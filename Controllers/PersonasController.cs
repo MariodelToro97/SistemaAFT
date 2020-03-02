@@ -59,6 +59,7 @@ namespace SistemaAFT.Controllers
             ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "Nombre");
             return View();            
         }
+        //cOMENTARIO
 
         // POST: Personas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
