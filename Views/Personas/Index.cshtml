@@ -11,39 +11,48 @@
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
-    <thead>
+    <thead class="text-center">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.correo)
+                <!--@Html.DisplayNameFor(model => model.correo)-->
+                Correo
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.fechaNacimiento)
+                <!--@Html.DisplayNameFor(model => model.fechaNacimiento)-->
+                Fecha de Nacimiento
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.nacionalidad)
+                <!--@Html.DisplayNameFor(model => model.nacionalidad)-->
+                Nacionalidad
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Genero)
+                <!--@Html.DisplayNameFor(model => model.Genero)-->
+                Género
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Estado_Civil)
+                <!--@Html.DisplayNameFor(model => model.Estado_Civil)-->
+                Estado Civil
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Tipo_Identidad)
+                <!--@Html.DisplayNameFor(model => model.Tipo_Identidad)-->
+                Identificación
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.telefono)
+                <!--@Html.DisplayNameFor(model => model.telefono)-->
+                Teléfono
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Tipo_Telefono)
+                <!--@Html.DisplayNameFor(model => model.Tipo_Telefono)-->
+                Tipo de Teléfono
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Tipo_Compania)
+                <!--@Html.DisplayNameFor(model => model.Tipo_Compania)-->
+                Compañía
             </th>
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="text-center">
 @foreach (var item in Model) {
         <tr>
             <td>
@@ -56,22 +65,22 @@
                 @Html.DisplayFor(modelItem => item.nacionalidad)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Genero.GeneroID)
+                @Html.DisplayFor(modelItem => item.Genero.Nombre_Genero)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Estado_Civil.Estado_CivilID)
+                @Html.DisplayFor(modelItem => item.Estado_Civil.Nombre_Edo_Civil)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Tipo_Identidad.Tipo_IdentidadID)
+                @Html.DisplayFor(modelItem => item.Tipo_Identidad.Nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.telefono)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Tipo_Telefono.Tipo_TelefonoID)
+                @Html.DisplayFor(modelItem => item.Tipo_Telefono.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Tipo_Compania.Tipo_CompaniaID)
+                @Html.DisplayFor(modelItem => item.Tipo_Compania.Nombre)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PersonaID">Edit</a> |

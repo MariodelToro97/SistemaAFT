@@ -96,11 +96,11 @@ namespace SistemaAFT.Controllers
             {
                 return NotFound();
             }
-            ViewData["Estado_CivilID"] = new SelectList(_context.Set<Estado_Civil>(), "Estado_CivilID", "Estado_CivilID", persona.Estado_CivilID);
-            ViewData["GeneroID"] = new SelectList(_context.Set<Genero>(), "GeneroID", "GeneroID", persona.GeneroID);
-            ViewData["Tipo_CompaniaID"] = new SelectList(_context.Set<Tipo_Compania>(), "Tipo_CompaniaID", "Tipo_CompaniaID", persona.Tipo_CompaniaID);
-            ViewData["Tipo_IdentidadID"] = new SelectList(_context.Set<Tipo_Identidad>(), "Tipo_IdentidadID", "Tipo_IdentidadID", persona.Tipo_IdentidadID);
-            ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "Tipo_TelefonoID", persona.Tipo_TelefonoID);
+            ViewData["Estado_CivilID"] = new SelectList(_context.Set<Estado_Civil>(), "Estado_CivilID", "Nombre_Edo_Civil", persona.Estado_CivilID);
+            ViewData["GeneroID"] = new SelectList(_context.Set<Genero>(), "GeneroID", "Nombre_Genero", persona.GeneroID);
+            ViewData["Tipo_CompaniaID"] = new SelectList(_context.Set<Tipo_Compania>(), "Tipo_CompaniaID", "Nombre", persona.Tipo_CompaniaID);
+            ViewData["Tipo_IdentidadID"] = new SelectList(_context.Set<Tipo_Identidad>(), "Tipo_IdentidadID", "Nombre", persona.Tipo_IdentidadID);
+            ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "Nombre", persona.Tipo_TelefonoID);
             return View(persona);
         }
 
