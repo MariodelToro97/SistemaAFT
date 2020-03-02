@@ -1,0 +1,69 @@
+﻿@model SistemaAFT.Models.Persona
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Persona</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="correo" class="control-label"></label>
+                <input asp-for="correo" type="email" class="form-control" />
+                <span asp-validation-for="correo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fechaNacimiento" class="control-label"></label>
+                <input asp-for="fechaNacimiento" type="date" class="form-control" />
+                <span asp-validation-for="fechaNacimiento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="nacionalidad" class="control-label"></label>
+                <input asp-for="nacionalidad" type="text" class="form-control" />
+                <span asp-validation-for="nacionalidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GeneroID" class="control-label"></label>
+                <select asp-for="GeneroID" class ="form-control" asp-items='ViewBag.GeneroID' ></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Estado_CivilID" class="control-label"></label>
+                <select asp-for="Estado_CivilID" class ="form-control" asp-items="ViewBag.Estado_CivilID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipo_IdentidadID" class="control-label"></label>
+                <select asp-for="Tipo_IdentidadID" class ="form-control" asp-items="ViewBag.Tipo_IdentidadID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="telefono" class="control-label"></label>
+                <input asp-for="telefono" type="number" class="form-control" />
+                <span asp-validation-for="telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipo_TelefonoID" class="control-label"></label>
+                <select asp-for="Tipo_TelefonoID" class ="form-control" asp-items="ViewBag.Tipo_TelefonoID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipo_CompaniaID" class="control-label"></label>
+                <select asp-for="Tipo_CompaniaID" class ="form-control" asp-items="ViewBag.Tipo_CompaniaID"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -9,7 +9,7 @@ namespace SistemaAFT.Controllers
 {
     public class AdminController : Controller
     {
-        [Authorize(Roles="Administrador")]
+        [Authorize(Roles="Admin")]
         public IActionResult Index()
         {
             return View();

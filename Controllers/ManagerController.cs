@@ -9,7 +9,7 @@ namespace SistemaAFT.Controllers
 {
     public class ManagerController : Controller
     {
-        [Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Usuario")]
         public IActionResult Index()
         {
             return View();

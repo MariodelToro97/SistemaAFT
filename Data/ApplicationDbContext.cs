@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SistemaAFT.Models;
 
 namespace SistemaAFT.Data
 {
@@ -12,5 +13,13 @@ namespace SistemaAFT.Data
 			: base(options)
 		{
 		}
+		public DbSet<SistemaAFT.Models.Persona> Persona { get; set; }
+		public DbSet<SistemaAFT.Models.Domicilio> Domicilio { get; set; }
+		public DbSet<SistemaAFT.Models.Genero> Genero { get; set; }
+		public DbSet<SistemaAFT.Models.Estado_Civil> Estado_Civil { get; set; }
+		public DbSet<SistemaAFT.Models.Tipo_Identidad> Tipo_Identidad { get; set; }
+		public DbSet<SistemaAFT.Models.Municipio> Municipio { get; set; }
+		public DbSet<SistemaAFT.Models.Tipo_Telefono> Tipo_Telefono { get; set; }
+		public DbSet<SistemaAFT.Models.Tipo_Compania> Tipo_Compania { get; set; }
 	}
 }

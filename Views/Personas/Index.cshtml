@@ -1,0 +1,84 @@
+﻿@model IEnumerable<SistemaAFT.Models.Persona>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.correo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaNacimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nacionalidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado_Civil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo_Identidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo_Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo_Compania)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.correo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaNacimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nacionalidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genero.GeneroID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado_Civil.Estado_CivilID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo_Identidad.Tipo_IdentidadID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo_Telefono.Tipo_TelefonoID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo_Compania.Tipo_CompaniaID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PersonaID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PersonaID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PersonaID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

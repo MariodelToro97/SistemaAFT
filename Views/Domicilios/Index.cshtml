@@ -1,0 +1,114 @@
+﻿@model IEnumerable<SistemaAFT.Models.Domicilio>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo_Ambito)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombreasentamiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo_Vialidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.noexterior)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Municipio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.referenciavialidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombrevialidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nointerior)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.localidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.referenciaposterior)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.codigopostal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo_Asentamiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.referenciaubicacion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo_Ambito.Tipo_AmbitoID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombreasentamiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo_Vialidad.Tipo_VialidadID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.noexterior)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Municipio.MunicipioID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.referenciavialidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombrevialidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nointerior)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.localidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.referenciaposterior)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.codigopostal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo_Asentamiento.Tipo_AsentamientoID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.referenciaubicacion)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DomicilioID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DomicilioID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DomicilioID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
