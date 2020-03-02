@@ -9,9 +9,7 @@
 
         @if (SignInManager.IsSignedIn(User))
         {
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Añadir Role</a>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
             </li>
@@ -24,6 +22,9 @@
         }
         else
         {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Añadir Role</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
             </li>

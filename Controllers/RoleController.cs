@@ -16,7 +16,7 @@ namespace SistemaAFT.Controllers
             _roleManager = roleManager;
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             var roles = _roleManager.Roles.ToList();
@@ -24,7 +24,7 @@ namespace SistemaAFT.Controllers
             return View(roles);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View(new IdentityRole());
