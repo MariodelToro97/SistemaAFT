@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,6 +28,9 @@ namespace SistemaAFT.Models
         public Tipo_Telefono Tipo_Telefono { get; set; }
         public int Tipo_CompaniaID { get; set; }
         public Tipo_Compania Tipo_Compania { get; set; }
+
+        
+        public DateTime Today { get; set; }
 
         //public SelectList genero { get; set; }
 
