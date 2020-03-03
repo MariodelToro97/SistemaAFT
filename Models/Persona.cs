@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,6 +28,9 @@ namespace SistemaAFT.Models
         public Tipo_Telefono Tipo_Telefono { get; set; }
         public int Tipo_CompaniaID { get; set; }
         public Tipo_Compania Tipo_Compania { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public DateTime Created { get; set; } = DateTime.Now;
 
         //public SelectList genero { get; set; }
 

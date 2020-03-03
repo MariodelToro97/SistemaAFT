@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -65,6 +66,8 @@ namespace SistemaAFT.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             public string Name { get; set; }
+            [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+            public DateTime Created { get; set; } = DateTime.Now;
         }
 
         public async Task OnGet(string returnUrl = null)
