@@ -12,7 +12,7 @@ namespace SistemaAFT.Data
 		{
 			context.Database.EnsureCreated();
 
-			if (context.Genero.Any() || context.Estado_Civil.Any() || context.Tipo_Identidad.Any() || context.Municipio.Any() || context.Tipo_Telefono.Any() || context.Tipo_Compania.Any())
+			if (context.Genero.Any() || context.Estado_Civil.Any() || context.Tipo_Identidad.Any() || context.Municipio.Any() || context.Tipo_Telefono.Any() || context.Tipo_Compania.Any() || context.Tipo_Persona.Any())
 			{
 				return;
 			}
@@ -115,6 +115,18 @@ namespace SistemaAFT.Data
 			foreach (Tipo_Compania g in tipo_compania)
 			{
 				context.Tipo_Compania.Add(g);
+			}
+
+			//Tipo de persona
+			var tipo_persona = new Tipo_Persona[]
+			{
+				new Tipo_Persona { Nombre_Tipo = "Fisica"},
+				new Tipo_Persona { Nombre_Tipo = "Moral" }
+			};
+
+			foreach (Tipo_Persona g in tipo_persona)
+			{
+				context.Tipo_Persona.Add(g);
 			}
 
 			context.SaveChanges();

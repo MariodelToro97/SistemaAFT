@@ -65,9 +65,11 @@ namespace SistemaAFT.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            public string Name { get; set; }
             [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
             public DateTime Created { get; set; } = DateTime.Now;
+
+            public string Name { get; set; }
+
         }
 
         public async Task OnGet(string returnUrl = null)

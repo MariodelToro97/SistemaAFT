@@ -30,15 +30,12 @@ namespace SistemaAFT.Models
         public int Tipo_CompaniaID { get; set; }
         public Tipo_Compania Tipo_Compania { get; set; }
 
-<<<<<<< HEAD
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime Created { get; set; } = DateTime.Now;
-=======
-        
-        public DateTime Today { get; set; }
->>>>>>> 99981ddb2fba6410202fcf1aa785cbccb9075168
 
-        //public SelectList genero { get; set; }
+        public int Tipo_PersonaID { get; set; }
+        public Tipo_Persona Tipo_Persona { get; set; }
+
 
     }
 }

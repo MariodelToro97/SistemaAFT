@@ -21,5 +21,6 @@ namespace SistemaAFT.Data
 		public DbSet<SistemaAFT.Models.Municipio> Municipio { get; set; }
 		public DbSet<SistemaAFT.Models.Tipo_Telefono> Tipo_Telefono { get; set; }
 		public DbSet<SistemaAFT.Models.Tipo_Compania> Tipo_Compania { get; set; }
+		public DbSet<SistemaAFT.Models.Tipo_Persona> Tipo_Persona { get; set; }
 	}
 }

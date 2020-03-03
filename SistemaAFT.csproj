@@ -8,8 +8,32 @@
   <ItemGroup>
     <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
     <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200229194556_[Migracion-inicial].cs" />
+    <Compile Remove="Data\Migrations\20200229194556_[Migracion-inicial].Designer.cs" />
     <Compile Remove="Data\Migrations\20200302013850_[Initial].cs" />
     <Compile Remove="Data\Migrations\20200302013850_[Initial].Designer.cs" />
+    <Compile Remove="Data\Migrations\20200303202615_Tipo-Personas.cs" />
+    <Compile Remove="Data\Migrations\20200303202615_Tipo-Personas.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200303202851_Personas.cs" />
+    <Compile Remove="Data\Migrations\20200303202851_Personas.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200303204645_H.cs" />
+    <Compile Remove="Data\Migrations\20200303204645_H.Designer.cs" />
+    <Compile Remove="Migrations\20200302014637_[Initial].cs" />
+    <Compile Remove="Migrations\20200302014637_[Initial].Designer.cs" />
+    <Compile Remove="Migrations\20200302151801_Inicial.cs" />
+    <Compile Remove="Migrations\20200302151801_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20200303152458_Initial-fecha.cs" />
+    <Compile Remove="Migrations\20200303152458_Initial-fecha.Designer.cs" />
+    <Compile Remove="Migrations\20200303152757_initial-fecha-2.cs" />
+    <Compile Remove="Migrations\20200303152757_initial-fecha-2.Designer.cs" />
+    <Compile Remove="Migrations\20200303154151_initial-registro-fecha.cs" />
+    <Compile Remove="Migrations\20200303154151_initial-registro-fecha.Designer.cs" />
+    <Compile Remove="Migrations\20200303162831_F.cs" />
+    <Compile Remove="Migrations\20200303162831_F.Designer.cs" />
+    <Compile Remove="Migrations\20200303163749_F2.cs" />
+    <Compile Remove="Migrations\20200303163749_F2.Designer.cs" />
+    <Compile Remove="Migrations\20200303201225_persona.cs" />
+    <Compile Remove="Migrations\20200303201225_persona.Designer.cs" />
   </ItemGroup>
 
 
@@ -21,11 +45,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
 </Project>
