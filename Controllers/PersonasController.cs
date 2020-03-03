@@ -40,6 +40,7 @@ namespace SistemaAFT.Controllers
                 .Include(p => p.Tipo_Compania)
                 .Include(p => p.Tipo_Identidad)
                 .Include(p => p.Tipo_Telefono)
+                .Include(p => p.Tipo_Persona)
                 .FirstOrDefaultAsync(m => m.PersonaID == id);
             if (persona == null)
             {
@@ -66,7 +67,7 @@ namespace SistemaAFT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PersonaID,correo,fechaNacimiento,nacionalidad,GeneroID,Estado_CivilID,Tipo_IdentidadID,telefono,Tipo_TelefonoID,Tipo_CompaniaID")] Persona persona)
+        public async Task<IActionResult> Create([Bind("PersonaID,correo,fechaNacimiento,nacionalidad,GeneroID,Estado_CivilID,Tipo_IdentidadID,telefono,Tipo_TelefonoID,Tipo_CompaniaID,Tipo_PersonaID")] Persona persona)
         {
             if (ModelState.IsValid)
             {
@@ -109,7 +110,7 @@ namespace SistemaAFT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PersonaID,correo,fechaNacimiento,nacionalidad,GeneroID,Estado_CivilID,Tipo_IdentidadID,telefono,Tipo_TelefonoID,Tipo_CompaniaID")] Persona persona)
+        public async Task<IActionResult> Edit(int id, [Bind("PersonaID,correo,fechaNacimiento,nacionalidad,GeneroID,Estado_CivilID,Tipo_IdentidadID,telefono,Tipo_TelefonoID,Tipo_CompaniaID, Tipo_PersonaID")] Persona persona)
         {
             if (id != persona.PersonaID)
             {

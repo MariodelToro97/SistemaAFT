@@ -11,6 +11,7 @@
 <hr />
 
 <section>
+    
 
 </section>
 
@@ -27,9 +28,9 @@
     <div class="tab-pane fade show active" id="nav-general" role="tabpanel" aria-labelledby="nav-home-tab">
         <div>
             <form asp-action="Create">
-
-               @Html.RadioButton("Tipo_PersonaID", 1) <label class="control-label">Física</label>
-               @Html.RadioButton("Tipo_PersonaID", 2) <label class="control-label">Moral</label>
+                <label asp-for="Tipo_PersonaID" class="control-label">Tipo de Persona:</label>
+                @Html.RadioButton("Tipo_PersonaID", '2') <label class="control-label">Moral</label>
+                @Html.RadioButton("Tipo_PersonaID", 1) <label class="control-label">Física</label>
 
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="row">
@@ -51,11 +52,15 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="GeneroID" class="control-label">Género:</label>
-                            <select asp-for="GeneroID" class="form-control" asp-items='ViewBag.GeneroID'></select>
+                            <select asp-for="GeneroID" class="form-control" asp-items='ViewBag.GeneroID'>
+                                <option value="" selected>Seleccione opción</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label asp-for="Estado_CivilID" class="control-label">Estado civil</label>
-                            <select asp-for="Estado_CivilID" class="form-control" asp-items="ViewBag.Estado_CivilID"></select>
+                            <select asp-for="Estado_CivilID" class="form-control" asp-items="ViewBag.Estado_CivilID">
+                                <option value="" selected>Seleccione opción</option>
+                            </select>
                             <!--@Html.RadioButton("Estado_CivilID", 2)-->
                         </div>
                     </div>
@@ -63,7 +68,9 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="Tipo_IdentidadID" class="control-label">Tipo de identificación:</label>
-                            <select asp-for="Tipo_IdentidadID" class="form-control" asp-items="ViewBag.Tipo_IdentidadID"></select>
+                            <select asp-for="Tipo_IdentidadID" class="form-control" asp-items="ViewBag.Tipo_IdentidadID">
+                                <option value="" selected>Seleccione opción</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label asp-for="telefono" class="control-label">Teléfono:</label>
@@ -72,11 +79,15 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="Tipo_TelefonoID" class="control-label">Tipo de Teléfono:</label>
-                            <select asp-for="Tipo_TelefonoID" class="form-control" asp-items="ViewBag.Tipo_TelefonoID"></select>
+                            <select asp-for="Tipo_TelefonoID" class="form-control" asp-items="ViewBag.Tipo_TelefonoID">
+                                <option value="" selected>Seleccione opción</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label asp-for="Tipo_CompaniaID" class="control-label">Tipo de Compañía:</label>
-                            <select asp-for="Tipo_CompaniaID" class="form-control" asp-items="ViewBag.Tipo_CompaniaID"></select>
+                            <select asp-for="Tipo_CompaniaID" class="form-control" asp-items="ViewBag.Tipo_CompaniaID">
+                                <option value="" selected>Seleccione opción</option>
+                            </select>
                         </div>
                     </div>
                 </div>

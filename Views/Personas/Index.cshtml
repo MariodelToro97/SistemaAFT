@@ -49,6 +49,10 @@
                 <!--@Html.DisplayNameFor(model => model.Tipo_Compania)-->
                 Compañía
             </th>
+            <th>
+                <!--@Html.DisplayNameFor(model => model.Tipo_Compania)-->
+                Tipo de persona
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -83,9 +87,12 @@
                 @Html.DisplayFor(modelItem => item.Tipo_Compania.Nombre)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.PersonaID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PersonaID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PersonaID">Delete</a>
+                @Html.DisplayFor(modelItem => item.Tipo_Persona.Tipo_PersonaID)
+            </td>
+            <td>
+                <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.PersonaID">Edit</a>
+                <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.PersonaID">Details</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.PersonaID">Delete</a>
             </td>
         </tr>
 }

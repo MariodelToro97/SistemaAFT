@@ -27,14 +27,13 @@ namespace SistemaAFT.Models
         public string telefono { get; set; }
         public int Tipo_TelefonoID { get; set; }
         public Tipo_Telefono Tipo_Telefono { get; set; }
+        public int Tipo_PersonaID { get; set; }
+        public Tipo_Persona Tipo_Persona { get; set; }
         public int Tipo_CompaniaID { get; set; }
         public Tipo_Compania Tipo_Compania { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime Created { get; set; } = DateTime.Now;
-
-        public int Tipo_PersonaID { get; set; }
-        public Tipo_Persona Tipo_Persona { get; set; }
 
 
     }
