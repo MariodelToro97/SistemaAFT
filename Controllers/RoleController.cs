@@ -24,7 +24,11 @@ namespace SistemaAFT.Controllers
             return View(roles);
         }
 
+<<<<<<< HEAD
        // [Authorize(Roles = "Admin")]
+=======
+        //[Authorize(Roles = "Admin")]
+>>>>>>> 99981ddb2fba6410202fcf1aa785cbccb9075168
         public IActionResult Create()
         {
             return View(new IdentityRole());
