@@ -15,48 +15,51 @@
         <div class="container">
             <label class="font-italic font-weight-bold"><span class="text-danger font-weight-bold">*</span> Dato Requerido</label>
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <label asp-for="Tipo_PersonaID" class="control-label">Tipo de Persona<span class="text-danger font-weight-bold">*</span>:</label>
                     <div asp-for="Tipo_PersonaID">
                         @Html.RadioButton("Tipo_PersonaID", 1, true) <label class="control-label mx-2">Física</label>
                         @Html.RadioButton("Tipo_PersonaID", 2) <label class="control-label mx-2">Moral</label>
                     </div>
                 </div>
-
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
-                        <label asp-for="CURP" class="control-label">CURP:</label>
-                        <input asp-for="CURP" type="text" class="form-control" placeholder="curp" required />
+                        <label asp-for="CURP" class="control-label">CURP<span class="text-danger font-weight-bold">*</span>:</label>
+                        <input asp-for="CURP" type="text" class="form-control" placeholder="CURP" required />
                         <span asp-validation-for="CURP" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="RFC" class="control-label">RFC:</label>
-                        <input asp-for="RFC" type="text" class="form-control" placeholder="RFC" required />
-                        <span asp-validation-for="RFC" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="nombre" class="control-label">nombre:</label>
-                        <input asp-for="nombre" type="text" class="form-control" placeholder="nombre" required />
-                        <span asp-validation-for="nombre" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="apellido_paterno" class="control-label">apellido_paterno:</label>
-                        <input asp-for="apellido_paterno" type="text" class="form-control" placeholder="apellido_paterno" required />
-                        <span asp-validation-for="apellido_paterno" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="apellido_materno" class="control-label">apellido_materno:</label>
-                        <input asp-for="apellido_materno" type="text" class="form-control" placeholder="apellido_materno" required />
-                        <span asp-validation-for="apellido_materno" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="correo" class="control-label">Correo:</label>
-                        <input asp-for="correo" type="email" class="form-control" placeholder="Correo" required />
-                        <span asp-validation-for="correo" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="RFC" class="control-label">RFC:</label>
+                        <input asp-for="RFC" type="text" class="form-control" placeholder="RFC" />
+                        <span asp-validation-for="RFC" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">                    
+                    <div class="form-group">
+                        <label asp-for="nombre" class="control-label">Nombre<span class="text-danger font-weight-bold">*</span>:</label>
+                        <input asp-for="nombre" type="text" class="form-control" placeholder="Nombre" required />
+                        <span asp-validation-for="nombre" class="text-danger"></span>
+                    </div>
+                </div>
 
+                <div class="col-md-3">                   
+                    <div class="form-group">
+                        <label asp-for="apellido_paterno" class="control-label">Apellido Paterno<span class="text-danger font-weight-bold">*</span>:</label>
+                        <input asp-for="apellido_paterno" type="text" class="form-control" placeholder="Apellido Paterno" required />
+                        <span asp-validation-for="apellido_paterno" class="text-danger"></span>
+                    </div>
+                    
+                </div>
+                <div class="col-md-3">                    
+                    <div class="form-group">
+                        <label asp-for="apellido_materno" class="control-label">Apellido Materno:</label>
+                        <input asp-for="apellido_materno" type="text" class="form-control" placeholder="Apellido Materno" />
+                        <span asp-validation-for="apellido_materno" class="text-danger"></span>
+                    </div>
                 </div>
                 <div class="col-md-3">
 
@@ -100,13 +103,12 @@
                         @Html.RadioButton("EtniaID", 2, false) <label class="control-label mx-2">Si</label>
                         @Html.RadioButton("EtniaID", 1, true) <label class="control-label mx-2">No</label>
                     </div>
-
                 </div>
 
                 <div class="col-md-3">
                     <div class="form-group">
                         <label asp-for="fechaNacimiento" class="control-label">Fecha de Nacimiento<span class="text-danger font-weight-bold">*</span>:</label>
-                        <input asp-for="fechaNacimiento" type="date" class="form-control" required/>
+                        <input asp-for="fechaNacimiento" type="date" class="form-control" required />
                         <span asp-validation-for="fechaNacimiento" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -121,70 +123,33 @@
                         @Html.RadioButton("DiscapacidadID", 2, false) <label class="control-label mx-2">Si</label>
                         @Html.RadioButton("DiscapacidadID", 1, true) <label class="control-label mx-2">No</label>
                     </div>
+                </div>
 
                 
-                        
-                        <div class="form-group">
-                            <label asp-for="GeneroID" class="control-label">Género:</label>
-                            <select asp-for="GeneroID" class="form-control" asp-items='ViewBag.GeneroID'>
-                                <option value="" selected>Seleccione opción</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="fechaNacimiento" class="control-label">Fecha de Nacimiento:</label>
-                            <input asp-for="fechaNacimiento" type="date" class="form-control" />
-                            <span asp-validation-for="fechaNacimiento" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Estado_CivilID" class="control-label">Estado civil</label>
-                            <select asp-for="Estado_CivilID" class="form-control" asp-items="ViewBag.Estado_CivilID">
-                                <option value="" selected>Seleccione opción</option>
-                            </select>
-                            <!--@Html.RadioButton("Estado_CivilID", 2)-->
-                        </div>
-
-
-
-                        <div class="form-group">
-                            <label asp-for="telefono" class="control-label">Teléfono:</label>
-                            <input asp-for="telefono" type="number" min=0 class="form-control" />
-                            <span asp-validation-for="telefono" class="text-danger"></span>
-                        </div>
-                        
-                  
-                        <div class="form-group">
-                            <label asp-for="nacionalidad" class="control-label">Nacionalidad<span class="text-danger font-weight-bold">*</span>:</label>
-                            <input asp-for="nacionalidad" type="text" class="form-control" />
-                            <span asp-validation-for="nacionalidad" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="Tipo_IdentidadID" class="control-label">Tipo de identificación:</label>
-                            <select asp-for="Tipo_IdentidadID" class="form-control" asp-items="ViewBag.Tipo_IdentidadID">
-                                <option value="" selected>Seleccione opción</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="num_identificacion" class="control-label">num_identificacion:</label>
-                            <input asp-for="num_identificacion" type="email" class="form-control" placeholder="num_identificacion" required />
-                            <span asp-validation-for="num_identificacion" class="text-danger"></span>
-                        </div>
-                    
-
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="nacionalidad" class="control-label">Nacionalidad<span class="text-danger font-weight-bold">*</span>:</label>
+                        <input asp-for="nacionalidad" type="text" class="form-control" />
+                        <span asp-validation-for="nacionalidad" class="text-danger"></span>
+                    </div>
                     <div class="form-group">
                         <label asp-for="Tipo_IdentidadID" class="control-label">Tipo de identificación<span class="text-danger font-weight-bold">*</span>:</label>
                         <select asp-for="Tipo_IdentidadID" class="form-control" asp-items="ViewBag.Tipo_IdentidadID">
                             <option value="" selected>Seleccione opción</option>
                         </select>
                     </div>
-                </div>
+                </div>                   
 
                 <div class="col-md-3">
                     <div class="form-group">
                         <label asp-for="telefono" class="control-label">Teléfono:</label>
                         <input asp-for="telefono" type="number" min=0 class="form-control" />
                         <span asp-validation-for="telefono" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="num_identificacion" class="control-label">num_identificacion:</label>
+                        <input asp-for="num_identificacion" type="email" class="form-control" placeholder="num_identificacion" required />
+                        <span asp-validation-for="num_identificacion" class="text-danger"></span>
                     </div>
                 </div>
             </div>

@@ -14,12 +14,14 @@ namespace SistemaAFT.Models
 	{
         
 		public int PersonaID { get; set; }
-        [RegularExpression("^.* (?=.{18})(?=.*[0 - 9])(?=.*[A - ZÑ]).*$", ErrorMessage = "La CURP no es VALIDA")]
-        [Required(ErrorMessage = "Se requiere la CRUP")]
+        [RegularExpression("^.* (?=.{18})(?=.*[0 - 9])(?=.*[A - ZÑ]).*$", ErrorMessage = "La CURP no es Válida")]
+        [Required(ErrorMessage = "Se requiere la CURP")]
         public string CURP { get; set; }
-        [Required(ErrorMessage = "Se requiere el RFC")]
+        //[Required(ErrorMessage = "Se requiere el RFC")]
         public string RFC { get; set; }
+        [Required(ErrorMessage = "Campo Requerido")]
         public string nombre { get; set; }
+        [Required(ErrorMessage = "Campo Requerido")]
         public string apellido_paterno { get; set; }
         public string apellido_materno { get; set; }
         public string correo { get; set; }
@@ -33,7 +35,7 @@ namespace SistemaAFT.Models
         public Estado_Civil Estado_Civil { get; set; }
         public int Tipo_IdentidadID { get; set; }
         public Tipo_Identidad Tipo_Identidad { get; set; }
-        [Required(ErrorMessage = "Se requiere num de indentificacion")]
+        [Required(ErrorMessage = "Se requiere número de identificación")]
         public string num_identificacion { get; set; }
         public string telefono { get; set; }
         public int Tipo_PersonaID { get; set; }
