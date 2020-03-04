@@ -20,5 +20,7 @@ namespace SistemaAFT.Data
 		public DbSet<SistemaAFT.Models.Tipo_Identidad> Tipo_Identidad { get; set; }
 		public DbSet<SistemaAFT.Models.Municipio> Municipio { get; set; }
 		public DbSet<SistemaAFT.Models.Tipo_Persona> Tipo_Persona { get; set; }
+		public DbSet<SistemaAFT.Models.Etnia> Etnia { get; set; }
+		public DbSet<SistemaAFT.Models.Discapacidad> Discapacidad { get; set; }
 	}
 }

@@ -22,7 +22,7 @@ namespace SistemaAFT.Controllers
         // GET: Personas
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Persona.Include(p => p.Estado_Civil).Include(p => p.Genero).Include(p => p.Tipo_Identidad);
+            var applicationDbContext = _context.Persona.Include(p => p.Estado_Civil).Include(p => p.Genero).Include(p => p.Tipo_Identidad).Include(p => p.Tipo_Persona).Include(p => p.Etnia);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -39,6 +39,7 @@ namespace SistemaAFT.Controllers
                 .Include(p => p.Genero)
                 .Include(p => p.Tipo_Identidad)
                 .Include(p => p.Tipo_Persona)
+                .Include(p => p.Etnia)
                 .FirstOrDefaultAsync(m => m.PersonaID == id);
             if (persona == null)
             {
@@ -63,7 +64,7 @@ namespace SistemaAFT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PersonaID,CURP,RFC,nombre,apellido_paterno,apellido_materno,correo,fechaNacimiento,nacionalidad,GeneroID,Estado_CivilID,Tipo_IdentidadID,num_identificacion,telefono,Tipo_PersonaID")] Persona persona)
+        public async Task<IActionResult> Create([Bind("PersonaID,CURP,RFC,nombre,apellido_paterno,apellido_materno,correo,fechaNacimiento,nacionalidad,GeneroID,Estado_CivilID,Tipo_IdentidadID,num_identificacion,telefono,Tipo_PersonaID,EtniaID,DiscapacidadID")] Persona persona)
         {
             if (ModelState.IsValid)
             {
@@ -102,7 +103,7 @@ namespace SistemaAFT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PersonaID,CURP,RFC,nombre,apellido_paterno,apellido_materno,correo,fechaNacimiento,nacionalidad,GeneroID,Estado_CivilID,Tipo_IdentidadID,num_identificacion,telefono,Tipo_PersonaID")] Persona persona)
+        public async Task<IActionResult> Edit(int id, [Bind("PersonaID,CURP,RFC,nombre,apellido_paterno,apellido_materno,correo,fechaNacimiento,nacionalidad,GeneroID,Estado_CivilID,Tipo_IdentidadID,num_identificacion,telefono,Tipo_PersonaID,EtniaID,DiscapacidadID")] Persona persona)
         {
             if (id != persona.PersonaID)
             {

@@ -12,13 +12,13 @@ namespace SistemaAFT.Data
 		{
 			context.Database.EnsureCreated();
 
-			if (context.Genero.Any() || context.Estado_Civil.Any() || context.Tipo_Identidad.Any() || context.Municipio.Any() || context.Tipo_Persona.Any())
+			if (context.Genero.Any() || context.Estado_Civil.Any() || context.Tipo_Identidad.Any() || context.Municipio.Any() || context.Tipo_Persona.Any() || context.Etnia.Any() || context.Discapacidad.Any())
 			{
 				return;
 			}
 
 			var generos = new Genero[]
-			{
+			{				
 				new Genero {Nombre_Genero = "Masculino"},
 				new Genero {Nombre_Genero = "Femenino"}
 			};
@@ -30,7 +30,7 @@ namespace SistemaAFT.Data
 
 			//ESTADO CIVIL
 			var civil = new Estado_Civil[]
-			{
+			{				
 				new Estado_Civil {Nombre_Edo_Civil = "Soltero"},
 				new Estado_Civil {Nombre_Edo_Civil = "Casado"},
 				new Estado_Civil {Nombre_Edo_Civil = "Divorciado"},
@@ -46,7 +46,7 @@ namespace SistemaAFT.Data
 
 			//TIPO DE IDENTIDAD
 			var tipo_identidad = new Tipo_Identidad[]
-			{
+			{				
 				new Tipo_Identidad {Nombre = "INE"},
 				new Tipo_Identidad {Nombre = "Pasaporte"},
 				new Tipo_Identidad {Nombre = "Cédula Profesional"},
@@ -90,6 +90,30 @@ namespace SistemaAFT.Data
 			foreach (Tipo_Persona g in tipo_persona)
 			{
 				context.Tipo_Persona.Add(g);
+			}
+
+			//Tipo de Etnia
+			var tipo_etnia = new Etnia[]
+			{
+				new Etnia { Pertenece_Etnia = "Si"},
+				new Etnia { Pertenece_Etnia = "No" }
+			};
+
+			foreach (Etnia g in tipo_etnia)
+			{
+				context.Etnia.Add(g);
+			}
+
+			//Discapacidad
+			var discapacidad = new Discapacidad[]
+			{
+				new Discapacidad {Tiene_Discapacidad = "Si"},
+				new Discapacidad {Tiene_Discapacidad = "No"}
+			};
+
+			foreach(Discapacidad g in discapacidad)
+			{
+				context.Discapacidad.Add(g);
 			}
 
 			context.SaveChanges();
