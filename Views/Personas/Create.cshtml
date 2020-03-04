@@ -5,15 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>Persona</h4>
+<h1>Crear Persona</h1>
+<!--<label class="font-italic font-weight-bold derecho"><span class="text-danger font-weight-bold">*</span> Dato Requerido</label>-->
 <hr />
 
 <form asp-action="Create">
     <section>
         <div class="container">
-            <label class="font-italic font-weight-bold"><span class="text-danger font-weight-bold">*</span> Dato Requerido</label>
             <div class="row">
                 <div class="col-md-2">
                     <label asp-for="Tipo_PersonaID" class="control-label">Tipo de Persona<span class="text-danger font-weight-bold">*</span>:</label>
@@ -22,43 +20,41 @@
                         @Html.RadioButton("Tipo_PersonaID", 2) <label class="control-label mx-2">Moral</label>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="form-group">
-                        <label asp-for="CURP" class="control-label">CURP<span class="text-danger font-weight-bold">*</span>:</label>
+                        <label asp-for="CURP" class="control-label">CURP<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="CURP" class="text-danger ErrorInput"></span>
                         <input asp-for="CURP" type="text" class="form-control" placeholder="CURP" required />
-                        <span asp-validation-for="CURP" class="text-danger"></span>
                     </div>
+                </div>
+                <div class="col-md-1">
+
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label asp-for="RFC" class="control-label">RFC:</label>
+                        <label asp-for="RFC" class="control-label">RFC:</label><span asp-validation-for="RFC" class="text-danger"></span>
                         <input asp-for="RFC" type="text" class="form-control" placeholder="RFC" />
-                        <span asp-validation-for="RFC" class="text-danger"></span>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3">                    
+                <div class="col-md-3">
                     <div class="form-group">
-                        <label asp-for="nombre" class="control-label">Nombre<span class="text-danger font-weight-bold">*</span>:</label>
+                        <label asp-for="nombre" class="control-label">Nombre<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="nombre" class="text-danger ErrorInput"></span>
                         <input asp-for="nombre" type="text" class="form-control" placeholder="Nombre" required />
-                        <span asp-validation-for="nombre" class="text-danger"></span>
                     </div>
                 </div>
 
-                <div class="col-md-3">                   
+                <div class="col-md-3">
                     <div class="form-group">
-                        <label asp-for="apellido_paterno" class="control-label">Apellido Paterno<span class="text-danger font-weight-bold">*</span>:</label>
+                        <label asp-for="apellido_paterno" class="control-label">Apellido Paterno<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="apellido_paterno" class="text-danger ErrorInput"></span>
                         <input asp-for="apellido_paterno" type="text" class="form-control" placeholder="Apellido Paterno" required />
-                        <span asp-validation-for="apellido_paterno" class="text-danger"></span>
                     </div>
-                    
+
                 </div>
-                <div class="col-md-3">                    
+                <div class="col-md-3">
                     <div class="form-group">
-                        <label asp-for="apellido_materno" class="control-label">Apellido Materno:</label>
+                        <label asp-for="apellido_materno" class="control-label">Apellido Materno:</label><span asp-validation-for="apellido_materno" class="text-danger"></span>
                         <input asp-for="apellido_materno" type="text" class="form-control" placeholder="Apellido Materno" />
-                        <span asp-validation-for="apellido_materno" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -68,7 +64,7 @@
         </div>
 
 
-        
+
 
     </section>
 
@@ -78,19 +74,19 @@
             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-domicilio" role="tab" aria-controls="nav-profile" aria-selected="false">Domicilios</a>
             <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-cuenta" role="tab" aria-controls="nav-contact" aria-selected="false">Cuentas</a>
             <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-obligacion" role="tab" aria-controls="nav-contact" aria-selected="false">Obligaciones</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-representantes" role="tab" aria-controls="nav-contact" aria-selected="false">Representantes</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-integrantes" role="tab" aria-controls="nav-contact" aria-selected="false">Integrantes</a>
             <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-bajas" role="tab" aria-controls="nav-contact" aria-selected="false">Bajas</a>
         </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-general" role="tabpanel" aria-labelledby="nav-home-tab">
-            <label class="font-italic font-weight-bold"><span class="text-danger font-weight-bold">*</span> Dato Requerido</label>
+        <div class="tab-pane fade show container active border border-secondary rounded" id="nav-general" role="tabpanel" aria-labelledby="nav-home-tab">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 mt-2">
                     <div class="form-group">
-                        <label asp-for="correo" class="control-label">Correo electrónico:</label>
+                        <label asp-for="correo" class="control-label">Correo electrónico:</label><span asp-validation-for="correo" class="text-danger ErrorInput"></span>
                         <input asp-for="correo" type="email" class="form-control" placeholder="correo@electrónico.com" />
-                        <span asp-validation-for="correo" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="GeneroID" class="control-label">Género<span class="text-danger font-weight-bold">*</span>:</label>
@@ -105,11 +101,10 @@
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-3 mt-2">
                     <div class="form-group">
-                        <label asp-for="fechaNacimiento" class="control-label">Fecha de Nacimiento<span class="text-danger font-weight-bold">*</span>:</label>
+                        <label asp-for="fechaNacimiento" class="control-label">Fecha de nacimiento<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="fechaNacimiento" class="text-danger ErrorInput"></span>
                         <input asp-for="fechaNacimiento" type="date" class="form-control" required />
-                        <span asp-validation-for="fechaNacimiento" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Estado_CivilID" class="control-label">Estado civil<span class="text-danger font-weight-bold">*</span>:</label>
@@ -125,12 +120,11 @@
                     </div>
                 </div>
 
-                
-                <div class="col-md-3">
+
+                <div class="col-md-3 mt-2">
                     <div class="form-group">
-                        <label asp-for="nacionalidad" class="control-label">Nacionalidad<span class="text-danger font-weight-bold">*</span>:</label>
+                        <label asp-for="nacionalidad" class="control-label">Nacionalidad<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="nacionalidad" class="text-danger ErrorInput"></span>
                         <input asp-for="nacionalidad" type="text" class="form-control" />
-                        <span asp-validation-for="nacionalidad" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Tipo_IdentidadID" class="control-label">Tipo de identificación<span class="text-danger font-weight-bold">*</span>:</label>
@@ -138,36 +132,85 @@
                             <option value="" selected>Seleccione opción</option>
                         </select>
                     </div>
-                </div>                   
+                </div>
 
-                <div class="col-md-3">
+                <div class="col-md-3 mt-2">
                     <div class="form-group">
-                        <label asp-for="telefono" class="control-label">Teléfono:</label>
+                        <label asp-for="telefono" class="control-label">Teléfono:</label><span asp-validation-for="telefono" class="text-danger ErrorInput"></span>
                         <input asp-for="telefono" type="number" min=0 class="form-control" />
-                        <span asp-validation-for="telefono" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="num_identificacion" class="control-label">num_identificacion:</label>
+                        <label asp-for="num_identificacion" class="control-label">Núm. Doc de identificación:</label><span asp-validation-for="num_identificacion" class="text-danger ErrorInput"></span>
                         <input asp-for="num_identificacion" type="email" class="form-control" placeholder="num_identificacion" required />
-                        <span asp-validation-for="num_identificacion" class="text-danger"></span>
+
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+
+
+        <div class="tab-pane fade" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab">2</div>
+        <div class="tab-pane fade" id="nav-cuenta" role="tabpanel" aria-labelledby="nav-contact-tab">3</div>
+        <div class="tab-pane fade" id="nav-obligacion" role="tabpanel" aria-labelledby="nav-contact-tab">4</div>
+        <div class="tab-pane fade" id="nav-representantes" role="tabpanel" aria-labelledby="nav-contact-tab">4</div>
+        <div class="tab-pane fade border border-secondary rounded" id="nav-integrantes" role="tabpanel" aria-labelledby="nav-contact-tab">
+            <div class="container my-3">
+                <div class="border border-secondary rounded bg-dark">
+                    <h4 class="my-3 mx-3 text-white font-weight-lighter">Integrantes</h4>
+                    <button type="button" class="btn btn-light derecho text-dark" data-toggle="modal" data-target="#exampleModal">
+                        Agregar
+                    </button>
+                </div>
+
+                <div class="rounded border border-secondary">
+                    <div class="container">
+                        <table class="table table-sm table-secondary my-3 rounded">
+                            <thead class="thead-light text-center">
+                                <tr>
+                                    <th>Tipo persona</th>
+                                    <th>CURP</th>
+                                    <th>RFC</th>
+                                    <th>Nombre</th>
+                                    <th>Fec. nac/cons.</th>
+                                    <th>Editar</th>
+                                </tr>
+
+                            </thead>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="tab-pane fade border border-secondary rounded" id="nav-bajas" role="tabpanel" aria-labelledby="nav-contact-tab">
+            <div class="container my-3">
+                <div class="border border-secondary rounded bg-dark">
+                    <h4 class="my-3 mx-3 text-white font-weight-lighter">Baja por Defunción</h4>
+                </div>
+
+                <div class="rounded border border-secondary">
+                    <div class="container">
+                        <table class="table table-sm table-secondary my-3 rounded">
+                            <thead class="thead-light text-center">
+                                <tr>
+                                    <th>Fecha de Baja</th>
+                                    <th>Tipo documento de baja</th>
+                                    <th>Folio documento</th>
+                                    <th>Observaciones</th>
+                                </tr>
+
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group mt-3 mx-auto">
+        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Guardar" class="btn btn-success" />
+    </div>
 </form>
-
-<div class="tab-pane fade" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab">2</div>
-<div class="tab-pane fade" id="nav-cuenta" role="tabpanel" aria-labelledby="nav-contact-tab">3</div>
-<div class="tab-pane fade" id="nav-obligacion" role="tabpanel" aria-labelledby="nav-contact-tab">4</div>
-<div class="tab-pane fade" id="nav-bajas" role="tabpanel" aria-labelledby="nav-contact-tab">5</div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

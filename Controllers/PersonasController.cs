@@ -76,7 +76,7 @@ namespace SistemaAFT.Controllers
             ViewData["GeneroID"] = new SelectList(_context.Set<Genero>(), "GeneroID", "GeneroID", persona.GeneroID);
             ViewData["Tipo_IdentidadID"] = new SelectList(_context.Set<Tipo_Identidad>(), "Tipo_IdentidadID", "Tipo_IdentidadID", persona.Tipo_IdentidadID);
 
-            return View(persona);            
+            return View(persona);
         }
 
         // GET: Personas/Edit/5
