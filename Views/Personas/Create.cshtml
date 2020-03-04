@@ -10,51 +10,73 @@
 <h4>Persona</h4>
 <hr />
 
-<section>
-    
+<form asp-action="Create">
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <label asp-for="Tipo_PersonaID" class="control-label">Tipo de Persona:</label>
+                    <div asp-for="Tipo_PersonaID">
+                        @Html.RadioButton("Tipo_PersonaID", 1) <label class="control-label mx-2">Física</label>
+                        @Html.RadioButton("Tipo_PersonaID", 2) <label class="control-label mx-2">Moral</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
 
-</section>
+                </div>
+                <div class="col-md-3">
 
-<nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-home" aria-selected="true">Generales</a>
-        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-domicilio" role="tab" aria-controls="nav-profile" aria-selected="false">Domicilios</a>
-        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-cuenta" role="tab" aria-controls="nav-contact" aria-selected="false">Cuentas</a>
-        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-obligacion" role="tab" aria-controls="nav-contact" aria-selected="false">Obligaciones</a>
-        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-bajas" role="tab" aria-controls="nav-contact" aria-selected="false">Bajas</a>
-    </div>
-</nav>
-<div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade show active" id="nav-general" role="tabpanel" aria-labelledby="nav-home-tab">
-        <div>
-            <form asp-action="Create">
-                <label asp-for="Tipo_PersonaID" class="control-label">Tipo de Persona:</label>
-                @Html.RadioButton("Tipo_PersonaID", '2') <label class="control-label">Moral</label>
-                @Html.RadioButton("Tipo_PersonaID", 1) <label class="control-label">Física</label>
+                </div>
+                <div class="col-md-3">
+
+                </div>
+            </div>
+        </div>
+
+
+        
+
+    </section>
+
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-home" aria-selected="true">Generales</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-domicilio" role="tab" aria-controls="nav-profile" aria-selected="false">Domicilios</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-cuenta" role="tab" aria-controls="nav-contact" aria-selected="false">Cuentas</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-obligacion" role="tab" aria-controls="nav-contact" aria-selected="false">Obligaciones</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-bajas" role="tab" aria-controls="nav-contact" aria-selected="false">Bajas</a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-general" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div>
+
+
 
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label asp-for="correo" class="control-label">Correo electrónico:</label>
-                            <input asp-for="correo" type="email" class="form-control" />
+                            <input asp-for="correo" type="email" class="form-control" placeholder="correo@electrónico.com" required />
                             <span asp-validation-for="correo" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="fechaNacimiento" class="control-label">Fecha de Nacimiento:</label>
-                            <input asp-for="fechaNacimiento" type="date" class="form-control" />
-                            <span asp-validation-for="fechaNacimiento" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="nacionalidad" class="control-label">Nacionalidad:</label>
-                            <input asp-for="nacionalidad" type="text" class="form-control" />
-                            <span asp-validation-for="nacionalidad" class="text-danger"></span>
-                        </div>
+
+
                         <div class="form-group">
                             <label asp-for="GeneroID" class="control-label">Género:</label>
                             <select asp-for="GeneroID" class="form-control" asp-items='ViewBag.GeneroID'>
                                 <option value="" selected>Seleccione opción</option>
                             </select>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label asp-for="fechaNacimiento" class="control-label">Fecha de Nacimiento:</label>
+                            <input asp-for="fechaNacimiento" type="date" class="form-control" />
+                            <span asp-validation-for="fechaNacimiento" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Estado_CivilID" class="control-label">Estado civil</label>
@@ -63,15 +85,9 @@
                             </select>
                             <!--@Html.RadioButton("Estado_CivilID", 2)-->
                         </div>
-                    </div>
 
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="Tipo_IdentidadID" class="control-label">Tipo de identificación:</label>
-                            <select asp-for="Tipo_IdentidadID" class="form-control" asp-items="ViewBag.Tipo_IdentidadID">
-                                <option value="" selected>Seleccione opción</option>
-                            </select>
-                        </div>
+
+
                         <div class="form-group">
                             <label asp-for="telefono" class="control-label">Teléfono:</label>
                             <input asp-for="telefono" type="number" min=0 class="form-control" />
@@ -90,18 +106,38 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label asp-for="nacionalidad" class="control-label">Nacionalidad:</label>
+                            <input asp-for="nacionalidad" type="text" class="form-control" />
+                            <span asp-validation-for="nacionalidad" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Tipo_IdentidadID" class="control-label">Tipo de identificación:</label>
+                            <select asp-for="Tipo_IdentidadID" class="form-control" asp-items="ViewBag.Tipo_IdentidadID">
+                                <option value="" selected>Seleccione opción</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+
+                    </div>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />
                 </div>
-            </form>
-        </div>
-    </div>
 
-    <div class="tab-pane fade" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab">2</div>
-    <div class="tab-pane fade" id="nav-cuenta" role="tabpanel" aria-labelledby="nav-contact-tab">3</div>
-    <div class="tab-pane fade" id="nav-obligacion" role="tabpanel" aria-labelledby="nav-contact-tab">4</div>
-    <div class="tab-pane fade" id="nav-bajas" role="tabpanel" aria-labelledby="nav-contact-tab">5</div>
+            </div>
+        </div>
+</form>
+
+<div class="tab-pane fade" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab">2</div>
+<div class="tab-pane fade" id="nav-cuenta" role="tabpanel" aria-labelledby="nav-contact-tab">3</div>
+<div class="tab-pane fade" id="nav-obligacion" role="tabpanel" aria-labelledby="nav-contact-tab">4</div>
+<div class="tab-pane fade" id="nav-bajas" role="tabpanel" aria-labelledby="nav-contact-tab">5</div>
 </div>
 
 <div>

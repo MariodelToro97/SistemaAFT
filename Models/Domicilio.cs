@@ -25,7 +25,6 @@ namespace SistemaAFT.Models
         public string localidad { get; set; }
         public string referenciaposterior { get; set; }
         public string codigopostal { get; set; }
-
         public int Tipo_AsentamientoID { get; set; }
         public Tipo_Asentamiento Tipo_Asentamiento { get; set; }
         public string referenciaubicacion { get; set; }

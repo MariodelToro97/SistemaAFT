@@ -47,11 +47,13 @@
             </th>
             <th>
                 <!--@Html.DisplayNameFor(model => model.Tipo_Compania)-->
-                Compañía
+                Compañía celular
+
             </th>
             <th>
-                <!--@Html.DisplayNameFor(model => model.Tipo_Compania)-->
+                <!--@Html.DisplayNameFor(model => model.Tipo_Persona)-->
                 Tipo de persona
+
             </th>
             <th></th>
         </tr>
@@ -87,14 +89,13 @@
                 @Html.DisplayFor(modelItem => item.Tipo_Compania.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Tipo_Persona.Tipo_PersonaID)
+                @Html.DisplayFor(modelItem => item.Tipo_Persona.Nombre_Tipo)
             </td>
             <td>
                 <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.PersonaID">Edit</a>
                 <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.PersonaID">Details</a>
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.PersonaID">Delete</a>
             </td>
-        </tr>
-}
+        </tr>}
     </tbody>
 </table>
