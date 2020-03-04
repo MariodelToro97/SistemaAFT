@@ -14,9 +14,11 @@ namespace SistemaAFT.Models
 	{
         
 		public int PersonaID { get; set; }
-        [Required(ErrorMessage = "Campo Requerido")]
+        
         public string correo { get; set; }
+        [Required(ErrorMessage = "Campo Requerido")]
         public string fechaNacimiento { get; set; }
+        [Required(ErrorMessage = "Campo Requerido")]
         public string nacionalidad { get; set; }
         public int GeneroID { get; set; }
         public Genero Genero { get; set; }
@@ -31,6 +33,10 @@ namespace SistemaAFT.Models
         public Tipo_Persona Tipo_Persona { get; set; }
         public int Tipo_CompaniaID { get; set; }
         public Tipo_Compania Tipo_Compania { get; set; }
+        public int EtniaID { get; set; }
+        public Etnia Etnia { get; set; }
+        public int DiscapacidadID { get; set; }
+        public Discapacidad Discapacidad { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime Created { get; set; } = DateTime.Now;
