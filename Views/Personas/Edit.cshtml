@@ -9,62 +9,156 @@
 
 <h4>Persona</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="PersonaID" />
-            <div class="form-group">
-                <label asp-for="correo" class="control-label"></label>
-                <input asp-for="correo" class="form-control" />
-                <span asp-validation-for="correo" class="text-danger"></span>
+<form asp-action="Edit">
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <label asp-for="Tipo_PersonaID" class="control-label">Tipo de Persona:</label>
+                    <div asp-for="Tipo_PersonaID">
+                        @Html.RadioButton("Tipo_PersonaID", 1) <label class="control-label mx-2">Física</label>
+                        @Html.RadioButton("Tipo_PersonaID", 2) <label class="control-label mx-2">Moral</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-3">
+
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="fechaNacimiento" class="control-label"></label>
-                <input asp-for="fechaNacimiento" class="form-control" />
-                <span asp-validation-for="fechaNacimiento" class="text-danger"></span>
+        </div>
+
+
+
+
+    </section>
+
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-home" aria-selected="true">Generales</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-domicilio" role="tab" aria-controls="nav-profile" aria-selected="false">Domicilios</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-cuenta" role="tab" aria-controls="nav-contact" aria-selected="false">Cuentas</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-obligacion" role="tab" aria-controls="nav-contact" aria-selected="false">Obligaciones</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-bajas" role="tab" aria-controls="nav-contact" aria-selected="false">Bajas</a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-general" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div>
+
+
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="PersonaID" />
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label asp-for="CURP" class="control-label">CURP:</label>
+                            <input asp-for="CURP" type="text" class="form-control" placeholder="curp" required />
+                            <span asp-validation-for="CURP" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="RFC" class="control-label">RFC:</label>
+                            <input asp-for="RFC" type="text" class="form-control" placeholder="RFC" required />
+                            <span asp-validation-for="RFC" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="nombre" class="control-label">nombre:</label>
+                            <input asp-for="nombre" type="text" class="form-control" placeholder="nombre" required />
+                            <span asp-validation-for="nombre" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="apellido_paterno" class="control-label">apellido_paterno:</label>
+                            <input asp-for="apellido_paterno" type="text" class="form-control" placeholder="apellido_paterno" required />
+                            <span asp-validation-for="apellido_paterno" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="apellido_materno" class="control-label">apellido_materno:</label>
+                            <input asp-for="apellido_materno" type="text" class="form-control" placeholder="apellido_materno" required />
+                            <span asp-validation-for="apellido_materno" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="correo" class="control-label">Correo electrónico:</label>
+                            <input asp-for="correo" type="email" class="form-control" placeholder="correo@electrónico.com" required />
+                            <span asp-validation-for="correo" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label asp-for="GeneroID" class="control-label">Género:</label>
+                            <select asp-for="GeneroID" class="form-control" asp-items='ViewBag.GeneroID'>
+                                <option value="" selected>Seleccione opción</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label asp-for="fechaNacimiento" class="control-label">Fecha de Nacimiento:</label>
+                            <input asp-for="fechaNacimiento" type="date" class="form-control" />
+                            <span asp-validation-for="fechaNacimiento" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Estado_CivilID" class="control-label">Estado civil</label>
+                            <select asp-for="Estado_CivilID" class="form-control" asp-items="ViewBag.Estado_CivilID">
+                                <option value="" selected>Seleccione opción</option>
+                            </select>
+                            <!--@Html.RadioButton("Estado_CivilID", 2)-->
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label asp-for="telefono" class="control-label">Teléfono:</label>
+                            <input asp-for="telefono" type="number" min=0 class="form-control" />
+                            <span asp-validation-for="telefono" class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label asp-for="nacionalidad" class="control-label">Nacionalidad:</label>
+                            <input asp-for="nacionalidad" type="text" class="form-control" />
+                            <span asp-validation-for="nacionalidad" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Tipo_IdentidadID" class="control-label">Tipo de identificación:</label>
+                            <select asp-for="Tipo_IdentidadID" class="form-control" asp-items="ViewBag.Tipo_IdentidadID">
+                                <option value="" selected>Seleccione opción</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="num_identificacion" class="control-label">num_identificacion:</label>
+                            <input asp-for="num_identificacion" type="email" class="form-control" placeholder="num_identificacion" required />
+                            <span asp-validation-for="num_identificacion" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+
             </div>
-            <div class="form-group">
-                <label asp-for="nacionalidad" class="control-label"></label>
-                <input asp-for="nacionalidad" class="form-control" />
-                <span asp-validation-for="nacionalidad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GeneroID" class="control-label"></label>
-                <select asp-for="GeneroID" class="form-control" asp-items="ViewBag.GeneroID"></select>
-                <span asp-validation-for="GeneroID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Estado_CivilID" class="control-label"></label>
-                <select asp-for="Estado_CivilID" class="form-control" asp-items="ViewBag.Estado_CivilID"></select>
-                <span asp-validation-for="Estado_CivilID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Tipo_IdentidadID" class="control-label"></label>
-                <select asp-for="Tipo_IdentidadID" class="form-control" asp-items="ViewBag.Tipo_IdentidadID"></select>
-                <span asp-validation-for="Tipo_IdentidadID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="telefono" class="control-label"></label>
-                <input asp-for="telefono" class="form-control" />
-                <span asp-validation-for="telefono" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Tipo_TelefonoID" class="control-label"></label>
-                <select asp-for="Tipo_TelefonoID" class="form-control" asp-items="ViewBag.Tipo_TelefonoID"></select>
-                <span asp-validation-for="Tipo_TelefonoID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Tipo_CompaniaID" class="control-label"></label>
-                <select asp-for="Tipo_CompaniaID" class="form-control" asp-items="ViewBag.Tipo_CompaniaID"></select>
-                <span asp-validation-for="Tipo_CompaniaID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+        </div>
+</form>
+
+<div class="tab-pane fade" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab">2</div>
+<div class="tab-pane fade" id="nav-cuenta" role="tabpanel" aria-labelledby="nav-contact-tab">3</div>
+<div class="tab-pane fade" id="nav-obligacion" role="tabpanel" aria-labelledby="nav-contact-tab">4</div>
+<div class="tab-pane fade" id="nav-bajas" role="tabpanel" aria-labelledby="nav-contact-tab">5</div>
 </div>
+
 
 <div>
     <a asp-action="Index">Back to List</a>

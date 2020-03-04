@@ -22,7 +22,7 @@ namespace SistemaAFT.Controllers
         // GET: Personas
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Persona.Include(p => p.Estado_Civil).Include(p => p.Genero).Include(p => p.Tipo_Compania).Include(p => p.Tipo_Identidad).Include(p => p.Tipo_Telefono);
+            var applicationDbContext = _context.Persona.Include(p => p.Estado_Civil).Include(p => p.Genero).Include(p => p.Tipo_Identidad);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -37,9 +37,7 @@ namespace SistemaAFT.Controllers
             var persona = await _context.Persona
                 .Include(p => p.Estado_Civil)
                 .Include(p => p.Genero)
-                .Include(p => p.Tipo_Compania)
                 .Include(p => p.Tipo_Identidad)
-                .Include(p => p.Tipo_Telefono)
                 .Include(p => p.Tipo_Persona)
                 .FirstOrDefaultAsync(m => m.PersonaID == id);
             if (persona == null)
@@ -55,9 +53,7 @@ namespace SistemaAFT.Controllers
         {
             ViewData["Estado_CivilID"] = new SelectList(_context.Set<Estado_Civil>(), "Estado_CivilID", "Nombre_Edo_Civil");
             ViewData["GeneroID"] = new SelectList(_context.Set<Genero>(), "GeneroID", "Nombre_Genero");
-            ViewData["Tipo_CompaniaID"] = new SelectList(_context.Set<Tipo_Compania>(), "Tipo_CompaniaID", "Nombre");
             ViewData["Tipo_IdentidadID"] = new SelectList(_context.Set<Tipo_Identidad>(), "Tipo_IdentidadID", "Nombre");
-            ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "Nombre");
             return View();            
         }
         //cOMENTARIO
@@ -67,7 +63,7 @@ namespace SistemaAFT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PersonaID,correo,fechaNacimiento,nacionalidad,GeneroID,Estado_CivilID,Tipo_IdentidadID,telefono,Tipo_TelefonoID,Tipo_CompaniaID,Tipo_PersonaID")] Persona persona)
+        public async Task<IActionResult> Create([Bind("PersonaID,CURP,RFC,nombre,apellido_paterno,apellido_materno,correo,fechaNacimiento,nacionalidad,GeneroID,Estado_CivilID,Tipo_IdentidadID,num_identificacion,telefono,Tipo_PersonaID")] Persona persona)
         {
             if (ModelState.IsValid)
             {
@@ -77,9 +73,7 @@ namespace SistemaAFT.Controllers
             }            
             ViewData["Estado_CivilID"] = new SelectList(_context.Set<Estado_Civil>(), "Estado_CivilID", "Estado_CivilID", persona.Estado_CivilID);
             ViewData["GeneroID"] = new SelectList(_context.Set<Genero>(), "GeneroID", "GeneroID", persona.GeneroID);
-            ViewData["Tipo_CompaniaID"] = new SelectList(_context.Set<Tipo_Compania>(), "Tipo_CompaniaID", "Tipo_CompaniaID", persona.Tipo_CompaniaID);
             ViewData["Tipo_IdentidadID"] = new SelectList(_context.Set<Tipo_Identidad>(), "Tipo_IdentidadID", "Tipo_IdentidadID", persona.Tipo_IdentidadID);
-            ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "Tipo_TelefonoID", persona.Tipo_TelefonoID);
 
             return View(persona);            
         }
@@ -99,9 +93,7 @@ namespace SistemaAFT.Controllers
             }
             ViewData["Estado_CivilID"] = new SelectList(_context.Set<Estado_Civil>(), "Estado_CivilID", "Nombre_Edo_Civil", persona.Estado_CivilID);
             ViewData["GeneroID"] = new SelectList(_context.Set<Genero>(), "GeneroID", "Nombre_Genero", persona.GeneroID);
-            ViewData["Tipo_CompaniaID"] = new SelectList(_context.Set<Tipo_Compania>(), "Tipo_CompaniaID", "Nombre", persona.Tipo_CompaniaID);
             ViewData["Tipo_IdentidadID"] = new SelectList(_context.Set<Tipo_Identidad>(), "Tipo_IdentidadID", "Nombre", persona.Tipo_IdentidadID);
-            ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "Nombre", persona.Tipo_TelefonoID);
             return View(persona);
         }
 
@@ -110,7 +102,7 @@ namespace SistemaAFT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PersonaID,correo,fechaNacimiento,nacionalidad,GeneroID,Estado_CivilID,Tipo_IdentidadID,telefono,Tipo_TelefonoID,Tipo_CompaniaID, Tipo_PersonaID")] Persona persona)
+        public async Task<IActionResult> Edit(int id, [Bind("PersonaID,CURP,RFC,nombre,apellido_paterno,apellido_materno,correo,fechaNacimiento,nacionalidad,GeneroID,Estado_CivilID,Tipo_IdentidadID,num_identificacion,telefono,Tipo_PersonaID")] Persona persona)
         {
             if (id != persona.PersonaID)
             {
@@ -139,9 +131,7 @@ namespace SistemaAFT.Controllers
             }
             ViewData["Estado_CivilID"] = new SelectList(_context.Set<Estado_Civil>(), "Estado_CivilID", "Estado_CivilID", persona.Estado_CivilID);
             ViewData["GeneroID"] = new SelectList(_context.Set<Genero>(), "GeneroID", "GeneroID", persona.GeneroID);
-            ViewData["Tipo_CompaniaID"] = new SelectList(_context.Set<Tipo_Compania>(), "Tipo_CompaniaID", "Tipo_CompaniaID", persona.Tipo_CompaniaID);
             ViewData["Tipo_IdentidadID"] = new SelectList(_context.Set<Tipo_Identidad>(), "Tipo_IdentidadID", "Tipo_IdentidadID", persona.Tipo_IdentidadID);
-            ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "Tipo_TelefonoID", persona.Tipo_TelefonoID);
             return View(persona);
         }
 
@@ -156,9 +146,7 @@ namespace SistemaAFT.Controllers
             var persona = await _context.Persona
                 .Include(p => p.Estado_Civil)
                 .Include(p => p.Genero)
-                .Include(p => p.Tipo_Compania)
                 .Include(p => p.Tipo_Identidad)
-                .Include(p => p.Tipo_Telefono)
                 .FirstOrDefaultAsync(m => m.PersonaID == id);
             if (persona == null)
             {

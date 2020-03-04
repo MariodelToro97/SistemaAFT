@@ -57,11 +57,35 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label asp-for="correo" class="control-label">Correo electrónico:</label>
-                            <input asp-for="correo" type="email" class="form-control" placeholder="correo@electrónico.com" required />
+                            <label asp-for="CURP" class="control-label">CURP:</label>
+                            <input asp-for="CURP" type="text" class="form-control" placeholder="curp" required />
+                            <span asp-validation-for="CURP" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="RFC" class="control-label">RFC:</label>
+                            <input asp-for="RFC" type="text" class="form-control" placeholder="RFC" required />
+                            <span asp-validation-for="RFC" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="nombre" class="control-label">nombre:</label>
+                            <input asp-for="nombre" type="text" class="form-control" placeholder="nombre" required />
+                            <span asp-validation-for="nombre" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="apellido_paterno" class="control-label">apellido_paterno:</label>
+                            <input asp-for="apellido_paterno" type="text" class="form-control" placeholder="apellido_paterno" required />
+                            <span asp-validation-for="apellido_paterno" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="apellido_materno" class="control-label">apellido_materno:</label>
+                            <input asp-for="apellido_materno" type="text" class="form-control" placeholder="apellido_materno" required />
+                            <span asp-validation-for="apellido_materno" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="correo" class="control-label">Correo:</label>
+                            <input asp-for="correo" type="email" class="form-control" placeholder="Correo" required />
                             <span asp-validation-for="correo" class="text-danger"></span>
                         </div>
-
 
                         <div class="form-group">
                             <label asp-for="GeneroID" class="control-label">Género:</label>
@@ -93,18 +117,7 @@
                             <input asp-for="telefono" type="number" min=0 class="form-control" />
                             <span asp-validation-for="telefono" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="Tipo_TelefonoID" class="control-label">Tipo de Teléfono:</label>
-                            <select asp-for="Tipo_TelefonoID" class="form-control" asp-items="ViewBag.Tipo_TelefonoID">
-                                <option value="" selected>Seleccione opción</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Tipo_CompaniaID" class="control-label">Tipo de Compañía:</label>
-                            <select asp-for="Tipo_CompaniaID" class="form-control" asp-items="ViewBag.Tipo_CompaniaID">
-                                <option value="" selected>Seleccione opción</option>
-                            </select>
-                        </div>
+                        
                     </div>
 
                     <div class="col-md-3">
@@ -119,6 +132,11 @@
                             <select asp-for="Tipo_IdentidadID" class="form-control" asp-items="ViewBag.Tipo_IdentidadID">
                                 <option value="" selected>Seleccione opción</option>
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="num_identificacion" class="control-label">num_identificacion:</label>
+                            <input asp-for="num_identificacion" type="email" class="form-control" placeholder="num_identificacion" required />
+                            <span asp-validation-for="num_identificacion" class="text-danger"></span>
                         </div>
                     </div>
 

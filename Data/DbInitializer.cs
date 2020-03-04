@@ -12,7 +12,7 @@ namespace SistemaAFT.Data
 		{
 			context.Database.EnsureCreated();
 
-			if (context.Genero.Any() || context.Estado_Civil.Any() || context.Tipo_Identidad.Any() || context.Municipio.Any() || context.Tipo_Telefono.Any() || context.Tipo_Compania.Any() || context.Tipo_Persona.Any())
+			if (context.Genero.Any() || context.Estado_Civil.Any() || context.Tipo_Identidad.Any() || context.Municipio.Any() || context.Tipo_Persona.Any())
 			{
 				return;
 			}
@@ -79,44 +79,7 @@ namespace SistemaAFT.Data
 				context.Municipio.Add(g);
 			}
 
-			//TIPO DE TELEFONO
-			var tipo_telefono = new Tipo_Telefono[]
-			{
-				new Tipo_Telefono {Nombre = "Móvil"},
-				new Tipo_Telefono {Nombre = "Fijo"},
-				new Tipo_Telefono {Nombre = "Oficina"}
-			};
-
-			foreach (Tipo_Telefono g in tipo_telefono)
-			{
-				context.Tipo_Telefono.Add(g);
-			}
-
-			//TIPO DE COMPANIA
-			var tipo_compania = new Tipo_Compania[]
-			{
-				new Tipo_Compania {Nombre = "Telcel"},
-				new Tipo_Compania {Nombre = "Movistar"},
-				new Tipo_Compania {Nombre = "AT&T"},
-				new Tipo_Compania {Nombre = "Unefón"},
-				new Tipo_Compania {Nombre = "Virgin Móvil"},
-				new Tipo_Compania {Nombre = "Simplii"},
-				new Tipo_Compania {Nombre = "FreedomPop"},
-				new Tipo_Compania {Nombre = "Flash Móvil"},
-				new Tipo_Compania {Nombre = "Weex"},
-				new Tipo_Compania {Nombre = "Cierto"},
-				new Tipo_Compania {Nombre = "Aló"},
-				new Tipo_Compania {Nombre = "Maz Tiempo"},
-				new Tipo_Compania {Nombre = "Toca Móvil"},
-				new Tipo_Compania {Nombre = "QBOcel"},
-
-			};
-
-			foreach (Tipo_Compania g in tipo_compania)
-			{
-				context.Tipo_Compania.Add(g);
-			}
-
+			
 			//Tipo de persona
 			var tipo_persona = new Tipo_Persona[]
 			{
