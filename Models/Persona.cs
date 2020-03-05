@@ -44,6 +44,9 @@ namespace SistemaAFT.Models
         public Etnia Etnia { get; set; }
         public int DiscapacidadID { get; set; }
         public Discapacidad Discapacidad { get; set; }
+        [Required(ErrorMessage = "ACUSE SURI")]
+        public string ACUSESURI { get; set; } = "ACUSE SURI";
+
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime Created { get; set; } = DateTime.Now;

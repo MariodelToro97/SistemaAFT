@@ -26,11 +26,9 @@
                         <input asp-for="CURP" type="text" class="form-control" placeholder="CURP" required />
                     </div>
                 </div>
-                <div class="col-md-1">
-                    <div class="form-group">
-                        <div class="bg-secondary">
-                            <img src="~/icon/search-solid.svg" class="tamanoIMG text-secondary" />
-                        </div>
+                <div class="col-md-1 d-flex">
+                    <div class="bg-secondary rounded mx-auto my-auto py-1 px-2 mx-1">
+                        <input type="image" src ="~/icon/search-solid.svg" class="tamanoIMG "/>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -60,6 +58,10 @@
                         <label asp-for="apellido_materno" class="control-label">Apellido Materno:</label><span asp-validation-for="apellido_materno" class="text-danger"></span>
                         <input asp-for="apellido_materno" type="text" class="form-control" placeholder="Apellido Materno" />
                     </div>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="ACUSESURI" class="control-label">ACUSE SURI</label>
+                    <input asp-for="ACUSESURI" type="text" class="form-control" placeholder="ACUSE SURI" value="ACUSE SURI" disabled />
                 </div>
                 <div class="col-md-3">
 
@@ -103,7 +105,7 @@
 
                 <div class="col-md-3 mt-2">
                     <div class="form-group">
-                        <label asp-for="fechaNacimiento" class="control-label">Fecha de nacimiento<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="fechaNacimiento" class="text-danger ErrorInput"></span>
+                        <label asp-for="fechaNacimiento" class="control-label">Fecha nacimiento<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="fechaNacimiento" class="text-danger ErrorInput"></span>
                         <input asp-for="fechaNacimiento" type="date" class="form-control" required />
                     </div>
                     <div class="form-group">
@@ -156,9 +158,11 @@
         <div class="tab-pane fade border border-secondary rounded" id="nav-integrantes" role="tabpanel" aria-labelledby="nav-contact-tab">
             <div class="container my-3">
                 <div class="border border-secondary rounded bg-dark">
-                    <div class="form-inline">
+                    <div class="form-inline d-flex">
                         <h4 class="my-3 mx-3 text-white font-weight-lighter">Integrantes</h4>
-                        <button type="button" class="btn btn-light text-dark" data-toggle="modal" data-target="#exampleModal">Agregar</button>
+                        <button class="btn btn-light text-dark mr-3 ml-auto">Agregar</button>
+                           
+                        
                     </div>                    
                 </div>
                 <div class="rounded border border-secondary">
