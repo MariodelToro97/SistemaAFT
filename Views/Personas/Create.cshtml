@@ -150,8 +150,116 @@
             </div>
         </div>
 
+        <!--MODAL DE DOMICILIO-->
+        <div class="tab-pane fade" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <div class="container my-3">
+                <div class="border border-secondary rounded bg-dark">
+                    <h4 class="my-3 mx-3 text-white font-weight-lighter">Domicilios</h4>
+                    <!--Modal 2-->
+                    <a href="" class="btn btn-primary btn-rounded float-right" data-toggle="modal" data-target="#modalRegisterForm">Extra large modal</a>
 
-        <div class="tab-pane fade" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab">2</div>
+                    <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-header text-center">
+                                    <h4 class="modal-title w-100 font-weight-bold">Domicilios</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="tab-pane fade show container active border border-secondary rounded" id="nav-general" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <div class="row">
+                                        <div class="col-md-3 mt-2">
+                                            <div class="form-group">
+                                                <label asp-for="correo" class="control-label">Correo electrónico:</label><span asp-validation-for="correo" class="text-danger ErrorInput"></span>
+                                                <input asp-for="correo" type="email" class="form-control" placeholder="correo@electrónico.com" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="GeneroID" class="control-label">Género<span class="text-danger font-weight-bold">*</span>:</label>
+                                                <select asp-for="GeneroID" class="form-control" asp-items='ViewBag.GeneroID'>
+                                                    <option value="" selected>Seleccione opción</option>
+                                                </select>
+                                            </div>
+                                            <label asp-for="EtniaID" class="control-label">Pertenece a una étnia:</label>
+                                            <div asp-for="Tipo_PersonaID">
+                                                @Html.RadioButton("EtniaID", 2, false) <label class="control-label mx-2">Si</label>
+                                                @Html.RadioButton("EtniaID", 1, true) <label class="control-label mx-2">No</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 mt-2">
+                                            <div class="form-group">
+                                                <label asp-for="fechaNacimiento" class="control-label">Fecha de nacimiento<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="fechaNacimiento" class="text-danger ErrorInput"></span>
+                                                <input asp-for="fechaNacimiento" type="date" class="form-control" required />
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Estado_CivilID" class="control-label">Estado civil<span class="text-danger font-weight-bold">*</span>:</label>
+                                                <select asp-for="Estado_CivilID" class="form-control" asp-items="ViewBag.Estado_CivilID">
+                                                    <option value="" selected>Seleccione opción</option>
+                                                </select>
+                                                <!--@Html.RadioButton("Estado_CivilID", 2)-->
+                                            </div>
+                                            <label asp-for="DiscapacidadID" class="control-label">Discapacidad:</label>
+                                            <div asp-for="Tipo_PersonaID">
+                                                @Html.RadioButton("DiscapacidadID", 2, false) <label class="control-label mx-2">Si</label>
+                                                @Html.RadioButton("DiscapacidadID", 1, true) <label class="control-label mx-2">No</label>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-3 mt-2">
+                                            <div class="form-group">
+                                                <label asp-for="nacionalidad" class="control-label">Nacionalidad<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="nacionalidad" class="text-danger ErrorInput"></span>
+                                                <input asp-for="nacionalidad" type="text" class="form-control" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Tipo_IdentidadID" class="control-label">Tipo de identificación<span class="text-danger font-weight-bold">*</span>:</label>
+                                                <select asp-for="Tipo_IdentidadID" class="form-control" asp-items="ViewBag.Tipo_IdentidadID">
+                                                    <option value="" selected>Seleccione opción</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 mt-2">
+                                            <div class="form-group">
+                                                <label asp-for="telefono" class="control-label">Teléfono:</label><span asp-validation-for="telefono" class="text-danger ErrorInput"></span>
+                                                <input asp-for="telefono" type="number" min=0 class="form-control" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="num_identificacion" class="control-label">Núm. Doc de identificación:</label><span asp-validation-for="num_identificacion" class="text-danger ErrorInput"></span>
+                                                <input asp-for="num_identificacion" type="email" class="form-control" placeholder="num_identificacion" required />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button class="btn btn-primary">Sign up</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rounded border border-secondary">
+                    <div class="container">
+                        <table class="table table-sm table-secondary my-3 rounded">
+                            <thead class="thead-light text-center">
+                                <tr>
+                                    <th>Estado</th>
+                                    <th>Municipio</th>
+                                    <th>Localidad</th>
+                                    <th>Tipo Asentamiento</th>
+                                    <th>Referencia Ubicación</th>
+                                    <th>Editar</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div><!--FIN MODAL DOMICILIO-->
         <div class="tab-pane fade" id="nav-cuenta" role="tabpanel" aria-labelledby="nav-contact-tab">3</div>
         <div class="tab-pane fade" id="nav-obligacion" role="tabpanel" aria-labelledby="nav-contact-tab">4</div>
         <div class="tab-pane fade" id="nav-representantes" role="tabpanel" aria-labelledby="nav-contact-tab">4</div>

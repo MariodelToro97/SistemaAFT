@@ -76,5 +76,5 @@ body {
 }
 
 .derecho {
-    float: right;
+    float: right!important;
 }
