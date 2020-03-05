@@ -20,16 +20,18 @@
                         @Html.RadioButton("Tipo_PersonaID", 2) <label class="control-label mx-2">Moral</label>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3">                    
                     <div class="form-group">
                         <label asp-for="CURP" class="control-label">CURP<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="CURP" class="text-danger ErrorInput"></span>
                         <input asp-for="CURP" type="text" class="form-control" placeholder="CURP" required />
                     </div>
                 </div>
                 <div class="col-md-1">
-                    <a>
-                        <i class="fas fa-search"></i>
-                    </a>
+                    <div class="form-group">
+                        <div class="bg-secondary">
+                            <img src="~/icon/search-solid.svg" class="tamanoIMG text-secondary" />
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
@@ -64,10 +66,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
     </section>
 
     <nav>
@@ -158,8 +156,10 @@
         <div class="tab-pane fade border border-secondary rounded" id="nav-integrantes" role="tabpanel" aria-labelledby="nav-contact-tab">
             <div class="container my-3">
                 <div class="border border-secondary rounded bg-dark">
-                    <h4 class="my-3 mx-3 text-white font-weight-lighter">Integrantes</h4>
-                    <button type="button" class="btn btn-light derecho text-dark" data-toggle="modal" data-target="#exampleModal">Agregar</button>
+                    <div class="form-inline">
+                        <h4 class="my-3 mx-3 text-white font-weight-lighter">Integrantes</h4>
+                        <button type="button" class="btn btn-light text-dark" data-toggle="modal" data-target="#exampleModal">Agregar</button>
+                    </div>                    
                 </div>
                 <div class="rounded border border-secondary">
                     <div class="container">
