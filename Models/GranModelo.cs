@@ -9,7 +9,7 @@ namespace SistemaAFT.Models
 	{
 		//public int PersonaID { get; set; }
 		public Persona Persona { get; set; }
-//		public int DomicilioID { get; set; }
+		//		public int DomicilioID { get; set; }
 
 		public Domicilio Domicilio { get; set; }
 

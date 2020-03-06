@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -59,6 +60,11 @@ namespace SistemaAFT.Controllers
             ViewData["GeneroID"] = new SelectList(_context.Genero, "GeneroID", "GeneroID");
             ViewData["Tipo_IdentidadID"] = new SelectList(_context.Tipo_Identidad, "Tipo_IdentidadID", "Tipo_IdentidadID");
             ViewData["Tipo_PersonaID"] = new SelectList(_context.Tipo_Persona, "Tipo_PersonaID", "Tipo_PersonaID");
+            ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "MunicipioID");
+            ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "PersonaID");
+            ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Tipo_AmbitoID");
+            ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Tipo_AsentamientoID");
+            ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Tipo_VialidadID");
             return View();
         }
 
@@ -85,25 +91,27 @@ namespace SistemaAFT.Controllers
         }
 
         // GET: Personas/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id, GranModelo granModelo)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var persona = await _context.Persona.FindAsync(id);
-            if (persona == null)
+            granModelo.Persona = await _context.Persona.FindAsync(id);
+            if (granModelo.Persona == null)
             {
                 return NotFound();
             }
-            ViewData["DiscapacidadID"] = new SelectList(_context.Discapacidad, "DiscapacidadID", "DiscapacidadID", persona.DiscapacidadID);
-            ViewData["Estado_CivilID"] = new SelectList(_context.Estado_Civil, "Estado_CivilID", "Estado_CivilID", persona.Estado_CivilID);
-            ViewData["EtniaID"] = new SelectList(_context.Etnia, "EtniaID", "EtniaID", persona.EtniaID);
-            ViewData["GeneroID"] = new SelectList(_context.Genero, "GeneroID", "GeneroID", persona.GeneroID);
-            ViewData["Tipo_IdentidadID"] = new SelectList(_context.Tipo_Identidad, "Tipo_IdentidadID", "Tipo_IdentidadID", persona.Tipo_IdentidadID);
-            ViewData["Tipo_PersonaID"] = new SelectList(_context.Tipo_Persona, "Tipo_PersonaID", "Tipo_PersonaID", persona.Tipo_PersonaID);
-            return View(persona);
+            ViewData["DiscapacidadID"] = new SelectList(_context.Discapacidad, "DiscapacidadID", "DiscapacidadID", granModelo.Persona.DiscapacidadID);
+            ViewData["Estado_CivilID"] = new SelectList(_context.Estado_Civil, "Estado_CivilID", "Estado_CivilID", granModelo.Persona.Estado_CivilID);
+            ViewData["EtniaID"] = new SelectList(_context.Etnia, "EtniaID", "EtniaID", granModelo.Persona.EtniaID);
+            ViewData["GeneroID"] = new SelectList(_context.Genero, "GeneroID", "GeneroID", granModelo.Persona.GeneroID);
+            ViewData["Tipo_IdentidadID"] = new SelectList(_context.Tipo_Identidad, "Tipo_IdentidadID", "Tipo_IdentidadID", granModelo.Persona.Tipo_IdentidadID);
+            ViewData["Tipo_PersonaID"] = new SelectList(_context.Tipo_Persona, "Tipo_PersonaID", "Tipo_PersonaID", granModelo.Persona.Tipo_PersonaID);
+            
+
+            return View(granModelo);
         }
 
         // POST: Personas/Edit/5
@@ -111,9 +119,10 @@ namespace SistemaAFT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PersonaID,CURP,RFC,nombre,apellido_paterno,apellido_materno,correo,fechaNacimiento,nacionalidad,GeneroID,Estado_CivilID,Tipo_IdentidadID,num_identificacion,telefono,Tipo_PersonaID,EtniaID,DiscapacidadID,Created")] Persona persona)
+        public async Task<IActionResult> Edit(int id, GranModelo granModelo)
         {
-            if (id != persona.PersonaID)
+
+            if (id != granModelo.Persona.PersonaID)
             {
                 return NotFound();
             }
@@ -122,12 +131,12 @@ namespace SistemaAFT.Controllers
             {
                 try
                 {
-                    _context.Update(persona);
+                    _context.Update(granModelo.Persona);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PersonaExists(persona.PersonaID))
+                    if (!PersonaExists(granModelo.Persona.PersonaID))
                     {
                         return NotFound();
                     }
@@ -138,13 +147,20 @@ namespace SistemaAFT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DiscapacidadID"] = new SelectList(_context.Discapacidad, "DiscapacidadID", "DiscapacidadID", persona.DiscapacidadID);
-            ViewData["Estado_CivilID"] = new SelectList(_context.Estado_Civil, "Estado_CivilID", "Estado_CivilID", persona.Estado_CivilID);
-            ViewData["EtniaID"] = new SelectList(_context.Etnia, "EtniaID", "EtniaID", persona.EtniaID);
-            ViewData["GeneroID"] = new SelectList(_context.Genero, "GeneroID", "GeneroID", persona.GeneroID);
-            ViewData["Tipo_IdentidadID"] = new SelectList(_context.Tipo_Identidad, "Tipo_IdentidadID", "Tipo_IdentidadID", persona.Tipo_IdentidadID);
-            ViewData["Tipo_PersonaID"] = new SelectList(_context.Tipo_Persona, "Tipo_PersonaID", "Tipo_PersonaID", persona.Tipo_PersonaID);
-            return View(persona);
+            ViewData["DiscapacidadID"] = new SelectList(_context.Discapacidad, "DiscapacidadID", "DiscapacidadID", granModelo.Persona.DiscapacidadID);
+            ViewData["Estado_CivilID"] = new SelectList(_context.Estado_Civil, "Estado_CivilID", "Estado_CivilID", granModelo.Persona.Estado_CivilID);
+            ViewData["EtniaID"] = new SelectList(_context.Etnia, "EtniaID", "EtniaID", granModelo.Persona.EtniaID);
+            ViewData["GeneroID"] = new SelectList(_context.Genero, "GeneroID", "GeneroID", granModelo.Persona.GeneroID);
+            ViewData["Tipo_IdentidadID"] = new SelectList(_context.Tipo_Identidad, "Tipo_IdentidadID", "Tipo_IdentidadID", granModelo.Persona.Tipo_IdentidadID);
+            ViewData["Tipo_PersonaID"] = new SelectList(_context.Tipo_Persona, "Tipo_PersonaID", "Tipo_PersonaID", granModelo.Persona.Tipo_PersonaID);
+            /*
+            ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "MunicipioID", domicilio.MunicipioID);
+            ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "CURP", domicilio.PersonaID);
+            ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Tipo_AmbitoID", domicilio.Tipo_AmbitoID);
+            ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Tipo_AsentamientoID", domicilio.Tipo_AsentamientoID);
+            ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Tipo_VialidadID", domicilio.Tipo_VialidadID);
+            */
+            return View(granModelo);
         }
 
         // GET: Personas/Delete/5

@@ -10,8 +10,8 @@ using SistemaAFT.Data;
 namespace SistemaAFT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200305153243_personaid")]
-    partial class personaid
+    [Migration("20200306205113_inicial22")]
+    partial class inicial22
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

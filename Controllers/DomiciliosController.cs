@@ -53,7 +53,7 @@ namespace SistemaAFT.Controllers
         public IActionResult Create()
         {
             ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "MunicipioID");
-            ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "CURP");
+            ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "PersonaID");
             ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Tipo_AmbitoID");
             ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Tipo_AsentamientoID");
             ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Tipo_VialidadID");
@@ -74,7 +74,7 @@ namespace SistemaAFT.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "MunicipioID", domicilio.MunicipioID);
-            ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "CURP", domicilio.PersonaID);
+            ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "PersonaID", domicilio.PersonaID);
             ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Tipo_AmbitoID", domicilio.Tipo_AmbitoID);
             ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Tipo_AsentamientoID", domicilio.Tipo_AsentamientoID);
             ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Tipo_VialidadID", domicilio.Tipo_VialidadID);

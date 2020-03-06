@@ -36,6 +36,10 @@
     <Compile Remove="Migrations\20200303201225_persona.Designer.cs" />
     <Compile Remove="Migrations\20200303212535_[nuevo].cs" />
     <Compile Remove="Migrations\20200303212535_[nuevo].Designer.cs" />
+    <Compile Remove="Migrations\20200305153243_personaid.cs" />
+    <Compile Remove="Migrations\20200305153243_personaid.Designer.cs" />
+    <Compile Remove="Migrations\20200306205001_inicial22.cs" />
+    <Compile Remove="Migrations\20200306205001_inicial22.Designer.cs" />
   </ItemGroup>
 
 
