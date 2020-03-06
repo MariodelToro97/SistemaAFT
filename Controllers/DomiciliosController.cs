@@ -22,7 +22,7 @@ namespace SistemaAFT.Controllers
         // GET: Domicilios
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Domicilio.Include(d => d.Municipio).Include(d => d.Tipo_Ambito).Include(d => d.Tipo_Asentamiento).Include(d => d.Tipo_Vialidad);
+            var applicationDbContext = _context.Domicilio.Include(d => d.Municipio).Include(d => d.Persona).Include(d => d.Tipo_Ambito).Include(d => d.Tipo_Asentamiento).Include(d => d.Tipo_Vialidad);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -36,6 +36,7 @@ namespace SistemaAFT.Controllers
 
             var domicilio = await _context.Domicilio
                 .Include(d => d.Municipio)
+                .Include(d => d.Persona)
                 .Include(d => d.Tipo_Ambito)
                 .Include(d => d.Tipo_Asentamiento)
                 .Include(d => d.Tipo_Vialidad)
@@ -51,7 +52,8 @@ namespace SistemaAFT.Controllers
         // GET: Domicilios/Create
         public IActionResult Create()
         {
-            ViewData["MunicipioID"] = new SelectList(_context.Set<Municipio>(), "MunicipioID", "MunicipioID");
+            ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "MunicipioID");
+            ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "CURP");
             ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Tipo_AmbitoID");
             ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Tipo_AsentamientoID");
             ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Tipo_VialidadID");
@@ -63,7 +65,7 @@ namespace SistemaAFT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DomicilioID,Tipo_AmbitoID,estado,nombreasentamiento,Tipo_VialidadID,noexterior,MunicipioID,referenciavialidad,nombrevialidad,nointerior,localidad,referenciaposterior,codigopostal,Tipo_AsentamientoID,referenciaubicacion, PersonID")] Domicilio domicilio)
+        public async Task<IActionResult> Create([Bind("DomicilioID,Tipo_AmbitoID,estado,nombreasentamiento,Tipo_VialidadID,noexterior,MunicipioID,referenciavialidad,nombrevialidad,nointerior,localidad,referenciaposterior,codigopostal,Tipo_AsentamientoID,referenciaubicacion,PersonaID")] Domicilio domicilio)
         {
             if (ModelState.IsValid)
             {
@@ -71,7 +73,8 @@ namespace SistemaAFT.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MunicipioID"] = new SelectList(_context.Set<Municipio>(), "MunicipioID", "MunicipioID", domicilio.MunicipioID);
+            ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "MunicipioID", domicilio.MunicipioID);
+            ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "CURP", domicilio.PersonaID);
             ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Tipo_AmbitoID", domicilio.Tipo_AmbitoID);
             ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Tipo_AsentamientoID", domicilio.Tipo_AsentamientoID);
             ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Tipo_VialidadID", domicilio.Tipo_VialidadID);
@@ -91,7 +94,8 @@ namespace SistemaAFT.Controllers
             {
                 return NotFound();
             }
-            ViewData["MunicipioID"] = new SelectList(_context.Set<Municipio>(), "MunicipioID", "MunicipioID", domicilio.MunicipioID);
+            ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "MunicipioID", domicilio.MunicipioID);
+            ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "CURP", domicilio.PersonaID);
             ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Tipo_AmbitoID", domicilio.Tipo_AmbitoID);
             ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Tipo_AsentamientoID", domicilio.Tipo_AsentamientoID);
             ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Tipo_VialidadID", domicilio.Tipo_VialidadID);
@@ -103,7 +107,7 @@ namespace SistemaAFT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DomicilioID,Tipo_AmbitoID,estado,nombreasentamiento,Tipo_VialidadID,noexterior,MunicipioID,referenciavialidad,nombrevialidad,nointerior,localidad,referenciaposterior,codigopostal,Tipo_AsentamientoID,referenciaubicacion, PersonaID")] Domicilio domicilio)
+        public async Task<IActionResult> Edit(int id, [Bind("DomicilioID,Tipo_AmbitoID,estado,nombreasentamiento,Tipo_VialidadID,noexterior,MunicipioID,referenciavialidad,nombrevialidad,nointerior,localidad,referenciaposterior,codigopostal,Tipo_AsentamientoID,referenciaubicacion,PersonaID")] Domicilio domicilio)
         {
             if (id != domicilio.DomicilioID)
             {
@@ -130,7 +134,8 @@ namespace SistemaAFT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MunicipioID"] = new SelectList(_context.Set<Municipio>(), "MunicipioID", "MunicipioID", domicilio.MunicipioID);
+            ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "MunicipioID", domicilio.MunicipioID);
+            ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "CURP", domicilio.PersonaID);
             ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Tipo_AmbitoID", domicilio.Tipo_AmbitoID);
             ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Tipo_AsentamientoID", domicilio.Tipo_AsentamientoID);
             ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Tipo_VialidadID", domicilio.Tipo_VialidadID);
@@ -147,6 +152,7 @@ namespace SistemaAFT.Controllers
 
             var domicilio = await _context.Domicilio
                 .Include(d => d.Municipio)
+                .Include(d => d.Persona)
                 .Include(d => d.Tipo_Ambito)
                 .Include(d => d.Tipo_Asentamiento)
                 .Include(d => d.Tipo_Vialidad)

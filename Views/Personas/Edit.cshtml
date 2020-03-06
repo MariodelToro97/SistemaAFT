@@ -1,337 +1,113 @@
-﻿@model (Persona, Domicilio)
+﻿@model SistemaAFT.Models.Persona
 
 @{
     ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Edit</h1>
 
 <h4>Persona</h4>
 <hr />
-<form asp-action="Edit">
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true);
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-2">
-                    <label asp-for="Item1.Tipo_PersonaID" class="control-label">Tipo de Persona<span class="text-danger font-weight-bold">*</span>:</label>
-                    <div asp-for="Persona.Tipo_PersonaID">
-                        @Html.RadioButton("Item1.Tipo_PersonaID", 1, true) <label class="control-label mx-2">Física</label>
-                        @Html.RadioButton("Item1.Tipo_PersonaID", 2) <label class="control-label mx-2">Moral</label>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="Item1.CURP" class="control-label">CURP<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Item1.CURP" class="text-danger ErrorInput"></span>
-                        <input asp-for="Item1.CURP" type="text" class="form-control" placeholder="CURP" required />
-                    </div>
-                </div>
-                <div class="col-md-1">
-                    <a>
-                        <i class="fas fa-search"></i>
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="Item1.RFC" class="control-label">RFC:</label><span asp-validation-for="Item1.RFC" class="text-danger"></span>
-                        <input asp-for="Item1.RFC" type="text" class="form-control" placeholder="RFC" />
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="Item1.nombre" class="control-label">Nombre<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Item1.nombre" class="text-danger ErrorInput"></span>
-                        <input asp-for="Item1.nombre" type="text" class="form-control" placeholder="Nombre" required />
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="Item1.apellido_paterno" class="control-label">Apellido Paterno<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Item1.apellido_paterno" class="text-danger ErrorInput"></span>
-                        <input asp-for="Item1.apellido_paterno" type="text" class="form-control" placeholder="Apellido Paterno" required />
-                    </div>
-
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="Item1.apellido_materno" class="control-label">Apellido Materno:</label><span asp-validation-for="Item1.apellido_materno" class="text-danger"></span>
-                        <input asp-for="Item1.apellido_materno" type="text" class="form-control" placeholder="Apellido Materno" />
-                    </div>
-                </div>
-                <div class="col-md-3">
-
-                </div>
-            </div>
-        </div>
-
-
-
-
-    </section>
-
-    <nav>
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-home" aria-selected="true">Generales</a>
-            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-domicilio" role="tab" aria-controls="nav-profile" aria-selected="false">Domicilios</a>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-cuenta" role="tab" aria-controls="nav-contact" aria-selected="false">Cuentas</a>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-obligacion" role="tab" aria-controls="nav-contact" aria-selected="false">Obligaciones</a>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-representantes" role="tab" aria-controls="nav-contact" aria-selected="false">Representantes</a>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-integrantes" role="tab" aria-controls="nav-contact" aria-selected="false">Integrantes</a>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-bajas" role="tab" aria-controls="nav-contact" aria-selected="false">Bajas</a>
-        </div>
-    </nav>
-    <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show container active border border-secondary rounded" id="nav-general" role="tabpanel" aria-labelledby="nav-home-tab">
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Item1.PersonaID" />
-
-            <div class="row">
-                <div class="col-md-3 mt-2">
-                    <div class="form-group">
-                        <label asp-for="Item1.correo" class="control-label">Correo electrónico:</label><span asp-validation-for="Item1.correo" class="text-danger ErrorInput"></span>
-                        <input asp-for="Item1.correo" type="email" class="form-control" placeholder="correo@electrónico.com" />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Item1.GeneroID" class="control-label">Género<span class="text-danger font-weight-bold">*</span>:</label>
-                        <select asp-for="Item1.GeneroID" class="form-control" asp-items='ViewBag.GeneroID'>
-                            <option value="" selected>Seleccione opción</option>
-                        </select>
-                    </div>
-                    <label asp-for="Item1.EtniaID" class="control-label">Pertenece a una étnia:</label>
-                    <div asp-for="Tipo_PersonaID">
-                        @Html.RadioButton("Item1.EtniaID", 2, false) <label class="control-label mx-2">Si</label>
-                        @Html.RadioButton("Item1.EtniaID", 1, true) <label class="control-label mx-2">No</label>
-                    </div>
-                </div>
-
-                <div class="col-md-3 mt-2">
-                    <div class="form-group">
-                        <label asp-for="Item1.fechaNacimiento" class="control-label">Fecha de nacimiento<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Item1.fechaNacimiento" class="text-danger ErrorInput"></span>
-                        <input asp-for="Item1.fechaNacimiento" type="date" class="form-control" required />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Item1.Estado_CivilID" class="control-label">Estado civil<span class="text-danger font-weight-bold">*</span>:</label>
-                        <select asp-for="Item1.Estado_CivilID" class="form-control" asp-items="ViewBag.Estado_CivilID">
-                            <option value="" selected>Seleccione opción</option>
-                        </select>
-                        <!--@Html.RadioButton("Item1.Estado_CivilID", 2)-->
-                    </div>
-                    <label asp-for="Item1.DiscapacidadID" class="control-label">Discapacidad:</label>
-                    <div asp-for="Tipo_PersonaID">
-                        @Html.RadioButton("Item1.DiscapacidadID", 2, false) <label class="control-label mx-2">Si</label>
-                        @Html.RadioButton("Item1.DiscapacidadID", 1, true) <label class="control-label mx-2">No</label>
-                    </div>
-                </div>
-
-
-                <div class="col-md-3 mt-2">
-                    <div class="form-group">
-                        <label asp-for="Item1.nacionalidad" class="control-label">Nacionalidad<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Item1.nacionalidad" class="text-danger ErrorInput"></span>
-                        <input asp-for="Item1.nacionalidad" type="text" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Item1.Tipo_IdentidadID" class="control-label">Tipo de identificación<span class="text-danger font-weight-bold">*</span>:</label>
-                        <select asp-for="Item1.Tipo_IdentidadID" class="form-control" asp-items="ViewBag.Tipo_IdentidadID">
-                            <option value="" selected>Seleccione opción</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-3 mt-2">
-                    <div class="form-group">
-                        <label asp-for="Item1.telefono" class="control-label">Teléfono:</label><span asp-validation-for="Item1.telefono" class="text-danger ErrorInput"></span>
-                        <input asp-for="Item1.telefono" type="number" min=0 class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Item1.num_identificacion" class="control-label">Núm. Doc de identificación:</label><span asp-validation-for="Item1.num_identificacion" class="text-danger ErrorInput"></span>
-                        <input asp-for="Item1.num_identificacion" type="email" class="form-control" placeholder="num_identificacion" required />
-                    </div>
-                </div>
+            <input type="hidden" asp-for="PersonaID" />
+            <div class="form-group">
+                <label asp-for="CURP" class="control-label"></label>
+                <input asp-for="CURP" class="form-control" />
+                <span asp-validation-for="CURP" class="text-danger"></span>
             </div>
-        </div>
-
-        <div class="form-group mt-3 mx-auto">
-            <a asp-action="Index">Back to List</a>
-            <input type="submit" value="Guardar" class="btn btn-success" />
-        </div>
-
-        <!--MODAL DE DOMICILIO-->
-        <div class="tab-pane fade" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab">
-            <div class="container my-3">
-                <div class="border border-secondary rounded bg-dark">
-                    <h4 class="my-3 mx-3 text-white font-weight-lighter">Domicilios</h4>
-                    <!--Modal 2-->
-                    <a href="" class="btn btn-primary btn-rounded float-right" data-toggle="modal" data-target="#modalRegisterForm">Extra large modal</a>
-
-                    <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-xl">
-                            <div class="modal-content">
-                                <div class="modal-header text-center">
-                                    <h4 class="modal-title w-100 font-weight-bold">Domicilios</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="tab-pane fade show container active border border-secondary rounded" id="nav-general" role="tabpanel" aria-labelledby="nav-home-tab">
-
-                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                                    <div class="row">
-                                        <div class="col-md-3 mt-2">
-                                            <div class="form-group">
-                                                <label asp-for="Item2.Tipo_AmbitoID" class="control-label">Tipo Ambito<span class="text-danger font-weight-bold">*</span>:</label>
-                                                <select asp-for="Item2.Tipo_AmbitoID" class="form-control" asp-items='ViewBag.Tipo_AmbitoID'>
-                                                    <option value="" selected>Seleccione opción</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="Item2.estado" class="control-label">Estado<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Item2.estado" class="text-danger ErrorInput"></span>
-                                                <input asp-for="Item2.estado" type="date" class="form-control" required />
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="Item2.nombreasentamiento" class="control-label">Nombre Asentamiento<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Item2.nombreasentamiento" class="text-danger ErrorInput"></span>
-                                                <input asp-for="Item2.nombreasentamiento" type="text" class="form-control" required />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3 mt-2">
-                                            <div class="form-group">
-                                                <label asp-for="Item2.Tipo_VialidadID" class="control-label">Tipo Vialidad<span class="text-danger font-weight-bold">*</span>:</label>
-                                                <select asp-for="Item2.Tipo_VialidadID" class="form-control" asp-items='ViewBag.Tipo_VialidadID'>
-                                                    <option value="" selected>Seleccione opción</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="Item2.noexterior" class="control-label">Numero Exterior<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Item2.noexterior" class="text-danger ErrorInput"></span>
-                                                <input asp-for="Item2.noexterior" type="text" class="form-control" required />
-                                            </div>
-                                            <label asp-for="Item2.MunicipioID" class="control-label">Municipio<span class="text-danger font-weight-bold">*</span>:</label>
-                                            <select asp-for="Item2.MunicipioID" class="form-control" asp-items='ViewBag.MunicipioID'>
-                                                <option value="" selected>Seleccione opción</option>
-                                            </select>
-                                        </div>
-
-
-                                        <div class="col-md-3 mt-2">
-                                            <div class="form-group">
-                                                <label asp-for="Item2.referenciavialidad" class="control-label">Referencia de Vialidad<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Item2.referenciavialidad" class="text-danger ErrorInput"></span>
-                                                <input asp-for="Item2.referenciavialidad" type="text" class="form-control" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="Item2.nombrevialidad" class="control-label">Nombre Vialidad<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Item2.nombrevialidad" class="text-danger ErrorInput"></span>
-                                                <input asp-for="Item2.nombrevialidad" type="text" class="form-control" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="Item2.nointerior" class="control-label">Numero Interior<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Item2.nointerior" class="text-danger ErrorInput"></span>
-                                                <input asp-for="Item2.nointerior" type="text" class="form-control" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="Item2.localidad" class="control-label">Localidad<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Item2.localidad" class="text-danger ErrorInput"></span>
-                                                <input asp-for="Item2.localidad" type="text" class="form-control" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="Item2.referenciaposterior" class="control-label">Referencia Posterior<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Item2.referenciaposterior" class="text-danger ErrorInput"></span>
-                                                <input asp-for="Item2.referenciaposterior" type="text" class="form-control" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="Item2.codigopostal" class="control-label">Codigo Postal<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Item2.codigopostal" class="text-danger ErrorInput"></span>
-                                                <input asp-for="Item2.codigopostal" type="text" class="form-control" />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3 mt-2">
-                                            <div class="form-group">
-                                                <label asp-for="Item2.Tipo_AsentamientoID" class="control-label">Tipo Asentamiento:</label><span asp-validation-for="Item2.Tipo_AsentamientoID" class="text-danger ErrorInput"></span>
-                                                <input asp-for="Item2.Tipo_AsentamientoID" type="text" min=0 class="form-control" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="Item2.referenciaubicacion" class="control-label">Referencia Ubicación</label><span asp-validation-for="Item2.referenciaubicacion" class="text-danger ErrorInput"></span>
-                                                <input asp-for="Item2.referenciaubicacion" type="text" class="form-control" placeholder="num_identificacion" required />
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer d-flex justify-content-center">
-                                    <button class="btn btn-primary">Guardar Domicilio</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="rounded border border-secondary">
-                    <div class="container">
-                        <table class="table table-sm table-secondary my-3 rounded">
-                            <thead class="thead-light text-center">
-                                <tr>
-                                    <th>Estado</th>
-                                    <th>Municipio</th>
-                                    <th>Localidad</th>
-                                    <th>Tipo Asentamiento</th>
-                                    <th>Referencia Ubicación</th>
-                                    <th>Editar</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label asp-for="RFC" class="control-label"></label>
+                <input asp-for="RFC" class="form-control" />
+                <span asp-validation-for="RFC" class="text-danger"></span>
             </div>
-        </div><!--FIN MODAL DOMICILIO-->
-        <div class="tab-pane fade" id="nav-cuenta" role="tabpanel" aria-labelledby="nav-contact-tab">3</div>
-        <div class="tab-pane fade" id="nav-obligacion" role="tabpanel" aria-labelledby="nav-contact-tab">4</div>
-        <div class="tab-pane fade" id="nav-representantes" role="tabpanel" aria-labelledby="nav-contact-tab">4</div>
-        <div class="tab-pane fade border border-secondary rounded" id="nav-integrantes" role="tabpanel" aria-labelledby="nav-contact-tab">
-            <div class="container my-3">
-                <div class="border border-secondary rounded bg-dark">
-                    <h4 class="my-3 mx-3 text-white font-weight-lighter">Integrantes</h4>
-                    <button type="button" class="btn btn-light derecho text-dark" data-toggle="modal" data-target="#exampleModal">Agregar</button>
-                </div>
-                <div class="rounded border border-secondary">
-                    <div class="container">
-                        <table class="table table-sm table-secondary my-3 rounded">
-                            <thead class="thead-light text-center">
-                                <tr>
-                                    <th>Tipo persona</th>
-                                    <th>CURP</th>
-                                    <th>RFC</th>
-                                    <th>Nombre</th>
-                                    <th>Fec. nac/cons.</th>
-                                    <th>Editar</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label asp-for="nombre" class="control-label"></label>
+                <input asp-for="nombre" class="form-control" />
+                <span asp-validation-for="nombre" class="text-danger"></span>
             </div>
-        </div>
-        <div class="tab-pane fade border border-secondary rounded" id="nav-bajas" role="tabpanel" aria-labelledby="nav-contact-tab">
-            <div class="container my-3">
-                <div class="border border-secondary rounded bg-dark">
-                    <h4 class="my-3 mx-3 text-white font-weight-lighter">Baja por Defunción</h4>
-                </div>
-
-                <div class="rounded border border-secondary">
-                    <div class="container">
-                        <table class="table table-sm table-secondary my-3 rounded">
-                            <thead class="thead-light text-center">
-                                <tr>
-                                    <th>Fecha de Baja</th>
-                                    <th>Tipo documento de baja</th>
-                                    <th>Folio documento</th>
-                                    <th>Observaciones</th>
-                                </tr>
-
-                            </thead>
-                        </table>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label asp-for="apellido_paterno" class="control-label"></label>
+                <input asp-for="apellido_paterno" class="form-control" />
+                <span asp-validation-for="apellido_paterno" class="text-danger"></span>
             </div>
-        </div>
+            <div class="form-group">
+                <label asp-for="apellido_materno" class="control-label"></label>
+                <input asp-for="apellido_materno" class="form-control" />
+                <span asp-validation-for="apellido_materno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="correo" class="control-label"></label>
+                <input asp-for="correo" class="form-control" />
+                <span asp-validation-for="correo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fechaNacimiento" class="control-label"></label>
+                <input asp-for="fechaNacimiento" class="form-control" />
+                <span asp-validation-for="fechaNacimiento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="nacionalidad" class="control-label"></label>
+                <input asp-for="nacionalidad" class="form-control" />
+                <span asp-validation-for="nacionalidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GeneroID" class="control-label"></label>
+                <select asp-for="GeneroID" class="form-control" asp-items="ViewBag.GeneroID"></select>
+                <span asp-validation-for="GeneroID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Estado_CivilID" class="control-label"></label>
+                <select asp-for="Estado_CivilID" class="form-control" asp-items="ViewBag.Estado_CivilID"></select>
+                <span asp-validation-for="Estado_CivilID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipo_IdentidadID" class="control-label"></label>
+                <select asp-for="Tipo_IdentidadID" class="form-control" asp-items="ViewBag.Tipo_IdentidadID"></select>
+                <span asp-validation-for="Tipo_IdentidadID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="num_identificacion" class="control-label"></label>
+                <input asp-for="num_identificacion" class="form-control" />
+                <span asp-validation-for="num_identificacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="telefono" class="control-label"></label>
+                <input asp-for="telefono" class="form-control" />
+                <span asp-validation-for="telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipo_PersonaID" class="control-label"></label>
+                <select asp-for="Tipo_PersonaID" class="form-control" asp-items="ViewBag.Tipo_PersonaID"></select>
+                <span asp-validation-for="Tipo_PersonaID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EtniaID" class="control-label"></label>
+                <select asp-for="EtniaID" class="form-control" asp-items="ViewBag.EtniaID"></select>
+                <span asp-validation-for="EtniaID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiscapacidadID" class="control-label"></label>
+                <select asp-for="DiscapacidadID" class="form-control" asp-items="ViewBag.DiscapacidadID"></select>
+                <span asp-validation-for="DiscapacidadID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Created" class="control-label"></label>
+                <input asp-for="Created" class="form-control" />
+                <span asp-validation-for="Created" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
-</form>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
