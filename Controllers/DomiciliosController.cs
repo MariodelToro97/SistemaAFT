@@ -63,7 +63,7 @@ namespace SistemaAFT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DomicilioID,Tipo_AmbitoID,estado,nombreasentamiento,Tipo_VialidadID,noexterior,MunicipioID,referenciavialidad,nombrevialidad,nointerior,localidad,referenciaposterior,codigopostal,Tipo_AsentamientoID,referenciaubicacion")] Domicilio domicilio)
+        public async Task<IActionResult> Create([Bind("DomicilioID,Tipo_AmbitoID,estado,nombreasentamiento,Tipo_VialidadID,noexterior,MunicipioID,referenciavialidad,nombrevialidad,nointerior,localidad,referenciaposterior,codigopostal,Tipo_AsentamientoID,referenciaubicacion, PersonID")] Domicilio domicilio)
         {
             if (ModelState.IsValid)
             {
@@ -103,7 +103,7 @@ namespace SistemaAFT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DomicilioID,Tipo_AmbitoID,estado,nombreasentamiento,Tipo_VialidadID,noexterior,MunicipioID,referenciavialidad,nombrevialidad,nointerior,localidad,referenciaposterior,codigopostal,Tipo_AsentamientoID,referenciaubicacion")] Domicilio domicilio)
+        public async Task<IActionResult> Edit(int id, [Bind("DomicilioID,Tipo_AmbitoID,estado,nombreasentamiento,Tipo_VialidadID,noexterior,MunicipioID,referenciavialidad,nombrevialidad,nointerior,localidad,referenciaposterior,codigopostal,Tipo_AsentamientoID,referenciaubicacion, PersonaID")] Domicilio domicilio)
         {
             if (id != domicilio.DomicilioID)
             {
