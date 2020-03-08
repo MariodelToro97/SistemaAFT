@@ -13,59 +13,77 @@
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-md-2">
-                    <label asp-for="Tipo_PersonaID" class="control-label">Tipo de Persona<span class="text-danger font-weight-bold">*</span>:</label>
-                    <div asp-for="Tipo_PersonaID">
-                        @Html.RadioButton("Tipo_PersonaID", 1, true) <label class="control-label mx-2">Física</label>
-                        @Html.RadioButton("Tipo_PersonaID", 2) <label class="control-label mx-2">Moral</label>
-                    </div>
-                </div>
-                <div class="col-md-3">                    
-                    <div class="form-group">
-                        <label asp-for="CURP" class="control-label">CURP<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="CURP" class="text-danger ErrorInput"></span>
-                        <input asp-for="CURP" type="text" class="form-control" placeholder="CURP" required />
-                    </div>
-                </div>
-                <div class="col-md-1 d-flex">
-                    <div class="rounded mx-auto my-auto py-1 px-2 mx-1" style="background-color: #999999;">
-                        <input type="image" src ="~/icon/search-solid.svg" class="tamanoIMG "/>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="RFC" class="control-label">RFC:</label><span asp-validation-for="RFC" class="text-danger"></span>
-                        <input asp-for="RFC" type="text" class="form-control" placeholder="RFC" />
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="nombre" class="control-label">Nombre<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="nombre" class="text-danger ErrorInput"></span>
-                        <input asp-for="nombre" type="text" class="form-control" placeholder="Nombre" required />
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="apellido_paterno" class="control-label">Apellido Paterno<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="apellido_paterno" class="text-danger ErrorInput"></span>
-                        <input asp-for="apellido_paterno" type="text" class="form-control" placeholder="Apellido Paterno" required />
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label asp-for="Tipo_PersonaID" class="control-label">Tipo de Persona<span class="text-danger font-weight-bold">*</span>:</label>
+                            <div asp-for="Tipo_PersonaID">
+                                @Html.RadioButton("Tipo_PersonaID", 1, true, new { id = "personaFisica" }) <label class="control-label mx-2">Física</label>
+                                @Html.RadioButton("Tipo_PersonaID", 2, new { id = "personaMoral" }) <label class="control-label mx-2">Moral</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4" id="divCURP">
+                            <div class="form-group">
+                                <label asp-for="CURP" class="control-label">CURP<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="CURP" class="text-danger ErrorInput"></span>
+                                <input asp-for="CURP" type="text" class="form-control" placeholder="CURP" required id="CURP" oninput="errorCurp(this);" oninvalid="errorCurp(this);" />
+                            </div>
+                        </div>
+                        <div class="col-md-1" id="imagenSearch">
+                            <div class="d-flex">
+                                <input type="image" class="rounded btn btn-block imageback tamanoIMG" src="~/icon/search-solid.svg" />
+                            </div>                            
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="RFC" class="control-label">RFC:</label><span asp-validation-for="RFC" class="text-danger ErrorInput"></span>
+                                <input id="rfcPersona" asp-for="RFC" type="text" class="form-control" placeholder="RFC" />
+                            </div>
+                        </div>
+                        <div class="col-md-1" id="imagenSearchRFC" style="display: none;">
+                            <div class="d-flex">
+                                <input type="image" class="rounded btn btn-block imageback tamanoIMG" src="~/icon/search-solid.svg" />
+                            </div>
+                        </div>
                     </div>
 
+                    <div class="row" id="columnaDos">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="nombre" class="control-label">Nombre<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="nombre" class="text-danger ErrorInput"></span>
+                                <input id="nombreGeneral" asp-for="nombre" type="text" class="form-control" placeholder="Nombre" required />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="apellido_paterno" class="control-label">Apellido Paterno<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="apellido_paterno" class="text-danger ErrorInput"></span>
+                                <input id="apellidoPaterno" asp-for="apellido_paterno" type="text" class="form-control" placeholder="Apellido Paterno" required />
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="apellido_materno" class="control-label">Apellido Materno:</label><span asp-validation-for="apellido_materno" class="text-danger"></span>
+                                <input id="apellidoMaterno" asp-for="apellido_materno" type="text" class="form-control" placeholder="Apellido Materno" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="nombreMoral" style="display: none;">
+                        <label asp-for="nombreMoral" class="control-label">Nombre<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="nombreMoral" class="text-danger ErrorInput"></span>
+                        <input asp-for="nombreMoral" type="text" class="form-control" placeholder="Nombre/s" required />
+                    </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3" id="curpHistoricas">
                     <div class="form-group">
-                        <label asp-for="apellido_materno" class="control-label">Apellido Materno:</label><span asp-validation-for="apellido_materno" class="text-danger"></span>
-                        <input asp-for="apellido_materno" type="text" class="form-control" placeholder="Apellido Materno" />
+                        <button class="btn btn-block imageback font-weight-bold">CURP históricas</button>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label asp-for="ACUSESURI" class="control-label">ACUSE SURI</label>
-                    <input asp-for="ACUSESURI" type="text" class="form-control" placeholder="ACUSE SURI" value="ACUSE SURI" disabled />
-                </div>
-                <div class="col-md-3">
-
-                </div>
+                    <div class="form-group">
+                        <label asp-for="ACUSESURI" class="control-label">ACUSE SURI</label>
+                        <input asp-for="ACUSESURI" type="text" class="form-control" placeholder="ACUSE SURI" value="ACUSE SURI" disabled />
+                    </div>
+                </div>                
             </div>
         </div>
     </section>
@@ -75,10 +93,10 @@
             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-home" aria-selected="true">Generales</a>
             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-domicilio" role="tab" aria-controls="nav-profile" aria-selected="false">Domicilios</a>
             <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-cuenta" role="tab" aria-controls="nav-contact" aria-selected="false">Cuentas</a>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-obligacion" role="tab" aria-controls="nav-contact" aria-selected="false">Obligaciones</a>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-representantes" role="tab" aria-controls="nav-contact" aria-selected="false">Representantes</a>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-integrantes" role="tab" aria-controls="nav-contact" aria-selected="false">Integrantes</a>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-bajas" role="tab" aria-controls="nav-contact" aria-selected="false">Bajas</a>
+            <a class="nav-item nav-link" id="nav-obligacion-tab" data-toggle="tab" href="#nav-obligacion" role="tab" aria-controls="nav-contact" aria-selected="false">Obligaciones</a>
+            <a class="nav-item nav-link" id="nav-representantes-tab" data-toggle="tab" href="#nav-representantes" style="display: none;" role="tab" aria-controls="nav-contact" aria-selected="false">Representantes</a>
+            <a class="nav-item nav-link" id="nav-integrantes-tab" data-toggle="tab" href="#nav-integrantes" style="display: none;" role="tab" aria-controls="nav-contact" aria-selected="false">Integrantes</a>
+            <a class="nav-item nav-link" id="nav-bajas-tab" data-toggle="tab" href="#nav-bajas" role="tab" aria-controls="nav-contact" aria-selected="false">Bajas</a>
         </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
@@ -207,10 +225,11 @@
             </div>
         </div>
     </div>
-
-    <div class="form-group mt-3 mx-auto">
-        <a asp-action="Index">Back to List</a>
-        <input type="submit" value="Guardar" class="btn btn-success" />
+    <div class="d-flex">
+        <div class="form-group mt-3 mx-auto">
+            <a asp-action="Index">Back to List</a>
+            <input type="submit" value="Guardar" class="btn btn-success ml-5" />
+        </div>
     </div>
 </form>
 
