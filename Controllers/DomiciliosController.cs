@@ -82,24 +82,24 @@ namespace SistemaAFT.Controllers
         }
 
         // GET: Domicilios/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id, GranModelo granModelo)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var domicilio = await _context.Domicilio.FindAsync(id);
-            if (domicilio == null)
+            granModelo.Domicilio = await _context.Domicilio.FindAsync(id);
+            if (granModelo.Domicilio == null)
             {
                 return NotFound();
             }
-            ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "MunicipioID", domicilio.MunicipioID);
-            ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "CURP", domicilio.PersonaID);
-            ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Tipo_AmbitoID", domicilio.Tipo_AmbitoID);
-            ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Tipo_AsentamientoID", domicilio.Tipo_AsentamientoID);
-            ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Tipo_VialidadID", domicilio.Tipo_VialidadID);
-            return View(domicilio);
+            ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "MunicipioID", granModelo.Domicilio.MunicipioID);
+            ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "CURP", granModelo.Domicilio.PersonaID);
+            ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Tipo_AmbitoID", granModelo.Domicilio.Tipo_AmbitoID);
+            ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Tipo_AsentamientoID", granModelo.Domicilio.Tipo_AsentamientoID);
+            ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Tipo_VialidadID", granModelo.Domicilio.Tipo_VialidadID);
+            return View(granModelo);
         }
 
         // POST: Domicilios/Edit/5
@@ -107,9 +107,11 @@ namespace SistemaAFT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DomicilioID,Tipo_AmbitoID,estado,nombreasentamiento,Tipo_VialidadID,noexterior,MunicipioID,referenciavialidad,nombrevialidad,nointerior,localidad,referenciaposterior,codigopostal,Tipo_AsentamientoID,referenciaubicacion,PersonaID")] Domicilio domicilio)
+        public async Task<IActionResult> Edit(GranModelo granModelo, int id)
         {
-            if (id != domicilio.DomicilioID)
+            id = granModelo.Domicilio.DomicilioID;
+
+            if (id != granModelo.Domicilio.DomicilioID)
             {
                 return NotFound();
             }
@@ -118,12 +120,12 @@ namespace SistemaAFT.Controllers
             {
                 try
                 {
-                    _context.Update(domicilio);
+                    _context.Update(granModelo.Domicilio);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DomicilioExists(domicilio.DomicilioID))
+                    if (!DomicilioExists(granModelo.Domicilio.DomicilioID))
                     {
                         return NotFound();
                     }
@@ -134,12 +136,12 @@ namespace SistemaAFT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "MunicipioID", domicilio.MunicipioID);
-            ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "CURP", domicilio.PersonaID);
-            ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Tipo_AmbitoID", domicilio.Tipo_AmbitoID);
-            ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Tipo_AsentamientoID", domicilio.Tipo_AsentamientoID);
-            ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Tipo_VialidadID", domicilio.Tipo_VialidadID);
-            return View(domicilio);
+            ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "MunicipioID", granModelo.Domicilio.MunicipioID);
+            ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "CURP", granModelo.Domicilio.PersonaID);
+            ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Tipo_AmbitoID", granModelo.Domicilio.Tipo_AmbitoID);
+            ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Tipo_AsentamientoID", granModelo.Domicilio.Tipo_AsentamientoID);
+            ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Tipo_VialidadID", granModelo.Domicilio.Tipo_VialidadID);
+            return View(granModelo);
         }
 
         // GET: Domicilios/Delete/5

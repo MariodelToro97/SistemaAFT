@@ -11,7 +11,7 @@
     <div class="col-md-4">
         <form asp-action="Edit" asp-controller="Personas">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Persona.PersonaID" />
+            <input type="text" asp-for="Persona.PersonaID" />
             <div class="form-group">
                 <label asp-for="Persona.CURP" class="control-label"></label>
                 <input asp-for="Persona.CURP" class="form-control" />
@@ -91,9 +91,9 @@
             </div>
         </form>
 
-        <form asp-action="Edit" asp-controller="Domicilios">
+        <form asp-action="Edit" asp-controller="Domicilios" >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Domicilio.PersonaID" />
+            <input type="text" asp-for="Domicilio.DomicilioID" />
 
             <div class="form-group">
                 <label asp-for="Domicilio.Tipo_AmbitoID" class="control-label"></label>
