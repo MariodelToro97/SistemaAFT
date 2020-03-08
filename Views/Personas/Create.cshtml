@@ -24,7 +24,7 @@
                         </div>
                         <div class="col-md-4" id="divCURP">
                             <div class="form-group">
-                                <label asp-for="CURP" class="control-label">CURP<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="CURP" class="text-danger ErrorInput"></span>
+                                <label asp-for="CURP" class="control-label">CURP<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="CURP" class="text-danger ErrorInput"></span>
                                 <input asp-for="CURP" type="text" class="form-control" placeholder="CURP" required id="CURP" oninput="errorCurp(this);" oninvalid="errorCurp(this);" />
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label asp-for="RFC" class="control-label">RFC:</label><span asp-validation-for="RFC" class="text-danger ErrorInput"></span>
+                                <label id="labelRFC" asp-for="RFC" class="control-label">RFC:</label><span id="spanRFC" asp-validation-for="RFC" class="text-danger ErrorInput"></span>
                                 <input id="rfcPersona" asp-for="RFC" type="text" class="form-control" placeholder="RFC" />
                             </div>
                         </div>
@@ -75,7 +75,17 @@
                 </div>
                 <div class="col-md-3" id="curpHistoricas">
                     <div class="form-group">
-                        <button class="btn btn-block imageback font-weight-bold">CURP históricas</button>
+                        <button id="CURP_Historicas" class="btn btn-block imageback font-weight-bold">CURP históricas</button>
+                        <table class="table table-hover table-sm table-responsive" style="display: none;" id="tableCurpHist">
+                            <tbody>
+                                <tr>
+                                    <th>PRUEBA 1</th>
+                                </tr>
+                                <tr>
+                                    <th>PRUEBA 2</th>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="col-md-3">
