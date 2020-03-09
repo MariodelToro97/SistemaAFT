@@ -5,16 +5,9 @@ using System.Threading.Tasks;
 
 namespace SistemaAFT.Models
 {
-	public class GranModelo
-	{
-		//public int PersonaID { get; set; }
-		public Persona Persona { get; set; }
-		//		public int DomicilioID { get; set; }
-
-		public Domicilio Domicilio { get; set; }
-		public List<Domicilio> domicilios = new List<Domicilio>();
-
-
-
-	}
+    public class GranModelo
+    {
+        public Persona Persona { get; set; }
+        public Domicilio Domicilio { get; set; }   
+    }
 }
