@@ -29,7 +29,8 @@ namespace SistemaAFT.Models
         public Tipo_Asentamiento Tipo_Asentamiento { get; set; }
         public string referenciaubicacion { get; set; }
 
-
+        public int PersonaID { get; set; }
+        public Persona Persona { get; set; }
 
     }
 }

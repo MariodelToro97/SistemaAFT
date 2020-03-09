@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Details</h1>
@@ -11,6 +10,36 @@
     <h4>Persona</h4>
     <hr />
     <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CURP)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CURP)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RFC)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RFC)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.apellido_paterno)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.apellido_paterno)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.apellido_materno)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.apellido_materno)
+        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.correo)
         </dt>
@@ -48,12 +77,41 @@
             @Html.DisplayFor(model => model.Tipo_Identidad.Tipo_IdentidadID)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.num_identificacion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.num_identificacion)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.telefono)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.telefono)
         </dd>
-        
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tipo_Persona)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Tipo_Persona.Tipo_PersonaID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Etnia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Etnia.EtniaID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Discapacidad)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Discapacidad.DiscapacidadID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Created)
+        </dd>
     </dl>
 </div>
 <div>
