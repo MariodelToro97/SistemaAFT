@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Delete";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Delete</h1>
@@ -96,6 +95,12 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.referenciaubicacion)
         </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Persona)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Persona.CURP)
+        </dd class>
     </dl>
     
     <form asp-action="Delete">

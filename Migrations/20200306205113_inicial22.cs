@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SistemaAFT.Migrations
 {
-    public partial class personaid : Migration
+    public partial class inicial22 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

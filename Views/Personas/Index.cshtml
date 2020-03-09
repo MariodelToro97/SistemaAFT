@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Index</h1>
@@ -11,48 +10,80 @@
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
-    <thead class="text-center">
+    <thead>
         <tr>
             <th>
-                <!--@Html.DisplayNameFor(model => model.correo)-->
-                Correo
+                @Html.DisplayNameFor(model => model.CURP)
             </th>
             <th>
-                <!--@Html.DisplayNameFor(model => model.fechaNacimiento)-->
-                Fecha de Nacimiento
+                @Html.DisplayNameFor(model => model.RFC)
             </th>
             <th>
-                <!--@Html.DisplayNameFor(model => model.nacionalidad)-->
-                Nacionalidad
+                @Html.DisplayNameFor(model => model.nombre)
             </th>
             <th>
-                <!--@Html.DisplayNameFor(model => model.Genero)-->
-                Género
+                @Html.DisplayNameFor(model => model.apellido_paterno)
             </th>
             <th>
-                <!--@Html.DisplayNameFor(model => model.Estado_Civil)-->
-                Estado Civil
+                @Html.DisplayNameFor(model => model.apellido_materno)
             </th>
             <th>
-                <!--@Html.DisplayNameFor(model => model.Tipo_Identidad)-->
-                Identificación
+                @Html.DisplayNameFor(model => model.correo)
             </th>
             <th>
-                <!--@Html.DisplayNameFor(model => model.telefono)-->
-                Teléfono
+                @Html.DisplayNameFor(model => model.fechaNacimiento)
             </th>
-            
             <th>
-                <!--@Html.DisplayNameFor(model => model.Tipo_Persona)-->
-                Tipo de persona
-
+                @Html.DisplayNameFor(model => model.nacionalidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado_Civil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo_Identidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.num_identificacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo_Persona)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Etnia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discapacidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
             </th>
             <th></th>
         </tr>
     </thead>
-    <tbody class="text-center">
+    <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CURP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RFC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.apellido_paterno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.apellido_materno)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.correo)
             </td>
@@ -63,26 +94,38 @@
                 @Html.DisplayFor(modelItem => item.nacionalidad)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Genero.Nombre_Genero)
+                @Html.DisplayFor(modelItem => item.Genero.GeneroID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Estado_Civil.Nombre_Edo_Civil)
+                @Html.DisplayFor(modelItem => item.Estado_Civil.Estado_CivilID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Tipo_Identidad.Nombre)
+                @Html.DisplayFor(modelItem => item.Tipo_Identidad.Tipo_IdentidadID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.num_identificacion)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.telefono)
             </td>
-            
             <td>
-                @Html.DisplayFor(modelItem => item.Tipo_Persona.Nombre_Tipo)
+                @Html.DisplayFor(modelItem => item.Tipo_Persona.Tipo_PersonaID)
             </td>
             <td>
-                <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.PersonaID">Edit</a>
-                <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.PersonaID">Details</a>
-                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.PersonaID">Delete</a>
+                @Html.DisplayFor(modelItem => item.Etnia.EtniaID)
             </td>
-        </tr>}
+            <td>
+                @Html.DisplayFor(modelItem => item.Discapacidad.DiscapacidadID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PersonaID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PersonaID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PersonaID">Delete</a>
+            </td>
+        </tr>
+}
     </tbody>
 </table>
