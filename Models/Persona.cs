@@ -45,6 +45,8 @@ namespace SistemaAFT.Models
         public int DiscapacidadID { get; set; }
         public Discapacidad Discapacidad { get; set; }
 
+        public ICollection<Domicilio> Domicilios { get; set; }
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime Created { get; set; } = DateTime.Now;
 
