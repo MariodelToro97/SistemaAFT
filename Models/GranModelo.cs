@@ -12,6 +12,9 @@ namespace SistemaAFT.Models
 		//		public int DomicilioID { get; set; }
 
 		public Domicilio Domicilio { get; set; }
+		public List<Domicilio> domicilios = new List<Domicilio>();
+
+
 
 	}
 }
