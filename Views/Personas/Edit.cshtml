@@ -174,8 +174,9 @@
                                 </button>
                             </div>
                             <div class="tab-pane fade show container active border border-secondary rounded" id="nav-general" role="tabpanel" aria-labelledby="nav-home-tab">
-
+                                
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input type="text" for="Domicilio.DomicilioID" />
                                 <div class="row">
                                     <div class="col-md-3 mt-2">
                                         <div class="form-group">
@@ -310,8 +311,8 @@
                                     <th>@dom.Tipo_AsentamientoID</th>
                                     <th>@dom.referenciaubicacion</th>
                                     <th>
-                                        <!--asp-action="Edit" asp-controller="Domicilios"-->
-                                        <button type="button" class="btn btn-success" value="@dom.DomicilioID" onclick="editarDom(this)" id="btnEditarDom">Edit</button>
+                                        <!--asp-action="Edit" asp-controller="Domicilios"  data-toggle="modal" data-target="#modalRegisterForm"-->
+                                        <button type="button" onclick="editarDom(this)" class="btn btn-success" value="@dom.DomicilioID" id="editDom">Edit</button>
                                         <a class="btn btn-primary" asp-action="Details" asp-controller="Domicilios" asp-route-id="@dom.DomicilioID">Details</a>
                                         <a class="btn btn-danger" asp-action="Delete" asp-controller="Domicilios" asp-route-id="@dom.DomicilioID">Delete</a>
                                     </th>

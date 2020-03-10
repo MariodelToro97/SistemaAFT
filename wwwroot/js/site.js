@@ -94,18 +94,22 @@
     });
 });
 
+$(function () {
+    
+});
+
 function editarDom(boton) {
     var id = boton.value;
 
     $.ajax({
-        type: 'POST',
-        url: "../Controllers/DomiciliosController/GetDomicilio",
+        type: 'GET',
+        url: "/Domicilios/GetDomicilio",
         data:
         {
             id : id
         },
         success: function (data) {
-            alert(data.mensaje);
+            alert(data);
         },
         error: function (r) {
             alert("NO REALIZADO");

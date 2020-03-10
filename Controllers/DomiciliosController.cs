@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -184,12 +186,13 @@ namespace SistemaAFT.Controllers
             return _context.Domicilio.Any(e => e.DomicilioID == id);
         }
 
-        [HttpPost]
+        [HttpGet]
         public JsonResult GetDomicilio(int id)
         {
-            System.Diagnostics.Debug.WriteLine("ENTROOOOOOOOOOOOOO");
-            id = id + 1;
-            return Json("'mensaje' :  'Realizado'");
+            //var classes = _context.Domicilio.FromSqlRaw("Select * From dbo.Domicilio WHERE PersonaID = {0}", id);
+            //Debug.WriteLine(classes);
+            //return Json(classes);
+            return Json(new { error = "Mensaje" });
         }
     }
 }
