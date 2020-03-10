@@ -19,10 +19,6 @@
         document.getElementById('spanRFC').innerHTML = "";
     }); 
     
-    if(document.getElementById('spanCURP').innerHTML = "This field is required."){
-        document.getElementById('spanCURP').innerHTML = "Campo requerido";
-    }
-    
     $('#personaMoral').click(function () {
         $('#nombreMoral').show();
         $('#curpHistoricas').hide();
@@ -48,4 +44,57 @@
             $('#tableCurpHist').show();
         }
     });
+
+    $('#nav-profile-tab').click(function () {
+        $('#nav-general').hide();
+        $('#formDomicilio').show();
+        $('#botonFormUno').hide();
+        $('#nav-bajas').hide();
+        $('#nav-integrantes').hide();
+        $('#nav-representantes').hide();
+        $('#nav-obligacion').hide();
+        $('#nav-cuenta').hide();
+        $('#nav-domicilio').show();
+    });
+
+    $('#nav-home-tab').click(function () {
+        $('#nav-general').show();
+        $('#formDomicilio').hide();
+        $('#botonFormUno').show();
+        $('#nav-bajas').hide();
+        $('#nav-integrantes').hide();
+        $('#nav-representantes').hide();
+        $('#nav-obligacion').hide();
+        $('#nav-cuenta').hide();
+        $('#nav-domicilio').hide();
+    });
+    
+    $('#nav-integrantes-tab').click(function () {
+        $('#nav-general').hide();
+        $('#formDomicilio').hide();
+        $('#botonFormUno').hide();
+        $('#nav-bajas').hide();
+        $('#nav-integrantes').show();
+        $('#nav-representantes').hide();
+        $('#nav-obligacion').hide();
+        $('#nav-cuenta').hide();
+        $('#nav-domicilio').hide();
+    });
+
+    $('#nav-bajas-tab').click(function () {
+        $('#nav-general').hide();
+        $('#formDomicilio').hide();
+        $('#botonFormUno').hide();
+        $('#nav-bajas').show();
+        $('#nav-integrantes').hide();
+        $('#nav-representantes').hide();
+        $('#nav-obligacion').hide();
+        $('#nav-cuenta').hide();
+        $('#nav-domicilio').hide();   
+    });
+
+    
+    function EditarDomicilio() {
+        alert("ENTROOOOOOO");
+    };
 });

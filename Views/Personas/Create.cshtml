@@ -227,7 +227,31 @@
                                     <th>Folio documento</th>
                                     <th>Observaciones</th>
                                 </tr>
+    </div><!--FIN MODAL DOMICILIO-->
+  </form>
+        <div class="tab-pane fade" id="nav-cuenta" role="tabpanel" aria-labelledby="nav-contact-tab">3</div>
+        <div class="tab-pane fade" id="nav-obligacion" role="tabpanel" aria-labelledby="nav-contact-tab">4</div>
+        <div class="tab-pane fade" id="nav-representantes" role="tabpanel" aria-labelledby="nav-contact-tab">8</div>
 
+<form>
+    <div class="tab-pane fade border border-secondary rounded" id="nav-integrantes" role="tabpanel" aria-labelledby="nav-contact-tab" style="display: none;">
+        <div class="container my-3 rounded">
+                <div class="form-inline d-flex bg-dark rounded">
+                    <h4 class="my-3 mx-3 text-white font-weight-lighter">Integrantes</h4>
+                    <button type="button" class="btn btn-light ml-auto text-dark mr-3" data-toggle="modal" data-target="#exampleModal">Agregar</button>
+                </div>
+                <div class="border border-secondary rounded">
+                    <div class="container">
+                        <table class="table table-sm table-secondary my-3 rounded">
+                            <thead class="thead-light text-center">
+                                <tr>
+                                    <th>Tipo persona</th>
+                                    <th>CURP</th>
+                                    <th>RFC</th>
+                                    <th>Nombre</th>
+                                    <th>Fec. nac/cons.</th>
+                                    <th>Editar</th>
+                                </tr>
                             </thead>
                         </table>
                     </div>
@@ -242,6 +266,30 @@
         </div>
     </div>
 </form>
+
+    <div class="tab-pane fade border border-secondary rounded" id="nav-bajas" role="tabpanel" aria-labelledby="nav-contact-tab" style="display: none;">
+        <div class="container my-3">
+            <div class="border border-secondary rounded bg-dark">
+                <h4 class="my-3 mx-3 text-white font-weight-lighter">Baja por Defunción</h4>
+            </div>
+
+            <div class="rounded border border-secondary">
+                <div class="container">
+                    <table class="table table-sm table-secondary my-3 rounded">
+                        <thead class="thead-light text-center">
+                            <tr>
+                                <th>Fecha de Baja</th>
+                                <th>Tipo documento de baja</th>
+                                <th>Folio documento</th>
+                                <th>Observaciones</th>
+                            </tr>
+
+                        </thead>
+                    </table>
+                </div>
+            </div>
+          </div>
+      </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
