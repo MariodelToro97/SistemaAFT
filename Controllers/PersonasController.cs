@@ -21,8 +21,6 @@ namespace SistemaAFT.Controllers
             _context = context;
         }
 
-        
-
         // GET: Personas
         public async Task<IActionResult> Index()
         {
@@ -131,7 +129,6 @@ namespace SistemaAFT.Controllers
             ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Tipo_AmbitoID", granModelo.Domicilio.Tipo_AmbitoID);
             ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Tipo_AsentamientoID", granModelo.Domicilio.Tipo_AsentamientoID);
             ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Tipo_VialidadID", granModelo.Domicilio.Tipo_VialidadID);
-            
 
             return View(granModelo);
         }
@@ -152,11 +149,9 @@ namespace SistemaAFT.Controllers
             if (ModelState.IsValid)
             {
                 try
-                {
-                   
+                {                   
                      _context.Update(granModelo.Persona);
-                     await _context.SaveChangesAsync();
-                                        
+                     await _context.SaveChangesAsync();                                        
                 }
                 catch (DbUpdateConcurrencyException)
                 {

@@ -92,9 +92,24 @@
         $('#nav-cuenta').hide();
         $('#nav-domicilio').hide();   
     });
-
-    
-    function EditarDomicilio() {
-        alert("ENTROOOOOOO");
-    };
 });
+
+function editarDom(boton) {
+    var id = boton.value;
+
+    $.ajax({
+        type: 'POST',
+        url: "../Controllers/DomiciliosController/GetDomicilio",
+        data:
+        {
+            id : id
+        },
+        success: function (data) {
+            alert(data.mensaje);
+        },
+        error: function (r) {
+            alert("NO REALIZADO");
+        }
+    });
+    return false;
+}

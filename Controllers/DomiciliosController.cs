@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SistemaAFT.Data;
 using SistemaAFT.Models;
 
+
 namespace SistemaAFT.Controllers
 {
     public class DomiciliosController : Controller
@@ -181,6 +182,14 @@ namespace SistemaAFT.Controllers
         private bool DomicilioExists(int id)
         {
             return _context.Domicilio.Any(e => e.DomicilioID == id);
+        }
+
+        [HttpPost]
+        public JsonResult GetDomicilio(int id)
+        {
+            System.Diagnostics.Debug.WriteLine("ENTROOOOOOOOOOOOOO");
+            id = id + 1;
+            return Json("'mensaje' :  'Realizado'");
         }
     }
 }
