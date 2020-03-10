@@ -52,6 +52,8 @@ namespace SistemaAFT.Models
         public string nombreMoral { get; set; }
 
 
+        public ICollection<Domicilio> Domicilios { get; set; }
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime Created { get; set; } = DateTime.Now;
 

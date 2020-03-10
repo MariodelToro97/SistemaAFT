@@ -8,8 +8,6 @@ namespace SistemaAFT.Models
     public class GranModelo
     {
         public Persona Persona { get; set; }
-        public Domicilio Domicilio { get; set; }
-
-        
+        public Domicilio Domicilio { get; set; }   
     }
 }
