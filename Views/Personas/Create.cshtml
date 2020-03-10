@@ -19,8 +19,8 @@
                         <div class="col-md-3">
                             <label asp-for="Persona.Tipo_PersonaID" class="control-label">Tipo de Persona<span class="text-danger font-weight-bold">*</span>:</label>
                             <div asp-for="Persona.Tipo_PersonaID">
-                                @Html.RadioButton("Perona.Tipo_PersonaID", 1, true, new { id = "personaFisica" }) <label class="control-label mx-2">Física</label>
-                                @Html.RadioButton("Perona.Tipo_PersonaID", 2, new { id = "personaMoral" }) <label class="control-label mx-2">Moral</label>
+                                @Html.RadioButton("Persona.Tipo_PersonaID", 1, true, new { id = "personaFisica" }) <label class="control-label mx-2">Física</label>
+                                @Html.RadioButton("Persona.Tipo_PersonaID", 2, new { id = "personaMoral" }) <label class="control-label mx-2">Moral</label>
                             </div>
                         </div>
                         <div class="col-md-4" id="divCURP">
@@ -32,7 +32,7 @@
                         <div class="col-md-1" id="imagenSearch">
                             <div class="d-flex">
                                 <input type="image" class="rounded btn btn-block imageback tamanoIMG" src="~/icon/search-solid.svg" />
-                            </div>                            
+                            </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
@@ -94,7 +94,7 @@
                         <label asp-for="Persona.ACUSESURI" class="control-label">ACUSE SURI</label>
                         <input asp-for="Persona.ACUSESURI" type="text" class="form-control" placeholder="ACUSE SURI" value="ACUSE SURI" disabled />
                     </div>
-                </div>                
+                </div>
             </div>
         </div>
     </section>
@@ -179,20 +179,23 @@
             </div>
         </div>
     </div>
-    <div class="form-group mt-3 mx-auto">
+    <div class="form-group mt-3 mx-auto" id="botonFormUno">
         <a asp-action="Index">Back to List</a>
         <input type="submit" value="Guardar" class="btn btn-success" />
     </div>
 </form>
 
-<form asp-action="Create" asp-controller="Domicilios">
+<form asp-action="Create" asp-controller="Domicilios" id="formDomicilio">
     <!--MODAL DE DOMICILIO-->
-    <div class="tab-pane fade" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab">
+    <div class="tab-pane fade border border-secondary rounded" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab" style="display: none;">
         <div class="container my-3">
             <div class="border border-secondary rounded bg-dark">
-                <h4 class="my-3 mx-3 text-white font-weight-lighter">Domicilios</h4>
-                <!--Modal 2-->
-                <a href="" class="btn btn-primary btn-rounded float-right" data-toggle="modal" data-target="#modalRegisterForm">Extra large modal</a>
+
+                <div class="form-inline d-flex">
+                    <h4 class="my-3 mx-3 text-white font-weight-lighter">Domicilios</h4>
+                    <!--Modal 2-->
+                    <a href="" class="btn btn-light btn-rounded derecho mr-3 ml-auto" data-toggle="modal" data-target="#modalRegisterForm">Agregar domicilio</a>
+                </div>
 
                 <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl">
@@ -325,122 +328,61 @@
             </div>
         </div>
     </div><!--FIN MODAL DOMICILIO-->
-  </form>
+</form>
 
-        <div class="tab-pane fade" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab">2</div>
-        <div class="tab-pane fade" id="nav-cuenta" role="tabpanel" aria-labelledby="nav-contact-tab">3</div>
-        <div class="tab-pane fade" id="nav-obligacion" role="tabpanel" aria-labelledby="nav-contact-tab">4</div>
-        <div class="tab-pane fade" id="nav-representantes" role="tabpanel" aria-labelledby="nav-contact-tab">4</div>
-        <div class="tab-pane fade border border-secondary rounded" id="nav-integrantes" role="tabpanel" aria-labelledby="nav-contact-tab">
-            <div class="container my-3">
-                <div class="border border-secondary rounded bg-dark">
-                    <div class="form-inline d-flex">
-                        <h4 class="my-3 mx-3 text-white font-weight-lighter">Integrantes</h4>
-                        <button class="btn btn-light text-dark mr-3 ml-auto">Agregar</button>
-                    </div>                    
-                </div>
-                <div class="rounded border border-secondary">
-                    <div class="container">
-                        <table class="table table-sm table-secondary my-3 rounded">
-                            <thead class="thead-light text-center">
-                                <tr>
-                                    <th>Tipo persona</th>
-                                    <th>CURP</th>
-                                    <th>RFC</th>
-                                    <th>Nombre</th>
-                                    <th>Fec. nac/cons.</th>
-                                    <th>Editar</th>
-                                </tr>
-                            </thead>
-                        </table>
-                      </div>
-                  </div>
-              </div>
-          </div>
+<div class="tab-pane fade" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab">2</div>
+<div class="tab-pane fade" id="nav-cuenta" role="tabpanel" aria-labelledby="nav-contact-tab">3</div>
+<div class="tab-pane fade" id="nav-obligacion" role="tabpanel" aria-labelledby="nav-contact-tab">4</div>
+<div class="tab-pane fade" id="nav-representantes" role="tabpanel" aria-labelledby="nav-contact-tab">8</div>
 
-    <div class="tab-pane fade" id="nav-cuenta" role="tabpanel" aria-labelledby="nav-contact-tab">3</div>
-    <div class="tab-pane fade" id="nav-obligacion" role="tabpanel" aria-labelledby="nav-contact-tab">4</div>
-    <div class="tab-pane fade" id="nav-representantes" role="tabpanel" aria-labelledby="nav-contact-tab">5</div>
-
-    <div class="tab-pane fade border border-secondary rounded" id="nav-integrantes" role="tabpanel" aria-labelledby="nav-contact-tab">
-        <div class="container my-3">
-            <div class="form-inline d-flex bg-dark rounded">
-                <h4 class="my-3 mx-3 text-white font-weight-lighter">Integrantes</h4>
-                <button type="button" class="btn btn-light ml-auto text-dark mr-3" data-toggle="modal" data-target="#exampleModal">Agregar</button>
-            </div>
-            <div class="rounded border border-secondary">
-                <div class="container">
-                    <table class="table table-sm table-secondary my-3 rounded">
-                        <thead class="thead-light text-center">
-                            <tr>
-                                <th>Tipo persona</th>
-                                <th>CURP</th>
-                                <th>RFC</th>
-                                <th>Nombre</th>
-                                <th>Fec. nac/cons.</th>
-                                <th>Editar</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
+<div class="tab-pane fade border border-secondary rounded" id="nav-integrantes" role="tabpanel" aria-labelledby="nav-contact-tab" style="display: none;">
+    <div class="container my-3">
+        <div class="border border-secondary rounded bg-dark">
+            <h4 class="my-3 mx-3 text-white font-weight-lighter">Integrantes</h4>
+            <button type="button" class="btn btn-light derecho text-dark" data-toggle="modal" data-target="#exampleModal">Agregar</button>
+        </div>
+        <div class="rounded border border-secondary">
+            <div class="container">
+                <table class="table table-sm table-secondary my-3 rounded">
+                    <thead class="thead-light text-center">
+                        <tr>
+                            <th>Tipo persona</th>
+                            <th>CURP</th>
+                            <th>RFC</th>
+                            <th>Nombre</th>
+                            <th>Fec. nac/cons.</th>
+                            <th>Editar</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="tab-pane fade border border-secondary rounded" id="nav-bajas" role="tabpanel" aria-labelledby="nav-contact-tab">
-        <div class="container my-3">
-            <div class="border border-secondary rounded bg-dark">
-                <h4 class="my-3 mx-3 text-white font-weight-lighter">Baja por Defunción</h4>
+<div class="tab-pane fade border border-secondary rounded" id="nav-bajas" role="tabpanel" aria-labelledby="nav-contact-tab" style="display: none;">
+    <div class="container my-3">
+        <div class="border border-secondary rounded bg-dark">
+            <h4 class="my-3 mx-3 text-white font-weight-lighter">Baja por Defunción</h4>
+        </div>
+
+        <div class="rounded border border-secondary">
+            <div class="container">
+                <table class="table table-sm table-secondary my-3 rounded">
+                    <thead class="thead-light text-center">
+                        <tr>
+                            <th>Fecha de Baja</th>
+                            <th>Tipo documento de baja</th>
+                            <th>Folio documento</th>
+                            <th>Observaciones</th>
+                        </tr>
+
+                    </thead>
+                </table>
             </div>
-
-            <div class="rounded border border-secondary">
-                <div class="container">
-                    <table class="table table-sm table-secondary my-3 rounded">
-                        <thead class="thead-light text-center">
-                            <tr>
-                                <th>Fecha de Baja</th>
-                                <th>Tipo documento de baja</th>
-                                <th>Folio documento</th>
-                                <th>Observaciones</th>
-                            </tr>
-
-                        </thead>
-                    </table>
-                </div>
-            </div>
-          </div>
-      </div>
-          
-    <div class="d-flex">
-        <div class="form-group mt-3 mx-auto">
-            <a asp-action="Index">Back to List</a>
-            <input type="submit" value="Guardar" class="btn btn-success ml-5" />
         </div>
     </div>
-
-    <div class="tab-pane fade border border-secondary rounded" id="nav-bajas" role="tabpanel" aria-labelledby="nav-contact-tab" style="display: none;">
-        <div class="container my-3">
-            <div class="border border-secondary rounded bg-dark">
-                <h4 class="my-3 mx-3 text-white font-weight-lighter">Baja por Defunción</h4>
-            </div>
-
-            <div class="rounded border border-secondary">
-                <div class="container">
-                    <table class="table table-sm table-secondary my-3 rounded">
-                        <thead class="thead-light text-center">
-                            <tr>
-                                <th>Fecha de Baja</th>
-                                <th>Tipo documento de baja</th>
-                                <th>Folio documento</th>
-                                <th>Observaciones</th>
-                            </tr>
-
-                        </thead>
-                    </table>
-                </div>
-            </div>
-          </div>
-      </div>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
