@@ -94,10 +94,6 @@
     });
 });
 
-$(function selecciones () {
-    
-});
-
 function editarDom(boton) {
     var id = boton.value;
 
@@ -124,8 +120,7 @@ function editarDom(boton) {
             var municipio = data[0]['MunicipioID'];
             var persona = data[0]['PersonaID'];
             var tipoAsentamiento = data[0]['Tipo_AsentamientoID'];
-            var domicilioID = data[0]["domicilioID"];
-            
+            var domicilioID = data[0]["domicilioID"];            
             
             $("#domicilioTipoVialidad option[value = " + vialidad + "]").attr("selected", true);
             $("#domicilioTipoAsentamiento option[value = " + tipoAsentamiento + "]").attr("selected", true);
@@ -146,7 +141,7 @@ function editarDom(boton) {
             $('#domicilioReferenciaUbicacion').val(refUbi);
         },
         error: function (r) {
-            alert("NO REALIZADO");
+            console.log(r);
         }
     });
     return false;
