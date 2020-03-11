@@ -12,7 +12,7 @@ namespace SistemaAFT.Data
 		{
 			context.Database.EnsureCreated();
 
-			if (context.Genero.Any() || context.Estado_Civil.Any() || context.Tipo_Identidad.Any() || context.Municipio.Any() || context.Tipo_Persona.Any() || context.Etnia.Any() || context.Discapacidad.Any())
+			if (context.Genero.Any() || context.Estado_Civil.Any() || context.Tipo_Identidad.Any() || context.Municipio.Any() || context.Tipo_Persona.Any() || context.Etnia.Any() || context.Discapacidad.Any() || context.Tipo_Ambito.Any() || context.Tipo_Asentamiento.Any() || context.Tipo_Vialidad.Any())
 			{
 				return;
 			}
@@ -115,6 +115,44 @@ namespace SistemaAFT.Data
 			{
 				context.Discapacidad.Add(g);
 			}
+
+			//tipo ambito
+			var tipo_ambito = new Tipo_Ambito[]
+			{
+				new Tipo_Ambito {Nombre = "Social"},
+				new Tipo_Ambito {Nombre = "Privado"}
+			};
+
+			foreach (Tipo_Ambito g in tipo_ambito)
+			{
+				context.Tipo_Ambito.Add(g);
+			}
+
+			//tipo asentamiento
+			var tipo_asentamiento = new Tipo_Asentamiento[]
+			{
+				new Tipo_Asentamiento {Nombre = "Ubrano"},
+				new Tipo_Asentamiento {Nombre = "rural"}
+			};
+
+			foreach (Tipo_Asentamiento g in tipo_asentamiento)
+			{
+				context.Tipo_Asentamiento.Add(g);
+			}
+
+			//tipo vialid
+			var tipo_vialidad = new Tipo_Vialidad[]
+			{
+				new Tipo_Vialidad {Nombre = "Hola"},
+				new Tipo_Vialidad {Nombre = "Diego"}
+			};
+
+			foreach (Tipo_Vialidad g in tipo_vialidad)
+			{
+				context.Tipo_Vialidad.Add(g);
+			}
+
+
 
 			context.SaveChanges();
 		}

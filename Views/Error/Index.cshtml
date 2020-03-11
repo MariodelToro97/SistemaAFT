@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="text-center">DEBES AGREGAR UN DOMICILIO A LA PERSONA ANTES DE EDITAR</h3>
+<div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">Ups..! INGRESA UN DOMICILIO PARA EL USUARIO</h4>
+    <p>Parece que el usuario al que deseas ingresar no tiene ningún domicilio asignado y es INDISPENSABLE TENERLO</p>
+    <hr>
+    <p class="mb-0">Por favor agrega un domicilio en el siguiente formulario. GRACIAS POR TU ATENCIÓN.</p>
+</div>
+
+<div class="text-center form-group mt-3">
+    <a asp-action="Create" asp-controller="Domicilios"  class="btn btn-success">Crear Domicilio</a>
+</div>
+

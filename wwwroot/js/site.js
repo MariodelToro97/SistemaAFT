@@ -93,3 +93,19 @@
         $('#nav-domicilio').hide();   
     });
 });
+
+/*
+$(document).ready(function () {
+  
+    $("#btnCerrar").click(function () {
+        $("#modalRegisterForm").modal("hide");
+    });
+    $("#modalRegisterForm").on('hidden.bs.modal', function () {
+        $("#modalRegisterForm input").val("");
+        $("#modalRegisterForm textarea").val("");
+        $("#modalRegisterForm select").val("");
+        alert("Se limpio todo");
+    });
+
+});*/
+
