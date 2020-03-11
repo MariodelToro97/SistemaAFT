@@ -176,29 +176,30 @@
                             <div class="tab-pane fade show container active border border-secondary rounded" id="nav-general" role="tabpanel" aria-labelledby="nav-home-tab">
                                 
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <input type="text" for="Domicilio.DomicilioID" />
+                                
                                 <div class="row">
                                     <div class="col-md-3 mt-2">
+                                        <input type="text" asp-for="Domicilio.DomicilioID" id="domicilioID" />
                                         <div class="form-group">
                                             <label asp-for="Domicilio.Tipo_AmbitoID" class="control-label">Tipo Ambito<span class="text-danger font-weight-bold">*</span></label>
-                                            <select asp-for="Domicilio.Tipo_AmbitoID" class="form-control" asp-items="ViewBag.Tipo_AmbitoID" required>
+                                            <select asp-for="Domicilio.Tipo_AmbitoID" id="domicilioTipoAmbito" class="form-control" asp-items="ViewBag.Tipo_AmbitoID" required>
                                                 <option value="" selected>Seleccione opción</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label asp-for="Domicilio.noexterior" class="control-label">No. Exterior<span class="text-danger font-weight-bold">*</span></label>
-                                            <input asp-for="Domicilio.noexterior" class="form-control" required />
+                                            <input asp-for="Domicilio.noexterior" id="domicilioNoExterior" class="form-control" required />
                                             <span asp-validation-for="Domicilio.noexterior" class="text-danger"></span>
                                         </div>
 
                                         <div class="form-group">
                                             <label asp-for="Domicilio.estado" class="control-label">Estado<span class="text-danger font-weight-bold">*</span></label>
-                                            <input asp-for="Domicilio.estado" class="form-control" required />
+                                            <input asp-for="Domicilio.estado" id="domicilioEstado" class="form-control" required />
                                             <span asp-validation-for="Domicilio.estado" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
                                             <label asp-for="Domicilio.nombreasentamiento" class="control-label">Nombre Asentamiento<span class="text-danger font-weight-bold">*</span></label>
-                                            <input asp-for="Domicilio.nombreasentamiento" class="form-control" required />
+                                            <input asp-for="Domicilio.nombreasentamiento" id="domicilioNombreAsentamiento" class="form-control" required />
                                             <span asp-validation-for="Domicilio.nombreasentamiento" class="text-danger"></span>
                                         </div>
 
@@ -207,7 +208,7 @@
                                     <div class="col-md-3 mt-2">
                                         <div class="form-group">
                                             <label asp-for="Domicilio.Tipo_VialidadID" class="control-label">Tipo Vialidad<span class="text-danger font-weight-bold">*</span></label>
-                                            <select asp-for="Domicilio.Tipo_VialidadID" class="form-control" asp-items="ViewBag.Tipo_VialidadID" required>
+                                            <select asp-for="Domicilio.Tipo_VialidadID" id="domicilioTipoVialidad" class="form-control" asp-items="ViewBag.Tipo_VialidadID" required>
                                                 <option value="" selected>Seleccione opción</option>
                                             </select>
                                             <span asp-validation-for="Domicilio.Tipo_VialidadID" class="text-danger"></span>
@@ -215,18 +216,18 @@
                                         </div>
                                         <div class="form-group">
                                             <label asp-for="Domicilio.nointerior" class="control-label">No. Interior</label>
-                                            <input asp-for="Domicilio.nointerior" class="form-control" />
+                                            <input asp-for="Domicilio.nointerior" id="domicilioNombreInterior" class="form-control" />
                                         </div>
                                         <div class="form-group">
                                             <label asp-for="Domicilio.MunicipioID" class="control-label">Municipio<span class="text-danger font-weight-bold">*</span></label>
-                                            <select asp-for="Domicilio.MunicipioID" class="form-control" asp-items="ViewBag.MunicipioID">
+                                            <select asp-for="Domicilio.MunicipioID" id="domicilioMunicipioID" class="form-control" asp-items="ViewBag.MunicipioID">
                                                 <option value="" selected>Seleccione opción</option>
                                             </select>
                                             <span asp-validation-for="Domicilio.MunicipioID" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
                                             <label asp-for="Domicilio.referenciavialidad" class="control-label">Referencia de Vialidad</label>
-                                            <input asp-for="Domicilio.referenciavialidad" class="form-control" />
+                                            <input asp-for="Domicilio.referenciavialidad"id="domicilioReferenciaVialidad" class="form-control" />
                                         </div>
                                     </div>
 
@@ -235,22 +236,22 @@
 
                                         <div class="form-group">
                                             <label asp-for="Domicilio.nombrevialidad" class="control-label">Nombre Vialidad <span class="text-danger font-weight-bold">*</span></label>
-                                            <input asp-for="Domicilio.nombrevialidad" class="form-control" required />
+                                            <input asp-for="Domicilio.nombrevialidad" id="domicilioNombreVialidad" class="form-control" required />
                                             <span asp-validation-for="Domicilio.nombrevialidad" class="text-danger"></span>
                                         </div>
 
                                         <div class="form-group">
                                             <label asp-for="Domicilio.localidad" class="control-label">Localidad <span class="text-danger font-weight-bold">*</span></label>
-                                            <input asp-for="Domicilio.localidad" class="form-control" required />
+                                            <input asp-for="Domicilio.localidad" id="domicilioLocalidad" class="form-control" required />
                                             <span asp-validation-for="Domicilio.localidad" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
                                             <label asp-for="Domicilio.referenciaposterior" class="control-label"></label>
-                                            <input asp-for="Domicilio.referenciaposterior" class="form-control" />
+                                            <input asp-for="Domicilio.referenciaposterior" id="domicilioReferenciaPosterior" class="form-control" />
                                         </div>
                                         <div class="form-group">
                                             <label asp-for="Domicilio.PersonaID" class="control-label"></label>
-                                            <select asp-for="Domicilio.PersonaID" class="form-control" asp-items="ViewBag.PersonaID" required></select>
+                                            <select asp-for="Domicilio.PersonaID" id="domicilioPersonaID" class="form-control" asp-items="ViewBag.PersonaID" required></select>
                                             <span asp-validation-for="Domicilio.PersonaID" class="text-danger"></span>
 
                                         </div>
@@ -261,18 +262,18 @@
 
                                         <div class="form-group">
                                             <label asp-for="Domicilio.codigopostal" class="control-label">Codigo Postal<span class="text-danger font-weight-bold">*</span></label>
-                                            <input asp-for="Domicilio.codigopostal" class="form-control" required />
+                                            <input asp-for="Domicilio.codigopostal" id="domicilioCodigoPostal" class="form-control" required />
                                             <span asp-validation-for="Domicilio.codigopostal" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
                                             <label asp-for="Domicilio.Tipo_AsentamientoID" class="control-label">Tipo Asentamiento<span class="text-danger font-weight-bold">*</span></label>
-                                            <select asp-for="Domicilio.Tipo_AsentamientoID" class="form-control" asp-items="ViewBag.Tipo_AsentamientoID" required></select>
+                                            <select asp-for="Domicilio.Tipo_AsentamientoID" id="domicilioTipoAsentamiento" class="form-control" asp-items="ViewBag.Tipo_AsentamientoID" required></select>
                                             <span asp-validation-for="Domicilio.referenciaubicacion" class="text-danger"></span>
 
                                         </div>
                                         <div class="form-group">
                                             <label asp-for="Domicilio.referenciaubicacion" class="control-label">Referencia de Ubicación<span class="text-danger font-weight-bold">*</span></label>
-                                            <input asp-for="Domicilio.referenciaubicacion" class="form-control" required />
+                                            <input asp-for="Domicilio.referenciaubicacion" id="domicilioReferenciaUbicacion" class="form-control" required />
                                             <span asp-validation-for="Domicilio.referenciaubicacion" class="text-danger"></span>
                                         </div>
 
@@ -282,7 +283,6 @@
                             <div class="modal-footer d-flex justify-content-center">
                                 <button class="btn btn-primary">Guardar Domicilio</button>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -312,7 +312,7 @@
                                     <th>@dom.referenciaubicacion</th>
                                     <th>
                                         <!--asp-action="Edit" asp-controller="Domicilios"  data-toggle="modal" data-target="#modalRegisterForm"-->
-                                        <button type="button" onclick="editarDom(this)" class="btn btn-success" value="@dom.DomicilioID" id="editDom">Edit</button>
+                                        <button type="button" onclick="editarDom(this)" data-toggle="modal" data-target="#modalRegisterForm" class="btn btn-success" value="@dom.DomicilioID" id="editDom">Edit</button>
                                         <a class="btn btn-primary" asp-action="Details" asp-controller="Domicilios" asp-route-id="@dom.DomicilioID">Details</a>
                                         <a class="btn btn-danger" asp-action="Delete" asp-controller="Domicilios" asp-route-id="@dom.DomicilioID">Delete</a>
                                     </th>

@@ -189,10 +189,9 @@ namespace SistemaAFT.Controllers
         [HttpGet]
         public JsonResult GetDomicilio(int id)
         {
-            //var classes = _context.Domicilio.FromSqlRaw("Select * From dbo.Domicilio WHERE PersonaID = {0}", id);
-            //Debug.WriteLine(classes);
-            //return Json(classes);
-            return Json(new { error = "Mensaje" });
+            var classes = _context.Domicilio.FromSqlRaw("Select * From dbo.Domicilio WHERE DomicilioID = {0}", id);
+            return Json(classes);
+            //return Json(new { error = "Mensaje" });
         }
     }
 }
