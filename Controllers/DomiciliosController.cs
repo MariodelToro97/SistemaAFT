@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using SistemaAFT.Data;
 using SistemaAFT.Models;
+
 
 namespace SistemaAFT.Controllers
 {
@@ -182,6 +187,53 @@ namespace SistemaAFT.Controllers
         private bool DomicilioExists(int id)
         {
             return _context.Domicilio.Any(e => e.DomicilioID == id);
+        }
+
+        //Selección de los domicilios pertenecientes a un determinado usuario
+        [HttpGet]
+        public JsonResult GetDomicilio(int id)
+        {
+            var classes = _context.Domicilio.FromSqlRaw("Select * From dbo.Domicilio WHERE DomicilioID = {0}", id);
+            return Json(classes);
+        }
+
+        //Llamada a procedimiento de actualizar en la base de datos spUpdateDomicilio
+        public string updateDomicilio (int DomicilioID, int Tipo_AmbitoID, string estado, string nombreasentamiento, int Tipo_Vialidad, string noexterior, int Municipio, string referenciavialidad, string nombrevialidad, string nointerior, string localidad, string referenciaposterior, string codigopostal, int Tipo_Asentamiento, string referenciaubicacion, int PersonaID)
+        {
+            try
+            {
+                SqlConnection cn = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=dbsistemaaft;Trusted_Connection=True;MultipleActiveResultSets=true");
+
+                SqlCommand com = new SqlCommand("spUpdateDomicilio", cn);
+                com.CommandType = CommandType.StoredProcedure;
+
+                com.Parameters.AddWithValue("@domID", DomicilioID);
+                com.Parameters.AddWithValue("@tipoAmbito", Tipo_AmbitoID);
+                com.Parameters.AddWithValue("@estado", estado);
+                com.Parameters.AddWithValue("@asentamiento", nombreasentamiento);
+                com.Parameters.AddWithValue("@vialidad", Tipo_Vialidad);
+                com.Parameters.AddWithValue("@noExterior", noexterior);
+                com.Parameters.AddWithValue("@munID", Municipio);
+                com.Parameters.AddWithValue("@refVialidad", referenciavialidad);
+                com.Parameters.AddWithValue("@nomViali", nombrevialidad);
+                com.Parameters.AddWithValue("@noInterior", nointerior);
+                com.Parameters.AddWithValue("@localidad", localidad);
+                com.Parameters.AddWithValue("@referenciaPos", referenciaposterior);
+                com.Parameters.AddWithValue("@cp", codigopostal);
+                com.Parameters.AddWithValue("@tipoAsentamiento", Tipo_Asentamiento);
+                com.Parameters.AddWithValue("@referencia", referenciaubicacion);
+                com.Parameters.AddWithValue("@personaID", PersonaID);                
+
+                cn.Open();
+                com.ExecuteNonQuery();
+                cn.Close();
+
+                return "SUCCESS";
+
+            } catch (Exception e)
+            {
+                return e.ToString();
+            }            
         }
     }
 }

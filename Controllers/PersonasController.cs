@@ -21,8 +21,6 @@ namespace SistemaAFT.Controllers
             _context = context;
         }
 
-        
-
         // GET: Personas
         public async Task<IActionResult> Index()
         {
@@ -155,10 +153,10 @@ namespace SistemaAFT.Controllers
             if (ModelState.IsValid)
             {
                 try
-                {
+                {                   
+
                      _context.Update(granModelo.Persona);
-                     await _context.SaveChangesAsync();
-                                        
+                     await _context.SaveChangesAsync();                                        
                 }
                 catch (DbUpdateConcurrencyException)
                 {
