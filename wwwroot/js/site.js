@@ -146,3 +146,55 @@ function editarDom(boton) {
     });
     return false;
 }
+
+$('#formEditDomicilio').submit(function () {
+    var noExterior = $('#domicilioNoExterior').val();
+    var estado = $('#domicilioEstado').val();
+    var asentamiento = $('#domicilioNombreAsentamiento').val();
+    var nombreInterior = $('#domicilioNombreInterior').val();
+    var referenciaVialidad = $('#domicilioReferenciaVialidad').val();
+    var nombreVialidad = $('#domicilioNombreVialidad').val();
+    var localidad = $('#domicilioLocalidad').val();
+    var referenciaPosterior = $('#domicilioReferenciaPosterior').val();
+    var cp = $('#domicilioCodigoPostal').val();
+    var refUbi = $('#domicilioReferenciaUbicacion').val();
+    var ambito = $("#domicilioTipoAmbito").val();
+    var vialidad = $("#domicilioTipoVialidad").val();
+    var municipio = $("#domicilioMunicipioID").val();
+    var persona = $("#domicilioPersonaID").val();
+    var tipoAsentamiento = $("#domicilioTipoAsentamiento").val();
+    var domicilioID = $("#domicilioID").val();
+    
+    $.ajax({
+        type: 'POST',
+        url: "/Domicilios/updateDomicilio",
+        data: {
+            noexterior: noExterior,
+            estado: estado,
+            nombreasentamiento: asentamiento,
+            nointerior: nombreInterior,
+            referenciavialidad: referenciaVialidad,
+            nombrevialidad: nombreVialidad,
+            localidad: localidad,
+            referenciaposterior: referenciaPosterior,
+            codigopostal: cp,
+            referenciaubicacion: refUbi,
+            Tipo_AmbitoID: ambito,
+            Tipo_Vialidad: vialidad,
+            Municipio: municipio,
+            Persona: persona,
+            Tipo_Asentamiento: tipoAsentamiento,
+            DomicilioID: domicilioID,
+            PersonaID: persona
+        },
+        success: function (data) {
+            console.log(data);
+            $('#modalRegisterForm').modal('hide');
+            $('#tableDomicilio').load(" #tableDomicilio");
+        },
+        error: function (r) {
+            console.log(r);
+        }
+    });
+    return false;
+});
