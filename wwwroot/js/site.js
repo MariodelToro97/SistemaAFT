@@ -98,6 +98,13 @@
     });
 });
 
+function limpiarForm() {
+    //$("#modalRegisterForm").find("input,textarea,select").val("");
+    $("#modalRegisterForm input").val("");
+    $("#modalRegisterForm textarea").val("");
+    $("#modalRegisterForm select").val("");
+}
+
 function editarDom(boton) {
     var id = boton.value;
 
@@ -125,13 +132,53 @@ function editarDom(boton) {
             var persona = data[0]['PersonaID'];
             var tipoAsentamiento = data[0]['Tipo_AsentamientoID'];
             var domicilioID = data[0]["domicilioID"];            
-            
-            $("#domicilioTipoVialidad option[value = " + vialidad + "]").attr("selected", true);
+            console.log(data[0]['Tipo_VialidadID']);
+            //document.getElementById('domicilioTipoVialidad').getElementsByTagName('option')[vialidad].selected = 'selected';
+
+
+            //$("#domicilioTipoVialidad option[value = " + vialidad + "]").attr("selected", true);
             $("#domicilioTipoAsentamiento option[value = " + tipoAsentamiento + "]").attr("selected", true);
             $("#domicilioPersonaID option[value = " + persona + "]").attr("selected", true);
             $("#domicilioMunicipioID option[value = " + municipio + "]").attr("selected", true);
             $("#domicilioTipoAmbito option[value = " + ambito + "]").attr("selected", true);
+           
+            /*
+            var select = document.getElementById('domicilioTipoVialidad');
+            select.addEventListener('change',
+                function () {
+                    var selectedOption = this.options[select.selectedIndex];
+                    ambito = selectedOption.text;
+                });
 
+            var select = document.getElementById('domicilioTipoAsentamiento');
+            select.addEventListener('change',
+                function () {
+                    var selectedOption = this.options[select.selectedIndex];
+                    console.log(selectedOption.value + ': ' + selectedOption.text);
+                });
+
+            var select = document.getElementById('domicilioPersonaID');
+            select.addEventListener('change',
+                function () {
+                    var selectedOption = this.options[select.selectedIndex];
+                    console.log(selectedOption.value + ': ' + selectedOption.text);
+                });
+
+            var select = document.getElementById('domicilioMunicipioID');
+            select.addEventListener('change',
+                function () {
+                    var selectedOption = this.options[select.selectedIndex];
+                    console.log(selectedOption.value + ': ' + selectedOption.text);
+                });
+
+            var select = document.getElementById('domicilioTipoAmbito');
+            select.addEventListener('change',
+                function () {
+                    var selectedOption = this.options[select.selectedIndex];
+                    console.log(selectedOption.value + ': ' + selectedOption.text);
+                });
+            */
+           
             $("#domicilioID").val(domicilioID);
             $('#domicilioNoExterior').val(noExterior);
             $('#domicilioEstado').val(estado);

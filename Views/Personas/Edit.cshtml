@@ -193,7 +193,7 @@
             <div class="border border-secondary rounded bg-dark d-flex">
                 <h4 class="my-3 mx-3 text-white font-weight-lighter">Domicilios</h4>
                 <!--Modal 2-->
-                <a class="btn btn-light btn-rounded mr-3 my-3 ml-auto" data-toggle="modal" data-target="#modalRegisterForm">Agregar</a>
+                <a class="btn btn-light btn-rounded mr-3 my-3 ml-auto" data-toggle="modal" onclick="limpiarForm()" data-target="#modalRegisterForm">ADD</a>
             </div>
 
             <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
@@ -279,7 +279,7 @@
                                         <label asp-for="Domicilio.referenciaposterior" class="control-label"></label>
                                         <input asp-for="Domicilio.referenciaposterior" id="domicilioReferenciaPosterior" class="form-control" />
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="display: none;">
                                         <label asp-for="Domicilio.PersonaID" class="control-label"></label>
                                         <select asp-for="Domicilio.PersonaID" id="domicilioPersonaID" class="form-control" asp-items="ViewBag.PersonaID" required></select>
                                         <span asp-validation-for="Domicilio.PersonaID" class="text-danger"></span>
@@ -294,7 +294,9 @@
                                     </div>
                                     <div class="form-group">
                                         <label asp-for="Domicilio.Tipo_AsentamientoID" class="control-label">Tipo Asentamiento<span class="text-danger font-weight-bold">*</span></label>
-                                        <select asp-for="Domicilio.Tipo_AsentamientoID" id="domicilioTipoAsentamiento" class="form-control" asp-items="ViewBag.Tipo_AsentamientoID" required></select>
+                                        <select asp-for="Domicilio.Tipo_AsentamientoID" id="domicilioTipoAsentamiento" class="form-control" asp-items="ViewBag.Tipo_AsentamientoID" required>
+                                            <option value="" selected>Seleccione opción</option>
+                                        </select>
                                         <span asp-validation-for="Domicilio.referenciaubicacion" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
