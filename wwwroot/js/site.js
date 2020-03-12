@@ -103,10 +103,12 @@ function limpiarForm() {
     $("#modalRegisterForm input").val("");
     $("#modalRegisterForm textarea").val("");
     $("#modalRegisterForm select").val("");
+    //document.getElementById('domicilioTipoAmbito').getElementsByTagName('option')[0].selected = 'selected';
 }
 
 function editarDom(boton) {
     var id = boton.value;
+    
 
     $.ajax({
         type: 'GET',
@@ -126,59 +128,14 @@ function editarDom(boton) {
             var referenciaPosterior = data[0]['referenciaposterior'];
             var cp = data[0]['codigopostal'];
             var refUbi = data[0]['referenciaubicacion'];
-            var ambito = data[0]['Tipo_AmbitoID'];
-            var vialidad = data[0]['Tipo_VialidadID'];
-            var municipio = data[0]['MunicipioID'];
-            var persona = data[0]['PersonaID'];
-            var tipoAsentamiento = data[0]['Tipo_AsentamientoID'];
-            var domicilioID = data[0]["domicilioID"];            
-            console.log(data[0]['Tipo_VialidadID']);
-            //document.getElementById('domicilioTipoVialidad').getElementsByTagName('option')[vialidad].selected = 'selected';
+            var ambito = data[0]['tipo_AmbitoID'];
+            var vialidad = data[0]['tipo_VialidadID'];
+            var municipio = data[0]['municipioID'];
+            var persona = data[0]['personaID'];
+            var tipoAsentamiento = data[0]['tipo_AsentamientoID'];
+            var domicilioID = data[0]["domicilioID"];
+            console.log(data);
 
-
-            //$("#domicilioTipoVialidad option[value = " + vialidad + "]").attr("selected", true);
-            $("#domicilioTipoAsentamiento option[value = " + tipoAsentamiento + "]").attr("selected", true);
-            $("#domicilioPersonaID option[value = " + persona + "]").attr("selected", true);
-            $("#domicilioMunicipioID option[value = " + municipio + "]").attr("selected", true);
-            $("#domicilioTipoAmbito option[value = " + ambito + "]").attr("selected", true);
-           
-            /*
-            var select = document.getElementById('domicilioTipoVialidad');
-            select.addEventListener('change',
-                function () {
-                    var selectedOption = this.options[select.selectedIndex];
-                    ambito = selectedOption.text;
-                });
-
-            var select = document.getElementById('domicilioTipoAsentamiento');
-            select.addEventListener('change',
-                function () {
-                    var selectedOption = this.options[select.selectedIndex];
-                    console.log(selectedOption.value + ': ' + selectedOption.text);
-                });
-
-            var select = document.getElementById('domicilioPersonaID');
-            select.addEventListener('change',
-                function () {
-                    var selectedOption = this.options[select.selectedIndex];
-                    console.log(selectedOption.value + ': ' + selectedOption.text);
-                });
-
-            var select = document.getElementById('domicilioMunicipioID');
-            select.addEventListener('change',
-                function () {
-                    var selectedOption = this.options[select.selectedIndex];
-                    console.log(selectedOption.value + ': ' + selectedOption.text);
-                });
-
-            var select = document.getElementById('domicilioTipoAmbito');
-            select.addEventListener('change',
-                function () {
-                    var selectedOption = this.options[select.selectedIndex];
-                    console.log(selectedOption.value + ': ' + selectedOption.text);
-                });
-            */
-           
             $("#domicilioID").val(domicilioID);
             $('#domicilioNoExterior').val(noExterior);
             $('#domicilioEstado').val(estado);
@@ -190,6 +147,15 @@ function editarDom(boton) {
             $('#domicilioReferenciaPosterior').val(referenciaPosterior);
             $('#domicilioCodigoPostal').val(cp);
             $('#domicilioReferenciaUbicacion').val(refUbi);
+
+            $('#domicilioPersonaID').val(persona);
+
+            document.getElementById('domicilioTipoVialidad').getElementsByTagName('option')[vialidad].selected = 'selected';
+            document.getElementById('domicilioTipoAsentamiento').getElementsByTagName('option')[tipoAsentamiento].selected = 'selected';            
+            document.getElementById('domicilioMunicipioID').getElementsByTagName('option')[municipio].selected = 'selected';
+            document.getElementById('domicilioTipoAmbito').getElementsByTagName('option')[ambito].selected = 'selected';
+            //document.getElementById('domicilioPersonaID').getElementsByTagName('option')[persona].selected = 'selected';
+           
         },
         error: function (r) {
             console.log(r);
