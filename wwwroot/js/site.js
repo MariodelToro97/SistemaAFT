@@ -55,6 +55,7 @@
         $('#nav-obligacion').hide();
         $('#nav-cuenta').hide();
         $('#nav-domicilio').show();
+        $('#botonesGeneral').hide();
     });
 
     $('#nav-home-tab').click(function () {
@@ -67,6 +68,7 @@
         $('#nav-obligacion').hide();
         $('#nav-cuenta').hide();
         $('#nav-domicilio').hide();
+        $('#botonesGeneral').show();
     });
     
     $('#nav-integrantes-tab').click(function () {
@@ -79,6 +81,7 @@
         $('#nav-obligacion').hide();
         $('#nav-cuenta').hide();
         $('#nav-domicilio').hide();
+        $('#botonesGeneral').hide();
     });
 
     $('#nav-bajas-tab').click(function () {
@@ -91,6 +94,7 @@
         $('#nav-obligacion').hide();
         $('#nav-cuenta').hide();
         $('#nav-domicilio').hide();   
+        $('#botonesGeneral').hide();
     });
 });
 

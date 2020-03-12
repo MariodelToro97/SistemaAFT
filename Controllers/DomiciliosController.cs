@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,7 +9,6 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using SistemaAFT.Data;
 using SistemaAFT.Models;
-
 
 namespace SistemaAFT.Controllers
 {
@@ -198,7 +195,7 @@ namespace SistemaAFT.Controllers
         }
 
         //Llamada a procedimiento de actualizar en la base de datos spUpdateDomicilio
-        public string updateDomicilio (int DomicilioID, int Tipo_AmbitoID, string estado, string nombreasentamiento, int Tipo_Vialidad, string noexterior, int Municipio, string referenciavialidad, string nombrevialidad, string nointerior, string localidad, string referenciaposterior, string codigopostal, int Tipo_Asentamiento, string referenciaubicacion, int PersonaID)
+        public string updateDomicilio(int DomicilioID, int Tipo_AmbitoID, string estado, string nombreasentamiento, int Tipo_Vialidad, string noexterior, int Municipio, string referenciavialidad, string nombrevialidad, string nointerior, string localidad, string referenciaposterior, string codigopostal, int Tipo_Asentamiento, string referenciaubicacion, int PersonaID)
         {
             try
             {
@@ -222,7 +219,7 @@ namespace SistemaAFT.Controllers
                 com.Parameters.AddWithValue("@cp", codigopostal);
                 com.Parameters.AddWithValue("@tipoAsentamiento", Tipo_Asentamiento);
                 com.Parameters.AddWithValue("@referencia", referenciaubicacion);
-                com.Parameters.AddWithValue("@personaID", PersonaID);                
+                com.Parameters.AddWithValue("@personaID", PersonaID);
 
                 cn.Open();
                 com.ExecuteNonQuery();
@@ -230,10 +227,11 @@ namespace SistemaAFT.Controllers
 
                 return "SUCCESS";
 
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return e.ToString();
-            }            
+            }
         }
     }
 }
