@@ -125,7 +125,7 @@
                             <option value="" selected>Seleccione opción</option>
                         </select>
                     </div>
-                    <label asp-for="Persona.EtniaID" class="control-label">Pertenece a una étnia:</label>
+                    <label asp-for="Persona.EtniaID" class="control-label">Pertenece a una etnia:</label>
                     <div asp-for="Tipo_PersonaID">
                         @Html.RadioButton("Persona.EtniaID", 2, false) <label class="control-label mx-2">Si</label>
                         @Html.RadioButton("Persona.EtniaID", 1, true) <label class="control-label mx-2">No</label>
@@ -172,15 +172,15 @@
                         <input asp-for="Persona.telefono" type="number" min=0 class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label asp-for="Persona.num_identificacion" class="control-label">Núm. Doc de identificación:</label><span asp-validation-for="Persona.num_identificacion" class="text-danger ErrorInput"></span>
-                        <input asp-for="Persona.num_identificacion" type="text" class="form-control" placeholder="num_identificacion" required />
+                        <label asp-for="Persona.num_identificacion" class="control-label">No. Documento de identificación:</label><span asp-validation-for="Persona.num_identificacion" class="text-danger ErrorInput"></span>
+                        <input asp-for="Persona.num_identificacion" type="text" class="form-control" placeholder="Número de identificación" required />
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="form-group mt-3 mx-auto" id="botonFormUno">
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index">Regresar a la lista</a>
         <input type="submit" value="Guardar" class="btn btn-success" />
     </div>
 </form>
