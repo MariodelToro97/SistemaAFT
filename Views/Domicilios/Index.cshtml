@@ -64,7 +64,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Tipo_Ambito.Tipo_AmbitoID)
+                @Html.DisplayFor(modelItem => item.Tipo_Ambito.Nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.estado)
@@ -73,13 +73,13 @@
                 @Html.DisplayFor(modelItem => item.nombreasentamiento)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Tipo_Vialidad.Tipo_VialidadID)
+                @Html.DisplayFor(modelItem => item.Tipo_Vialidad.Nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.noexterior)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Municipio.MunicipioID)
+                @Html.DisplayFor(modelItem => item.Municipio.Nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.referenciavialidad)
@@ -100,7 +100,7 @@
                 @Html.DisplayFor(modelItem => item.codigopostal)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Tipo_Asentamiento.Tipo_AsentamientoID)
+                @Html.DisplayFor(modelItem => item.Tipo_Asentamiento.Nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.referenciaubicacion)

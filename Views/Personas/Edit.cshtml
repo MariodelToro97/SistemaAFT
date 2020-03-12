@@ -82,6 +82,7 @@
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show container active border border-secondary rounded" id="nav-general" role="tabpanel" aria-labelledby="nav-home-tab">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Persona.PersonaID"/>
             <div class="row">
                 <div class="col-md-3 mt-2">
                     <div class="form-group">
@@ -142,7 +143,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Persona.num_identificacion" class="control-label">Núm. Doc de identificación:</label><span asp-validation-for="Persona.num_identificacion" class="text-danger ErrorInput"></span>
-                        <input asp-for="Persona.num_identificacion" type="email" class="form-control" placeholder="num_identificacion" required />
+                        <input asp-for="Persona.num_identificacion" type="text" class="form-control" placeholder="num_identificacion" required />
                     </div>
                 </div>
             </div>
@@ -155,10 +156,12 @@
 
 </form>
 
+
 <!--asp-action="Edit" asp-controller="Domicilios"-->
 <form id="formEditDomicilio">
+
     <!--MODAL DE DOMICILIO-->
-    <div class="tab-pane fade" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab">
+    <div class="tab-pane fade border border-secondary rounded" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab">
         <div class="container my-3">
             <div class="border border-secondary rounded bg-dark">
                 <h4 class="my-3 mx-3 text-white font-weight-lighter">Domicilios</h4>
@@ -204,8 +207,7 @@
                                             <span asp-validation-for="Domicilio.nombreasentamiento" class="text-danger"></span>
                                         </div>
 
-                                    </div>
-
+                <form asp-action="Edit" asp-controller="Domicilios">
                                     <div class="col-md-3 mt-2">
                                         <div class="form-group">
                                             <label asp-for="Domicilio.Tipo_VialidadID" class="control-label">Tipo Vialidad<span class="text-danger font-weight-bold">*</span></label>
@@ -254,13 +256,30 @@
                                             <label asp-for="Domicilio.PersonaID" class="control-label"></label>
                                             <select asp-for="Domicilio.PersonaID" id="domicilioPersonaID" class="form-control" asp-items="ViewBag.PersonaID" required></select>
                                             <span asp-validation-for="Domicilio.PersonaID" class="text-danger"></span>
+                                      </div>
 
-                                        </div>
+                                        <div class="col-md-3 mt-2">
 
-                                    </div>
+                                            <div class="form-group">
+                                                <label asp-for="Domicilio.nombrevialidad" class="control-label">Nombre Vialidad <span class="text-danger font-weight-bold">*</span></label>
+                                                <input asp-for="Domicilio.nombrevialidad" class="form-control" required />
+                                                <span asp-validation-for="Domicilio.nombrevialidad" class="text-danger"></span>
+                                            </div>
 
-                                    <div class="col-md-3 mt-2">
-
+                                            <div class="form-group">
+                                                <label asp-for="Domicilio.localidad" class="control-label">Localidad <span class="text-danger font-weight-bold">*</span></label>
+                                                <input asp-for="Domicilio.localidad" class="form-control" required />
+                                                <span asp-validation-for="Domicilio.localidad" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Domicilio.referenciaposterior" class="control-label"></label>
+                                                <input asp-for="Domicilio.referenciaposterior" class="form-control" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Domicilio.PersonaID" class="control-label"></label>
+                                                <select asp-for="Domicilio.PersonaID" class="form-control" asp-items="ViewBag.PersonaID" required></select>
+                                                <span asp-validation-for="Domicilio.PersonaID" class="text-danger"></span>
+                                          </div>
                                         <div class="form-group">
                                             <label asp-for="Domicilio.codigopostal" class="control-label">Codigo Postal<span class="text-danger font-weight-bold">*</span></label>
                                             <input asp-for="Domicilio.codigopostal" id="domicilioCodigoPostal" class="form-control" required />
@@ -278,15 +297,36 @@
                                             <span asp-validation-for="Domicilio.referenciaubicacion" class="text-danger"></span>
                                         </div>
 
+                                        <div class="col-md-3 mt-2">
+
+                                            <div class="form-group">
+                                                <label asp-for="Domicilio.codigopostal" class="control-label">Codigo Postal<span class="text-danger font-weight-bold">*</span></label>
+                                                <input asp-for="Domicilio.codigopostal" class="form-control" required />
+                                                <span asp-validation-for="Domicilio.codigopostal" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Domicilio.Tipo_AsentamientoID" class="control-label">Tipo Asentamiento<span class="text-danger font-weight-bold">*</span></label>
+                                                <select asp-for="Domicilio.Tipo_AsentamientoID" class="form-control" asp-items="ViewBag.Tipo_AsentamientoID" required></select>
+                                                <span asp-validation-for="Domicilio.referenciaubicacion" class="text-danger"></span>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Domicilio.referenciaubicacion" class="control-label">Referencia de Ubicación<span class="text-danger font-weight-bold">*</span></label>
+                                                <input asp-for="Domicilio.referenciaubicacion" class="form-control" required />
+                                                <span asp-validation-for="Domicilio.referenciaubicacion" class="text-danger"></span>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer d-flex justify-content-center">
-                                <button class="btn btn-primary">Guardar Domicilio</button>
+
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button class="btn btn-primary">Editar Domicilio</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    </form>
             </div>
             <div class="rounded border border-secondary">
                 <div id="tableDomicilio" class="container">
@@ -305,6 +345,8 @@
 
                             @foreach (var dom in (IEnumerable<SistemaAFT.Models.Domicilio>)ViewBag.Libros)
                             {
+                                <input type="text" asp-for="@dom.DomicilioID" />
+
                                 <tr>
                                     <th>@dom.estado</th>
                                     <th>@dom.MunicipioID</th>
@@ -316,7 +358,9 @@
                                         <button type="button" onclick="editarDom(this)" data-toggle="modal" data-target="#modalRegisterForm" class="btn btn-success" value="@dom.DomicilioID" id="editDom">Edit</button>
                                         <a class="btn btn-primary" asp-action="Details" asp-controller="Domicilios" asp-route-id="@dom.DomicilioID">Details</a>
                                         <a class="btn btn-danger" asp-action="Delete" asp-controller="Domicilios" asp-route-id="@dom.DomicilioID">Delete</a>
+                                        <!--<button href="" class="btn btn-primary btn-rounded float-right" data-toggle="modal" data-target="#modalRegisterForm">Agregar Domicilio</button>-->
                                     </th>
+                                    <th>@dom.DomicilioID</th>
                                 </tr>
                             }
                         </tbody>
@@ -325,7 +369,6 @@
             </div>
         </div>
     </div><!--FIN MODAL DOMICILIO-->
-</form>
 
 <div class="tab-pane fade" id="nav-cuenta" role="tabpanel" aria-labelledby="nav-contact-tab">3</div>
 <div class="tab-pane fade" id="nav-obligacion" role="tabpanel" aria-labelledby="nav-contact-tab">4</div>
@@ -383,6 +426,7 @@
         </div>
     </div>
 </div>
+
 
 
 
