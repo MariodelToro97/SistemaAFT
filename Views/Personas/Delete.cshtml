@@ -11,108 +11,104 @@
     <h4>Persona</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CURP)
+        <dt class="col-sm-2">
+            <!--@Html.DisplayNameFor(model => model.CURP)-->
+            CURP:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CURP)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RFC)
+            RCF:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.RFC)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.nombre)
+            Nombre: 
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.nombre)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.apellido_paterno)
+            Apellido Paterno:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.apellido_paterno)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.apellido_materno)
+           Apellido Materno:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.apellido_materno)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.correo)
+            Correo:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.correo)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.fechaNacimiento)
+            Fecha de Nacimiento:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.fechaNacimiento)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.nacionalidad)
+            Nacionalidad:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.nacionalidad)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Genero)
+            Genero: 
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Genero.GeneroID)
         </dd class>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado_Civil)
+            Estado Civil:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Estado_Civil.Estado_CivilID)
         </dd class>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tipo_Identidad)
+           Tipo de Identidad:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Tipo_Identidad.Tipo_IdentidadID)
         </dd class>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.num_identificacion)
+            No. Identificación:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.num_identificacion)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.telefono)
+            Telefono:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.telefono)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tipo_Persona)
+            Tipo Persona
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Tipo_Persona.Tipo_PersonaID)
         </dd class>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Etnia)
+            Etnia: 
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Etnia.EtniaID)
         </dd class>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Discapacidad)
+            Discapacidad: 
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Discapacidad.DiscapacidadID)
         </dd class>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Created)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Created)
-        </dd>
+        
     </dl>
     
     <form asp-action="Delete">

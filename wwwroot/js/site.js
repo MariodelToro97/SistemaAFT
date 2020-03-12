@@ -1,4 +1,111 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿$(document).ready( function() {
+    $('#personaFisica').click(function () {
+        $('#nombreMoral').hide();
+        $('#curpHistoricas').show();
+        $('#nav-representantes-tab').hide();
+        $('#nav-integrantes-tab').hide();
+        $('#columnaDos').show();
+        $('#divCURP').show();
+        $('#imagenSearch').show();
+        $('#imagenSearchRFC').hide();
+        $('#tableCurpHist').hide();
+        
+        document.getElementById('nombreGeneral').required = true;
+        document.getElementById('nombreGeneral').setPointerCapture = "Campo requerido";
+        document.getElementById('apellidoPaterno').required = true;
+        document.getElementById('rfcPersona').required = false;
+    
+        document.getElementById('labelRFC').innerHTML = 'RFC:';
+        document.getElementById('spanRFC').innerHTML = "";
+    }); 
+    
+    $('#personaMoral').click(function () {
+        $('#nombreMoral').show();
+        $('#curpHistoricas').hide();
+        $('#nav-representantes-tab').show();
+        $('#nav-integrantes-tab').show();
+        $('#columnaDos').hide();
+        $('#divCURP').hide();
+        $('#imagenSearch').hide();
+        $('#imagenSearchRFC').show();
+        $('#tableCurpHist').show();
+    
+        document.getElementById('nombreGeneral').required = false;
+        document.getElementById('apellidoPaterno').required = false;
+        document.getElementById('rfcPersona').required = true;
+    
+        document.getElementById('labelRFC').innerHTML = 'RFC<span class="text-danger font-weight-bold">*</span>:';
+    });
 
-// Write your JavaScript code.
+    $('#CURP_Historicas').click(function () {
+        if ($('#tableCurpHist').is(":visible")) {
+            $('#tableCurpHist').hide();
+        } else {
+            $('#tableCurpHist').show();
+        }
+    });
+
+    $('#nav-profile-tab').click(function () {
+        $('#nav-general').hide();
+        $('#formDomicilio').show();
+        $('#botonFormUno').hide();
+        $('#nav-bajas').hide();
+        $('#nav-integrantes').hide();
+        $('#nav-representantes').hide();
+        $('#nav-obligacion').hide();
+        $('#nav-cuenta').hide();
+        $('#nav-domicilio').show();
+    });
+
+    $('#nav-home-tab').click(function () {
+        $('#nav-general').show();
+        $('#formDomicilio').hide();
+        $('#botonFormUno').show();
+        $('#nav-bajas').hide();
+        $('#nav-integrantes').hide();
+        $('#nav-representantes').hide();
+        $('#nav-obligacion').hide();
+        $('#nav-cuenta').hide();
+        $('#nav-domicilio').hide();
+    });
+    
+    $('#nav-integrantes-tab').click(function () {
+        $('#nav-general').hide();
+        $('#formDomicilio').hide();
+        $('#botonFormUno').hide();
+        $('#nav-bajas').hide();
+        $('#nav-integrantes').show();
+        $('#nav-representantes').hide();
+        $('#nav-obligacion').hide();
+        $('#nav-cuenta').hide();
+        $('#nav-domicilio').hide();
+    });
+
+    $('#nav-bajas-tab').click(function () {
+        $('#nav-general').hide();
+        $('#formDomicilio').hide();
+        $('#botonFormUno').hide();
+        $('#nav-bajas').show();
+        $('#nav-integrantes').hide();
+        $('#nav-representantes').hide();
+        $('#nav-obligacion').hide();
+        $('#nav-cuenta').hide();
+        $('#nav-domicilio').hide();   
+    });
+});
+
+/*
+$(document).ready(function () {
+  
+    $("#btnCerrar").click(function () {
+        $("#modalRegisterForm").modal("hide");
+    });
+    $("#modalRegisterForm").on('hidden.bs.modal', function () {
+        $("#modalRegisterForm input").val("");
+        $("#modalRegisterForm textarea").val("");
+        $("#modalRegisterForm select").val("");
+        alert("Se limpio todo");
+    });
+
+});*/
+

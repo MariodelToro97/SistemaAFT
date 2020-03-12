@@ -8,13 +8,24 @@
 
 <h4>Domicilio</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+
+<form asp-action="Create">
+    <div class="row">
+        <div class="col">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Tipo_AmbitoID" class="control-label"></label>
-                <select asp-for="Tipo_AmbitoID" class ="form-control" asp-items="ViewBag.Tipo_AmbitoID"></select>
+                <select asp-for="Tipo_AmbitoID" class="form-control" asp-items="ViewBag.Tipo_AmbitoID">
+                    <option value="" selected>Seleccione opción</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipo_AsentamientoID" class="control-label"></label>
+                <select asp-for="Tipo_AsentamientoID" class="form-control" asp-items="ViewBag.Tipo_AsentamientoID">
+                    <option value="" selected>Seleccione opción</option>
+
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="estado" class="control-label"></label>
@@ -28,7 +39,33 @@
             </div>
             <div class="form-group">
                 <label asp-for="Tipo_VialidadID" class="control-label"></label>
-                <select asp-for="Tipo_VialidadID" class ="form-control" asp-items="ViewBag.Tipo_VialidadID"></select>
+                <select asp-for="Tipo_VialidadID" class="form-control" asp-items="ViewBag.Tipo_VialidadID">
+                    <option value="" selected>Seleccione opción</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="localidad" class="control-label"></label>
+                <input asp-for="localidad" class="form-control" />
+                <span asp-validation-for="localidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="codigopostal" class="control-label"></label>
+                <input asp-for="codigopostal" class="form-control" />
+                <span asp-validation-for="codigopostal" class="text-danger"></span>
+            </div>
+
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="referenciaposterior" class="control-label"></label>
+                <input asp-for="referenciaposterior" class="form-control" />
+                <span asp-validation-for="referenciaposterior" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="referenciaubicacion" class="control-label"></label>
+                <input asp-for="referenciaubicacion" class="form-control" />
+                <span asp-validation-for="referenciaubicacion" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="noexterior" class="control-label"></label>
@@ -37,7 +74,10 @@
             </div>
             <div class="form-group">
                 <label asp-for="MunicipioID" class="control-label"></label>
-                <select asp-for="MunicipioID" class ="form-control" asp-items="ViewBag.MunicipioID"></select>
+                <select asp-for="MunicipioID" class="form-control" asp-items="ViewBag.MunicipioID">
+                    <option value="" selected>Seleccione opción</option>
+
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="referenciavialidad" class="control-label"></label>
@@ -55,39 +95,21 @@
                 <span asp-validation-for="nointerior" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="localidad" class="control-label"></label>
-                <input asp-for="localidad" class="form-control" />
-                <span asp-validation-for="localidad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="referenciaposterior" class="control-label"></label>
-                <input asp-for="referenciaposterior" class="form-control" />
-                <span asp-validation-for="referenciaposterior" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="codigopostal" class="control-label"></label>
-                <input asp-for="codigopostal" class="form-control" />
-                <span asp-validation-for="codigopostal" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Tipo_AsentamientoID" class="control-label"></label>
-                <select asp-for="Tipo_AsentamientoID" class ="form-control" asp-items="ViewBag.Tipo_AsentamientoID"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="referenciaubicacion" class="control-label"></label>
-                <input asp-for="referenciaubicacion" class="form-control" />
-                <span asp-validation-for="referenciaubicacion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="PersonaID" class="control-label"></label>
-                <select asp-for="PersonaID" class ="form-control" asp-items="ViewBag.PersonaID"></select>
+                <select asp-for="PersonaID" class="form-control" asp-items="ViewBag.PersonaID">
+                    <option value="" selected>Seleccione opción</option>
+
+                </select>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+
+        </div>
     </div>
-</div>
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary float-right" />
+    </div>
+
+</form>
 
 <div>
     <a asp-action="Index">Back to List</a>
