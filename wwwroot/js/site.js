@@ -96,6 +96,14 @@
         $('#nav-domicilio').hide();   
         $('#botonesGeneral').hide();
     });
+
+    $('#btnAgregarDom').click(function () {
+        document.getElementById('btnModalDomicilio').innerHTML = "Agregar Domicilio";
+    });
+
+    $('#editDom').click(function () {
+        document.getElementById('btnModalDomicilio').innerHTML = "Editar Domicilio";
+    });
 });
 
 function limpiarForm() {
@@ -109,7 +117,6 @@ function limpiarForm() {
 function editarDom(boton) {
     var id = boton.value;
     
-
     $.ajax({
         type: 'GET',
         url: "/Domicilios/GetDomicilio",
@@ -134,7 +141,6 @@ function editarDom(boton) {
             var persona = data[0]['personaID'];
             var tipoAsentamiento = data[0]['tipo_AsentamientoID'];
             var domicilioID = data[0]["domicilioID"];
-            console.log(data);
 
             $("#domicilioID").val(domicilioID);
             $('#domicilioNoExterior').val(noExterior);
@@ -147,15 +153,12 @@ function editarDom(boton) {
             $('#domicilioReferenciaPosterior').val(referenciaPosterior);
             $('#domicilioCodigoPostal').val(cp);
             $('#domicilioReferenciaUbicacion').val(refUbi);
-
             $('#domicilioPersonaID').val(persona);
 
             document.getElementById('domicilioTipoVialidad').getElementsByTagName('option')[vialidad].selected = 'selected';
             document.getElementById('domicilioTipoAsentamiento').getElementsByTagName('option')[tipoAsentamiento].selected = 'selected';            
             document.getElementById('domicilioMunicipioID').getElementsByTagName('option')[municipio].selected = 'selected';
             document.getElementById('domicilioTipoAmbito').getElementsByTagName('option')[ambito].selected = 'selected';
-            //document.getElementById('domicilioPersonaID').getElementsByTagName('option')[persona].selected = 'selected';
-           
         },
         error: function (r) {
             console.log(r);
@@ -181,6 +184,12 @@ $('#formEditDomicilio').submit(function () {
     var persona = $("#domicilioPersonaID").val();
     var tipoAsentamiento = $("#domicilioTipoAsentamiento").val();
     var domicilioID = $("#domicilioID").val();
+
+    if (document.getElementById('btnModalDomicilio').innerHTML === "Editar Domicilio") {
+        console.log("EDITAR");
+    } else {
+        console.log("AGREGAR");
+    }
     
     $.ajax({
         type: 'POST',
