@@ -21,8 +21,6 @@ namespace SistemaAFT.Controllers
             _context = context;
         }
 
-        
-
         // GET: Personas
         public async Task<IActionResult> Index()
         {
@@ -57,6 +55,7 @@ namespace SistemaAFT.Controllers
         // GET: Personas/Create
         public IActionResult Create()
         {
+
             ViewData["DiscapacidadID"] = new SelectList(_context.Discapacidad, "DiscapacidadID", "DiscapacidadID");
             ViewData["Estado_CivilID"] = new SelectList(_context.Estado_Civil, "Estado_CivilID", "Nombre_Edo_Civil");
             ViewData["EtniaID"] = new SelectList(_context.Etnia, "EtniaID", "EtniaID");
@@ -64,7 +63,7 @@ namespace SistemaAFT.Controllers
             ViewData["Tipo_IdentidadID"] = new SelectList(_context.Tipo_Identidad, "Tipo_IdentidadID", "Nombre");
             ViewData["Tipo_PersonaID"] = new SelectList(_context.Tipo_Persona, "Tipo_PersonaID", "Nombre_Tipo");
             ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "Nombre");
-            ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "CURP");
+            ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "PersonaID");
             ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Nombre");
             ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Nombre");
             ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Nombre");
@@ -155,10 +154,10 @@ namespace SistemaAFT.Controllers
             if (ModelState.IsValid)
             {
                 try
-                {
+                {                   
+
                      _context.Update(granModelo.Persona);
-                     await _context.SaveChangesAsync();
-                                        
+                     await _context.SaveChangesAsync();                                        
                 }
                 catch (DbUpdateConcurrencyException)
                 {

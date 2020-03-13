@@ -42,6 +42,8 @@
     <Compile Remove="Migrations\20200306205001_inicial22.Designer.cs" />
     <Compile Remove="Migrations\20200306205113_inicial22.cs" />
     <Compile Remove="Migrations\20200306205113_inicial22.Designer.cs" />
+    <Compile Remove="Migrations\20200310164249_inicio.cs" />
+    <Compile Remove="Migrations\20200310164249_inicio.Designer.cs" />
   </ItemGroup>
 
 
@@ -52,6 +54,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1" />
+    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
   </ItemGroup>
 

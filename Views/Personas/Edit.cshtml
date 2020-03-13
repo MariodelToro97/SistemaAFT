@@ -4,8 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
 <h1>Editar</h1>
 <!--<label class="font-italic font-weight-bold derecho"><span class="text-danger font-weight-bold">*</span> Dato Requerido</label>-->
 <hr />
@@ -14,75 +12,106 @@
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-md-2">
-                    <label asp-for="Persona.Tipo_PersonaID" class="control-label">Tipo de Persona<span class="text-danger font-weight-bold">*</span>:</label>
-                    <div asp-for="Persona.Tipo_PersonaID">
-                        @Html.RadioButton("Persona.Tipo_PersonaID", 1, true) <label class="control-label mx-2">Física</label>
-                        @Html.RadioButton("Persona.Tipo_PersonaID", 2) <label class="control-label mx-2">Moral</label>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="Persona.CURP" class="control-label">CURP<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.CURP" class="text-danger ErrorInput"></span>
-                        <input asp-for="Persona.CURP" type="text" class="form-control" placeholder="CURP" required />
-                    </div>
-                </div>
-                <div class="col-md-1">
-                    <a>
-                        <i class="fas fa-search"></i>
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="Persona.RFC" class="control-label">RFC:</label><span asp-validation-for="Persona.RFC" class="text-danger"></span>
-                        <input asp-for="Persona.RFC" type="text" class="form-control" placeholder="RFC" />
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="Persona.nombre" class="control-label">Nombre<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.nombre" class="text-danger ErrorInput"></span>
-                        <input asp-for="Persona.nombre" type="text" class="form-control" placeholder="Nombre" required />
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="Persona.apellido_paterno" class="control-label">Apellido Paterno<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.apellido_paterno" class="text-danger ErrorInput"></span>
-                        <input asp-for="Persona.apellido_paterno" type="text" class="form-control" placeholder="Apellido Paterno" required />
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label asp-for="Persona.Tipo_PersonaID" class="control-label">Tipo de Persona<span class="text-danger font-weight-bold">*</span>:</label>
+                            <div asp-for="Persona.Tipo_PersonaID">
+                                @Html.RadioButton("Persona.Tipo_PersonaID", 1, true, new { id = "personaFisica" }) <label class="control-label mx-2">Física</label>
+                                @Html.RadioButton("Persona.Tipo_PersonaID", 2, new { id = "personaMoral" }) <label class="control-label mx-2">Moral</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4" id="divCURP">
+                            <div class="form-group">
+                                <label asp-for="Persona.CURP" class="control-label">CURP<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Persona.CURP" class="text-danger ErrorInput"></span>
+                                <input asp-for="Persona.CURP" type="text" class="form-control" placeholder="CURP" required id="CURP" oninput="errorCurp(this);" oninvalid="errorCurp(this);" />
+                            </div>
+                        </div>
+                        <div class="col-md-1" id="imagenSearch">
+                            <div class="d-flex">
+                                <input type="image" class="rounded btn btn-block imageback tamanoIMG" src="~/icon/search-solid.svg" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label id="labelRFC" asp-for="Persona.RFC" class="control-label">RFC:</label><span id="spanRFC" asp-validation-for="Persona.RFC" class="text-danger ErrorInput"></span>
+                                <input id="rfcPersona" asp-for="Persona.RFC" type="text" class="form-control" placeholder="RFC" />
+                            </div>
+                        </div>
+                        <div class="col-md-1" id="imagenSearchRFC" style="display: none;">
+                            <div class="d-flex">
+                                <input type="image" class="rounded btn btn-block imageback tamanoIMG" src="~/icon/search-solid.svg" />
+                            </div>
+                        </div>
                     </div>
 
+                    <div class="row" id="columnaDos">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Persona.nombre" class="control-label">Nombre<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.nombre" class="text-danger ErrorInput"></span>
+                                <input id="nombreGeneral" asp-for="Persona.nombre" type="text" class="form-control" placeholder="Nombre" required />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Persona.apellido_paterno" class="control-label">Apellido Paterno<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.apellido_paterno" class="text-danger ErrorInput"></span>
+                                <input id="apellidoPaterno" asp-for="Persona.apellido_paterno" type="text" class="form-control" placeholder="Apellido Paterno" required />
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Persona.apellido_materno" class="control-label">Apellido Materno:</label><span asp-validation-for="Persona.apellido_materno" class="text-danger"></span>
+                                <input id="apellidoMaterno" asp-for="Persona.apellido_materno" type="text" class="form-control" placeholder="Apellido Materno" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="nombreMoral" style="display: none;">
+                        <label asp-for="Persona.nombreMoral" class="control-label">Nombre<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.nombreMoral" class="text-danger ErrorInput"></span>
+                        <input asp-for="Persona.nombreMoral" type="text" class="form-control" placeholder="Nombre/s" required />
+                    </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3" id="curpHistoricas">
                     <div class="form-group">
-                        <label asp-for="Persona.apellido_materno" class="control-label">Apellido Materno:</label><span asp-validation-for="Persona.apellido_materno" class="text-danger"></span>
-                        <input asp-for="Persona.apellido_materno" type="text" class="form-control" placeholder="Apellido Materno" />
+                        <button id="CURP_Historicas" class="btn btn-block imageback font-weight-bold">CURP históricas</button>
+                        <table class="table table-hover table-sm table-responsive" style="display: none;" id="tableCurpHist">
+                            <tbody>
+                                <tr>
+                                    <th>PRUEBA 1</th>
+                                </tr>
+                                <tr>
+                                    <th>PRUEBA 2</th>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="col-md-3">
-
+                    <div class="form-group">
+                        <label asp-for="Persona.ACUSESURI" class="control-label">ACUSE SURI</label>
+                        <input asp-for="Persona.ACUSESURI" type="text" class="form-control" placeholder="ACUSE SURI" value="ACUSE SURI" disabled />
+                    </div>
                 </div>
             </div>
         </div>
-
     </section>
 
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-home" aria-selected="true">General</a>
             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-domicilio" role="tab" aria-controls="nav-profile" aria-selected="false">Domicilios</a>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-cuenta" role="tab" aria-controls="nav-contact" aria-selected="false">Cuentas</a>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-obligacion" role="tab" aria-controls="nav-contact" aria-selected="false">Obligaciones</a>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-representantes" role="tab" aria-controls="nav-contact" aria-selected="false">Representantes</a>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-integrantes" role="tab" aria-controls="nav-contact" aria-selected="false">Integrantes</a>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-bajas" role="tab" aria-controls="nav-contact" aria-selected="false">Bajas</a>
+            <a class="nav-item nav-link" id="nav-cuenta-tab" data-toggle="tab" href="#nav-cuenta" role="tab" aria-controls="nav-contact" aria-selected="false">Cuentas</a>
+            <a class="nav-item nav-link" id="nav-obligacion-tab" data-toggle="tab" href="#nav-obligacion" role="tab" aria-controls="nav-contact" aria-selected="false">Obligaciones</a>
+            <a class="nav-item nav-link" id="nav-representantes-tab" data-toggle="tab" href="#nav-representantes" role="tab" aria-controls="nav-contact" aria-selected="false">Representantes</a>
+            <a class="nav-item nav-link" id="nav-integrantes-tab" data-toggle="tab" href="#nav-integrantes" role="tab" aria-controls="nav-contact" aria-selected="false">Integrantes</a>
+            <a class="nav-item nav-link" id="nav-bajas-tab" data-toggle="tab" href="#nav-bajas" role="tab" aria-controls="nav-contact" aria-selected="false">Bajas</a>
         </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show container active border border-secondary rounded" id="nav-general" role="tabpanel" aria-labelledby="nav-home-tab">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Persona.PersonaID"/>
+            <input type="hidden" asp-for="Persona.PersonaID" />
             <div class="row">
                 <div class="col-md-3 mt-2">
                     <div class="form-group">
@@ -149,154 +178,146 @@
             </div>
         </div>
     </div>
-    <div class="form-group mt-3 mx-auto">
+    <div class="form-group mt-3 mx-auto" id="botonesGeneral">
         <a asp-action="Index">Back to List</a>
         <input type="submit" value="Guardar" class="btn btn-success" />
     </div>
-
 </form>
 
+
+<!--asp-action="Edit" asp-controller="Domicilios"-->
+<form id="formEditDomicilio">
     <!--MODAL DE DOMICILIO-->
     <div class="tab-pane fade border border-secondary rounded" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab">
         <div class="container my-3">
-            <div class="border border-secondary rounded bg-dark">
-                <div class="border border-secondary rounded bg-dark">
-                    <h4 class="my-3 mx-3 text-white font-weight-lighter">Domicilios</h4>
+            <div class="border border-secondary rounded bg-dark d-flex">
+                <h4 class="my-3 mx-3 text-white font-weight-lighter">Domicilios</h4>
+                <!--Modal 2-->
+                <a class="btn btn-light btn-rounded mr-3 my-3 ml-auto" id="btnAgregarDom" data-toggle="modal" onclick="limpiarForm()" data-target="#modalRegisterForm">Agregar</a>
+            </div>
 
-                    <!--Modal 2-->
-                    <button href="" id="btnCerrar" class="btn btn-primary btn-rounded float-right" data-toggle="modal" data-target="#modalRegisterForm">Agregar Domicilio</button>
-                </div>
+            <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Domicilios</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="tab-pane fade show container active border border-secondary rounded" id="nav-general" role="tabpanel" aria-labelledby="nav-home-tab">
 
-                <form asp-action="Edit" asp-controller="Domicilios">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" id="domicilioID" asp-for="Domicilio.DomicilioID" />
 
-                    <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-xl">
-                            <div class="modal-content">
-                                <div class="modal-header text-center">
-                                    <h4 class="modal-title w-100 font-weight-bold">Domicilios</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="tab-pane fade show container active border border-secondary rounded" id="nav-general" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <div class="row">
+                                <div class="col-md-3 mt-2">
+                                    <div class="form-group">
+                                        <label asp-for="Domicilio.Tipo_AmbitoID" class="control-label">Tipo Ambito<span class="text-danger font-weight-bold">*</span></label>
+                                        <select asp-for="Domicilio.Tipo_AmbitoID" id="domicilioTipoAmbito" class="form-control" asp-items="ViewBag.Tipo_AmbitoID" required>
+                                            <option value="" selected>Seleccione opción</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Domicilio.noexterior" class="control-label">No. Exterior<span class="text-danger font-weight-bold">*</span></label>
+                                        <input asp-for="Domicilio.noexterior" id="domicilioNoExterior" class="form-control" required />
+                                        <span asp-validation-for="Domicilio.noexterior" class="text-danger"></span>
+                                    </div>
 
-                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                    <input type="text" asp-for="Domicilio.DomicilioID" />
-
-                                    <div class="row">
-                                        <div class="col-md-3 mt-2">
-                                            <div class="form-group">
-                                                <label asp-for="Domicilio.Tipo_AmbitoID" class="control-label">Tipo Ambito<span class="text-danger font-weight-bold">*</span></label>
-                                                <select asp-for="Domicilio.Tipo_AmbitoID" class="form-control" asp-items="ViewBag.Tipo_AmbitoID" required>
-                                                    <option value="" selected>Seleccione opción</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="Domicilio.noexterior" class="control-label">No. Exterior<span class="text-danger font-weight-bold">*</span></label>
-                                                <input asp-for="Domicilio.noexterior" class="form-control" required />
-                                                <span asp-validation-for="Domicilio.noexterior" class="text-danger"></span>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label asp-for="Domicilio.estado" class="control-label">Estado<span class="text-danger font-weight-bold">*</span></label>
-                                                <input asp-for="Domicilio.estado" class="form-control" required />
-                                                <span asp-validation-for="Domicilio.estado" class="text-danger"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="Domicilio.nombreasentamiento" class="control-label">Nombre Asentamiento<span class="text-danger font-weight-bold">*</span></label>
-                                                <input asp-for="Domicilio.nombreasentamiento" class="form-control" required />
-                                                <span asp-validation-for="Domicilio.nombreasentamiento" class="text-danger"></span>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-md-3 mt-2">
-                                            <div class="form-group">
-                                                <label asp-for="Domicilio.Tipo_VialidadID" class="control-label">Tipo Vialidad<span class="text-danger font-weight-bold">*</span></label>
-                                                <select asp-for="Domicilio.Tipo_VialidadID" class="form-control" asp-items="ViewBag.Tipo_VialidadID" required>
-                                                    <option value="" selected>Seleccione opción</option>
-                                                </select>
-                                                <span asp-validation-for="Domicilio.Tipo_VialidadID" class="text-danger"></span>
-
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="Domicilio.nointerior" class="control-label">No. Interior</label>
-                                                <input asp-for="Domicilio.nointerior" class="form-control" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="Domicilio.MunicipioID" class="control-label">Municipio<span class="text-danger font-weight-bold">*</span></label>
-                                                <select asp-for="Domicilio.MunicipioID" class="form-control" asp-items="ViewBag.MunicipioID">
-                                                    <option value="" selected>Seleccione opción</option>
-                                                </select>
-                                                <span asp-validation-for="Domicilio.MunicipioID" class="text-danger"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="Domicilio.referenciavialidad" class="control-label">Referencia de Vialidad</label>
-                                                <input asp-for="Domicilio.referenciavialidad" class="form-control" />
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-md-3 mt-2">
-
-                                            <div class="form-group">
-                                                <label asp-for="Domicilio.nombrevialidad" class="control-label">Nombre Vialidad <span class="text-danger font-weight-bold">*</span></label>
-                                                <input asp-for="Domicilio.nombrevialidad" class="form-control" required />
-                                                <span asp-validation-for="Domicilio.nombrevialidad" class="text-danger"></span>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label asp-for="Domicilio.localidad" class="control-label">Localidad <span class="text-danger font-weight-bold">*</span></label>
-                                                <input asp-for="Domicilio.localidad" class="form-control" required />
-                                                <span asp-validation-for="Domicilio.localidad" class="text-danger"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="Domicilio.referenciaposterior" class="control-label"></label>
-                                                <input asp-for="Domicilio.referenciaposterior" class="form-control" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="Domicilio.PersonaID" class="control-label"></label>
-                                                <select asp-for="Domicilio.PersonaID" class="form-control" asp-items="ViewBag.PersonaID" required></select>
-                                                <span asp-validation-for="Domicilio.PersonaID" class="text-danger"></span>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-md-3 mt-2">
-
-                                            <div class="form-group">
-                                                <label asp-for="Domicilio.codigopostal" class="control-label">Codigo Postal<span class="text-danger font-weight-bold">*</span></label>
-                                                <input asp-for="Domicilio.codigopostal" class="form-control" required />
-                                                <span asp-validation-for="Domicilio.codigopostal" class="text-danger"></span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="Domicilio.Tipo_AsentamientoID" class="control-label">Tipo Asentamiento<span class="text-danger font-weight-bold">*</span></label>
-                                                <select asp-for="Domicilio.Tipo_AsentamientoID" class="form-control" asp-items="ViewBag.Tipo_AsentamientoID" required></select>
-                                                <span asp-validation-for="Domicilio.referenciaubicacion" class="text-danger"></span>
-
-                                            </div>
-                                            <div class="form-group">
-                                                <label asp-for="Domicilio.referenciaubicacion" class="control-label">Referencia de Ubicación<span class="text-danger font-weight-bold">*</span></label>
-                                                <input asp-for="Domicilio.referenciaubicacion" class="form-control" required />
-                                                <span asp-validation-for="Domicilio.referenciaubicacion" class="text-danger"></span>
-                                            </div>
-
-                                        </div>
+                                    <div class="form-group">
+                                        <label asp-for="Domicilio.estado" class="control-label">Estado<span class="text-danger font-weight-bold">*</span></label>
+                                        <input asp-for="Domicilio.estado" id="domicilioEstado" class="form-control" required />
+                                        <span asp-validation-for="Domicilio.estado" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Domicilio.nombreasentamiento" class="control-label">Nombre Asentamiento<span class="text-danger font-weight-bold">*</span></label>
+                                        <input asp-for="Domicilio.nombreasentamiento" id="domicilioNombreAsentamiento" class="form-control" required />
+                                        <span asp-validation-for="Domicilio.nombreasentamiento" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="modal-footer d-flex justify-content-center">
-                                    <button class="btn btn-primary">Editar Domicilio</button>
+
+                                <div class="col-md-3 mt-2">
+                                    <div class="form-group">
+                                        <label asp-for="Domicilio.Tipo_VialidadID" class="control-label">Tipo Vialidad<span class="text-danger font-weight-bold">*</span></label>
+                                        <select asp-for="Domicilio.Tipo_VialidadID" id="domicilioTipoVialidad" class="form-control" asp-items="ViewBag.Tipo_VialidadID" required>
+                                            <option value="">Seleccione opción</option>
+                                        </select>
+                                        <span asp-validation-for="Domicilio.Tipo_VialidadID" class="text-danger"></span>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Domicilio.nointerior" class="control-label">No. Interior</label>
+                                        <input asp-for="Domicilio.nointerior" id="domicilioNombreInterior" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Domicilio.MunicipioID" class="control-label">Municipio<span class="text-danger font-weight-bold">*</span></label>
+                                        <select asp-for="Domicilio.MunicipioID" id="domicilioMunicipioID" class="form-control" asp-items="ViewBag.MunicipioID">
+                                            <option value="" selected>Seleccione opción</option>
+                                        </select>
+                                        <span asp-validation-for="Domicilio.MunicipioID" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Domicilio.referenciavialidad" class="control-label">Referencia de Vialidad</label>
+                                        <input asp-for="Domicilio.referenciavialidad" id="domicilioReferenciaVialidad" class="form-control" />
+                                    </div>
                                 </div>
 
+                                <div class="col-md-3 mt-2">
+
+                                    <div class="form-group">
+                                        <label asp-for="Domicilio.nombrevialidad" class="control-label">Nombre Vialidad <span class="text-danger font-weight-bold">*</span></label>
+                                        <input asp-for="Domicilio.nombrevialidad" id="domicilioNombreVialidad" class="form-control" required />
+                                        <span asp-validation-for="Domicilio.nombrevialidad" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label asp-for="Domicilio.localidad" class="control-label">Localidad <span class="text-danger font-weight-bold">*</span></label>
+                                        <input asp-for="Domicilio.localidad" id="domicilioLocalidad" class="form-control" required />
+                                        <span asp-validation-for="Domicilio.localidad" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Domicilio.referenciaposterior" class="control-label"></label>
+                                        <input asp-for="Domicilio.referenciaposterior" id="domicilioReferenciaPosterior" class="form-control" />
+                                    </div>
+                                    <div class="form-group" style="display: none;">
+                                        <label asp-for="Domicilio.PersonaID" class="control-label"></label>
+                                        <input asp-for="Domicilio.PersonaID" id="domicilioPersonaID" class="form-control" required disabled/>                                        
+                                        <span asp-validation-for="Domicilio.PersonaID" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 mt-2">
+                                    <div class="form-group">
+                                        <label asp-for="Domicilio.codigopostal" class="control-label">Codigo Postal<span class="text-danger font-weight-bold">*</span></label>
+                                        <input asp-for="Domicilio.codigopostal" id="domicilioCodigoPostal" class="form-control" required />
+                                        <span asp-validation-for="Domicilio.codigopostal" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Domicilio.Tipo_AsentamientoID" class="control-label">Tipo Asentamiento<span class="text-danger font-weight-bold">*</span></label>
+                                        <select asp-for="Domicilio.Tipo_AsentamientoID" id="domicilioTipoAsentamiento" class="form-control" asp-items="ViewBag.Tipo_AsentamientoID" required>
+                                            <option value="" selected>Seleccione opción</option>
+                                        </select>
+                                        <span asp-validation-for="Domicilio.Tipo_AsentamientoID" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Domicilio.referenciaubicacion" class="control-label">Referencia de Ubicación<span class="text-danger font-weight-bold">*</span></label>
+                                        <input asp-for="Domicilio.referenciaubicacion" id="domicilioReferenciaUbicacion" class="form-control" required />
+                                        <span asp-validation-for="Domicilio.referenciaubicacion" class="text-danger"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancelar</button>
+                            <button class="btn btn-primary" id="btnModalDomicilio">Editar Domicilio</button>
+                        </div>
                     </div>
-                    </form>
+                </div>
             </div>
+
             <div class="rounded border border-secondary">
-                <div class="container">
-                    <table class="table table-sm table-secondary my-3 rounded table-hover table-striped">
+                <div id="tableDomicilio" class="container">
+                    <table class="table table-sm table-secondary my-3 table-hover table-striped">
                         <thead class="thead-light text-center">
                             <tr>
                                 <th>Estado</th>
@@ -308,11 +329,8 @@
                             </tr>
                         </thead>
                         <tbody class="text-center ">
-
                             @foreach (var dom in (IEnumerable<SistemaAFT.Models.Domicilio>)ViewBag.Libros)
                             {
-                                <input type="text" asp-for="@dom.DomicilioID" />
-
                                 <tr>
                                     <th>@dom.estado</th>
                                     <th>@dom.MunicipioID</th>
@@ -320,13 +338,12 @@
                                     <th>@dom.Tipo_AsentamientoID</th>
                                     <th>@dom.referenciaubicacion</th>
                                     <th>
-                                        <a data-toggle="modal" data-target="#modalRegisterForm" class="btn btn-success" asp-action="Edit" asp-controller="Personas" name="@dom.DomicilioID" asp-route-id="@dom.DomicilioID">Edit @dom.DomicilioID</a>
+                                        <!--asp-action="Edit" asp-controller="Domicilios"  data-toggle="modal" data-target="#modalRegisterForm"-->
+                                        <button type="button" onclick="editarDom(this)" data-toggle="modal" data-target="#modalRegisterForm" class="btn btn-success" value="@dom.DomicilioID" id="editDom">Edit</button>
                                         <a class="btn btn-primary" asp-action="Details" asp-controller="Domicilios" asp-route-id="@dom.DomicilioID">Details</a>
                                         <a class="btn btn-danger" asp-action="Delete" asp-controller="Domicilios" asp-route-id="@dom.DomicilioID">Delete</a>
                                         <!--<button href="" class="btn btn-primary btn-rounded float-right" data-toggle="modal" data-target="#modalRegisterForm">Agregar Domicilio</button>-->
                                     </th>
-                                    <th>@dom.DomicilioID</th>
-
                                 </tr>
                             }
                         </tbody>
@@ -334,12 +351,13 @@
                 </div>
             </div>
         </div>
-    </div><!--FIN MODAL DOMICILIO-->
+    </div>
+</form>
+
 
 <div class="tab-pane fade" id="nav-cuenta" role="tabpanel" aria-labelledby="nav-contact-tab">3</div>
 <div class="tab-pane fade" id="nav-obligacion" role="tabpanel" aria-labelledby="nav-contact-tab">4</div>
 <div class="tab-pane fade" id="nav-representantes" role="tabpanel" aria-labelledby="nav-contact-tab">5</div>
-
 
 
 <div class="tab-pane fade border border-secondary rounded" id="nav-integrantes" role="tabpanel" aria-labelledby="nav-contact-tab">
@@ -368,7 +386,6 @@
 </div>
 
 
-
 <div class="tab-pane fade border border-secondary rounded" id="nav-bajas" role="tabpanel" aria-labelledby="nav-contact-tab">
     <div class="container my-3">
         <div class="border border-secondary rounded bg-dark">
@@ -392,9 +409,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
