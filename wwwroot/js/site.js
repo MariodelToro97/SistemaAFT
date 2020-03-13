@@ -101,20 +101,21 @@
         document.getElementById('btnModalDomicilio').innerHTML = "Agregar Domicilio";
     });
 
-    $('#editDom').click(function () {
-        document.getElementById('btnModalDomicilio').innerHTML = "Editar Domicilio";
+    $('#btnModalDomicilio').click(function () {
+        $("span.Modal").show();
     });
 });
 
 function limpiarForm() {
-    //$("#modalRegisterForm").find("input,textarea,select").val("");
     $("#modalRegisterForm input").val("");
     $("#modalRegisterForm textarea").val("");
     $("#modalRegisterForm select").val("");
-    //document.getElementById('domicilioTipoAmbito').getElementsByTagName('option')[0].selected = 'selected';
+    $("span.Modal").hide();
 }
 
 function editarDom(boton) {
+    limpiarForm();
+    document.getElementById('btnModalDomicilio').innerHTML = "Editar Domicilio";
     var id = boton.value;
     
     $.ajax({
@@ -146,11 +147,30 @@ function editarDom(boton) {
             $('#domicilioNoExterior').val(noExterior);
             $('#domicilioEstado').val(estado);
             $('#domicilioNombreAsentamiento').val(asentamiento);
-            $('#domicilioNombreInterior').val(nombreInterior);
-            $('#domicilioReferenciaVialidad').val(referenciaVialidad);
+            
+
+            if (nombreInterior === 'NULL') {
+                $('#domicilioNombreInterior').val('');
+            } else {
+                $('#domicilioNombreInterior').val(nombreInterior);
+            }
+
+            if (referenciaVialidad === 'NULL') {
+                $('#domicilioReferenciaVialidad').val('');
+            } else {
+                $('#domicilioReferenciaVialidad').val(referenciaVialidad);
+            }
+            
             $('#domicilioNombreVialidad').val(nombreVialidad);
             $('#domicilioLocalidad').val(localidad);
-            $('#domicilioReferenciaPosterior').val(referenciaPosterior);
+            
+
+            if (referenciaPosterior === 'NULL') {
+                $('#domicilioReferenciaPosterior').val('');
+            } else {
+                $('#domicilioReferenciaPosterior').val(referenciaPosterior);
+            }
+
             $('#domicilioCodigoPostal').val(cp);
             $('#domicilioReferenciaUbicacion').val(refUbi);
             $('#domicilioPersonaID').val(persona);
@@ -168,59 +188,118 @@ function editarDom(boton) {
 }
 
 $('#formEditDomicilio').submit(function () {
-    var noExterior = $('#domicilioNoExterior').val();
-    var estado = $('#domicilioEstado').val();
-    var asentamiento = $('#domicilioNombreAsentamiento').val();
-    var nombreInterior = $('#domicilioNombreInterior').val();
-    var referenciaVialidad = $('#domicilioReferenciaVialidad').val();
-    var nombreVialidad = $('#domicilioNombreVialidad').val();
-    var localidad = $('#domicilioLocalidad').val();
-    var referenciaPosterior = $('#domicilioReferenciaPosterior').val();
-    var cp = $('#domicilioCodigoPostal').val();
-    var refUbi = $('#domicilioReferenciaUbicacion').val();
-    var ambito = $("#domicilioTipoAmbito").val();
-    var vialidad = $("#domicilioTipoVialidad").val();
-    var municipio = $("#domicilioMunicipioID").val();
-    var persona = $("#domicilioPersonaID").val();
-    var tipoAsentamiento = $("#domicilioTipoAsentamiento").val();
-    var domicilioID = $("#domicilioID").val();
-
-    if (document.getElementById('btnModalDomicilio').innerHTML === "Editar Domicilio") {
-        console.log("EDITAR");
-    } else {
-        console.log("AGREGAR");
-    }
     
-    $.ajax({
-        type: 'POST',
-        url: "/Domicilios/updateDomicilio",
-        data: {
-            noexterior: noExterior,
-            estado: estado,
-            nombreasentamiento: asentamiento,
-            nointerior: nombreInterior,
-            referenciavialidad: referenciaVialidad,
-            nombrevialidad: nombreVialidad,
-            localidad: localidad,
-            referenciaposterior: referenciaPosterior,
-            codigopostal: cp,
-            referenciaubicacion: refUbi,
-            Tipo_AmbitoID: ambito,
-            Tipo_Vialidad: vialidad,
-            Municipio: municipio,
-            Persona: persona,
-            Tipo_Asentamiento: tipoAsentamiento,
-            DomicilioID: domicilioID,
-            PersonaID: persona
-        },
-        success: function (data) {
-            console.log(data);
-            $('#modalRegisterForm').modal('hide');
-            $('#tableDomicilio').load(" #tableDomicilio");
-        },
-        error: function (r) {
-            console.log(r);
+    var dom = $('#domicilioTipoAmbito').val();
+    var via = $('#domicilioTipoVialidad').val();
+    var nomVia = $('#domicilioNombreVialidad').val();
+    var domCP = $('#domicilioCodigoPostal').val();
+    var domNE = $('#domicilioNoExterior').val();
+    var domEs = $('#domicilioEstado').val();
+    var domNA = $('#domicilioNombreAsentamiento').val();
+    var domMun = $('#domicilioMunicipioID').val();
+    var loc = $('#domicilioLocalidad').val();
+    var tAse = $('#domicilioTipoAsentamiento').val();
+    var refUb = $('#domicilioReferenciaUbicacion').val();
+
+    if (dom === '' || via === '' || nomVia === '' || domCP === '' || domNE === '' || domEs === '' || domNA === '' || domMun === '' || loc === '' || tAse === '' || refUb === '') {
+        console.log("FALTAN DATOS");
+    } else {
+
+        var noExterior = $('#domicilioNoExterior').val();
+        var estado = $('#domicilioEstado').val();
+        var asentamiento = $('#domicilioNombreAsentamiento').val();
+        var nombreInterior = $('#domicilioNombreInterior').val();
+        var referenciaVialidad = $('#domicilioReferenciaVialidad').val();
+        var nombreVialidad = $('#domicilioNombreVialidad').val();
+        var localidad = $('#domicilioLocalidad').val();
+        var referenciaPosterior = $('#domicilioReferenciaPosterior').val();
+        var cp = $('#domicilioCodigoPostal').val();
+        var refUbi = $('#domicilioReferenciaUbicacion').val();
+        var ambito = $("#domicilioTipoAmbito").val();
+        var vialidad = $("#domicilioTipoVialidad").val();
+        var municipio = $("#domicilioMunicipioID").val();
+        var persona = $("#domicilioPersonaID").val();
+        var tipoAsentamiento = $("#domicilioTipoAsentamiento").val();
+        var domicilioID = $("#domicilioID").val();        
+
+        if (referenciaVialidad === '') {
+            referenciaVialidad = 'NULL';
         }
-    });
-    return false;
+        if (nombreInterior === '') {
+            nombreInterior = 'NULL';
+        }
+        if (referenciaPosterior === '') {
+            referenciaPosterior = 'NULL';
+        }
+
+        if (document.getElementById('btnModalDomicilio').innerHTML === "Editar Domicilio") {
+            $.ajax({
+                type: 'POST',
+                url: "/Domicilios/updateDomicilio",
+                data: {
+                    noexterior: noExterior,
+                    estado: estado,
+                    nombreasentamiento: asentamiento,
+                    nointerior: nombreInterior,
+                    referenciavialidad: referenciaVialidad,
+                    nombrevialidad: nombreVialidad,
+                    localidad: localidad,
+                    referenciaposterior: referenciaPosterior,
+                    codigopostal: cp,
+                    referenciaubicacion: refUbi,
+                    Tipo_AmbitoID: ambito,
+                    Tipo_Vialidad: vialidad,
+                    Municipio: municipio,
+                    Persona: persona,
+                    Tipo_Asentamiento: tipoAsentamiento,
+                    DomicilioID: domicilioID,
+                    PersonaID: persona
+                },
+                success: function (data) {
+                    console.log(data);
+                    $('#modalRegisterForm').modal('hide');
+                    $('#tableDomicilio').load(" #tableDomicilio");
+                },
+                error: function (r) {
+                    console.log(r);
+                }
+            });
+            return false;
+
+        } else {
+            persona = $("#editDom").attr('name');
+            alert(persona);
+            $.ajax({
+                type: 'POST',
+                url: "/Domicilios/addDomicilio",
+                data: {
+                    noexterior: noExterior,
+                    estado: estado,
+                    nombreasentamiento: asentamiento,
+                    nointerior: nombreInterior,
+                    referenciavialidad: referenciaVialidad,
+                    nombrevialidad: nombreVialidad,
+                    localidad: localidad,
+                    referenciaposterior: referenciaPosterior,
+                    codigopostal: cp,
+                    referenciaubicacion: refUbi,
+                    Tipo_AmbitoID: ambito,
+                    Tipo_Vialidad: vialidad,
+                    Municipio: municipio,
+                    Persona: persona,
+                    Tipo_Asentamiento: tipoAsentamiento,                    
+                    PersonaID: persona
+                },
+                success: function (data) {
+                    console.log(data);
+                    $('#modalRegisterForm').modal('hide');
+                    $('#tableDomicilio').load(" #tableDomicilio");
+                },
+                error: function (r) {
+                    console.log(r);
+                }
+            });
+            return false;
+        }
+    }    
 });
