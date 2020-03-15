@@ -10,12 +10,12 @@ namespace SistemaAFT.Models
     {
         public int IntegranteID { get; set; }
         [RegularExpression("^[A-Z]{4}[0-9]{6}[H,M][A-Z]{5}[A-Z,0-9][0-9]", ErrorMessage = "La CURP no es Válida")]
-        //[Required(ErrorMessage = "Se requiere la CURP")]
+        [Required(ErrorMessage = "Campo requerido")]
         public string CURP { get; set; }
 
-        //[Required(ErrorMessage = "Se requiere el RFC")]
+        [Required(ErrorMessage = "Campo requerido")]
         public string nombre { get; set; }
-        //[Required(ErrorMessage = "Campo Requerido")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public string apellido_paterno { get; set; }
         public string apellido_materno { get; set; }
 

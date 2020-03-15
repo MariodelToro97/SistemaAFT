@@ -111,7 +111,7 @@
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show container active border border-secondary rounded" id="nav-general" role="tabpanel" aria-labelledby="nav-home-tab">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Persona.PersonaID" />
+            <input id="personaOcultoID" type="hidden" asp-for="Persona.PersonaID" />
             <div class="row">
                 <div class="col-md-3 mt-2">
                     <div class="form-group">
@@ -367,70 +367,15 @@
         <div class="rounded">
             <div class="form-inline d-flex bg-dark rounded">
                 <h4 class="my-3 mx-3 text-white font-weight-lighter">Integrantes</h4>
-                <button type="button" class="btn btn-light btn-rounded mr-3 my-3 ml-auto" data-toggle="modal" data-target=".bd-example-modal-xl">Agregar</button>
+                <button type="button" class="btn btn-light btn-rounded mr-3 my-3 ml-auto" id="integrantesTop" data-toggle="modal" data-target=".bd-example-modal-xl">Agregar</button>
             </div>
 
             <!-- Extra large modal -->
-            <form asp-action="Create">
-                <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl" role="document">
-                        <div class="modal-content">
+            @await Html.PartialAsync("_modalIntegrantes")
 
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <input type="hidden" id="integranteID" asp-for="Integrante.IntegranteID" />
-
-                            <div class="modal-header text-center">
-                                <h4 class="modal-title w-100 font-weight-bold">Integrante</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-4 mt-2">
-                                        <div class="form-group">
-                                            <label asp-for="Integrante.CURP" class="control-label">CURP<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Integrante.CURP" class="text-danger ErrorInput"></span>
-                                            <input asp-for="Integrante.CURP" id="integranteCurp" type="text" class="form-control" placeholder="CURP" required id="CURP" oninput="errorCurp(this);" oninvalid="errorCurp(this);" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-1 mt-2">
-                                        <div class="d-flex">
-                                            <input type="image" class="rounded btn btn-block imageback tamanoIMG" src="~/icon/search-solid.svg" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4 mt-2">
-                                        <div class="form-group">
-                                            <label asp-for="Integrante.nombre" class="control-label">Nombre<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Integrante.nombre" class="text-danger ErrorInput"></span>
-                                            <input id="integranteNombre" asp-for="Integrante.nombre" type="text" class="form-control" placeholder="Nombre" required />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mt-2">
-                                        <div class="form-group">
-                                            <label asp-for="Integrante.apellido_paterno" class="control-label">Apellido Paterno<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Integrante.apellido_paterno" class="text-danger ErrorInput"></span>
-                                            <input id="integranteApellidoPaterno" asp-for="Integrante.apellido_paterno" type="text" class="form-control" placeholder="Apellido Paterno" required />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mt-2">
-                                        <div class="form-group">
-                                            <label asp-for="Integrante.apellido_materno" class="control-label">Apellido Materno:</label><span asp-validation-for="Integrante.apellido_materno" class="text-danger"></span>
-                                            <input id="integranteApellidoMaterno" asp-for="Integrante.apellido_materno" type="text" class="form-control" placeholder="Apellido Materno" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer d-flex justify-content-center">
-                                <button class="btn btn-danger" id="btnCancelarDom" data-dismiss="modal" aria-label="Close">Cancelar</button>
-                                <button class="btn btn-primary">Guardar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
             <div class="rounded border border-secondary">
                 <div class="container">
-                    <table class="table table-sm table-secondary my-3 rounded">
+                    <table class="table table-sm table-secondary my-3 rounded" id="tableIntegrantes">
                         <thead class="thead-light text-center">
                             <tr>
                                 <th>Tipo persona</th>
@@ -441,6 +386,23 @@
                                 <th>Editar</th>
                             </tr>
                         </thead>
+                        <tbody class="text-center">
+                            @foreach (var integrante in (IEnumerable<SistemaAFT.Models.Integrante>)ViewBag.Integrantes)
+                            {
+                                <tr>
+                                    <th></th>
+                                    <th>@integrante.CURP</th>
+                                    <th></th>
+                                    <th>@integrante.nombre</th>
+                                    <th></th>
+                                    <th>
+                                        <button type="button" onclick="" data-toggle="modal" data-target="#modalIntegrantes" class="btn btn-success" value="@integrante.IntegranteID" id="editIntegrante">Editar</button>
+                                        <a class="btn btn-primary" asp-route-id="@integrante.IntegranteID">Detalles</a>
+                                        <a class="btn btn-danger" asp-route-id="@integrante.IntegranteID">Borrar</a>
+                                    </th>
+                                </tr>
+                            }
+                        </tbody>
                     </table>
                 </div>
             </div>
