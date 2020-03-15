@@ -19,5 +19,7 @@ namespace SistemaAFT.Models
         public string apellido_paterno { get; set; }
         public string apellido_materno { get; set; }
 
+        public int PersonaID { get; set; }
+        public Persona Persona { get; set; }
     }
 }
