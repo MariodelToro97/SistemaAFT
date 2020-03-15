@@ -272,5 +272,30 @@ namespace SistemaAFT.Controllers
                 return e.ToString();
             }
         }
+
+        //Llamada a procedimiento para eliminar domicilio
+        public string deleteDomicilio (int domID)
+        {
+            try
+            {
+                SqlConnection cn = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=dbsistemaaft;Trusted_Connection=True;MultipleActiveResultSets=true");
+
+                SqlCommand com = new SqlCommand("spDeleteAddress", cn);
+                com.CommandType = CommandType.StoredProcedure;
+
+                com.Parameters.AddWithValue("@domID", domID);                
+
+                cn.Open();
+                com.ExecuteNonQuery();
+                cn.Close();
+
+                return "SUCCESS";
+
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
     }
 }
