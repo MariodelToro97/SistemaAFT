@@ -112,16 +112,25 @@ namespace SistemaAFT.Controllers
             //var domicilio_id = _context.Domicilio.FromSqlRaw("Select * From dbo.Domicilio WHERE PersonaID = {0}", id);
 
             var libros = _context.Domicilio.FromSqlRaw("Select * From dbo.Domicilio WHERE PersonaID = {0}", id).ToList();
+            var integrantes = _context.Integrante.FromSqlRaw("Select * From dbo.Integrante WHERE PersonaID = {0}", id).ToList();
 
             ViewBag.Libros = libros;
+            ViewBag.Integrantes = integrantes;
                      
             if (libros.FirstOrDefault() == null)
             {
                 return RedirectToAction("Index", "Error");
             }
 
-           
-            granModelo.Domicilio = await _context.Domicilio.FindAsync(libros.First().DomicilioID);
+            if(libros.Count() > 0)
+            {
+                granModelo.Domicilio = await _context.Domicilio.FindAsync(libros.First().DomicilioID);
+            }
+
+            if (integrantes.Count() > 0)
+            {
+                granModelo.Integrante = await _context.Integrante.FindAsync(integrantes.First().IntegranteID);
+            }
 
             ViewData["DiscapacidadID"] = new SelectList(_context.Discapacidad, "DiscapacidadID", "DiscapacidadID", granModelo.Persona.DiscapacidadID);
             ViewData["Estado_CivilID"] = new SelectList(_context.Estado_Civil, "Estado_CivilID", "Nombre_Edo_Civil", granModelo.Persona.Estado_CivilID);
