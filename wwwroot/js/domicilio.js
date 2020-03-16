@@ -157,7 +157,7 @@ $('#formEditDomicilio').submit(function () {
         var ambito = $("#domicilioTipoAmbito").val();
         var vialidad = $("#domicilioTipoVialidad").val();
         var municipio = $("#domicilioMunicipioID").val();
-        var persona = $("#domicilioPersonaID").val();
+        var persona = $("#personaGeneralID").val();
         var tipoAsentamiento = $("#domicilioTipoAsentamiento").val();
         var domicilioID = $("#domicilioID").val();
 
@@ -206,8 +206,6 @@ $('#formEditDomicilio').submit(function () {
             return false;
 
         } else {
-            persona = $("#editDom").attr('name');
-            alert(persona);
             $.ajax({
                 type: 'POST',
                 url: "/Domicilios/addDomicilio",

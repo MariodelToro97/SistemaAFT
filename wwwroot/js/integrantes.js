@@ -4,7 +4,7 @@
         document.getElementById('btnCancelarIntegrante').innerHTML = "Cancelar";
         limpiarIntegrantes();
         $('#btnModalIntegrante').show();
-        $('#integrantePersonaID').val($('#personaOcultoID').val());
+        $('#integrantePersonaID').val($('#personaGeneralID').val());
     });
 
     $('#btnModalIntegrante').click(function () {
@@ -54,7 +54,7 @@ $('#formIntegrantes').submit(function () {
 
                 $.ajax({
                     type: 'POST',
-                    url: "/Peticiones/updateIntegrante",
+                    url: "/Peticiones/updateRepresentante",
                     data: {
                         id: id,
                         curp: curp,
