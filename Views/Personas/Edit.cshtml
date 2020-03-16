@@ -87,29 +87,51 @@
 
 <div class="tab-pane fade border border-secondary rounded" id="nav-integrantes" role="tabpanel" aria-labelledby="nav-contact-tab" style="display:none;">
     <div class="container my-3">
-        <div class="border border-secondary rounded bg-dark">
-            <h4 class="my-3 mx-3 text-white font-weight-lighter">Integrantes</h4>
-            <button type="button" class="btn btn-light derecho text-dark" data-toggle="modal" data-target="#exampleModal">Agregar</button>
-        </div>
-        <div class="rounded border border-secondary">
-            <div class="container">
-                <table class="table table-sm table-secondary my-3 rounded">
-                    <thead class="thead-light text-center">
-                        <tr>
-                            <th>Tipo persona</th>
-                            <th>CURP</th>
-                            <th>RFC</th>
-                            <th>Nombre</th>
-                            <th>Fec. nac/cons.</th>
-                            <th>Editar</th>
-                        </tr>
-                    </thead>
-                </table>
+        <div class="rounded">
+            <div class="form-inline d-flex bg-dark rounded">
+                <h4 class="my-3 mx-3 text-white font-weight-lighter">Integrantes</h4>
+                <button type="button" class="btn btn-light btn-rounded mr-3 my-3 ml-auto" id="integrantesTop" data-toggle="modal" data-target=".bd-example-modal-xl">Agregar</button>
+            </div>
+
+            <!-- Extra large modal -->
+            @await Html.PartialAsync("_modalIntegrantes")
+
+            <div class="rounded border border-secondary">
+                <div class="container">
+                    <table class="table table-sm table-secondary my-3 rounded" id="tableIntegrantes">
+                        <thead class="thead-light text-center">
+                            <tr>
+                                <th>Tipo persona</th>
+                                <th>CURP</th>
+                                <th>RFC</th>
+                                <th>Nombre</th>
+                                <th>Fec. nac/cons.</th>
+                                <th>Editar</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            @foreach (var integrante in (IEnumerable<SistemaAFT.Models.Integrante>)ViewBag.Integrantes)
+                            {
+                                <tr>
+                                    <th></th>
+                                    <th>@integrante.CURP</th>
+                                    <th></th>
+                                    <th>@integrante.nombre</th>
+                                    <th></th>
+                                    <th>
+                                        <button type="button" onclick="editIntegrante(this)" data-toggle="modal" data-target="#modalIntegrantes" class="btn btn-success" value="@integrante.IntegranteID" name="@integrante.PersonaID" id="editIntegrante">Editar</button>
+                                        <button class="btn btn-primary" onclick="detalleIntegrante(this)" data-toggle="modal" data-target="#modalIntegrantes" value="@integrante.IntegranteID" name="@integrante.PersonaID">Detalles</button>
+                                        <button class="btn btn-danger" onclick="deleteIntegrante(this)" value="@integrante.IntegranteID">Borrar</button>
+                                    </th>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 
 <div class="tab-pane fade border border-secondary rounded" id="nav-bajas" role="tabpanel" aria-labelledby="nav-contact-tab" style="display:none;">
     <div class="container my-3">
