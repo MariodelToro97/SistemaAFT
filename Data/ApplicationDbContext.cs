@@ -26,6 +26,9 @@ namespace SistemaAFT.Data
 		public DbSet<SistemaAFT.Models.Tipo_Asentamiento> Tipo_Asentamiento { get; set; }
 		public DbSet<SistemaAFT.Models.Tipo_Vialidad> Tipo_Vialidad { get; set; }
 		public DbSet<SistemaAFT.Models.Integrante> Integrante { get; set; }
+		public DbSet<SistemaAFT.Models.Compania> Compania { get; set; }
+		public DbSet<SistemaAFT.Models.Tipo_Telefono> Tipo_Telefono { get; set; }
+		public DbSet<SistemaAFT.Models.Telefono> Telefono { get; set; }
 
 
 	}

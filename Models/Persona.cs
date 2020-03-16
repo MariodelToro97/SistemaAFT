@@ -50,8 +50,6 @@ namespace SistemaAFT.Models
 
         //[Required(ErrorMessage ="Campo Requerido")]
         public string nombreMoral { get; set; }
-
-
         public ICollection<Domicilio> Domicilios { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

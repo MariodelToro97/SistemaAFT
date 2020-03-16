@@ -113,10 +113,13 @@ namespace SistemaAFT.Controllers
 
             var libros = _context.Domicilio.FromSqlRaw("Select * From dbo.Domicilio WHERE PersonaID = {0}", id).ToList();
             var integrantes = _context.Integrante.FromSqlRaw("Select * From dbo.Integrante WHERE PersonaID = {0}", id).ToList();
+            var telefonos = _context.Telefono.FromSqlRaw("Select * From dbo.Telefono WHERE PersonaID = {0}", id).ToList();
 
             ViewBag.Libros = libros;
             ViewBag.Integrantes = integrantes;
-                     
+            ViewBag.Telefonos = telefonos;
+
+
             if (libros.FirstOrDefault() == null)
             {
                 return RedirectToAction("Index", "Error");
@@ -132,6 +135,11 @@ namespace SistemaAFT.Controllers
                 granModelo.Integrante = await _context.Integrante.FindAsync(integrantes.First().IntegranteID);
             }
 
+            if (telefonos.Count() > 0)
+            {
+                granModelo.Telefono = await _context.Telefono.FindAsync(telefonos.First().TelefonoID);
+            }
+
             ViewData["DiscapacidadID"] = new SelectList(_context.Discapacidad, "DiscapacidadID", "DiscapacidadID", granModelo.Persona.DiscapacidadID);
             ViewData["Estado_CivilID"] = new SelectList(_context.Estado_Civil, "Estado_CivilID", "Nombre_Edo_Civil", granModelo.Persona.Estado_CivilID);
             ViewData["EtniaID"] = new SelectList(_context.Etnia, "EtniaID", "EtniaID", granModelo.Persona.EtniaID);
@@ -143,6 +151,8 @@ namespace SistemaAFT.Controllers
             ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Nombre", granModelo.Domicilio.Tipo_AmbitoID);
             ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Nombre", granModelo.Domicilio.Tipo_AsentamientoID);
             ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Nombre", granModelo.Domicilio.Tipo_VialidadID);
+            ViewData["CompaniaID"] = new SelectList(_context.Set<Compania>(), "CompaniaID", "nombre_compania", granModelo.Telefono.CompaniaID);
+            ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "nombre_tipo", granModelo.Telefono.Tipo_TelefonoID);
 
             return View(granModelo);
         }
@@ -192,6 +202,8 @@ namespace SistemaAFT.Controllers
             ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Nombre", granModelo.Domicilio.Tipo_AmbitoID);
             ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Nombre", granModelo.Domicilio.Tipo_AsentamientoID);
             ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Nombre", granModelo.Domicilio.Tipo_VialidadID);
+            ViewData["CompaniaID"] = new SelectList(_context.Set<Compania>(), "CompaniaID", "nombre_compania", granModelo.Telefono.CompaniaID);
+            ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "nombre_tipo", granModelo.Telefono.Tipo_TelefonoID);
 
             return View(granModelo);
         }

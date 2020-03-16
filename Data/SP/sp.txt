@@ -1,0 +1,34 @@
+CREATE PROCEDURE [dbo].[spAddTelefono]
+	@numero VARCHAR (MAX),
+	@CompaniaID int,
+	@Tipo_TelefonoID int,
+	@persona int
+AS
+	BEGIN
+		INSERT INTO Telefono VALUES (@numero, @CompaniaID, @Tipo_TelefonoID, @persona);
+	END
+RETURN 0
+
+
+CREATE PROCEDURE [dbo].[spUpdateTelefono]
+	@id INT,
+	@numero VARCHAR(MAX),
+	@CompaniaID int,
+	@Tipo_TelefonoID int,
+	@persona int
+AS
+	BEGIN
+		UPDATE Telefono
+		SET numero = @numero, CompaniaID = @CompaniaID, Tipo_TelefonoID = @Tipo_TelefonoID, PersonaID = @persona
+		WHERE TelefonoID = @id;
+	END
+RETURN 0
+
+
+CREATE PROCEDURE [dbo].[spDeleteTelefono]
+	@intID int
+AS
+	BEGIN
+		DELETE FROM Telefono WHERE TelefonoID = @intID;
+	END
+RETURN 0
