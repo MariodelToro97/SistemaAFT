@@ -206,8 +206,8 @@ $('#formEditDomicilio').submit(function () {
             return false;
 
         } else {
-            persona = $("#editDom").attr('name');
-            alert(persona);
+            persona = $("#personaGeneralID").val();
+            
             $.ajax({
                 type: 'POST',
                 url: "/Domicilios/addDomicilio",
