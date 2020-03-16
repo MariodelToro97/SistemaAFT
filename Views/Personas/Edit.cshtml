@@ -396,8 +396,8 @@
                                     <th>@integrante.nombre</th>
                                     <th></th>
                                     <th>
-                                        <button type="button" onclick="" data-toggle="modal" data-target="#modalIntegrantes" class="btn btn-success" value="@integrante.IntegranteID" name="@integrante.PersonaID" id="editIntegrante">Editar</button>
-                                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalIntegrantes" value="@integrante.IntegranteID">Detalles</button>
+                                        <button type="button" onclick="editIntegrante(this)" data-toggle="modal" data-target="#modalIntegrantes" class="btn btn-success" value="@integrante.IntegranteID" name="@integrante.PersonaID" id="editIntegrante">Editar</button>
+                                        <button class="btn btn-primary" onclick="detalleIntegrante(this)" data-toggle="modal" data-target="#modalIntegrantes" value="@integrante.IntegranteID" name="@integrante.PersonaID">Detalles</button>
                                         <button class="btn btn-danger" onclick="deleteIntegrante(this)" value="@integrante.IntegranteID">Borrar</button>
                                     </th>
                                 </tr>
