@@ -16,6 +16,7 @@ namespace SistemaAFT.Controllers
         }
 
         //Llamada a procedimiento de insertar Integrante en la base de datos spAddIntegrante
+        [HttpPost]
         public string addIntegrante(string curp, string nombre, string aPaterno, string aMaterno, int persona)
         {
             try
@@ -30,6 +31,31 @@ namespace SistemaAFT.Controllers
                 com.Parameters.AddWithValue("@aPaterno", aPaterno);
                 com.Parameters.AddWithValue("@aMaterno", aMaterno);
                 com.Parameters.AddWithValue("@persona", persona);
+
+                cn.Open();
+                com.ExecuteNonQuery();
+                cn.Close();
+
+                return "SUCCESS";
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        //Llamada a procedimiento de borrar Integrante en la base de datos spADeletentegrante
+        [HttpPost]
+        public string deleteIntegrante(int id)
+        {
+            try
+            {
+                SqlConnection cn = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=dbsistemaaft;Trusted_Connection=True;MultipleActiveResultSets=true");
+
+                SqlCommand com = new SqlCommand("spDeleteIntegrante", cn);
+                com.CommandType = CommandType.StoredProcedure;
+
+                com.Parameters.AddWithValue("@intID", id);
 
                 cn.Open();
                 com.ExecuteNonQuery();

@@ -51,3 +51,23 @@ function limpiarIntegrantes() {
     $("#modalIntegrantes select").val("");
     $("span.Integrantes").hide();
 }
+
+function deleteIntegrante(boton) {
+    var id = boton.value;
+
+    $.ajax({
+        type: 'POST',
+        url: "/Peticiones/deleteIntegrante",
+        data: {
+            id: id
+        },
+        success: function (data) {
+            console.log(data);
+            $('#tableIntegrantes').load(" #tableIntegrantes");
+        },
+        error: function (r) {
+            console.log(r);
+        }
+    });
+    return false;
+};

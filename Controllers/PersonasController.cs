@@ -121,14 +121,16 @@ namespace SistemaAFT.Controllers
             {
                 return RedirectToAction("Index", "Error");
             }
-            if (integrantes.FirstOrDefault() == null)
+
+            if(libros.Count() > 0)
             {
-                return RedirectToAction("Index", "Error");
+                granModelo.Domicilio = await _context.Domicilio.FindAsync(libros.First().DomicilioID);
             }
 
-           
-            granModelo.Domicilio = await _context.Domicilio.FindAsync(libros.First().DomicilioID);
-            granModelo.Integrante = await _context.Integrante.FindAsync(integrantes.First().IntegranteID);
+            if (integrantes.Count() > 0)
+            {
+                granModelo.Integrante = await _context.Integrante.FindAsync(integrantes.First().IntegranteID);
+            }
 
             ViewData["DiscapacidadID"] = new SelectList(_context.Discapacidad, "DiscapacidadID", "DiscapacidadID", granModelo.Persona.DiscapacidadID);
             ViewData["Estado_CivilID"] = new SelectList(_context.Estado_Civil, "Estado_CivilID", "Nombre_Edo_Civil", granModelo.Persona.Estado_CivilID);

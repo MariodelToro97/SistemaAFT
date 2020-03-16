@@ -396,9 +396,9 @@
                                     <th>@integrante.nombre</th>
                                     <th></th>
                                     <th>
-                                        <button type="button" onclick="" data-toggle="modal" data-target="#modalIntegrantes" class="btn btn-success" value="@integrante.IntegranteID" id="editIntegrante">Editar</button>
-                                        <a class="btn btn-primary" asp-route-id="@integrante.IntegranteID">Detalles</a>
-                                        <a class="btn btn-danger" asp-route-id="@integrante.IntegranteID">Borrar</a>
+                                        <button type="button" onclick="" data-toggle="modal" data-target="#modalIntegrantes" class="btn btn-success" value="@integrante.IntegranteID" name="@integrante.PersonaID" id="editIntegrante">Editar</button>
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalIntegrantes" value="@integrante.IntegranteID">Detalles</button>
+                                        <button class="btn btn-danger" onclick="deleteIntegrante(this)" value="@integrante.IntegranteID">Borrar</button>
                                     </th>
                                 </tr>
                             }
