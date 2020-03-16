@@ -233,5 +233,69 @@ namespace SistemaAFT.Controllers
                 return e.ToString();
             }
         }
+
+        //Llamada a procedimiento de actualizar en la base de datos spAddDomicilio
+        public string addDomicilio(int Tipo_AmbitoID, string estado, string nombreasentamiento, int Tipo_Vialidad, string noexterior, int Municipio, string referenciavialidad, string nombrevialidad, string nointerior, string localidad, string referenciaposterior, string codigopostal, int Tipo_Asentamiento, string referenciaubicacion, int PersonaID)
+        {
+            try
+            {
+                SqlConnection cn = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=dbsistemaaft;Trusted_Connection=True;MultipleActiveResultSets=true");
+
+                SqlCommand com = new SqlCommand("spAddDomicilio", cn);
+                com.CommandType = CommandType.StoredProcedure;
+                
+                com.Parameters.AddWithValue("@tipoAmbito", Tipo_AmbitoID);
+                com.Parameters.AddWithValue("@estado", estado);
+                com.Parameters.AddWithValue("@asentamiento", nombreasentamiento);
+                com.Parameters.AddWithValue("@vialidad", Tipo_Vialidad);
+                com.Parameters.AddWithValue("@noExterior", noexterior);
+                com.Parameters.AddWithValue("@munID", Municipio);
+                com.Parameters.AddWithValue("@refVialidad", referenciavialidad);
+                com.Parameters.AddWithValue("@nomViali", nombrevialidad);
+                com.Parameters.AddWithValue("@noInterior", nointerior);
+                com.Parameters.AddWithValue("@localidad", localidad);
+                com.Parameters.AddWithValue("@referenciaPos", referenciaposterior);
+                com.Parameters.AddWithValue("@cp", codigopostal);
+                com.Parameters.AddWithValue("@tipoAsentamiento", Tipo_Asentamiento);
+                com.Parameters.AddWithValue("@referencia", referenciaubicacion);
+                com.Parameters.AddWithValue("@personaID", PersonaID);
+
+                cn.Open();
+                com.ExecuteNonQuery();
+                cn.Close();
+
+                return "SUCCESS";
+
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        //Llamada a procedimiento para eliminar domicilio
+        public string deleteDomicilio (int domID)
+        {
+            try
+            {
+                SqlConnection cn = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=dbsistemaaft;Trusted_Connection=True;MultipleActiveResultSets=true");
+
+                SqlCommand com = new SqlCommand("spDeleteAddress", cn);
+                com.CommandType = CommandType.StoredProcedure;
+
+                com.Parameters.AddWithValue("@domID", domID);                
+
+                cn.Open();
+                com.ExecuteNonQuery();
+                cn.Close();
+
+                return "SUCCESS";
+
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
     }
 }
