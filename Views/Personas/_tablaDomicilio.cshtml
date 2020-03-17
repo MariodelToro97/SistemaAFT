@@ -1,0 +1,35 @@
+﻿@model GranModelo 
+
+<div class="rounded border border-secondary">
+    <div id="tableDomicilio" class="container">
+        <table class="table table-sm table-secondary my-3 table-hover table-striped rounded">
+            <thead class="thead-light text-center">
+                <tr>
+                    <th>Estado</th>
+                    <th>Municipio</th>
+                    <th>Localidad</th>
+                    <th>Tipo Asentamiento</th>
+                    <th>Referencia Ubicación</th>
+                    <th>Editar</th>
+                </tr>
+            </thead>
+            <tbody class="text-center ">
+                @foreach (var dom in (IEnumerable<SistemaAFT.Models.Domicilio>)ViewBag.Libros)
+                {
+                    <tr>
+                        <th>@dom.estado</th>
+                        <th>@dom.MunicipioID</th>
+                        <th>@dom.localidad</th>
+                        <th>@dom.Tipo_AsentamientoID</th>
+                        <th>@dom.referenciaubicacion</th>
+                        <th>
+                            <button type="button" onclick="editarDom(this)" data-toggle="modal" data-target="#modalRegisterForm" class="btn btn-success" value="@dom.DomicilioID" name="@dom.PersonaID" id="editDom">Editar</button>
+                            <button class="btn btn-primary" onclick="detailDom(this)" data-toggle="modal" data-target="#modalRegisterForm" name="@dom.PersonaID" value="@dom.DomicilioID" id="btnDetalleDom">Detalles</button>
+                            <button class="btn btn-danger" onclick="borrarDom(this)" value="@dom.DomicilioID">Borrar</button>
+                        </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

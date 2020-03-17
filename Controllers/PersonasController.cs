@@ -96,8 +96,7 @@ namespace SistemaAFT.Controllers
 
         // GET: Personas/Edit/5
         public async Task<IActionResult> Edit(int? id, GranModelo granModelo)
-        {
-           
+        {           
             if (id == null)
             {
                 return NotFound();
