@@ -27,7 +27,8 @@ namespace SistemaAFT.Data
 		public DbSet<SistemaAFT.Models.Tipo_Vialidad> Tipo_Vialidad { get; set; }
 		public DbSet<SistemaAFT.Models.Integrante> Integrante { get; set; }
 		public DbSet<SistemaAFT.Models.Representante> Representante { get; set; }
-
+		public DbSet<SistemaAFT.Models.documentoRepresentante> documentoRepresentante { get; set; }
+		public DbSet<SistemaAFT.Models.Nacionalidad> Nacionalidad { get; set; }
 
 	}
 }

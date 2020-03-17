@@ -155,8 +155,10 @@
 
                 <div class="col-md-3 mt-2">
                     <div class="form-group">
-                        <label asp-for="Persona.nacionalidad" class="control-label">Nacionalidad<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.nacionalidad" class="text-danger ErrorInput"></span>
-                        <input asp-for="Persona.nacionalidad" type="text" class="form-control" />
+                        <label asp-for="Persona.NacionalidadID" class="control-label">Nacionalidad<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.NacionalidadID" class="text-danger ErrorInput"></span>
+                        <select asp-for="Persona.NacionalidadID" class="form-control" asp-items="ViewBag.NacionalidadID">
+                            <option value="" selected>Seleccione opción</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label asp-for="Persona.Tipo_IdentidadID" class="control-label">Tipo de identificación<span class="text-danger font-weight-bold">*</span>:</label>

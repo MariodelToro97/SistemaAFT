@@ -11,5 +11,6 @@ namespace SistemaAFT.Models
         public Domicilio Domicilio { get; set; }   
         public Integrante Integrante { get; set; }
         public Representante Representante { get; set; }
+        public documentoRepresentante documentoRepresentante { get; set; }
     }
 }

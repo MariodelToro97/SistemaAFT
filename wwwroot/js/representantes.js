@@ -10,6 +10,12 @@
     $('#btnModalRepresentante').click(function () {
         $("span.Representantes").show();
     });
+
+    $('#representanteCurp, #representanteNombre, #representanteApellidoPaterno, #representanteApellidoMaterno').keyup(function () {
+        var tamano = $('#representanteCurp').val() + $('#representanteNombre').val() + $('#representanteApellidoPaterno').val() + $('#representanteApellidoMaterno').val();        
+        console.log(Object.keys(tamano).length);
+        $('#representanteModal').attr("disabled", Object.keys(tamano).length < 25);      
+    });
 });
 
 function limpiarRepresentante() {
