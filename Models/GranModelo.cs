@@ -10,5 +10,8 @@ namespace SistemaAFT.Models
         public Persona Persona { get; set; }
         public Domicilio Domicilio { get; set; }   
         public Integrante Integrante { get; set; }
+        public Representante Representante { get; set; }
+        public documentoRepresentante documentoRepresentante { get; set; }
+        public Telefono Telefono { get; set; }
     }
 }

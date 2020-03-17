@@ -29,7 +29,8 @@ namespace SistemaAFT.Models
         [Required(ErrorMessage = "Campo Requerido")]
         public string fechaNacimiento { get; set; }
         [Required(ErrorMessage = "Campo Requerido")]
-        public string nacionalidad { get; set; }
+        public int NacionalidadID { get; set; }
+        public Nacionalidad Nacionalidad { get; set; }
         public int GeneroID { get; set; }
         public Genero Genero { get; set; }
         public int Estado_CivilID { get; set; }
@@ -50,8 +51,6 @@ namespace SistemaAFT.Models
 
         //[Required(ErrorMessage ="Campo Requerido")]
         public string nombreMoral { get; set; }
-
-
         public ICollection<Domicilio> Domicilios { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

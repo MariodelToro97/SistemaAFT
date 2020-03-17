@@ -47,6 +47,7 @@
 
     $('#nav-profile-tab').click(function () {
         $('#nav-general').hide();
+        $('#Tel').hide();
         $('#formDomicilio').show();
         $('#botonFormUno').hide();
         $('#nav-bajas').hide();
@@ -60,6 +61,7 @@
 
     $('#nav-home-tab').click(function () {
         $('#nav-general').show();
+        $('#Tel').show();
         $('#formDomicilio').hide();
         $('#botonFormUno').show();
         $('#nav-bajas').hide();
@@ -69,6 +71,19 @@
         $('#nav-cuenta').hide();
         $('#nav-domicilio').hide();
         $('#botonesGeneral').show();
+    });
+
+    $('#nav-representantes-tab').click(function () {
+        $('#nav-general').hide();
+        $('#formDomicilio').hide();
+        $('#botonFormUno').hide();
+        $('#nav-bajas').hide();
+        $('#nav-integrantes').hide();
+        $('#nav-representantes').show();
+        $('#nav-obligacion').hide();
+        $('#nav-cuenta').hide();
+        $('#nav-domicilio').hide();
+        $('#botonesGeneral').hide();
     });
     
     $('#nav-integrantes-tab').click(function () {

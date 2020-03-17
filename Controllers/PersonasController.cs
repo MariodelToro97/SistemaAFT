@@ -67,6 +67,7 @@ namespace SistemaAFT.Controllers
             ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Nombre");
             ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Nombre");
             ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Nombre");
+            ViewData["NacionalidadID"] = new SelectList(_context.Set<Nacionalidad>(), "NacionalidadID", "Nombre");
             return View();
         }
 
@@ -75,7 +76,7 @@ namespace SistemaAFT.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PersonaID,CURP,RFC,nombre,apellido_paterno,apellido_materno,correo,fechaNacimiento,nacionalidad,GeneroID,Estado_CivilID,Tipo_IdentidadID,num_identificacion,telefono,Tipo_PersonaID,EtniaID,DiscapacidadID,Created,ACUSESURI,nombreMoral")] Persona persona)
+        public async Task<IActionResult> Create([Bind("PersonaID,CURP,RFC,nombre,apellido_paterno,apellido_materno,correo,fechaNacimiento,NacionalidadID,GeneroID,Estado_CivilID,Tipo_IdentidadID,num_identificacion,telefono,Tipo_PersonaID,EtniaID,DiscapacidadID,Created,ACUSESURI,nombreMoral")] Persona persona)
         {
             if (ModelState.IsValid)
             {
@@ -89,19 +90,18 @@ namespace SistemaAFT.Controllers
             ViewData["GeneroID"] = new SelectList(_context.Genero, "GeneroID", "Nombre", persona.GeneroID);
             ViewData["Tipo_IdentidadID"] = new SelectList(_context.Tipo_Identidad, "Tipo_IdentidadID", "Nombre", persona.Tipo_IdentidadID);
             ViewData["Tipo_PersonaID"] = new SelectList(_context.Tipo_Persona, "Tipo_PersonaID", "Nombre_Tipo", persona.Tipo_PersonaID);
+            ViewData["NacionalidadID"] = new SelectList(_context.Nacionalidad, "NacionalidadID", "Nombre", persona.Nacionalidad);
             return View(persona);
         }
 
         // GET: Personas/Edit/5
         public async Task<IActionResult> Edit(int? id, GranModelo granModelo)
-        {
-           
+        {           
             if (id == null)
             {
                 return NotFound();
             }
-            //System.Diagnostics.Debug.WriteLine(domicilio.DomicilioID);
-            //var domicilio_id = granModelo.Persona.
+
             granModelo.Persona = await _context.Persona.FindAsync(id);
 
             if (granModelo.Persona == null)
@@ -109,20 +109,22 @@ namespace SistemaAFT.Controllers
                 return NotFound();
             }
 
-            //var domicilio_id = _context.Domicilio.FromSqlRaw("Select * From dbo.Domicilio WHERE PersonaID = {0}", id);
-
             var libros = _context.Domicilio.FromSqlRaw("Select * From dbo.Domicilio WHERE PersonaID = {0}", id).ToList();
             var integrantes = _context.Integrante.FromSqlRaw("Select * From dbo.Integrante WHERE PersonaID = {0}", id).ToList();
+            var telefonos = _context.Telefono.FromSqlRaw("Select * From dbo.Telefono WHERE PersonaID = {0}", id).ToList();
+            var representantes = _context.Representante.FromSqlRaw("Select * From dbo.Representante WHERE PersonaID = {0}", id).ToList();
 
             ViewBag.Libros = libros;
             ViewBag.Integrantes = integrantes;
-                     
+            ViewBag.Representante = representantes;
+            ViewBag.Telefonos = telefonos;
+
             if (libros.FirstOrDefault() == null)
             {
                 return RedirectToAction("Index", "Error");
             }
 
-            if(libros.Count() > 0)
+            if (libros.Count() > 0)
             {
                 granModelo.Domicilio = await _context.Domicilio.FindAsync(libros.First().DomicilioID);
             }
@@ -132,17 +134,31 @@ namespace SistemaAFT.Controllers
                 granModelo.Integrante = await _context.Integrante.FindAsync(integrantes.First().IntegranteID);
             }
 
+            if (representantes.Count() > 0)
+            {
+                granModelo.Representante = await _context.Representante.FindAsync(representantes.First().RepresentanteID);
+            }
+            
+            if (telefonos.Count() > 0)
+            {
+                granModelo.Telefono = await _context.Telefono.FindAsync(telefonos.First().TelefonoID);
+            }
+
             ViewData["DiscapacidadID"] = new SelectList(_context.Discapacidad, "DiscapacidadID", "DiscapacidadID", granModelo.Persona.DiscapacidadID);
             ViewData["Estado_CivilID"] = new SelectList(_context.Estado_Civil, "Estado_CivilID", "Nombre_Edo_Civil", granModelo.Persona.Estado_CivilID);
             ViewData["EtniaID"] = new SelectList(_context.Etnia, "EtniaID", "EtniaID", granModelo.Persona.EtniaID);
             ViewData["GeneroID"] = new SelectList(_context.Genero, "GeneroID", "Nombre_Genero", granModelo.Persona.GeneroID);
             ViewData["Tipo_IdentidadID"] = new SelectList(_context.Tipo_Identidad, "Tipo_IdentidadID", "Nombre", granModelo.Persona.Tipo_IdentidadID);
             ViewData["Tipo_PersonaID"] = new SelectList(_context.Tipo_Persona, "Tipo_PersonaID", "Nombre_Tipo", granModelo.Persona.Tipo_PersonaID);
-            ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "Nombre", granModelo.Domicilio.MunicipioID);
-            ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "CURP", granModelo.Domicilio.PersonaID);
+            ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "CURP", granModelo.Persona.PersonaID);
+
             ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Nombre", granModelo.Domicilio.Tipo_AmbitoID);
+            ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "Nombre", granModelo.Domicilio.MunicipioID);            
             ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Nombre", granModelo.Domicilio.Tipo_AsentamientoID);
             ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Nombre", granModelo.Domicilio.Tipo_VialidadID);
+            ViewData["NacionalidadID"] = new SelectList(_context.Set<Nacionalidad>(), "NacionalidadID", "Nombre");
+            ViewData["CompaniaID"] = new SelectList(_context.Set<Compania>(), "CompaniaID", "nombre_compania", granModelo.Telefono.CompaniaID);
+            ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "nombre_tipo", granModelo.Telefono.Tipo_TelefonoID);
 
             return View(granModelo);
         }
@@ -192,6 +208,9 @@ namespace SistemaAFT.Controllers
             ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Nombre", granModelo.Domicilio.Tipo_AmbitoID);
             ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Nombre", granModelo.Domicilio.Tipo_AsentamientoID);
             ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Nombre", granModelo.Domicilio.Tipo_VialidadID);
+            ViewData["NacionalidadID"] = new SelectList(_context.Set<Nacionalidad>(), "NacionalidadID", "Nombre");
+            ViewData["CompaniaID"] = new SelectList(_context.Set<Compania>(), "CompaniaID", "nombre_compania", granModelo.Telefono.CompaniaID);
+            ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "nombre_tipo", granModelo.Telefono.Tipo_TelefonoID);
 
             return View(granModelo);
         }
