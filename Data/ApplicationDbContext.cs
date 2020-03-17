@@ -32,5 +32,11 @@ namespace SistemaAFT.Data
 		public DbSet<SistemaAFT.Models.Compania> Compania { get; set; }
 		public DbSet<SistemaAFT.Models.Tipo_Telefono> Tipo_Telefono { get; set; }
 		public DbSet<SistemaAFT.Models.Telefono> Telefono { get; set; }
+		public DbSet<SistemaAFT.Models.Solicitud> Solicitud { get; set; }
+		public DbSet<SistemaAFT.Models.Year> Year { get; set; }
+		public DbSet<SistemaAFT.Models.Programa> Programa { get; set; }
+		public DbSet<SistemaAFT.Models.Componente> Componente { get; set; }
+		public DbSet<SistemaAFT.Models.Instancia_Ejecutora> Instancia_Ejecutora { get; set; }
+		public DbSet<SistemaAFT.Models.Delegacion> Delegacion { get; set; }
 	}
 }
