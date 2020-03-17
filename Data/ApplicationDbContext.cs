@@ -29,6 +29,8 @@ namespace SistemaAFT.Data
 		public DbSet<SistemaAFT.Models.Representante> Representante { get; set; }
 		public DbSet<SistemaAFT.Models.documentoRepresentante> documentoRepresentante { get; set; }
 		public DbSet<SistemaAFT.Models.Nacionalidad> Nacionalidad { get; set; }
-
+		public DbSet<SistemaAFT.Models.Compania> Compania { get; set; }
+		public DbSet<SistemaAFT.Models.Tipo_Telefono> Tipo_Telefono { get; set; }
+		public DbSet<SistemaAFT.Models.Telefono> Telefono { get; set; }
 	}
 }

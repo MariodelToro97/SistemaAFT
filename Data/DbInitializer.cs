@@ -17,6 +17,31 @@ namespace SistemaAFT.Data
 				return;
 			}
 
+			//COMPANIA
+			var compania = new Compania[]
+			{
+				new Compania {nombre_compania = "Telcel"},
+				new Compania {nombre_compania = "Movistar"}
+			};
+
+			foreach (Compania g in compania)
+			{
+				context.Compania.Add(g);
+			}
+
+			//TUIPO_TELEFONO
+			var tipo_telefono = new Tipo_Telefono[]
+			{
+				new Tipo_Telefono {nombre_tipo = "Fijo"},
+				new Tipo_Telefono {nombre_tipo = "Movil"}
+			};
+
+			foreach (Tipo_Telefono g in tipo_telefono)
+			{
+				context.Tipo_Telefono.Add(g);
+			}
+
+			//GENEROS
 			var generos = new Genero[]
 			{				
 				new Genero {Nombre_Genero = "Masculino"},

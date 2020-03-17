@@ -12,5 +12,6 @@ namespace SistemaAFT.Models
         public Integrante Integrante { get; set; }
         public Representante Representante { get; set; }
         public documentoRepresentante documentoRepresentante { get; set; }
+        public Telefono Telefono { get; set; }
     }
 }

@@ -17,7 +17,7 @@ $('#formIntegrantes').submit(function () {
     var nombre = $('#integranteNombre').val();
     var aPaterno = $('#integranteApellidoPaterno').val();
     var aMaterno = $('#integranteApellidoMaterno').val();
-    var persona = $('#integrantePersonaID').val();
+    var persona = $('#personaGeneralID').val();
 
     if (curp === '' || nombre === '' || aPaterno === '') {
         console.log('FALTAN DATOS');
@@ -103,7 +103,7 @@ function deleteIntegrante(boton) {
         }
     });
     return false;
-};
+}
 
 function editIntegrante(boton) {
     limpiarIntegrantes();
@@ -116,7 +116,7 @@ function editIntegrante(boton) {
 
     $('#integrantePersonaID').val(persona);
     obtenerIntegrante(id);
-};
+}
 
 function detalleIntegrante(boton) {
     limpiarIntegrantes();

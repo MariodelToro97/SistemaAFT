@@ -31,6 +31,109 @@
     </div>
 </form>
 
+<!--MODAL TELEFONO-->
+<div class="modal fade" id="modalTelefonos" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <form id="formTelefonos">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Telefonos</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="tab-pane fade show container active border border-secondary rounded" id="nav-general" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" id="TelefonoID" asp-for="Telefono.TelefonoID" />
+
+                    <div class="row">
+                        <div class="col-md-3 mt-2">
+                            <div class="form-group">
+                                <label asp-for="Telefono.numero" class="control-label">Numero<span class="text-danger font-weight-bold">*</span>:</label>
+                                <span asp-validation-for="Telefono.numero" class="text-danger Telefonos ErrorInput Modal"></span>
+                                <input asp-for="Telefono.numero" placeholder="Numero Télefono" id="numeroTelefono" class="form-control" required />
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mt-2">
+                            <div class="form-group">
+                                <label asp-for="Telefono.CompaniaID" class="control-label">Compania<span class="text-danger font-weight-bold">*</span>:</label>
+                                <span asp-validation-for="Telefono.CompaniaID" class="text-danger Telefonos ErrorInput Modal"></span>
+                                <select asp-for="Telefono.CompaniaID" id="companiaTelefono" class="form-control" asp-items="ViewBag.CompaniaID" required>
+                                    <option value="">Seleccione opción</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mt-2">
+                            <div class="form-group">
+                                <label asp-for="Telefono.Tipo_TelefonoID" class="control-label">Tipo Telefono<span class="text-danger font-weight-bold">*</span>:</label>
+                                <span asp-validation-for="Telefono.Tipo_TelefonoID" class="text-danger ErrorInput Telefonos Modal"></span>
+                                <select asp-for="Telefono.Tipo_TelefonoID" id="tipoTelefono" class="form-control" asp-items="ViewBag.Tipo_TelefonoID" required>
+                                    <option value="">Seleccione opción</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mt-2">
+                            <div class="form-group" style="display: none;">
+                                <input id="telefonoPersonaID" type="text" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button class="btn btn-danger" id="btnCancelarTelefono" data-dismiss="modal" aria-label="Close">Cancelar</button>
+                    <button class="btn btn-primary" id="btnModalTelefono">Editar Telefono</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div><!--FIN MODAL TELEFONO-->
+
+<!--TABLA TELEFONOS-->
+<div class="container my-3" id="Tel">
+    <div class="border border-secondary rounded bg-dark d-flex">
+        <h4 class="my-3 mx-3 text-white font-weight-lighter">Telefonos</h4>
+        <!--Modal 2-->
+        <a class="btn btn-light btn-rounded mr-3 my-3 ml-auto" id="botonAgregarTelefono" data-toggle="modal" onclick="limpiarForm()" data-target="#modalTelefonos">Agregar Telefono</a>
+    </div>
+
+    <div class="rounded border border-secondary">
+        <div id="tableDomicilio" class="container">
+            <table class="table table-sm table-secondary my-3 table-hover table-striped rounded" id="tableTelefonos">
+                <thead class="thead-light text-center">
+                    <tr>
+                        <th>Número de Teléfono</th>
+                        <th>Compañia</th>
+                        <th>Tipo de Teléfono</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center ">
+                    @foreach (var dom in (IEnumerable<SistemaAFT.Models.Telefono>)ViewBag.Telefonos)
+                    {
+                        <tr>
+                            <th>@dom.numero</th>
+                            <th>@dom.CompaniaID</th>
+                            <th>@dom.Tipo_TelefonoID</th>
+                            <th>
+                                <button type="button" onclick="editTelefono(this)" data-toggle="modal" data-target="#modalTelefonos" class="btn btn-success" value="@dom.TelefonoID" name="@dom.PersonaID" id="editTelefono">Editar</button>
+                                <button class="btn btn-primary" onclick="detalleTelefono(this)" data-toggle="modal" data-target="#modalTelefonos" value="@dom.TelefonoID" name="@dom.PersonaID">Detalles</button>
+                                <button class="btn btn-danger" onclick="deleteTelefono(this)" value="@dom.TelefonoID">Borrar</button>
+                                <!--<button href="" class="btn btn-primary btn-rounded float-right" data-toggle="modal" data-target="#modalRegisterForm">Agregar Domicilio</button>-->
+                            
+                                
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div><!--FIN TABLA TELEFONOS-->
+
 <div class="tab-pane fade border border-secondary rounded" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab" style="display:none;">
     <!--MODAL DE DOMICILIO-->
     @await Html.PartialAsync("_modalDomicilio")

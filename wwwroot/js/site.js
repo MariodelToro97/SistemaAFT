@@ -47,6 +47,7 @@
 
     $('#nav-profile-tab').click(function () {
         $('#nav-general').hide();
+        $('#Tel').hide();
         $('#formDomicilio').show();
         $('#botonFormUno').hide();
         $('#nav-bajas').hide();
@@ -60,6 +61,7 @@
 
     $('#nav-home-tab').click(function () {
         $('#nav-general').show();
+        $('#Tel').show();
         $('#formDomicilio').hide();
         $('#botonFormUno').show();
         $('#nav-bajas').hide();
