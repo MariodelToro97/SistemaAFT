@@ -72,6 +72,19 @@
         $('#nav-domicilio').hide();
         $('#botonesGeneral').show();
     });
+
+    $('#nav-representantes-tab').click(function () {
+        $('#nav-general').hide();
+        $('#formDomicilio').hide();
+        $('#botonFormUno').hide();
+        $('#nav-bajas').hide();
+        $('#nav-integrantes').hide();
+        $('#nav-representantes').show();
+        $('#nav-obligacion').hide();
+        $('#nav-cuenta').hide();
+        $('#nav-domicilio').hide();
+        $('#botonesGeneral').hide();
+    });
     
     $('#nav-integrantes-tab').click(function () {
         $('#nav-general').hide();
