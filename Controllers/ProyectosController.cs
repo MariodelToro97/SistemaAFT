@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using SistemaAFT.Data;
 
-namespace SistemaAFT.Models
+namespace SistemaAFT.Controllers
 {
-    public class SolicitudesController : Controller
+    public class ProyectosController : Controller
     {
         public IActionResult Index()
         {
