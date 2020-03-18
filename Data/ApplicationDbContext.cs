@@ -38,5 +38,7 @@ namespace SistemaAFT.Data
 		public DbSet<SistemaAFT.Models.Componente> Componente { get; set; }
 		public DbSet<SistemaAFT.Models.Instancia_Ejecutora> Instancia_Ejecutora { get; set; }
 		public DbSet<SistemaAFT.Models.Delegacion> Delegacion { get; set; }
+		public DbSet<SistemaAFT.Models.Tipo_Proyecto> Tipo_Proyecto { get; set; }
+		public DbSet<SistemaAFT.Models.Proyecto> Proyecto { get; set; }
 	}
 }

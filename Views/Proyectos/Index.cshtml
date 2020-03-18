@@ -1,0 +1,59 @@
+﻿@model SistemaAFT.Models.Proyecto
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="border border-secondary rounded">
+    <div class="container">
+        <h3 class="text-dark mt-2">Datos del proyecto</h3>
+
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-home" aria-selected="true">Datos del proyecto</a>
+            </div>
+        </nav>
+
+        <div class="border border-secondary rounded container mb-3 mr-0" id="solicitante_personal">
+            <div class="container">
+                <div class="border border-secondary rounded mb-3 mt-2">
+                    <div class="form-inline d-flex bg-dark">
+                        <h6 class="my-3 mx-3 text-white font-weight-lighter">Proyecto</h6>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4 mt-2">
+                                <div class="form-group">
+                                    <label asp-for="nombreProyecto" class="control-label">Nombre del proyecto<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="nombreProyecto" class="text-danger ErrorInput"></span>
+                                    <input asp-for="nombreProyecto" type="text" class="form-control" placeholder="NOMBRE DEL PROYECTO" required id="CURP" />
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-2">
+                                <div class="form-group">
+                                    <label asp-for="Tipo_ProyectoID" class="control-label">Componente<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Tipo_ProyectoID" class="text-danger ErrorInput"></span>
+                                    <select asp-for="Tipo_ProyectoID" class="form-control">
+                                        <option value="" selected>Seleccione opción</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-1">
+                                <div class="form-group">
+                                    <label asp-for="fechaRecepcion" class="control-label">Fecha de recepción<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="fechaRecepcion" class="text-danger ErrorInput"></span>
+                                    <input asp-for="fechaRecepcion" type="date" class="form-control" placeholder="NOMBRE DEL PROYECTO" required id="CURP" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label asp-for="objetivo" class="control-label">Objetivo:</label>
+                            <textarea asp-for="objetivo" type="text" class="form-control" id="CURP"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="float-right mt-4" id="botonFormUno">
+            <a class="btn btn-info" asp-action="Index">Regresar</a>
+            <input type="submit" value="Limpiar Pantalla" class="btn btn-success" />
+            <input type="submit" value="Siguiente" class="btn btn-dark text-white" />
+        </div>
+    </div>
+</div>
