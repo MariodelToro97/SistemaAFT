@@ -40,5 +40,8 @@ namespace SistemaAFT.Data
 		public DbSet<SistemaAFT.Models.Delegacion> Delegacion { get; set; }
 		public DbSet<SistemaAFT.Models.Tipo_Proyecto> Tipo_Proyecto { get; set; }
 		public DbSet<SistemaAFT.Models.Proyecto> Proyecto { get; set; }
+		public DbSet<SistemaAFT.Models.Concepto_Apoyo> Concepto_Apoyo { get; set; }
+		public DbSet<SistemaAFT.Models.Subconcepto_Apoyo> Subconcepto_Apoyo { get; set; }
+		public DbSet<SistemaAFT.Models.Cotizacion> Cotizacion { get; set; }
 	}
 }
