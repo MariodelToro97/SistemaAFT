@@ -243,6 +243,11 @@ namespace SistemaAFT.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult Solicitante()
+        {
+            return View();
+        }
+
         private bool PersonaExists(int id)
         {
             return _context.Persona.Any(e => e.PersonaID == id);

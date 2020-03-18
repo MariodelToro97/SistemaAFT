@@ -57,6 +57,7 @@
         $('#nav-cuenta').hide();
         $('#nav-domicilio').show();
         $('#botonesGeneral').hide();
+        $('#solicitante_personal').hide();
     });
 
     $('#nav-home-tab').click(function () {
@@ -71,6 +72,8 @@
         $('#nav-cuenta').hide();
         $('#nav-domicilio').hide();
         $('#botonesGeneral').show();
+        $('#solicitante_personal').show();
+
     });
     
     $('#nav-integrantes-tab').click(function () {
