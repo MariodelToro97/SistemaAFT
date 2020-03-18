@@ -1,0 +1,35 @@
+﻿@model GranModelo
+
+<div class="rounded border border-secondary">
+    <div class="container">
+        <table class="table table-sm table-secondary my-3 rounded" id="tableIntegrantes">
+            <thead class="thead-light text-center">
+                <tr>
+                    <th>Tipo persona</th>
+                    <th>CURP</th>
+                    <th>RFC</th>
+                    <th>Nombre</th>
+                    <th>Fec. nac/cons.</th>
+                    <th>Editar</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                @foreach (var integrante in (IEnumerable<SistemaAFT.Models.Integrante>)ViewBag.Integrantes)
+                {
+                    <tr>
+                        <th></th>
+                        <th>@integrante.CURP</th>
+                        <th></th>
+                        <th>@integrante.nombre</th>
+                        <th></th>
+                        <th>
+                            <button type="button" onclick="editIntegrante(this)" data-toggle="modal" data-target="#modalIntegrantes" class="btn btn-success" value="@integrante.IntegranteID" name="@integrante.PersonaID" id="editIntegrante">Editar</button>
+                            <button class="btn btn-primary" onclick="detalleIntegrante(this)" data-toggle="modal" data-target="#modalIntegrantes" value="@integrante.IntegranteID" name="@integrante.PersonaID">Detalles</button>
+                            <button class="btn btn-danger" onclick="deleteIntegrante(this)" value="@integrante.IntegranteID">Borrar</button>
+                        </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

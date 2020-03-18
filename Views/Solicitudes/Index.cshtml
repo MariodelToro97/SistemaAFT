@@ -1,0 +1,59 @@
+﻿@model IEnumerable<SistemaAFT.Models.Solicitud>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Programa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Componente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Instancia_Ejecutora)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Delegacion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year.YearID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Programa.ProgramaID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Componente.ComponenteID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Instancia_Ejecutora.Instancia_EjecutoraID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Delegacion.DelegacionID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SolicitudID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SolicitudID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SolicitudID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

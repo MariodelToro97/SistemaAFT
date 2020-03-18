@@ -5,7 +5,6 @@
 }
 
 <h1>Editar</h1>
-<!--<label class="font-italic font-weight-bold derecho"><span class="text-danger font-weight-bold">*</span> Dato Requerido</label>-->
 <hr />
 
 <form asp-action="Edit">
@@ -19,7 +18,7 @@
             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-domicilio" role="tab" aria-controls="nav-profile" aria-selected="false">Domicilios</a>
             <a class="nav-item nav-link" id="nav-cuenta-tab" data-toggle="tab" href="#nav-cuenta" role="tab" aria-controls="nav-contact" aria-selected="false">Cuentas</a>
             <a class="nav-item nav-link" id="nav-obligacion-tab" data-toggle="tab" href="#nav-obligacion" role="tab" aria-controls="nav-contact" aria-selected="false">Obligaciones</a>
-            <a class="nav-item nav-link" id="nav-representantes-tab" data-toggle="tab" href="#nav-representantes" style="display: none;" role="tab" aria-controls="nav-contact" aria-selected="false">Representantes</a>
+            <a class="nav-item nav-link" id="nav-representantes-tab" data-toggle="tab" href="#nav-representantes" style="display: none;" role="tab" aria-controls="nav-representantes" aria-selected="false">Representantes</a>
             <a class="nav-item nav-link" id="nav-integrantes-tab" data-toggle="tab" href="#nav-integrantes" style="display: none;" role="tab" aria-controls="nav-contact" aria-selected="false">Integrantes</a>
             <a class="nav-item nav-link" id="nav-bajas-tab" data-toggle="tab" href="#nav-bajas" role="tab" aria-controls="nav-contact" aria-selected="false">Bajas</a>
         </div>
@@ -27,112 +26,15 @@
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show container active border border-secondary rounded" id="nav-general" role="tabpanel" aria-labelledby="nav-home-tab">
             @await Html.PartialAsync("_vistaInferiorGeneral")
+
+            <!--TABLA TELEFONOS-->
+            @await Html.PartialAsync("_tablaTelefono")
         </div>
     </div>
 </form>
 
 <!--MODAL TELEFONO-->
-<div class="modal fade" id="modalTelefonos" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <form id="formTelefonos">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h4 class="modal-title w-100 font-weight-bold">Telefonos</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="tab-pane fade show container active border border-secondary rounded" id="nav-general" role="tabpanel" aria-labelledby="nav-home-tab">
-
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" id="TelefonoID" asp-for="Telefono.TelefonoID" />
-
-                    <div class="row">
-                        <div class="col-md-3 mt-2">
-                            <div class="form-group">
-                                <label asp-for="Telefono.numero" class="control-label">Numero<span class="text-danger font-weight-bold">*</span>:</label>
-                                <span asp-validation-for="Telefono.numero" class="text-danger Telefonos ErrorInput Modal"></span>
-                                <input asp-for="Telefono.numero" placeholder="Numero Télefono" id="numeroTelefono" class="form-control" required />
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 mt-2">
-                            <div class="form-group">
-                                <label asp-for="Telefono.CompaniaID" class="control-label">Compania<span class="text-danger font-weight-bold">*</span>:</label>
-                                <span asp-validation-for="Telefono.CompaniaID" class="text-danger Telefonos ErrorInput Modal"></span>
-                                <select asp-for="Telefono.CompaniaID" id="companiaTelefono" class="form-control" asp-items="ViewBag.CompaniaID" required>
-                                    <option value="">Seleccione opción</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 mt-2">
-                            <div class="form-group">
-                                <label asp-for="Telefono.Tipo_TelefonoID" class="control-label">Tipo Telefono<span class="text-danger font-weight-bold">*</span>:</label>
-                                <span asp-validation-for="Telefono.Tipo_TelefonoID" class="text-danger ErrorInput Telefonos Modal"></span>
-                                <select asp-for="Telefono.Tipo_TelefonoID" id="tipoTelefono" class="form-control" asp-items="ViewBag.Tipo_TelefonoID" required>
-                                    <option value="">Seleccione opción</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 mt-2">
-                            <div class="form-group" style="display: none;">
-                                <input id="telefonoPersonaID" type="text" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn btn-danger" id="btnCancelarTelefono" data-dismiss="modal" aria-label="Close">Cancelar</button>
-                    <button class="btn btn-primary" id="btnModalTelefono">Editar Telefono</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div><!--FIN MODAL TELEFONO-->
-
-<!--TABLA TELEFONOS-->
-<div class="container my-3" id="Tel">
-    <div class="border border-secondary rounded bg-dark d-flex">
-        <h4 class="my-3 mx-3 text-white font-weight-lighter">Telefonos</h4>
-        <!--Modal 2-->
-        <a class="btn btn-light btn-rounded mr-3 my-3 ml-auto" id="botonAgregarTelefono" data-toggle="modal" onclick="limpiarForm()" data-target="#modalTelefonos">Agregar Telefono</a>
-    </div>
-
-    <div class="rounded border border-secondary">
-        <div id="tableDomicilio" class="container">
-            <table class="table table-sm table-secondary my-3 table-hover table-striped rounded" id="tableTelefonos">
-                <thead class="thead-light text-center">
-                    <tr>
-                        <th>Número de Teléfono</th>
-                        <th>Compañia</th>
-                        <th>Tipo de Teléfono</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody class="text-center ">
-                    @foreach (var dom in (IEnumerable<SistemaAFT.Models.Telefono>)ViewBag.Telefonos)
-                    {
-                        <tr>
-                            <th>@dom.numero</th>
-                            <th>@dom.CompaniaID</th>
-                            <th>@dom.Tipo_TelefonoID</th>
-                            <th>
-                                <button type="button" onclick="editTelefono(this)" data-toggle="modal" data-target="#modalTelefonos" class="btn btn-success" value="@dom.TelefonoID" name="@dom.PersonaID" id="editTelefono">Editar</button>
-                                <button class="btn btn-primary" onclick="detalleTelefono(this)" data-toggle="modal" data-target="#modalTelefonos" value="@dom.TelefonoID" name="@dom.PersonaID">Detalles</button>
-                                <button class="btn btn-danger" onclick="deleteTelefono(this)" value="@dom.TelefonoID">Borrar</button>
-                                <!--<button href="" class="btn btn-primary btn-rounded float-right" data-toggle="modal" data-target="#modalRegisterForm">Agregar Domicilio</button>-->
-                            
-                                
-                            </th>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div><!--FIN TABLA TELEFONOS-->
+@await Html.PartialAsync("_modalTelefono")
 
 <div class="tab-pane fade border border-secondary rounded" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab" style="display:none;">
     <!--MODAL DE DOMICILIO-->
@@ -145,47 +47,33 @@
             <a class="btn btn-light btn-rounded mr-3 my-3 ml-auto" id="btnAgregarDom" data-toggle="modal" onclick="limpiarForm()" data-target="#modalRegisterForm">Agregar</a>
         </div>
 
-        <div class="rounded border border-secondary">
-            <div id="tableDomicilio" class="container">
-                <table class="table table-sm table-secondary my-3 table-hover table-striped rounded">
-                    <thead class="thead-light text-center">
-                        <tr>
-                            <th>Estado</th>
-                            <th>Municipio</th>
-                            <th>Localidad</th>
-                            <th>Tipo Asentamiento</th>
-                            <th>Referencia Ubicación</th>
-                            <th>Editar</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-center ">
-                        @foreach (var dom in (IEnumerable<SistemaAFT.Models.Domicilio>)ViewBag.Libros)
-                        {
-                            <tr>
-                                <th>@dom.estado</th>
-                                <th>@dom.MunicipioID</th>
-                                <th>@dom.localidad</th>
-                                <th>@dom.Tipo_AsentamientoID</th>
-                                <th>@dom.referenciaubicacion</th>
-                                <th>
-                                    
-                                    <button type="button" onclick="editarDom(this)" data-toggle="modal" data-target="#modalRegisterForm" class="btn btn-success" value="@dom.DomicilioID" name="@dom.PersonaID" id="editDom">Editar</button>
-                                    <button class="btn btn-primary" onclick="detailDom(this)" data-toggle="modal" data-target="#modalRegisterForm" name="@dom.PersonaID" value="@dom.DomicilioID" id="btnDetalleDom">Detalles</button>
-                                    <button class="btn btn-danger" onclick="borrarDom(this)" value="@dom.DomicilioID">Borrar</button>
-                                    <!--<button href="" class="btn btn-primary btn-rounded float-right" data-toggle="modal" data-target="#modalRegisterForm">Agregar Domicilio</button>-->
-                                </th>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <!--TABLA DOMICILIO-->
+        @await Html.PartialAsync("_tablaDomicilio")
     </div>
 </div>
 
 <div class="tab-pane fade" id="nav-cuenta" role="tabpanel" aria-labelledby="nav-contact-tab" style="display:none;">3</div>
 <div class="tab-pane fade" id="nav-obligacion" role="tabpanel" aria-labelledby="nav-contact-tab" style="display:none;">4</div>
-<div class="tab-pane fade" id="nav-representantes" role="tabpanel" aria-labelledby="nav-contact-tab" style="display:none;">5</div>
+
+<div class="tab-pane fade border border-secondary rounded" id="nav-representantes" role="tabpanel" aria-labelledby="nav-representantes-tab" style="display:none;">
+    <div class="container my-3">
+        <div class="rounded">
+            <div class="form-inline d-flex bg-dark rounded">
+                <h4 class="my-3 mx-3 text-white font-weight-lighter">Representante</h4>
+                <button type="button" class="btn btn-light btn-rounded mr-3 my-3 ml-auto" id="representanteTop" data-toggle="modal" data-target="#modalRepresentantes">Agregar</button>
+            </div>
+
+            <!-- MODAL REPRESENTANTES -->
+            @await Html.PartialAsync("_modalRepresentantes")
+
+            <!--MODAL DOCUMENTOS DE REPRESENTANTES-->
+            @await Html.PartialAsync("_modalDocumentoRepresentante")
+
+            <!--TABLA REPRESENTANTES-->
+            @await Html.PartialAsync("_tablaRepresentantes")
+        </div>
+    </div>
+</div>
 
 
 <div class="tab-pane fade border border-secondary rounded" id="nav-integrantes" role="tabpanel" aria-labelledby="nav-contact-tab" style="display:none;">
@@ -193,45 +81,14 @@
         <div class="rounded">
             <div class="form-inline d-flex bg-dark rounded">
                 <h4 class="my-3 mx-3 text-white font-weight-lighter">Integrantes</h4>
-                <button type="button" class="btn btn-light btn-rounded mr-3 my-3 ml-auto" id="integrantesTop" data-toggle="modal" data-target=".bd-example-modal-xl">Agregar</button>
+                <button type="button" class="btn btn-light btn-rounded mr-3 my-3 ml-auto" id="integrantesTop" data-toggle="modal" data-target="#modalIntegrantes">Agregar</button>
             </div>
 
             <!-- Extra large modal -->
             @await Html.PartialAsync("_modalIntegrantes")
 
-            <div class="rounded border border-secondary">
-                <div class="container">
-                    <table class="table table-sm table-secondary my-3 rounded" id="tableIntegrantes">
-                        <thead class="thead-light text-center">
-                            <tr>
-                                <th>Tipo persona</th>
-                                <th>CURP</th>
-                                <th>RFC</th>
-                                <th>Nombre</th>
-                                <th>Fec. nac/cons.</th>
-                                <th>Editar</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-center">
-                            @foreach (var integrante in (IEnumerable<SistemaAFT.Models.Integrante>)ViewBag.Integrantes)
-                            {
-                                <tr>
-                                    <th></th>
-                                    <th>@integrante.CURP</th>
-                                    <th></th>
-                                    <th>@integrante.nombre</th>
-                                    <th></th>
-                                    <th>
-                                        <button type="button" onclick="editIntegrante(this)" data-toggle="modal" data-target="#modalIntegrantes" class="btn btn-success" value="@integrante.IntegranteID" name="@integrante.PersonaID" id="editIntegrante">Editar</button>
-                                        <button class="btn btn-primary" onclick="detalleIntegrante(this)" data-toggle="modal" data-target="#modalIntegrantes" value="@integrante.IntegranteID" name="@integrante.PersonaID">Detalles</button>
-                                        <button class="btn btn-danger" onclick="deleteIntegrante(this)" value="@integrante.IntegranteID">Borrar</button>
-                                    </th>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <!--TABLA INTEGRANTES-->
+            @await Html.PartialAsync("_tablaIntegrantes")
         </div>
     </div>
 </div>

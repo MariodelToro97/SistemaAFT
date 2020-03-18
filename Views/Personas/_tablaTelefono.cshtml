@@ -1,0 +1,39 @@
+﻿@model GranModelo
+
+<div class="container my-3" id="Tel">
+    <div class="border border-secondary rounded bg-dark d-flex">
+        <h4 class="my-3 mx-3 text-white font-weight-lighter">Telefonos</h4>
+        <!--Modal 2-->
+        <a class="btn btn-light btn-rounded mr-3 my-3 ml-auto" id="botonAgregarTelefono" data-toggle="modal" onclick="limpiarForm()" data-target="#modalTelefonos">Agregar</a>
+    </div>
+
+    <div class="rounded border border-secondary">
+        <div id="tableTelefonos" class="container">
+            <table class="table table-sm table-secondary my-3 table-hover table-striped rounded">
+                <thead class="thead-light text-center">
+                    <tr>
+                        <th>Número de Teléfono</th>
+                        <th>Compañia</th>
+                        <th>Tipo de Teléfono</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center ">
+                    @foreach (var tel in (IEnumerable<SistemaAFT.Models.Telefono>)ViewBag.Telefonos)
+                    {
+                        <tr>
+                            <th>@tel.numero</th>
+                            <th>@tel.CompaniaID</th>
+                            <th>@tel.Tipo_TelefonoID</th>
+                            <th>
+                                <button type="button" onclick="editTelefono(this)" data-toggle="modal" data-target="#modalTelefonos" class="btn btn-success" value="@tel.TelefonoID" name="@tel.PersonaID" id="editTelefono">Editar</button>
+                                <button class="btn btn-primary" onclick="detalleTelefono(this)" data-toggle="modal" data-target="#modalTelefonos" value="@tel.TelefonoID" name="@tel.PersonaID">Detalles</button>
+                                <button class="btn btn-danger" onclick="deleteTelefono(this)" value="@tel.TelefonoID">Borrar</button>
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div><!--FIN TABLA TELEFONOS-->
