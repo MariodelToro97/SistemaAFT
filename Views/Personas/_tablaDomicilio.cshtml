@@ -15,27 +15,26 @@
             </thead>
             <tbody class="text-center ">
                 @if (ViewBag.Libros == null)
-                {
+                { 
                     <p>No hay domicilios</p>
-
                 }
                 else
                 {
-                    @foreach (var dom in (IEnumerable<SistemaAFT.Models.Domicilio>)ViewBag.Libros)
-                    {
-                        <tr>
-                            <th>@dom.estado</th>
-                            <th>@dom.MunicipioID</th>
-                            <th>@dom.localidad</th>
-                            <th>@dom.Tipo_AsentamientoID</th>
-                            <th>@dom.referenciaubicacion</th>
-                            <th>
-                                <button type="button" onclick="editarDom(this)" data-toggle="modal" data-target="#modalRegisterForm" class="btn btn-success" value="@dom.DomicilioID" name="@dom.PersonaID" id="editDom">Editar</button>
-                                <button class="btn btn-primary" onclick="detailDom(this)" data-toggle="modal" data-target="#modalRegisterForm" name="@dom.PersonaID" value="@dom.DomicilioID" id="btnDetalleDom">Detalles</button>
-                                <button class="btn btn-danger" onclick="borrarDom(this)" value="@dom.DomicilioID">Borrar</button>
-                            </th>
-                        </tr>
-                    }
+                @foreach (var dom in (IEnumerable<SistemaAFT.Models.Domicilio>)ViewBag.Libros)
+                {
+                    <tr>
+                        <th>@dom.estado</th>
+                        <th>@dom.MunicipioID</th>
+                        <th>@dom.localidad</th>
+                        <th>@dom.Tipo_AsentamientoID</th>
+                        <th>@dom.referenciaubicacion</th>
+                        <th>
+                            <button type="button" onclick="editarDom(this)" data-toggle="modal" data-target="#modalRegisterForm" class="btn btn-success" value="@dom.DomicilioID" name="@dom.PersonaID" id="editDom">Editar</button>
+                            <button class="btn btn-primary" onclick="detailDom(this)" data-toggle="modal" data-target="#modalRegisterForm" name="@dom.PersonaID" value="@dom.DomicilioID" id="btnDetalleDom">Detalles</button>
+                            <button class="btn btn-danger" onclick="borrarDom(this)" value="@dom.DomicilioID">Borrar</button>
+                        </th>
+                    </tr>
+                }
                 }
 
             </tbody>
