@@ -71,27 +71,35 @@ namespace SistemaAFT.Controllers
             return View();
         }
 
+         
+
         // POST: Personas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PersonaID,CURP,RFC,nombre,apellido_paterno,apellido_materno,correo,fechaNacimiento,NacionalidadID,GeneroID,Estado_CivilID,Tipo_IdentidadID,num_identificacion,telefono,Tipo_PersonaID,EtniaID,DiscapacidadID,Created,ACUSESURI,nombreMoral")] Persona persona)
+       /* [Bind("PersonaID,CURP,RFC,nombre,apellido_paterno,apellido_materno,correo,fechaNacimiento,NacionalidadID,GeneroID,Estado_CivilID,Tipo_IdentidadID,num_identificacion,telefono,Tipo_PersonaID,EtniaID,DiscapacidadID,Created,ACUSESURI,nombreMoral")]*/
+        public async Task<IActionResult> Create( GranModelo granModelo)
         {
-            if (ModelState.IsValid)
+            
+                System.Diagnostics.Debug.WriteLine("entrooo");
+            if(granModelo.Persona != null)
             {
-                _context.Add(persona);
+                _context.Add(granModelo.Persona);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+                System.Diagnostics.Debug.WriteLine("noooo");
             }
-            ViewData["DiscapacidadID"] = new SelectList(_context.Discapacidad, "DiscapacidadID", "DiscapacidadID", persona.DiscapacidadID);
-            ViewData["Estado_CivilID"] = new SelectList(_context.Estado_Civil, "Estado_CivilID", "Nombre_Edo_Civil", persona.Estado_CivilID);
-            ViewData["EtniaID"] = new SelectList(_context.Etnia, "EtniaID", "EtniaID", persona.EtniaID);
-            ViewData["GeneroID"] = new SelectList(_context.Genero, "GeneroID", "Nombre", persona.GeneroID);
-            ViewData["Tipo_IdentidadID"] = new SelectList(_context.Tipo_Identidad, "Tipo_IdentidadID", "Nombre", persona.Tipo_IdentidadID);
-            ViewData["Tipo_PersonaID"] = new SelectList(_context.Tipo_Persona, "Tipo_PersonaID", "Nombre_Tipo", persona.Tipo_PersonaID);
-            ViewData["NacionalidadID"] = new SelectList(_context.Nacionalidad, "NacionalidadID", "Nombre", persona.Nacionalidad);
-            return View(persona);
+                           
+
+            ViewData["DiscapacidadID"] = new SelectList(_context.Discapacidad, "DiscapacidadID", "DiscapacidadID", granModelo.Persona.DiscapacidadID);
+            ViewData["Estado_CivilID"] = new SelectList(_context.Estado_Civil, "Estado_CivilID", "Nombre_Edo_Civil", granModelo.Persona.Estado_CivilID);
+            ViewData["EtniaID"] = new SelectList(_context.Etnia, "EtniaID", "EtniaID", granModelo.Persona.EtniaID);
+            ViewData["GeneroID"] = new SelectList(_context.Genero, "GeneroID", "Nombre_Genero", granModelo.Persona.GeneroID);
+            ViewData["Tipo_IdentidadID"] = new SelectList(_context.Tipo_Identidad, "Tipo_IdentidadID", "Nombre", granModelo.Persona.Tipo_IdentidadID);
+            ViewData["Tipo_PersonaID"] = new SelectList(_context.Tipo_Persona, "Tipo_PersonaID", "Nombre_Tipo", granModelo.Persona.Tipo_PersonaID);
+            ViewData["NacionalidadID"] = new SelectList(_context.Nacionalidad, "NacionalidadID", "Nombre", granModelo.Persona.Nacionalidad);
+            return View(granModelo);
         }
 
         // GET: Personas/Edit/5
@@ -122,6 +130,11 @@ namespace SistemaAFT.Controllers
             if (libros.FirstOrDefault() == null)
             {
                 return RedirectToAction("Index", "Error");
+            }
+
+            if (telefonos.FirstOrDefault() == null)
+            {
+                return RedirectToAction("IndexTel", "Error");
             }
 
             if (libros.Count() > 0)

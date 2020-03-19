@@ -14,21 +14,30 @@
                 </tr>
             </thead>
             <tbody class="text-center">
-                @foreach (var integrante in (IEnumerable<SistemaAFT.Models.Integrante>)ViewBag.Integrantes)
+                @if (ViewBag.Integrantes == null)
                 {
-                    <tr>
-                        <th></th>
-                        <th>@integrante.CURP</th>
-                        <th></th>
-                        <th>@integrante.nombre</th>
-                        <th></th>
-                        <th>
-                            <button type="button" onclick="editIntegrante(this)" data-toggle="modal" data-target="#modalIntegrantes" class="btn btn-success" value="@integrante.IntegranteID" name="@integrante.PersonaID" id="editIntegrante">Editar</button>
-                            <button class="btn btn-primary" onclick="detalleIntegrante(this)" data-toggle="modal" data-target="#modalIntegrantes" value="@integrante.IntegranteID" name="@integrante.PersonaID">Detalles</button>
-                            <button class="btn btn-danger" onclick="deleteIntegrante(this)" value="@integrante.IntegranteID">Borrar</button>
-                        </th>
-                    </tr>
+                    <p>No hay Integrantes</p>
+
                 }
+                else
+                {
+                    @foreach (var integrante in (IEnumerable<SistemaAFT.Models.Integrante>)ViewBag.Integrantes)
+                    {
+                        <tr>
+                            <th></th>
+                            <th>@integrante.CURP</th>
+                            <th></th>
+                            <th>@integrante.nombre</th>
+                            <th></th>
+                            <th>
+                                <button type="button" onclick="editIntegrante(this)" data-toggle="modal" data-target="#modalIntegrantes" class="btn btn-success" value="@integrante.IntegranteID" name="@integrante.PersonaID" id="editIntegrante">Editar</button>
+                                <button class="btn btn-primary" onclick="detalleIntegrante(this)" data-toggle="modal" data-target="#modalIntegrantes" value="@integrante.IntegranteID" name="@integrante.PersonaID">Detalles</button>
+                                <button class="btn btn-danger" onclick="deleteIntegrante(this)" value="@integrante.IntegranteID">Borrar</button>
+                            </th>
+                        </tr>
+                    }
+                }
+
             </tbody>
         </table>
     </div>

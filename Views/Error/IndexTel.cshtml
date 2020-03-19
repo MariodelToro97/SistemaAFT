@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "IndexTel";
+}
+
+<h1>IndexTel</h1>
+<h3 class="text-center">DEBES AGREGAR UN TELEFONO A LA PERSONA ANTES DE EDITAR</h3>
+<div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">Ups..! INGRESA UN TELEFONO PARA EL USUARIO</h4>
+    <p>Parece que el usuario al que deseas ingresar no tiene ningún telefono asignado y es INDISPENSABLE TENERLO</p>
+    <hr>
+    <p class="mb-0">Por favor agrega un telefono en el siguiente formulario. GRACIAS POR TU ATENCIÓN.</p>
+</div>
+
+<div class="text-center form-group mt-3">
+    <a asp-action="Create" asp-controller="Telefonos" class="btn btn-success">Crear Telefono</a>
+</div>
