@@ -87,6 +87,7 @@
         $('#nav-cuenta').hide();
         $('#nav-domicilio').hide();
         $('#botonesGeneral').hide();
+        $('#Tel').hide();
     });
     
     $('#nav-integrantes-tab').click(function () {
@@ -100,6 +101,7 @@
         $('#nav-cuenta').hide();
         $('#nav-domicilio').hide();
         $('#botonesGeneral').hide();
+        $('#Tel').hide();
     });
 
     $('#nav-bajas-tab').click(function () {
@@ -113,5 +115,6 @@
         $('#nav-cuenta').hide();
         $('#nav-domicilio').hide();   
         $('#botonesGeneral').hide();
+        $('#Tel').hide();
     });
 });
