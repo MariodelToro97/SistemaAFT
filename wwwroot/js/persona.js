@@ -57,10 +57,15 @@ $('#crearPersona').submit(function () {
 
         aPaterno = $('#apellidoPaterno').val();
         aMAterno = $('#apellidoMaterno').val();
+
+        if (aMAterno === '') {
+            aMAterno = 'NULL';
+        }
+
         nombreMoral = 'NULL';
         suri = $('#acuseSuri').val();
 
-        if (curp === 'NULL' || nombrePersona === 'NULL' || aPaterno === 'NULL' || aMAterno === 'NULL' || genero === 'NULL' || nacimiento === '' || civil === '' || nacionalidad === '' || numIdent === '' || identidad === '') {
+        if (curp === 'NULL' || nombrePersona === 'NULL' || aPaterno === 'NULL' || genero === 'NULL' || nacimiento === '' || civil === '' || nacionalidad === '' || numIdent === '' || identidad === '') {
             console.log("FALTAN DATOS");
         } else {            
             $.ajax({
