@@ -12,5 +12,10 @@ namespace SistemaAFT.Controllers
         {
             return View();
         }
+
+        public IActionResult IndexTel()
+        {
+            return View();
+        }
     }
 }

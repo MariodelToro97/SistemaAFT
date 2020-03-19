@@ -26,15 +26,15 @@
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show container active border border-secondary rounded" id="nav-general" role="tabpanel" aria-labelledby="nav-home-tab">
             @await Html.PartialAsync("_vistaInferiorGeneral")
-
-            <!--TABLA TELEFONOS-->
-            @await Html.PartialAsync("_tablaTelefono")
         </div>
     </div>
 </form>
 
 <!--MODAL TELEFONO-->
 @await Html.PartialAsync("_modalTelefono")
+
+<!--TABLA TELEFONOS-->
+@await Html.PartialAsync("_tablaTelefono")
 
 <div class="tab-pane fade border border-secondary rounded" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab" style="display:none;">
     <!--MODAL DE DOMICILIO-->

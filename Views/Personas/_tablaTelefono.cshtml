@@ -19,19 +19,28 @@
                     </tr>
                 </thead>
                 <tbody class="text-center ">
-                    @foreach (var tel in (IEnumerable<SistemaAFT.Models.Telefono>)ViewBag.Telefonos)
+                    @if (ViewBag.Telefonos == null)
                     {
-                        <tr>
-                            <th>@tel.numero</th>
-                            <th>@tel.CompaniaID</th>
-                            <th>@tel.Tipo_TelefonoID</th>
-                            <th>
-                                <button type="button" onclick="editTelefono(this)" data-toggle="modal" data-target="#modalTelefonos" class="btn btn-success" value="@tel.TelefonoID" name="@tel.PersonaID" id="editTelefono">Editar</button>
-                                <button class="btn btn-primary" onclick="detalleTelefono(this)" data-toggle="modal" data-target="#modalTelefonos" value="@tel.TelefonoID" name="@tel.PersonaID">Detalles</button>
-                                <button class="btn btn-danger" onclick="deleteTelefono(this)" value="@tel.TelefonoID">Borrar</button>
-                            </th>
-                        </tr>
+                        <p>No hay telefonos</p>
+
                     }
+                    else
+                    {
+                        @foreach (var tel in (IEnumerable<SistemaAFT.Models.Telefono>)ViewBag.Telefonos)
+                        {
+                            <tr>
+                                <th>@tel.numero</th>
+                                <th>@tel.CompaniaID</th>
+                                <th>@tel.Tipo_TelefonoID</th>
+                                <th>
+                                    <button type="button" onclick="editTelefono(this)" data-toggle="modal" data-target="#modalTelefonos" class="btn btn-success" value="@tel.TelefonoID" name="@tel.PersonaID" id="editTelefono">Editar</button>
+                                    <button class="btn btn-primary" onclick="detalleTelefono(this)" data-toggle="modal" data-target="#modalTelefonos" value="@tel.TelefonoID" name="@tel.PersonaID">Detalles</button>
+                                    <button class="btn btn-danger" onclick="deleteTelefono(this)" value="@tel.TelefonoID">Borrar</button>
+                                </th>
+                            </tr>
+                        }
+                    }
+
                 </tbody>
             </table>
         </div>
