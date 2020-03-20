@@ -5,7 +5,7 @@
 	@asentamiento varchar(max),
 	@vialidad int,
 	@noExterior varchar(max),
-	@munID int,
+	@munID varchar(max),
 	@refVialidad varchar(max),
 	@nomViali varchar(max),
 	@noInterior varchar(max),
@@ -18,7 +18,7 @@
 AS
 	BEGIN
 		UPDATE Domicilio
-		Set Tipo_AmbitoID = @tipoAmbito, estado = @estado, nombreasentamiento = @asentamiento, Tipo_VialidadID = @vialidad, noexterior = @noExterior, MunicipioID = @munID, referenciavialidad = @refVialidad, nombrevialidad = @nomViali, nointerior = @noInterior, localidad = @localidad, referenciaposterior = @referenciaPos, codigopostal = @cp, Tipo_AsentamientoID = @tipoAsentamiento, referenciaubicacion = @referencia, PersonaID = @personaID
+		Set Tipo_AmbitoID = @tipoAmbito, estado = @estado, nombreasentamiento = @asentamiento, Tipo_VialidadID = @vialidad, noexterior = @noExterior, Municipio = @munID, referenciavialidad = @refVialidad, nombrevialidad = @nomViali, nointerior = @noInterior, localidad = @localidad, referenciaposterior = @referenciaPos, codigopostal = @cp, Tipo_AsentamientoID = @tipoAsentamiento, referenciaubicacion = @referencia, PersonaID = @personaID
 		WHERE DomicilioID = @domID;
 	END
 RETURN 0

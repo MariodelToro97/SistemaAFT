@@ -100,7 +100,8 @@ namespace SistemaAFT.Data
 			}
 
 
-			//MUNICIPIO
+			//MUNICIPIO 
+			/*
 			var municipio = new Municipio[]
 			{
 				new Municipio {Nombre = "Armería"},
@@ -119,7 +120,7 @@ namespace SistemaAFT.Data
 			{
 				context.Municipio.Add(g);
 			}
-
+			*/
 			
 			//Tipo de persona
 			var tipo_persona = new Tipo_Persona[]
