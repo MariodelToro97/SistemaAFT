@@ -20,7 +20,7 @@
 AS
 	BEGIN
 
-		IF (@persona = 2) /* PERSONA FÍSICA */
+		IF (@persona = 1) /* PERSONA FÍSICA */
 		BEGIN
 			IF NOT EXISTS(SELECT * FROM Persona WHERE CURP = @CURP)
 				BEGIN

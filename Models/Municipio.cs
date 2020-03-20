@@ -9,6 +9,6 @@ namespace SistemaAFT.Models
 	{
 		public int MunicipioID { get; set; }
 		public string Nombre { get; set; }
-		public ICollection<Domicilio> Domicilios { get; set; }
+		//public ICollection<Domicilio> Domicilios { get; set; }
 	}
 }
