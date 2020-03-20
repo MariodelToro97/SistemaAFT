@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using SistemaAFT.Data;
 using SistemaAFT.Models;
@@ -68,9 +70,10 @@ namespace SistemaAFT.Controllers
             ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Nombre");
             ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Nombre");
             ViewData["NacionalidadID"] = new SelectList(_context.Set<Nacionalidad>(), "NacionalidadID", "Nombre");
+            ViewData["CompaniaID"] = new SelectList(_context.Set<Compania>(), "CompaniaID", "nombre_compania");
+            ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "nombre_tipo");
             return View();
         }
-
          
 
         // POST: Personas/Create
@@ -87,8 +90,7 @@ namespace SistemaAFT.Controllers
             {
                 _context.Add(granModelo.Persona);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-                System.Diagnostics.Debug.WriteLine("noooo");
+                return RedirectToAction(nameof(Index));                
             }
                            
 
@@ -166,7 +168,7 @@ namespace SistemaAFT.Controllers
             ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "CURP", granModelo.Persona.PersonaID);
 
             ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Nombre", granModelo.Domicilio.Tipo_AmbitoID);
-            ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "Nombre", granModelo.Domicilio.MunicipioID);            
+            //ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "Nombre", granModelo.Domicilio.MunicipioID);            
             ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Nombre", granModelo.Domicilio.Tipo_AsentamientoID);
             ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Nombre", granModelo.Domicilio.Tipo_VialidadID);
             ViewData["NacionalidadID"] = new SelectList(_context.Set<Nacionalidad>(), "NacionalidadID", "Nombre");
@@ -216,7 +218,7 @@ namespace SistemaAFT.Controllers
             ViewData["GeneroID"] = new SelectList(_context.Genero, "GeneroID", "Nombre_Genero", granModelo.Persona.GeneroID);
             ViewData["Tipo_IdentidadID"] = new SelectList(_context.Tipo_Identidad, "Tipo_IdentidadID", "Nombre", granModelo.Persona.Tipo_IdentidadID);
             ViewData["Tipo_PersonaID"] = new SelectList(_context.Tipo_Persona, "Tipo_PersonaID", "Nombre_Tipo", granModelo.Persona.Tipo_PersonaID);
-            ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "Nombre", granModelo.Domicilio.MunicipioID);
+            //ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "Nombre", granModelo.Domicilio.MunicipioID);
             ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "CURP", granModelo.Domicilio.PersonaID);
             ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Nombre", granModelo.Domicilio.Tipo_AmbitoID);
             ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Nombre", granModelo.Domicilio.Tipo_AsentamientoID);
@@ -275,6 +277,54 @@ namespace SistemaAFT.Controllers
         private bool DomicilioExists(int id_dom)
         {
             return _context.Domicilio.Any(e => e.DomicilioID == id_dom);
+        }
+
+        //Llamada a procedimiento para insertar persona spAddPersona
+        public string addPersona (string curp, string rfc, string nombrePersona, string aPaterno, string aMAterno, string correo, string nacimiento, int nacionalidad, int genero, int civil, int identidad, string numIdent, int tipoPersona, int etnia, int discapacidad, string suri, string nombreMoral)
+        {
+            try
+            {
+                SqlConnection cn = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=dbsistemaaft;Trusted_Connection=True;MultipleActiveResultSets=true");
+
+                SqlCommand com = new SqlCommand("spAddPersona", cn);
+                com.CommandType = CommandType.StoredProcedure;
+                
+                com.Parameters.AddWithValue("@CURP", curp);
+                com.Parameters.AddWithValue("@rfc", rfc);
+                com.Parameters.AddWithValue("@nombre", nombrePersona);
+                com.Parameters.AddWithValue("@aPaterno", aPaterno);
+                com.Parameters.AddWithValue("@aMaterno", aMAterno);
+                com.Parameters.AddWithValue("@correo", correo);
+                com.Parameters.AddWithValue("@nacimiento", nacimiento);
+                com.Parameters.AddWithValue("@nacionalidad", nacionalidad);
+                com.Parameters.AddWithValue("@genero", genero);
+                com.Parameters.AddWithValue("@civil", civil);
+                com.Parameters.AddWithValue("@identidad", identidad);
+                com.Parameters.AddWithValue("@identificacion", numIdent);                
+                com.Parameters.AddWithValue("@persona", tipoPersona);
+                com.Parameters.AddWithValue("@etnia", etnia);
+                com.Parameters.AddWithValue("@discapacidad", discapacidad);
+                com.Parameters.AddWithValue("@suri", suri);
+                com.Parameters.AddWithValue("@moral", nombreMoral);
+
+                SqlParameter ID = new SqlParameter("@ID", 0);
+                ID.Direction = ParameterDirection.Output;
+                com.Parameters.Add(ID);
+
+                cn.Open();
+                com.ExecuteNonQuery();
+                //int valor = Int32.Parse (com.Parameters["@id"].Value.ToString());
+                //string valor = com.ExecuteScalar().ToString();
+                string valor = com.Parameters["@ID"].Value.ToString();
+                cn.Close();
+
+                return valor;
+
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
         }
 
     }

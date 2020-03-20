@@ -3,12 +3,90 @@
         $('#btnModalDomicilio').show();
         document.getElementById('btnModalDomicilio').innerHTML = "Agregar Domicilio";
         document.getElementById('btnCancelarDom').innerHTML = "Cancelar";
+
+        estado();
+        
     });
 
     $('#btnModalDomicilio').click(function () {
         $("span.Modal").show();
     });
 });
+
+function estado() {
+    $.ajax({
+        type: 'GET',
+        url: "https://gaia.inegi.org.mx/wscatgeo/mgee/",
+        cache: false,
+        async: false,
+        dataType: "json",
+        success: function (data) {
+            //console.log(data);
+            for (var i = 0; i < data.datos.length; i++) {
+                $("#domicilioEstado").append("<option value=" + data.datos[i].cve_agee + ">" + data.datos[i].nom_agee + "</option>");
+            }
+        }, error: function (objeto, tipo, causa) {
+            console.log(objeto);
+            console.log(tipo);
+            console.log(causa);
+        }, complete: function (xhr, status) {
+            /*$('#spinner').hide();*/
+        }
+    });
+    return false;
+}
+
+function mostrarLocalidades(option) {
+    var mun = option.value;
+    var est = $('#domicilioMunicipioID').find('option:selected').attr("name");
+    $('#domicilioLocalidad option.localidadDomicilios').remove();
+
+    $.ajax({
+        type: 'GET',
+        url: "https://gaia.inegi.org.mx/wscatgeo/localidades/" + est + "/" + mun,
+        cache: false,
+        async: false,
+        dataType: "json",
+        success: function (data) {
+            for (var i = 0; i < data.datos.length; i++) {
+                $("#domicilioLocalidad").append("<option class ='localidadDomicilios' value=" + data.datos[i].cve_loc + ">" + data.datos[i].nom_loc + "</option>");
+            }
+        }, error: function (objeto, tipo, causa) {
+            console.log(objeto);
+            console.log(tipo);
+            console.log(causa);
+        }, complete: function (xhr, status) {
+            /*$('#spinner').hide();*/
+        }
+    });
+    return false;
+}
+
+function mostrarMunicipios(option) {
+    var mun = option.value;
+    $('#domicilioMunicipioID option.municipioDomicilios').remove();
+
+    $.ajax({
+        type: 'GET',
+        url: "https://gaia.inegi.org.mx/wscatgeo/mgem/" + mun,
+        cache: false,
+        async: false,
+        dataType: "json",
+        success: function (data) {
+            //console.log(data);
+            for (var i = 0; i < data.datos.length; i++) {
+                $("#domicilioMunicipioID").append("<option class ='municipioDomicilios' value=" + data.datos[i].cve_agem + " name=" + data.datos[i].cve_agee + ">" + data.datos[i].nom_agem + "</option>");
+            }
+        }, error: function (objeto, tipo, causa) {
+            console.log(objeto);
+            console.log(tipo);
+            console.log(causa);
+        }, complete: function (xhr, status) {
+            /*$('#spinner').hide();*/
+        }
+    });
+    return false;
+}
 
 function limpiarForm() {
     $("#modalRegisterForm input").val("");
@@ -37,6 +115,7 @@ function detailDom(boton) {
 }
 
 function obtenerDom(id) {
+    estado();
     $.ajax({
         type: 'GET',
         url: "/Domicilios/GetDomicilio",
@@ -57,15 +136,19 @@ function obtenerDom(id) {
             var refUbi = data[0]['referenciaubicacion'];
             var ambito = data[0]['tipo_AmbitoID'];
             var vialidad = data[0]['tipo_VialidadID'];
-            var municipio = data[0]['municipioID'];
+            var municipio = data[0]['municipio'];
             var persona = data[0]['personaID'];
             var tipoAsentamiento = data[0]['tipo_AsentamientoID'];
             var domicilioID = data[0]["domicilioID"];
+
+            watchMunicipios(estado);
+            watchLocalidades(estado, municipio);
 
             $("#domicilioID").val(domicilioID);
             $('#domicilioNoExterior').val(noExterior);
             $('#domicilioEstado').val(estado);
             $('#domicilioNombreAsentamiento').val(asentamiento);
+            $('#domicilioMunicipioID').val(municipio);
 
 
             if (nombreInterior === 'NULL') {
@@ -94,17 +177,65 @@ function obtenerDom(id) {
             $('#domicilioReferenciaUbicacion').val(refUbi);
             $('#domicilioPersonaID').val(persona);
 
-            document.getElementById('domicilioTipoVialidad').getElementsByTagName('option')[vialidad].selected = 'selected';
-            document.getElementById('domicilioTipoAsentamiento').getElementsByTagName('option')[tipoAsentamiento].selected = 'selected';
-            document.getElementById('domicilioMunicipioID').getElementsByTagName('option')[municipio].selected = 'selected';
             document.getElementById('domicilioTipoAmbito').getElementsByTagName('option')[ambito].selected = 'selected';
+            document.getElementById('domicilioTipoVialidad').getElementsByTagName('option')[vialidad].selected = 'selected';
+            document.getElementById('domicilioTipoAsentamiento').getElementsByTagName('option')[tipoAsentamiento].selected = 'selected';            
         },
         error: function (r) {
             console.log(r);
         }
     });
     return false;
-};
+}
+
+function watchLocalidades(est, mun) {
+    $('#domicilioLocalidad option.localidadDomicilios').remove();
+
+    $.ajax({
+        type: 'GET',
+        url: "https://gaia.inegi.org.mx/wscatgeo/localidades/" + est + "/" + mun,
+        cache: false,
+        async: false,
+        dataType: "json",
+        success: function (data) {
+            for (var i = 0; i < data.datos.length; i++) {
+                $("#domicilioLocalidad").append("<option class ='localidadDomicilios' value=" + data.datos[i].cve_loc + ">" + data.datos[i].nom_loc + "</option>");
+            }
+        }, error: function (objeto, tipo, causa) {
+            console.log(objeto);
+            console.log(tipo);
+            console.log(causa);
+        }, complete: function (xhr, status) {
+            /*$('#spinner').hide();*/
+        }
+    });
+    return false;
+}
+
+function watchMunicipios(est) {
+    $('#domicilioMunicipioID option.municipioDomicilios').remove();
+
+    $.ajax({
+        type: 'GET',
+        url: "https://gaia.inegi.org.mx/wscatgeo/mgem/" + est,
+        cache: false,
+        async: false,
+        dataType: "json",
+        success: function (data) {
+            //console.log(data);
+            for (var i = 0; i < data.datos.length; i++) {
+                $("#domicilioMunicipioID").append("<option class ='municipioDomicilios' value=" + data.datos[i].cve_agem + " name=" + data.datos[i].cve_agee + ">" + data.datos[i].nom_agem + "</option>");
+            }
+        }, error: function (objeto, tipo, causa) {
+            console.log(objeto);
+            console.log(tipo);
+            console.log(causa);
+        }, complete: function (xhr, status) {
+            /*$('#spinner').hide();*/
+        }
+    });
+    return false;
+}
 
 function borrarDom(boton) {
     var id = boton.value;
@@ -133,10 +264,10 @@ $('#formEditDomicilio').submit(function () {
     var nomVia = $('#domicilioNombreVialidad').val();
     var domCP = $('#domicilioCodigoPostal').val();
     var domNE = $('#domicilioNoExterior').val();
-    var domEs = $('#domicilioEstado').val();
+    var domEs = $('#domicilioEstado').val();                    //REVISAR
     var domNA = $('#domicilioNombreAsentamiento').val();
-    var domMun = $('#domicilioMunicipioID').val();
-    var loc = $('#domicilioLocalidad').val();
+    var domMun = $('#domicilioMunicipioID').val();              //REVISAR
+    var loc = $('#domicilioLocalidad').val();                   //REVISAR
     var tAse = $('#domicilioTipoAsentamiento').val();
     var refUb = $('#domicilioReferenciaUbicacion').val();
 

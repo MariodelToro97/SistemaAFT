@@ -15,10 +15,10 @@ namespace SistemaAFT.Models
         
 		public int PersonaID { get; set; }
         [RegularExpression("^[A-Z]{4}[0-9]{6}[H,M][A-Z]{5}[A-Z,0-9][0-9]", ErrorMessage = "La CURP no es Válida")]
-        //[Required(ErrorMessage = "Se requiere la CURP")]
+        //[Required(ErrorMessage = "Campo requerido")]
         public string CURP { get; set; }
-        
-        //[Required(ErrorMessage = "Se requiere el RFC")]
+        //[Required(ErrorMessage = "Campo requerido")]
+        [RegularExpression("^[A-Z]{4}[0-9]{6}[A-Z,0-9]{3}", ErrorMessage = "El RFC no es válido")]
         public string RFC { get; set; }
         //[Required(ErrorMessage = "Campo Requerido")]
         public string nombre { get; set; }
@@ -31,15 +31,17 @@ namespace SistemaAFT.Models
         [Required(ErrorMessage = "Campo Requerido")]
         public int NacionalidadID { get; set; }
         public Nacionalidad Nacionalidad { get; set; }
+        [Required(ErrorMessage = "Campo Requerido")]
         public int GeneroID { get; set; }
         public Genero Genero { get; set; }
+        [Required(ErrorMessage = "Campo Requerido")]
         public int Estado_CivilID { get; set; }
         public Estado_Civil Estado_Civil { get; set; }
+        [Required(ErrorMessage = "Campo Requerido")]
         public int Tipo_IdentidadID { get; set; }
         public Tipo_Identidad Tipo_Identidad { get; set; }
         [Required(ErrorMessage = "Campo Requerido")]
         public string num_identificacion { get; set; }
-        public string telefono { get; set; }
         public int Tipo_PersonaID { get; set; }
         public Tipo_Persona Tipo_Persona { get; set; }
         public int EtniaID { get; set; }

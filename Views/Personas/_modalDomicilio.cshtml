@@ -33,7 +33,10 @@
                             <div class="form-group">
                                 <label asp-for="Domicilio.estado" class="control-label">Estado<span class="text-danger font-weight-bold">*</span>:</label>
                                 <span asp-validation-for="Domicilio.estado" class="text-danger ErrorInput Modal"></span>
-                                <input asp-for="Domicilio.estado" id="domicilioEstado" class="form-control" required />
+                                <select asp-for="Domicilio.estado" onchange="mostrarMunicipios(this)" id="domicilioEstado" class="form-control" required>
+                                    <option value="">Seleccione opción</option>
+                                </select>
+
                             </div>
                             <div class="form-group">
                                 <label asp-for="Domicilio.nombreasentamiento" class="control-label">Nombre Asentamiento<span class="text-danger font-weight-bold">*</span>:</label>
@@ -55,10 +58,10 @@
                                 <input asp-for="Domicilio.nointerior" id="domicilioNombreInterior" class="form-control" />
                             </div>
                             <div class="form-group">
-                                <label asp-for="Domicilio.MunicipioID" class="control-label">Municipio<span class="text-danger font-weight-bold">*</span>:</label>
-                                <span asp-validation-for="Domicilio.MunicipioID" class="text-danger ErrorInput Modal"></span>
-                                <select asp-for="Domicilio.MunicipioID" id="domicilioMunicipioID" class="form-control" asp-items="ViewBag.MunicipioID">
-                                    <option value="" selected>Seleccione opción</option>
+                                <label asp-for="Domicilio.Municipio" class="control-label">Municipio<span class="text-danger font-weight-bold">*</span>:</label>
+                                <span asp-validation-for="Domicilio.Municipio" class="text-danger ErrorInput Modal"></span>
+                                <select asp-for="Domicilio.Municipio" onchange="mostrarLocalidades(this)" id="domicilioMunicipioID" class="form-control">
+                                    <option value="" name="" selected>Seleccione opción</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -78,7 +81,9 @@
                             <div class="form-group">
                                 <label asp-for="Domicilio.localidad" class="control-label">Localidad<span class="text-danger font-weight-bold">*</span>:</label>
                                 <span asp-validation-for="Domicilio.localidad" class="text-danger ErrorInput Modal"></span>
-                                <input asp-for="Domicilio.localidad" id="domicilioLocalidad" class="form-control" required />
+                                <select asp-for="Domicilio.localidad" id="domicilioLocalidad" class="form-control" >
+                                    <option value="" selected>Seleccione opción</option>
+                                </select>                                
                             </div>
                             <div class="form-group">
                                 <label asp-for="Domicilio.referenciaposterior" class="control-label">Referencia posterior:</label>

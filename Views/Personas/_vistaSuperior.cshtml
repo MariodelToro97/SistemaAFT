@@ -13,8 +13,8 @@
                     </div>
                     <div class="col-md-4" id="divCURP">
                         <div class="form-group">
-                            <label asp-for="Persona.CURP" class="control-label">CURP<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Persona.CURP" class="text-danger ErrorInput"></span>
-                            <input asp-for="Persona.CURP" type="text" class="form-control" placeholder="CURP" required id="CURP" oninput="errorCurp(this);" oninvalid="errorCurp(this);" />
+                            <label asp-for="Persona.CURP" class="control-label">CURP<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Persona.CURP" class="text-danger Persona ErrorInput"></span>
+                            <input asp-for="Persona.CURP" type="text" class="form-control" placeholder="CURP" maxlength="18" required id="curpPersona" />
                         </div>
                     </div>
                     <div class="col-md-1" id="imagenSearch">
@@ -24,8 +24,8 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label id="labelRFC" asp-for="Persona.RFC" class="control-label">RFC:</label><span id="spanRFC" asp-validation-for="Persona.RFC" class="text-danger ErrorInput"></span>
-                            <input id="rfcPersona" asp-for="Persona.RFC" type="text" class="form-control" placeholder="RFC" />
+                            <label id="labelRFC" asp-for="Persona.RFC" class="control-label">RFC:</label><span id="spanRFC" asp-validation-for="Persona.RFC" class="text-danger Persona ErrorInput"></span>
+                            <input id="rfcPersona" asp-for="Persona.RFC" type="text" maxlength="13" class="form-control" placeholder="RFC" />
                         </div>
                     </div>
                     <div class="col-md-1" id="imagenSearchRFC" style="display: none;">
@@ -38,14 +38,14 @@
                 <div class="row" id="columnaDos">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="Persona.nombre" class="control-label">Nombre<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.nombre" class="text-danger ErrorInput"></span>
+                            <label asp-for="Persona.nombre" class="control-label">Nombre<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.nombre" class="text-danger Persona ErrorInput"></span>
                             <input id="nombreGeneral" asp-for="Persona.nombre" type="text" class="form-control" placeholder="Nombre" required />
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="Persona.apellido_paterno" class="control-label">Apellido Paterno<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.apellido_paterno" class="text-danger ErrorInput"></span>
+                            <label asp-for="Persona.apellido_paterno" class="control-label">Apellido Paterno<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.apellido_paterno" class="text-danger Persona ErrorInput"></span>
                             <input id="apellidoPaterno" asp-for="Persona.apellido_paterno" type="text" class="form-control" placeholder="Apellido Paterno" required />
                         </div>
 
@@ -58,8 +58,8 @@
                     </div>
                 </div>
                 <div class="form-group" id="nombreMoral" style="display: none;">
-                    <label asp-for="Persona.nombreMoral" class="control-label">Nombre<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.nombreMoral" class="text-danger ErrorInput"></span>
-                    <input asp-for="Persona.nombreMoral" type="text" class="form-control" placeholder="Nombre/s" required />
+                    <label asp-for="Persona.nombreMoral" class="control-label">Nombre<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.nombreMoral" class="text-danger Persona ErrorInput"></span>
+                    <input asp-for="Persona.nombreMoral" type="text" class="form-control" id="nombreMoralPersonas" placeholder="Nombre/s" required />
                 </div>
             </div>
             <div class="col-md-3" id="curpHistoricas">
@@ -80,7 +80,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label asp-for="Persona.ACUSESURI" class="control-label">ACUSE SURI</label>
-                    <input asp-for="Persona.ACUSESURI" type="text" class="form-control" placeholder="ACUSE SURI" value="ACUSE SURI" disabled />
+                    <input asp-for="Persona.ACUSESURI" id="acuseSuri" type="text" class="form-control" placeholder="ACUSE SURI" value="ACUSE SURI" disabled />
                 </div>
             </div>
         </div>

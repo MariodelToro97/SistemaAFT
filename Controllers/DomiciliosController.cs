@@ -24,7 +24,8 @@ namespace SistemaAFT.Controllers
         // GET: Domicilios
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Domicilio.Include(d => d.Municipio).Include(d => d.Persona).Include(d => d.Tipo_Ambito).Include(d => d.Tipo_Asentamiento).Include(d => d.Tipo_Vialidad);
+            //Include(d => d.Municipio)
+            var applicationDbContext = _context.Domicilio.Include(d => d.Persona).Include(d => d.Tipo_Ambito).Include(d => d.Tipo_Asentamiento).Include(d => d.Tipo_Vialidad);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -37,7 +38,7 @@ namespace SistemaAFT.Controllers
             }
 
             var domicilio = await _context.Domicilio
-                .Include(d => d.Municipio)
+                //.Include(d => d.Municipio)
                 .Include(d => d.Persona)
                 .Include(d => d.Tipo_Ambito)
                 .Include(d => d.Tipo_Asentamiento)
@@ -76,7 +77,7 @@ namespace SistemaAFT.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "Nombre", domicilio.MunicipioID);
+            //ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "Nombre", domicilio.Municipio);
             ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "CRUP", domicilio.PersonaID);
             ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Nombre", domicilio.Tipo_AmbitoID);
             ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Nombre", domicilio.Tipo_AsentamientoID);
@@ -97,7 +98,7 @@ namespace SistemaAFT.Controllers
             {
                 return NotFound();
             }
-            ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "Nombre", granModelo.Domicilio.MunicipioID);
+            //ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "Nombre", granModelo.Domicilio.Municipio);
             ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "CURP", granModelo.Domicilio.PersonaID);
             ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Nombre", granModelo.Domicilio.Tipo_AmbitoID);
             ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Nombre", granModelo.Domicilio.Tipo_AsentamientoID);
@@ -139,7 +140,7 @@ namespace SistemaAFT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "Nombre", granModelo.Domicilio.MunicipioID);
+            //ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "Nombre", granModelo.Domicilio.MunicipioID);
             ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "CURP", granModelo.Domicilio.PersonaID);
             ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Nombre", granModelo.Domicilio.Tipo_AmbitoID);
             ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Nombre", granModelo.Domicilio.Tipo_AsentamientoID);
@@ -156,7 +157,7 @@ namespace SistemaAFT.Controllers
             }
 
             var domicilio = await _context.Domicilio
-                .Include(d => d.Municipio)
+                //.Include(d => d.Municipio)
                 .Include(d => d.Persona)
                 .Include(d => d.Tipo_Ambito)
                 .Include(d => d.Tipo_Asentamiento)
@@ -195,7 +196,7 @@ namespace SistemaAFT.Controllers
         }
 
         //Llamada a procedimiento de actualizar en la base de datos spUpdateDomicilio
-        public string updateDomicilio(int DomicilioID, int Tipo_AmbitoID, string estado, string nombreasentamiento, int Tipo_Vialidad, string noexterior, int Municipio, string referenciavialidad, string nombrevialidad, string nointerior, string localidad, string referenciaposterior, string codigopostal, int Tipo_Asentamiento, string referenciaubicacion, int PersonaID)
+        public string updateDomicilio(int DomicilioID, int Tipo_AmbitoID, string estado, string nombreasentamiento, int Tipo_Vialidad, string noexterior, string Municipio, string referenciavialidad, string nombrevialidad, string nointerior, string localidad, string referenciaposterior, string codigopostal, int Tipo_Asentamiento, string referenciaubicacion, int PersonaID)
         {
             try
             {
@@ -235,7 +236,7 @@ namespace SistemaAFT.Controllers
         }
 
         //Llamada a procedimiento de actualizar en la base de datos spAddDomicilio
-        public string addDomicilio(int Tipo_AmbitoID, string estado, string nombreasentamiento, int Tipo_Vialidad, string noexterior, int Municipio, string referenciavialidad, string nombrevialidad, string nointerior, string localidad, string referenciaposterior, string codigopostal, int Tipo_Asentamiento, string referenciaubicacion, int PersonaID)
+        public string addDomicilio(int Tipo_AmbitoID, string estado, string nombreasentamiento, int Tipo_Vialidad, string noexterior, string Municipio, string referenciavialidad, string nombrevialidad, string nointerior, string localidad, string referenciaposterior, string codigopostal, int Tipo_Asentamiento, string referenciaubicacion, int PersonaID)
         {
             try
             {
