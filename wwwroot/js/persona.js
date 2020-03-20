@@ -150,6 +150,7 @@ $('#crearPersona').submit(function () {
                     console.log(r);
                 }
             });
+            //console.log("retorno falso")
             return false;
         }
     }

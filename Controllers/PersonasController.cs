@@ -54,10 +54,11 @@ namespace SistemaAFT.Controllers
             return View(persona);
         }
 
+        
         // GET: Personas/Create
         public IActionResult Create()
         {
-
+            
             ViewData["DiscapacidadID"] = new SelectList(_context.Discapacidad, "DiscapacidadID", "DiscapacidadID");
             ViewData["Estado_CivilID"] = new SelectList(_context.Estado_Civil, "Estado_CivilID", "Nombre_Edo_Civil");
             ViewData["EtniaID"] = new SelectList(_context.Etnia, "EtniaID", "EtniaID");
@@ -72,6 +73,7 @@ namespace SistemaAFT.Controllers
             ViewData["NacionalidadID"] = new SelectList(_context.Set<Nacionalidad>(), "NacionalidadID", "Nombre");
             ViewData["CompaniaID"] = new SelectList(_context.Set<Compania>(), "CompaniaID", "nombre_compania");
             ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "nombre_tipo");
+
             return View();
         }
          
@@ -85,15 +87,18 @@ namespace SistemaAFT.Controllers
         public async Task<IActionResult> Create( GranModelo granModelo)
         {
             
-                System.Diagnostics.Debug.WriteLine("entrooo");
+            System.Diagnostics.Debug.WriteLine("entrooo");
             if(granModelo.Persona != null)
             {
                 _context.Add(granModelo.Persona);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));                
             }
-                           
 
+            /*
+            var libros = _context.Domicilio.FromSqlRaw("Select * From dbo.Domicilio WHERE PersonaID = {0}", granModelo.Persona.PersonaID).ToList();
+            ViewBag.Libros = libros;
+            */
             ViewData["DiscapacidadID"] = new SelectList(_context.Discapacidad, "DiscapacidadID", "DiscapacidadID", granModelo.Persona.DiscapacidadID);
             ViewData["Estado_CivilID"] = new SelectList(_context.Estado_Civil, "Estado_CivilID", "Nombre_Edo_Civil", granModelo.Persona.Estado_CivilID);
             ViewData["EtniaID"] = new SelectList(_context.Etnia, "EtniaID", "EtniaID", granModelo.Persona.EtniaID);
