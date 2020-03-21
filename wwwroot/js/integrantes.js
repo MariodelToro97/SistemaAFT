@@ -2,9 +2,11 @@
     $('#integrantesTop').click(function () {
         document.getElementById('btnModalIntegrante').innerHTML = "Guardar";
         document.getElementById('btnCancelarIntegrante').innerHTML = "Cancelar";
+        
         limpiarIntegrantes();
         $('#btnModalIntegrante').show();
         $('#integrantePersonaID').val($('#personaGeneralID').val());
+        
     });
 
     $('#btnModalIntegrante').click(function () {
@@ -12,7 +14,11 @@
     });
 });
 
-$('#formIntegrantes').submit(function () {
+$('#formIntegrantes').submit(function (e) {
+    listadoContactos = document.querySelector('#tableIntegrantes');
+    //console.log("listado", listadoContactos)
+    nuevoContacto = document.createElement('tr');
+
     var curp = $('#integranteCurp').val();
     var nombre = $('#integranteNombre').val();
     var aPaterno = $('#integranteApellidoPaterno').val();
@@ -36,10 +42,32 @@ $('#formIntegrantes').submit(function () {
                     aMaterno: aMaterno,
                     persona: persona
                 },
+                //contentType: false,
+                //processData: false,
                 success: function (data) {
-                    console.log(data);
-                    $('#tableIntegrantes').load(" #tableIntegrantes");
-                    $('#modalIntegrantes').modal('hide');
+                    alert('Insertado con el id ' + data);
+                    //console.log(data);
+                    //$('#tableIntegrantes').load(" #tableIntegrantes");
+                   $('#modalIntegrantes').modal('hide');
+                    console.log("id de la persona", persona);
+                    console.log("id del telefono", data);
+
+                    nuevoContacto.setAttribute("id", `${data}`);
+
+                    nuevoContacto.innerHTML = `
+                            <td>-</td>
+                            <td>${curp}</td>
+                            <td>-</td>
+                            <td>${nombre}</td>
+                            <td>-</td>
+                            
+                            <button type="button" onclick="editIntegrante(this)" data-toggle="modal" data-target="#modalIntegrantes" class="btn btn-success" value=${data} name=${persona} id="editIntegrante">Editar</button>
+                            <button class="btn btn-primary" onclick="detalleIntegrante(this)" data-toggle="modal" data-target="#modalIntegrantes" value=${data} name=${persona}>Detalles</button>
+                            <button class="btn btn-danger" onclick="deleteIntegrante(this)" value=${data}>Borrar</button>
+                        </td>
+                    `;
+
+                    listadoContactos.appendChild(nuevoContacto);
                 },
                 error: function (r) {
                     console.log(r);
@@ -65,8 +93,28 @@ $('#formIntegrantes').submit(function () {
                     },
                     success: function (data) {
                         console.log(data);
-                        $('#tableIntegrantes').load(" #tableIntegrantes");
+                        //$('#tableIntegrantes').load(" #tableIntegrantes");
                         $('#modalIntegrantes').modal('hide');
+
+                        var elemento = document.getElementById(id);
+                        $(elemento).remove();
+
+                        nuevoContacto.setAttribute("id", `${id}`);
+
+                        nuevoContacto.innerHTML = `
+                            <td>-</td>
+                            <td>${curp}</td>
+                            <td>-</td>
+                            <td>${nombre}</td>
+                            <td>-</td>
+                            <td>
+                                <button type="button" onclick="editIntegrante(this)" data-toggle="modal" data-target="#modalIntegrantes" class="btn btn-success" value=${id} name=${persona} id="editIntegrante">Editar</button>
+                                <button class="btn btn-primary" onclick="detalleIntegrante(this)" data-toggle="modal" data-target="#modalIntegrantes" value=${id} name=${persona}>Detalles</button>
+                                <button class="btn btn-danger" onclick="deleteIntegrante(this)" value=${id}>Borrar</button>
+                            </td>
+                        `;
+
+                        listadoContactos.appendChild(nuevoContacto);
                     },
                     error: function (r) {
                         console.log(r);
@@ -96,7 +144,9 @@ function deleteIntegrante(boton) {
         },
         success: function (data) {
             console.log(data);
-            $('#tableIntegrantes').load(" #tableIntegrantes");
+            //$('#tableIntegrantes').load(" #tableIntegrantes");
+            var elemento = document.getElementById(id);
+            $(elemento).remove();
         },
         error: function (r) {
             console.log(r);
