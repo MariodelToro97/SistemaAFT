@@ -22,8 +22,7 @@ namespace SistemaAFT.Models
         [Required(ErrorMessage = "Campo Requerido")]
         public string noexterior { get; set; }
         [Required(ErrorMessage = "Campo Requerido")]
-        public int MunicipioID { get; set; }
-        public Municipio Municipio { get; set; }
+        public string Municipio { get; set; }
         public string referenciavialidad { get; set; }
         [Required(ErrorMessage = "Campo Requerido")]
         public string nombrevialidad { get; set; }

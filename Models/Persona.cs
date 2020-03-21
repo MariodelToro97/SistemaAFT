@@ -18,6 +18,7 @@ namespace SistemaAFT.Models
         //[Required(ErrorMessage = "Campo requerido")]
         public string CURP { get; set; }
         //[Required(ErrorMessage = "Campo requerido")]
+        [RegularExpression("^[A-Z]{4}[0-9]{6}[A-Z,0-9]{3}", ErrorMessage = "El RFC no es válido")]
         public string RFC { get; set; }
         //[Required(ErrorMessage = "Campo Requerido")]
         public string nombre { get; set; }

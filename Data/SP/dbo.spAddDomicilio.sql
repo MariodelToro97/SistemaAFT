@@ -4,7 +4,7 @@
 	@asentamiento varchar(max),
 	@vialidad int,
 	@noExterior varchar(max),
-	@munID int,
+	@munID varchar(max),
 	@refVialidad varchar(max),
 	@nomViali varchar(max),
 	@noInterior varchar(max),
