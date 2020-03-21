@@ -4,6 +4,8 @@
         document.getElementById('btnModalRepresentante').innerHTML = "Guardar";
         document.getElementById('btnCancelarRepresentante').innerHTML = "Cancelar";
         limpiarRepresentante();
+        $('#btnModalRepresentante').attr("disabled", true);
+        $('#representanteModal').attr("disabled", true);
         $('#representantePersonaID').val($('#personaGeneralID').val());
     });
 
@@ -11,10 +13,17 @@
         $("span.Representantes").show();
     });
 
-    $('#representanteCurp, #representanteNombre, #representanteApellidoPaterno, #representanteApellidoMaterno').keyup(function () {
-        var tamano = $('#representanteCurp').val() + $('#representanteNombre').val() + $('#representanteApellidoPaterno').val() + $('#representanteApellidoMaterno').val();        
-        console.log(Object.keys(tamano).length);
-        $('#representanteModal').attr("disabled", Object.keys(tamano).length < 25);      
+    $('#representanteModal').click(function () {
+        document.getElementById('btnModalDocumentoRepresentante').innerHTML = "Guardar";
+    });
+
+    $('#representanteCurp, #representanteNombre, #representanteApellidoPaterno').keyup(function () {
+        if ($('#representanteNombre').val() !== '' && $('#representanteCurp').val() !== '' && $('#representanteApellidoPaterno').val() !== '') {
+            $('#btnModalRepresentante').attr("disabled", false);
+        } else {            
+            $('#btnModalRepresentante').attr("disabled", true);
+        }
+        //$('#representanteModal').attr("disabled", $('#representanteCurp').val() === '' && $('#representanteNombre').val() === '' && $('#representanteApellidoPaterno').val() === '');
     });
 });
 
@@ -82,9 +91,18 @@ $('#formRepresentantes').submit(function () {
                     persona: persona
                 },
                 success: function (data) {
-                    console.log(data);
-                    $('#tableRepresentante').load(" #tableRepresentante");
-                    $('#modalRepresentantes').modal('hide');
+                    if (data === '') {
+                        alert('No se insertó por qué ya esta dado de alta');
+                    } else {
+                        console.log(data);
+                        $('#representanteID').val(data);
+                        $('#representanteModal').attr("disabled", false);
+                        $('#btnModalRepresentante').attr("disabled", true);
+                        $('#lblGuardadoRepresentante').hide();
+                        $('#lblDocumentosRepresentante').show();
+                        $('#tableRepresentante').load(" #tableRepresentante");
+                        //$('#modalRepresentantes').modal('hide');
+                    }
                 },
                 error: function (r) {
                     console.log(r);
@@ -125,6 +143,7 @@ $('#formRepresentantes').submit(function () {
 
 function editarInt(boton) {
     limpiarRepresentante();
+    $('#btnModalRepresentante').attr("disabled", false);
     $('#btnModalRepresentante').show();
     document.getElementById('btnCancelarRepresentante').innerHTML = "Cerrar";
     document.getElementById('btnModalRepresentante').innerHTML = "Editar";
