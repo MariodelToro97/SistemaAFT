@@ -303,5 +303,117 @@ namespace SistemaAFT.Controllers
                 return e.ToString();
             }
         }
+
+        //Llamada a procedimiento para insertar documentos del representante spAddDocumentosRepresentante
+        [HttpPost]
+        public string addDocumentoRepresentante(string tipo, string folio, string fecha, int repre)
+        {
+            try
+            {
+                SqlConnection cn = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=dbsistemaaft;Trusted_Connection=True;MultipleActiveResultSets=true");
+
+                SqlCommand com = new SqlCommand("spAddDocumentoRepresentante", cn);
+                com.CommandType = CommandType.StoredProcedure;
+
+                com.Parameters.AddWithValue("@tipoDoc", tipo);
+                com.Parameters.AddWithValue("@folio", folio);
+                com.Parameters.AddWithValue("@fecha", fecha);
+                com.Parameters.AddWithValue("@repre", repre);
+
+                SqlParameter ID = new SqlParameter("@ID", 0);
+                ID.Direction = ParameterDirection.Output;
+                com.Parameters.Add(ID);
+
+                cn.Open();
+                com.ExecuteNonQuery();
+                string valor = com.Parameters["@ID"].Value.ToString();
+                cn.Close();
+
+                return valor;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        //Llamada a procedimiento de borrar documento de representante en la base de datos spADeleteDocumentoRepresentante
+        [HttpPost]
+        public string deleteDocumentoRepresentante(int id, int repre)
+        {
+            try
+            {
+                SqlConnection cn = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=dbsistemaaft;Trusted_Connection=True;MultipleActiveResultSets=true");
+
+                SqlCommand com = new SqlCommand("spDeleteDocumentoRepresentante", cn);
+                com.CommandType = CommandType.StoredProcedure;
+
+                com.Parameters.AddWithValue("@id", id);
+                com.Parameters.AddWithValue("@repre", repre);
+
+                SqlParameter ID = new SqlParameter("@contador", 0);
+                ID.Direction = ParameterDirection.Output;
+                com.Parameters.Add(ID);
+
+                cn.Open();
+                com.ExecuteNonQuery();
+                string valor = com.Parameters["@contador"].Value.ToString();
+                cn.Close();
+
+                return valor;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        //Método para obtener los datos de los documentos de los representantes
+        [HttpGet]
+        public JsonResult getDocumentosRepresentantes(int id)
+        {
+            var classes = _context.documentoRepresentante.FromSqlRaw("Select * From dbo.documentoRepresentante WHERE documentoRepresentanteID = {0}", id);
+            return Json(classes);
+        }
+
+        //Método para obtener los datos de los documentos de los representantes al presionar el botón de edit de la tabla exterior
+        [HttpGet]
+        public JsonResult getDocumentosRepresentante(int id)
+        {
+            var classes = _context.documentoRepresentante.FromSqlRaw("Select * From dbo.documentoRepresentante WHERE RepresentanteID = {0}", id);
+            return Json(classes);
+        }
+
+        //Llamada a procedimiento de actualizar documentos de Representante en la base de datos spUpdatedocumentoRepresentante
+        public string updateDocumentoRepresentante(int id, int tipo, string folio, string fecha)
+        {
+            try
+            {
+                SqlConnection cn = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=dbsistemaaft;Trusted_Connection=True;MultipleActiveResultSets=true");
+
+                SqlCommand com = new SqlCommand("spUpdateDocumentoRepresentante", cn);
+                com.CommandType = CommandType.StoredProcedure;
+
+                com.Parameters.AddWithValue("@id", id);
+                com.Parameters.AddWithValue("@tipoDoc", tipo);
+                com.Parameters.AddWithValue("@folio", folio);
+                com.Parameters.AddWithValue("@fecha", fecha);
+
+                SqlParameter ID = new SqlParameter("@docu", 0);
+                ID.Direction = ParameterDirection.Output;
+                com.Parameters.Add(ID);
+
+                cn.Open();
+                com.ExecuteNonQuery();
+                string valor = com.Parameters["@docu"].Value.ToString();
+                cn.Close();
+
+                return valor;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
     }
 }

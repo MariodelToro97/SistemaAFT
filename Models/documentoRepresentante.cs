@@ -10,7 +10,8 @@ namespace SistemaAFT.Models
     {
         public int documentoRepresentanteID { get; set; }
         [Required(ErrorMessage = "Campo requerido")]
-        public int tipoDocumento { get; set; }
+        public int Tipo_DocumentoID { get; set; }
+        public Tipo_Documento Tipo_Documento { get; set; }
         [Required(ErrorMessage = "Campo requerido")]
         public string folioDocumento { get; set; }
         [Required(ErrorMessage = "Campo Requerido")]

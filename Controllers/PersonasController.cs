@@ -72,6 +72,7 @@ namespace SistemaAFT.Controllers
             ViewData["NacionalidadID"] = new SelectList(_context.Set<Nacionalidad>(), "NacionalidadID", "Nombre");
             ViewData["CompaniaID"] = new SelectList(_context.Set<Compania>(), "CompaniaID", "nombre_compania");
             ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "nombre_tipo");
+            ViewData["Tipo_DocumentoID"] = new SelectList(_context.Set<Tipo_Documento>(), "Tipo_DocumentoID", "nombre");
             return View();
         }
          
@@ -174,6 +175,7 @@ namespace SistemaAFT.Controllers
             ViewData["NacionalidadID"] = new SelectList(_context.Set<Nacionalidad>(), "NacionalidadID", "Nombre");
             ViewData["CompaniaID"] = new SelectList(_context.Set<Compania>(), "CompaniaID", "nombre_compania", granModelo.Telefono.CompaniaID);
             ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "nombre_tipo", granModelo.Telefono.Tipo_TelefonoID);
+            ViewData["Tipo_DocumentoID"] = new SelectList(_context.Set<Tipo_Documento>(), "Tipo_DocumentoID", "nombre");
 
             return View(granModelo);
         }
@@ -226,6 +228,7 @@ namespace SistemaAFT.Controllers
             ViewData["NacionalidadID"] = new SelectList(_context.Set<Nacionalidad>(), "NacionalidadID", "Nombre");
             ViewData["CompaniaID"] = new SelectList(_context.Set<Compania>(), "CompaniaID", "nombre_compania", granModelo.Telefono.CompaniaID);
             ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "nombre_tipo", granModelo.Telefono.Tipo_TelefonoID);
+            ViewData["Tipo_DocumentoID"] = new SelectList(_context.Set<Tipo_Documento>(), "Tipo_DocumentoID", "nombre", granModelo.documentoRepresentante.Tipo_Documento);
 
             return View(granModelo);
         }

@@ -12,7 +12,7 @@ namespace SistemaAFT.Data
 		{
 			context.Database.EnsureCreated();
 
-			if (context.Nacionalidad.Any()  || context.Genero.Any() || context.Estado_Civil.Any() || context.Tipo_Identidad.Any() || context.Municipio.Any() || context.Tipo_Persona.Any() || context.Etnia.Any() || context.Discapacidad.Any() || context.Tipo_Ambito.Any() || context.Tipo_Asentamiento.Any() || context.Tipo_Vialidad.Any())
+			if (context.Nacionalidad.Any() || context.Tipo_Documento.Any()  || context.Genero.Any() || context.Estado_Civil.Any() || context.Tipo_Identidad.Any() || context.Municipio.Any() || context.Tipo_Persona.Any() || context.Etnia.Any() || context.Discapacidad.Any() || context.Tipo_Ambito.Any() || context.Tipo_Asentamiento.Any() || context.Tipo_Vialidad.Any())
 			{
 				return;
 			}
@@ -275,6 +275,23 @@ namespace SistemaAFT.Data
 			foreach (Nacionalidad g in nacionalidad)
 			{
 				context.Nacionalidad.Add(g);
+			}
+
+			//Tipo de documento
+			var tipoDocumento = new Tipo_Documento[]
+			{
+				new Tipo_Documento {nombre = "ACTA CONSTITUTIVA"},
+				new Tipo_Documento {nombre = "ANEXO MODIFICATORIO DE ACTA CONSTITUTIVA"},
+				new Tipo_Documento {nombre = "OTRO"},
+				new Tipo_Documento {nombre = "PODER NOTARIAL"},
+				new Tipo_Documento {nombre = "CARTA PODER SIMPLE"},
+				new Tipo_Documento {nombre = "CARTA PODER ANTE NOTARIO"},
+				new Tipo_Documento {nombre = "ACTA DE ASAMBLEA"}
+			};
+
+			foreach (Tipo_Documento g in tipoDocumento)
+			{
+				context.Tipo_Documento.Add(g);
 			}
 
 			context.SaveChanges();

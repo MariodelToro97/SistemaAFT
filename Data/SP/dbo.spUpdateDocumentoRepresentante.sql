@@ -1,13 +1,15 @@
 ﻿CREATE PROCEDURE [dbo].[spUpdateDocumentoRepresentante]
 	@id int,
-	@tipoDoc varchar(max),
+	@tipoDoc smallint,
 	@folio varchar(max),
 	@fecha varchar(max),
-	@repre int
+	@docu int OUTPUT
 AS
 	BEGIN
 		UPDATE documentoRepresentante
-		SET tipoDocumento = @tipoDoc, folioDocumento = @folio, fechaDocumento = @fecha, RepresentanteID = @repre
+		SET Tipo_DocumentoID = @tipoDoc, folioDocumento = @folio, fechaDocumento = @fecha
 		WHERE documentoRepresentanteID = @id;
+
+		SELECT @docu = documentoRepresentanteID FROM documentoRepresentante WHERE documentoRepresentanteID = @id;
 	END	
-RETURN 0
+RETURN 

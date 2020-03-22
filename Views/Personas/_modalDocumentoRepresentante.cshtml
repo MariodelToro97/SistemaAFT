@@ -18,19 +18,21 @@
                     <div class="row">
                         <div class="col-md-4 mt-2">
                             <div class="form-group">
-                                <label asp-for="documentoRepresentante.tipoDocumento" class="control-label">Tipo de documento<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="documentoRepresentante.tipoDocumento" class="text-danger Representantes ErrorInput"></span>
-                                <input asp-for="documentoRepresentante.tipoDocumento" id="tipoDocumentoRep" type="text" class="form-control" placeholder="Tipo de documento" required />
+                                <label asp-for="documentoRepresentante.Tipo_DocumentoID" class="control-label">Tipo de documento<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="documentoRepresentante.Tipo_DocumentoID" class="text-danger documentosRepresentantes ErrorInput"></span>
+                                <select asp-for="documentoRepresentante.Tipo_DocumentoID" id="tipoDocumentoRep" class="form-control" asp-items="ViewBag.Tipo_DocumentoID" required>
+                                    <option value="">Seleccione opción</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-4 mt-2">
                             <div class="form-group">
-                                <label asp-for="documentoRepresentante.folioDocumento" class="control-label">Folio de documento<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="documentoRepresentante.folioDocumento" class="text-danger Representantes ErrorInput"></span>
+                                <label asp-for="documentoRepresentante.folioDocumento" class="control-label">Folio de documento<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="documentoRepresentante.folioDocumento" class="text-danger documentosRepresentantes ErrorInput"></span>
                                 <input id="folioDocumentoRep" asp-for="documentoRepresentante.folioDocumento" type="text" class="form-control" placeholder="Folio de documento" required />
                             </div>
                         </div>
                         <div class="col-md-4 mt-2">
                             <div class="form-group">
-                                <label asp-for="documentoRepresentante.fechaDocumento" class="control-label">Fecha de documento<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="documentoRepresentante.fechaDocumento" class="text-danger Representantes ErrorInput"></span>
+                                <label asp-for="documentoRepresentante.fechaDocumento" class="control-label">Fecha de documento<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="documentoRepresentante.fechaDocumento" class="text-danger documentosRepresentantes ErrorInput"></span>
                                 <input id="fechaDocumentoRep" asp-for="documentoRepresentante.fechaDocumento" type="date" class="form-control" required />
                             </div>
                         </div>                        
