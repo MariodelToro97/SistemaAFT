@@ -41,11 +41,18 @@ namespace SistemaAFT.Controllers
                 com.Parameters.AddWithValue("@aMaterno", aMaterno);
                 com.Parameters.AddWithValue("@persona", persona);
 
+                SqlParameter ID = new SqlParameter("@ID", 0);
+                ID.Direction = ParameterDirection.Output;
+                com.Parameters.Add(ID);
+
                 cn.Open();
                 com.ExecuteNonQuery();
+                //int valor = Int32.Parse (com.Parameters["@id"].Value.ToString());
+                //string valor = com.ExecuteScalar().ToString();
+                string valor = com.Parameters["@ID"].Value.ToString();
                 cn.Close();
 
-                return "SUCCESS";
+                return valor;
             }
             catch (Exception e)
             {
@@ -132,11 +139,18 @@ namespace SistemaAFT.Controllers
                 com.Parameters.AddWithValue("@Tipo_TelefonoID", Tipo_TelefonoID);
                 com.Parameters.AddWithValue("@persona", persona);
 
+                SqlParameter ID = new SqlParameter("@ID", 0);
+                ID.Direction = ParameterDirection.Output;
+                com.Parameters.Add(ID);
+
                 cn.Open();
                 com.ExecuteNonQuery();
+                //int valor = Int32.Parse (com.Parameters["@id"].Value.ToString());
+                //string valor = com.ExecuteScalar().ToString();
+                string valor = com.Parameters["@ID"].Value.ToString();
                 cn.Close();
 
-                return "SUCCESS";
+                return valor;
             }
             catch (Exception e)
             {

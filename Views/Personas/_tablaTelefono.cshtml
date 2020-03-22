@@ -4,11 +4,11 @@
     <div class="border border-secondary rounded bg-dark d-flex">
         <h4 class="my-3 mx-3 text-white font-weight-lighter">Telefonos</h4>
         <!--Modal 2-->
-        <button class="btn btn-light btn-rounded mr-3 my-3 ml-auto" id="botonAgregarTelefono" data-toggle="modal" onclick="limpiarForm()" data-target="#modalTelefonos" disabled>Agregar</button>
+        <button class="btn btn-light btn-rounded mr-3 my-3 ml-auto" id="botonAgregarTelefono" data-toggle="modal" onclick="limpiarForm()" data-target="#modalTelefonos">Agregar</button>
     </div>
 
     <div class="rounded border border-secondary">
-        <div id="tableTelefonos" class="container">
+        <div class="container">
             <table class="table table-sm table-secondary my-3 table-hover table-striped rounded">
                 <thead class="thead-light text-center">
                     <tr>
@@ -18,7 +18,7 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody class="text-center ">
+                <tbody id="tableTelefonos"  class="text-center ">
                     @if (ViewBag.Telefonos == null)
                     {
                         <p>No hay telefonos</p>
@@ -28,7 +28,7 @@
                     {
                         @foreach (var tel in (IEnumerable<SistemaAFT.Models.Telefono>)ViewBag.Telefonos)
                         {
-                            <tr>
+                            <tr id="@tel.TelefonoID">
                                 <th>@tel.numero</th>
                                 <th>@tel.CompaniaID</th>
                                 <th>@tel.Tipo_TelefonoID</th>
