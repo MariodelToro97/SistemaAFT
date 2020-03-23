@@ -4,6 +4,14 @@
         /* ASIGNA VALOR A CAMPO SURI */
         $('#acuseSuri').val('ACUSE SURI');
     });
+
+    $('#tipoIdenPersona').change(function () {
+        if ($(this).val() !== '') {
+            $("#numIdenPersona").prop("disabled", false);
+        } else {
+            $("#numIdenPersona").prop("disabled", true);
+        }
+    });
 });
 
 function limpiarPersona() {
@@ -13,6 +21,9 @@ function limpiarPersona() {
     $("span.Persona").hide();
 }
 
+function mayus(i) {
+    i.value = i.value.toUpperCase();
+}
 
 $('#crearPersona').submit(function () {
     var tipoPersona , curp, rfc, nombrePersona, aPaterno, aMAterno, nombreMoral, suri;
@@ -126,43 +137,48 @@ $('#crearPersona').submit(function () {
         if (rfc === 'NULL' || nombreMoral === 'NULL' || genero === '' || nacimiento === '' || civil === '' || nacionalidad === '' || numIdent === '' || identidad === '') {
             console.log("FALTAN DATOS");
         } else {
-            $.ajax({
-                type: 'POST',
-                url: "/Personas/addPersona",
-                data: {
-                    curp: curp,
-                    rfc: rfc,
-                    nombrePersona: nombrePersona,
-                    aPaterno: aPaterno,
-                    aMAterno: aMAterno,
-                    correo: correo,
-                    nacimiento: nacimiento,
-                    nacionalidad: nacionalidad,
-                    genero: genero,
-                    civil: civil,
-                    identidad: identidad,
-                    numIdent: numIdent,
-                    tipoPersona: tipoPersona,
-                    etnia: etnia,
-                    discapacidad: discapacidad,
-                    suri: suri,
-                    nombreMoral: nombreMoral
-                },
-                success: function (data) {
-                    if (data === '') {
-                        alert('No se insertó por qué ya esta dado de alta');
-                    } else {
-                        alert('Insertado con el id ' + data);
-                        //limpiarPersona();
-                        $('#personaGeneralID').val(data);
+            var expRFC = new RegExp("^[A-Z]{4}[0-9]{6}[A-Z,0-9]{3}");
+            if (!expRFC.test(rfc)) {
+                alert('El RFC no es válido');
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: "/Personas/addPersona",
+                    data: {
+                        curp: curp,
+                        rfc: rfc,
+                        nombrePersona: nombrePersona,
+                        aPaterno: aPaterno,
+                        aMAterno: aMAterno,
+                        correo: correo,
+                        nacimiento: nacimiento,
+                        nacionalidad: nacionalidad,
+                        genero: genero,
+                        civil: civil,
+                        identidad: identidad,
+                        numIdent: numIdent,
+                        tipoPersona: tipoPersona,
+                        etnia: etnia,
+                        discapacidad: discapacidad,
+                        suri: suri,
+                        nombreMoral: nombreMoral
+                    },
+                    success: function (data) {
+                        if (data === '') {
+                            alert('No se insertó por qué ya esta dado de alta');
+                        } else {
+                            alert('Insertado con el id ' + data);
+                            //limpiarPersona();
+                            $('#personaGeneralID').val(data);
+                        }
+                    },
+                    error: function (r) {
+                        console.log(r);
                     }
-                },
-                error: function (r) {
-                    console.log(r);
-                }
-            });
-            //console.log("retorno falso")
-            return false;
+                });
+                //console.log("retorno falso")
+                return false;
+            }
         }
     }
 });

@@ -241,18 +241,23 @@ function watchMunicipios(est) {
 
 function borrarDom(boton) {
     var id = boton.value;
+    var persona = $('#personaGeneralID').val();
 
     $.ajax({
         type: 'POST',
         url: "/Domicilios/deleteDomicilio",
         data: {
-            domID: id
+            domID: id,
+            persona: persona
         },
         success: function (data) {
+            if (data === '0') {
+                $('#lblNoDomicilio').show();
+            } 
             console.log(data);
             //$('#tableDomicilio').load(" #tableDomicilio");
             var elemento = document.getElementById(id);
-            $(elemento).remove();
+            $(elemento).remove(".tablaDomicilio");
         },
         error: function (r) {
             console.log(r);
@@ -270,10 +275,10 @@ $('#formEditDomicilio').submit(function (e) {
     var nomVia = $('#domicilioNombreVialidad').val();
     var domCP = $('#domicilioCodigoPostal').val();
     var domNE = $('#domicilioNoExterior').val();
-    var domEs = $('#domicilioEstado').val();                    //REVISAR
+    var domEs = $('#domicilioEstado').val();                    
     var domNA = $('#domicilioNombreAsentamiento').val();
-    var domMun = $('#domicilioMunicipioID').val();              //REVISAR
-    var loc = $('#domicilioLocalidad').val();                   //REVISAR
+    var domMun = $('#domicilioMunicipioID').val();              
+    var loc = $('#domicilioLocalidad').val();                   
     var tAse = $('#domicilioTipoAsentamiento').val();
     var refUb = $('#domicilioReferenciaUbicacion').val();
 
@@ -309,7 +314,6 @@ $('#formEditDomicilio').submit(function (e) {
         }
 
         if (document.getElementById('btnModalDomicilio').innerHTML === "Editar Domicilio") {
-            //e.preventDefault();
 
             $.ajax({
                 type: 'POST',
@@ -333,17 +337,14 @@ $('#formEditDomicilio').submit(function (e) {
                     DomicilioID: domicilioID,
                     PersonaID: persona
                 },
-                //contentType: false,
-                //processData: false,
-                success: function (data) {
-                    console.log(data);
+                success: function (data) {                    
                     $('#modalRegisterForm').modal('hide');
                    
-                    //listadoContactos.appendChild(nuevoContacto);
                     var elemento = document.getElementById(domicilioID);
-                    $(elemento).remove();
+                    $(elemento).remove(".tablaDomicilio");
 
-                    nuevoContacto.setAttribute("id", `${domicilioID}`);
+                    nuevoContacto.setAttribute("id", domicilioID);
+                    nuevoContacto.setAttribute("class", 'tablaDomicilio');
 
                     nuevoContacto.innerHTML = `
                         <td>${estado}</td>
@@ -390,18 +391,12 @@ $('#formEditDomicilio').submit(function (e) {
                     Tipo_Asentamiento: tipoAsentamiento,
                     PersonaID: persona
                 },
-                //contentType: false,
-                //processData: false,
                 success: function (data) {
                     alert('Insertado con el id ' + data);
-                    //obtenerDom(data);
-                    console.log("id de la persona", persona);
-                    console.log("id del domicilio", data);
-
-                   // obtenerDom(persona);
-                   // console.log("Este es el data", data);
+                    $('#lblNoDomicilio').hide();
                     
                     nuevoContacto.setAttribute("id", `${data}`);
+                    nuevoContacto.setAttribute("class", 'tablaDomicilio');
                                         
                     nuevoContacto.innerHTML = `
                         <td>${estado}</td>
@@ -411,8 +406,8 @@ $('#formEditDomicilio').submit(function (e) {
                         <td>${refUbi}</td>
                         <td>
                             <button type="button" onclick="editarDom(this)" data-toggle="modal" data-target="#modalRegisterForm" class="btn btn-success" value=${data} name=${persona} id="editDom">Editar</button>
-                            <button class="btn btn-primary" onclick="detailDom(this)" data-toggle="modal" data-target="#modalRegisterForm" value=${data} name=${persona} id="btnDetalleDom">Detalles</button>
-                            <button class="btn btn-danger" onclick="borrarDom(this)" value=${data}>Borrar</button>
+                            <button type="button" class="btn btn-primary" onclick="detailDom(this)" data-toggle="modal" data-target="#modalRegisterForm" value=${data} name=${persona} id="btnDetalleDom">Detalles</button>
+                            <button type="button" class="btn btn-danger" onclick="borrarDom(this)" value=${data}>Borrar</button>
                         </td>
                     `;
 

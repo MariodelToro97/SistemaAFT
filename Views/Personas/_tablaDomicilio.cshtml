@@ -16,7 +16,7 @@
             <tbody id="tableDomicilio" class="text-center ">
                 @if (ViewBag.Libros == null)
                 {
-                    <p>No hay domicilios</p>
+                    <p id="lblNoDomicilio" class="text-danger font-weight-bold">No hay domicilios</p>
                 }
                 else
                 {
@@ -24,7 +24,7 @@
                     {
                         <tr id="@dom.DomicilioID">
                             <th>@dom.estado</th>
-                            <th>@dom.MunicipioID</th>
+                            <th>@dom.Municipio</th>
                             <th>@dom.localidad</th>
                             <th>@dom.Tipo_AsentamientoID</th>
                             <th>@dom.referenciaubicacion</th>

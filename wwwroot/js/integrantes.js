@@ -42,17 +42,14 @@ $('#formIntegrantes').submit(function (e) {
                     aMaterno: aMaterno,
                     persona: persona
                 },
-                //contentType: false,
-                //processData: false,
                 success: function (data) {
                     alert('Insertado con el id ' + data);
-                    //console.log(data);
-                    //$('#tableIntegrantes').load(" #tableIntegrantes");
+
                    $('#modalIntegrantes').modal('hide');
-                    console.log("id de la persona", persona);
-                    console.log("id del telefono", data);
+                    $('#lblNoIntegrantes').hide();
 
                     nuevoContacto.setAttribute("id", `${data}`);
+                    nuevoContacto.setAttribute("class", 'tablaIntegrante');
 
                     nuevoContacto.innerHTML = `
                             <td>-</td>
@@ -97,9 +94,10 @@ $('#formIntegrantes').submit(function (e) {
                         $('#modalIntegrantes').modal('hide');
 
                         var elemento = document.getElementById(id);
-                        $(elemento).remove();
+                        $(elemento).remove(".tablaIntegrante");
 
                         nuevoContacto.setAttribute("id", `${id}`);
+                        nuevoContacto.setAttribute("class", 'tablaIntegrante');
 
                         nuevoContacto.innerHTML = `
                             <td>-</td>
@@ -135,18 +133,23 @@ function limpiarIntegrantes() {
 
 function deleteIntegrante(boton) {
     var id = boton.value;
+    var persona = $('#personaGeneralID').val();
 
     $.ajax({
         type: 'POST',
         url: "/Peticiones/deleteIntegrante",
         data: {
-            id: id
+            id: id,
+            persona: persona
         },
         success: function (data) {
+            if (data === '0') {
+                $('#lblNoIntegrantes').show();
+            } 
             console.log(data);
             //$('#tableIntegrantes').load(" #tableIntegrantes");
             var elemento = document.getElementById(id);
-            $(elemento).remove();
+            $(elemento).remove(".tablaIntegrante");
         },
         error: function (r) {
             console.log(r);

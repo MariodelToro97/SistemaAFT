@@ -60,16 +60,23 @@ function detailInt(boton) {
 
 function borrarInt(boton) {
     var id = boton.value;
+    var persona = $('#personaGeneralID').val();
 
     $.ajax({
         type: 'POST',
         url: "/Peticiones/deleteRepresentante",
         data: {
-            id: id
+            id: id,
+            persona: persona
         },
         success: function (data) {
+            if (data === '0') {
+                $('#lblNoRepresentantes').show();
+            } 
             console.log(data);
-            $('#tableRepresentante').load(" #tableRepresentante");
+            var elemento = document.getElementById(id);
+            $(elemento).remove(".tablaRepresentante");
+            //$('#tableRepresentante').load(" #tableRepresentante");
         },
         error: function (r) {
             console.log(r);
@@ -116,13 +123,11 @@ $('#formRepresentantes').submit(function () {
                         $('#cerrarModalRepresentantes').attr("disabled", true);
                         $('#lblGuardadoRepresentante').hide();
                         $('#lblDocumentosRepresentante').show();
-                        //$('#tableRepresentante').load(" #tableRepresentante");
-                        //$('#modalRepresentantes').modal('hide');
 
-                        //var nombreDoc = $('#tipoDocumentoRep option[value=' + data[i]['tipo_DocumentoID'] + ']').text();
+                        $('#lblNoRepresentantes').hide();
 
                         nuevoDoc.setAttribute("id", data);
-                        nuevoDoc.setAttribute("class", "filaRepresentante text-center");
+                        nuevoDoc.setAttribute("class", "filaRepresentante tablaRepresentante text-center");
                         nuevoDoc.innerHTML = '<td></td>' +
                             '<td>' + curp + '</td>' +
                             '<td></td>' +
@@ -163,10 +168,10 @@ $('#formRepresentantes').submit(function () {
                         $('#modalRepresentantes').modal('hide');
 
                         var fila = document.getElementById(id);
-                        $(fila).remove();
+                        $(fila).remove(".tablaRepresentante");
 
                         nuevoDoc.setAttribute("id", id);
-                        nuevoDoc.setAttribute("class", "filaRepresentante text-center");
+                        nuevoDoc.setAttribute("class", "filaRepresentante tablaRepresentante text-center");
                         nuevoDoc.innerHTML = '<td></td>' +
                             '<td>' + curp + '</td>' +
                             '<td></td>' +
@@ -216,7 +221,7 @@ $('#formDocumentoRepresentantes').submit(function () {
                 },
                 success: function (data) {
                     nuevoDoc.setAttribute("id", data);
-                    nuevoDoc.setAttribute("class", "filaDocumentoRepresentante");
+                    nuevoDoc.setAttribute("class", "filaDocumentoRepresentante tablaDocumentosRepresentantes");
                     nuevoDoc.innerHTML = '<td>' + nombreDoc + '</td><td>' + folio + '</td><td>' + fecha + '</td>' +
                         '<td> ' +
                         '<button type="button" onclick="editDocumentoRepresentante(this)" data-toggle="modal" data-target="#modalDocumentoRepresentantes" class="btn btn-success" value=' + data + ' name=' + repre + '>Editar</button>' +
@@ -249,10 +254,10 @@ $('#formDocumentoRepresentantes').submit(function () {
                 },
                 success: function (data) {
                     var fila = document.getElementById(id);
-                    $(fila).remove();
+                    $(fila).remove(".tablaDocumentosRepresentantes");
                     
                     nuevoDoc.setAttribute("id", data);
-                    nuevoDoc.setAttribute("class", "filaDocumentoRepresentante");
+                    nuevoDoc.setAttribute("class", "filaDocumentoRepresentante tablaDocumentosRepresentantes");
                     nuevoDoc.innerHTML = '<td>' + nombreDoc + '</td><td>' + folio + '</td><td>' + fecha + '</td>' +
                         '<td> ' +
                         '<button type="button" onclick="editDocumentoRepresentante(this)" data-toggle="modal" data-target="#modalDocumentoRepresentantes" class="btn btn-success" value=' + data + ' name=' + repre + '>Editar</button>' +
@@ -335,7 +340,7 @@ function deleteDocumentoRepresentante(boton) {
                 $('#cerrarModalRepresentantes').attr("disabled", true);
             }
             var fila = document.getElementById(id);
-            $(fila).remove();
+            $(fila).remove(".tablaDocumentosRepresentantes");
         },
         error: function (r) {
             console.log(r);
@@ -396,7 +401,7 @@ function getRepresentante(id) {
                             var nombreDoc = $('#tipoDocumentoRep option[value=' + data[i]['tipo_DocumentoID'] + ']').text();
 
                             nuevoDoc.setAttribute("id", data[i]['documentoRepresentanteID']);
-                            nuevoDoc.setAttribute("class", "filaDocumentoRepresentante");
+                            nuevoDoc.setAttribute("class", "filaDocumentoRepresentante tablaDocumentosRepresentantes");
                             nuevoDoc.innerHTML = '<td>' + nombreDoc + '</td><td>' + data[i]['folioDocumento'] + '</td><td>' + data[i]['fechaDocumento'] + '</td>' +
                                 '<td> ' +
                                 '<button type="button" onclick="editDocumentoRepresentante(this)" data-toggle="modal" data-target="#modalDocumentoRepresentantes" class="btn btn-success" value=' + data[i]['documentoRepresentanteID'] + ' name=' + data[i]['representanteID'] + '>Editar</button>' +

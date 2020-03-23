@@ -14,18 +14,18 @@
                     <div class="col-md-4" id="divCURP">
                         <div class="form-group">
                             <label asp-for="Persona.CURP" class="control-label">CURP<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Persona.CURP" class="text-danger Persona ErrorInput"></span>
-                            <input asp-for="Persona.CURP" type="text" class="form-control" placeholder="CURP" maxlength="18" required id="curpPersona" />
+                            <input asp-for="Persona.CURP" type="text" onkeyup="mayus(this)" class="form-control" placeholder="CURP" maxlength="18" required id="curpPersona" />
                         </div>
                     </div>
                     <div class="col-md-1" id="imagenSearch">
-                        <div class="d-flex">
+                        <div class="d-flex">                            
                             <input type="image" class="rounded btn btn-block imageback tamanoIMG" src="~/icon/search-solid.svg" />
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label id="labelRFC" asp-for="Persona.RFC" class="control-label">RFC:</label><span id="spanRFC" asp-validation-for="Persona.RFC" class="text-danger Persona ErrorInput"></span>
-                            <input id="rfcPersona" asp-for="Persona.RFC" type="text" maxlength="13" class="form-control" placeholder="RFC" />
+                            <input id="rfcPersona" asp-for="Persona.RFC" onkeyup="mayus(this)" type="text" maxlength="13" class="form-control" placeholder="RFC" />
                         </div>
                     </div>
                     <div class="col-md-1" id="imagenSearchRFC" style="display: none;">
@@ -64,7 +64,7 @@
             </div>
             <div class="col-md-3" id="curpHistoricas">
                 <div class="form-group">
-                    <button id="CURP_Historicas" class="btn btn-block imageback font-weight-bold">CURP históricas</button>
+                    <button type="button" id="CURP_Historicas" class="btn btn-block imageback font-weight-bold">CURP históricas</button>
                     <table class="table table-hover table-sm table-responsive" style="display: none;" id="tableCurpHist">
                         <tbody>
                             <tr>

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spAddIntegrante]
+﻿CREATE PROCEDURE [dbo].[spAddTelefono]
 	@numero VARCHAR (MAX),
 	@CompaniaID int,
 	@Tipo_TelefonoID int,

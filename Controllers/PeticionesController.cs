@@ -62,7 +62,7 @@ namespace SistemaAFT.Controllers
 
         //Llamada a procedimiento de borrar Integrante en la base de datos spADeletentegrante
         [HttpPost]
-        public string deleteIntegrante(int id)
+        public string deleteIntegrante(int id, int persona)
         {
             try
             {
@@ -72,12 +72,18 @@ namespace SistemaAFT.Controllers
                 com.CommandType = CommandType.StoredProcedure;
 
                 com.Parameters.AddWithValue("@intID", id);
+                com.Parameters.AddWithValue("@persona", persona);
+
+                SqlParameter ID = new SqlParameter("@contador", 0);
+                ID.Direction = ParameterDirection.Output;
+                com.Parameters.Add(ID);
 
                 cn.Open();
                 com.ExecuteNonQuery();
+                string valor = com.Parameters["@contador"].Value.ToString();
                 cn.Close();
 
-                return "SUCCESS";
+                return valor;
             }
             catch (Exception e)
             {
@@ -198,7 +204,7 @@ namespace SistemaAFT.Controllers
 
         //Llamada a procedimiento de borrar Telefono en la base de datos spADeletentegrante
         [HttpPost]
-        public string deleteTelefono(int id)
+        public string deleteTelefono(int id, int persona)
         {
             try
             {
@@ -208,12 +214,18 @@ namespace SistemaAFT.Controllers
                 com.CommandType = CommandType.StoredProcedure;
 
                 com.Parameters.AddWithValue("@intID", id);
+                com.Parameters.AddWithValue("@persona", persona);
+
+                SqlParameter ID = new SqlParameter("@contador", 0);
+                ID.Direction = ParameterDirection.Output;
+                com.Parameters.Add(ID);
 
                 cn.Open();
                 com.ExecuteNonQuery();
+                string valor = com.Parameters["@contador"].Value.ToString();
                 cn.Close();
 
-                return "SUCCESS DELETE";
+                return valor;
             }
             catch (Exception e)
             {
@@ -231,7 +243,7 @@ namespace SistemaAFT.Controllers
 
         //Llamada a procedimiento de borrar representante en la base de datos spADeleteRepresentante
         [HttpPost]
-        public string deleteRepresentante(int id)
+        public string deleteRepresentante(int id, int persona)
         {
             try
             {
@@ -241,12 +253,18 @@ namespace SistemaAFT.Controllers
                 com.CommandType = CommandType.StoredProcedure;
 
                 com.Parameters.AddWithValue("@intID", id);
+                com.Parameters.AddWithValue("@persona", persona);
+
+                SqlParameter ID = new SqlParameter("@contador", 0);
+                ID.Direction = ParameterDirection.Output;
+                com.Parameters.Add(ID);
 
                 cn.Open();
                 com.ExecuteNonQuery();
+                string valor = com.Parameters["@contador"].Value.ToString();
                 cn.Close();
 
-                return "SUCCESS";
+                return valor;
             }
             catch (Exception e)
             {
