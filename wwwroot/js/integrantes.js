@@ -49,7 +49,7 @@ $('#formIntegrantes').submit(function (e) {
                     $('#lblNoIntegrantes').hide();
 
                     nuevoContacto.setAttribute("id", `${data}`);
-                    nuevoContacto.setAttribute("class", 'tablaIntegrante');
+                    nuevoContacto.setAttribute("class", `tablaIntegrante-${data}`);
 
                     nuevoContacto.innerHTML = `
                             <td>-</td>
@@ -93,11 +93,11 @@ $('#formIntegrantes').submit(function (e) {
                         //$('#tableIntegrantes').load(" #tableIntegrantes");
                         $('#modalIntegrantes').modal('hide');
 
-                        var elemento = document.getElementById(id);
-                        $(elemento).remove(".tablaIntegrante");
+                        var elemento = document.getElementsByClassName(`tablaIntegrante-${id}`);
+                        $(elemento).remove();
 
                         nuevoContacto.setAttribute("id", `${id}`);
-                        nuevoContacto.setAttribute("class", 'tablaIntegrante');
+                        nuevoContacto.setAttribute("class", `tablaIntegrante-${id}`);
 
                         nuevoContacto.innerHTML = `
                             <td>-</td>
@@ -148,8 +148,8 @@ function deleteIntegrante(boton) {
             } 
             console.log(data);
             //$('#tableIntegrantes').load(" #tableIntegrantes");
-            var elemento = document.getElementById(id);
-            $(elemento).remove(".tablaIntegrante");
+            var elemento = document.getElementsByClassName(`tablaIntegrante-${id}`);
+            $(elemento).remove();
         },
         error: function (r) {
             console.log(r);

@@ -43,7 +43,7 @@ $('#formTelefonos').submit(function (e) {
                     $('#lblNoTelefonos').hide();
 
                     nuevoContacto.setAttribute("id", `${data}`);
-                    nuevoContacto.setAttribute("class", 'tablaTelefono');
+                    nuevoContacto.setAttribute("class", `tablaTelefono-${data}`);
 
                     nuevoContacto.innerHTML = `
                         <td>${numero}</td>
@@ -84,11 +84,11 @@ $('#formTelefonos').submit(function (e) {
                         console.log(data);
                         $('#modalTelefonos').modal('hide');
 
-                        var elemento = document.getElementById(id);
-                        $(elemento).remove(".tablaTelefono");
+                        var elemento = document.getElementsByClassName(`tablaTelefono-${id}`);
+                        $(elemento).remove();
 
                         nuevoContacto.setAttribute("id", `${id}`);
-                        nuevoContacto.setAttribute("class", 'tablaTelefono');
+                        nuevoContacto.setAttribute("class", `tablaTelefono-${id}`);
 
                         nuevoContacto.innerHTML = `
                         <td>${numero}</td>
@@ -137,8 +137,8 @@ function deleteTelefono(boton) {
                 $('#lblNoTelefonos').show();
             } 
             console.log(data);
-            var elemento = document.getElementById(id);
-            $(elemento).remove(".tablaTelefono");
+            var elemento = document.getElementsByClassName(`tablaTelefono-${id}`);
+            $(elemento).remove();
             //$('#tableTelefonos').load(" #tableTelefonos");
         },
         error: function (r) {
