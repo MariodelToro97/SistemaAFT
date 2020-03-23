@@ -13,7 +13,7 @@
                     </div>
                     <div class="col-md-4" id="divCURP">
                         <div class="form-group">
-                            <label asp-for="Persona.CURP" class="control-label">CURP<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Persona.CURP" class="text-danger Persona ErrorInput"></span>
+                            <label asp-for="Persona.CURP" class="control-label">CURP<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.CURP" class="text-danger Persona ErrorInput"></span>
                             <input asp-for="Persona.CURP" type="text" onkeyup="mayus(this)" class="form-control" placeholder="CURP" maxlength="18" required id="curpPersona" />
                         </div>
                     </div>
