@@ -7,6 +7,8 @@
 
     $('#personaFisica').click(function () {
         personaFisicaRadio();
+        $("span.Persona").hide();
+        $("#spanRFC").hide();        
     }); 
     
     $('#personaMoral').click(function () {
@@ -34,6 +36,8 @@
         $('#divfolioActa').show();
         $('#divNumeroNotario').show();
 
+        $("#spanRFC").show();
+        $("span.Persona").hide();
         inicioPerson();
     
         document.getElementById('nombreGeneral').required = false;
@@ -165,7 +169,7 @@ function reinicializarTodo() {
     $("#crearPersona input").val("");
     $("#crearPersona textarea").val("");
     $("#crearPersona select").val("");
-    $("#crearPersona span").hide();
+    $("#crearPersona span.Persona").hide();
 
     deshabilitarModales();
     personaFisicaRadio();

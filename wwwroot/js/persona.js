@@ -58,6 +58,7 @@ $('#crearPersona').submit(function () {
     
     if ($('#personaFisica').is(':checked')) {
         tipoPersona = 1;
+        $("#spanRFC").hide();
         curp = $('#curpPersona').val();
         var expCURP = new RegExp ("^[A-Z]{4}[0-9]{6}[H,M][A-Z]{5}[A-Z,0-9][0-9]");
 
@@ -126,6 +127,7 @@ $('#crearPersona').submit(function () {
         
     } else if ($('#personaMoral').is(':checked')) {        
         tipoPersona = 2;
+        $("#spanRFC").show();
         curp = 'NULL';
         rfc = $('#rfcPersona').val();
         nombrePersona = 'NULL';
