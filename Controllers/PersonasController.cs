@@ -58,22 +58,26 @@ namespace SistemaAFT.Controllers
         // GET: Personas/Create
         public IActionResult Create()
         {
-            
+            ViewBag.Nacionalidad = _context.Nacionalidad.FromSqlRaw("Select * From dbo.Nacionalidad").ToList();
+            ViewBag.Civil = _context.Estado_Civil.FromSqlRaw("Select * From dbo.Estado_Civil").OrderBy(e => e.Nombre_Edo_Civil).ToList();
+            ViewBag.Genero = _context.Genero.FromSqlRaw("Select * From dbo.Genero ").ToList();
+            ViewBag.Tipo_Iden = _context.Tipo_Identidad.FromSqlRaw("Select * From dbo.Tipo_Identidad").OrderBy(i => i.Nombre).ToList();
+
             ViewData["DiscapacidadID"] = new SelectList(_context.Discapacidad, "DiscapacidadID", "DiscapacidadID");
-            ViewData["Estado_CivilID"] = new SelectList(_context.Estado_Civil, "Estado_CivilID", "Nombre_Edo_Civil");
+            //ViewData["Estado_CivilID"] = new SelectList(_context.Estado_Civil, "Estado_CivilID", "Nombre_Edo_Civil");
             ViewData["EtniaID"] = new SelectList(_context.Etnia, "EtniaID", "EtniaID");
-            ViewData["GeneroID"] = new SelectList(_context.Genero, "GeneroID", "Nombre_Genero");
-            ViewData["Tipo_IdentidadID"] = new SelectList(_context.Tipo_Identidad, "Tipo_IdentidadID", "Nombre");
+            //ViewData["GeneroID"] = new SelectList(_context.Genero, "GeneroID", "Nombre_Genero");
+            //ViewData["Tipo_IdentidadID"] = new SelectList(_context.Tipo_Identidad, "Tipo_IdentidadID", "Nombre");
             ViewData["Tipo_PersonaID"] = new SelectList(_context.Tipo_Persona, "Tipo_PersonaID", "Nombre_Tipo");
-            ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "Nombre");
+            //ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "Nombre");
             ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "PersonaID");
             ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Nombre");
             ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Nombre");
             ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Nombre");
-            ViewData["NacionalidadID"] = new SelectList(_context.Set<Nacionalidad>(), "NacionalidadID", "Nombre");
+            //ViewData["NacionalidadID"] = new SelectList(_context.Set<Nacionalidad>(), "NacionalidadID", "Nombre");
             ViewData["CompaniaID"] = new SelectList(_context.Set<Compania>(), "CompaniaID", "nombre_compania");
             ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "nombre_tipo");
-            ViewData["Tipo_DocumentoID"] = new SelectList(_context.Set<Tipo_Documento>(), "Tipo_DocumentoID", "nombre");
+            //ViewData["Tipo_DocumentoID"] = new SelectList(_context.Set<Tipo_Documento>(), "Tipo_DocumentoID", "nombre");
             return View();
         }
          
@@ -100,12 +104,12 @@ namespace SistemaAFT.Controllers
             ViewBag.Libros = libros;
             */
             ViewData["DiscapacidadID"] = new SelectList(_context.Discapacidad, "DiscapacidadID", "DiscapacidadID", granModelo.Persona.DiscapacidadID);
-            ViewData["Estado_CivilID"] = new SelectList(_context.Estado_Civil, "Estado_CivilID", "Nombre_Edo_Civil", granModelo.Persona.Estado_CivilID);
+            //ViewData["Estado_CivilID"] = new SelectList(_context.Estado_Civil, "Estado_CivilID", "Nombre_Edo_Civil", granModelo.Persona.Estado_CivilID);
             ViewData["EtniaID"] = new SelectList(_context.Etnia, "EtniaID", "EtniaID", granModelo.Persona.EtniaID);
             ViewData["GeneroID"] = new SelectList(_context.Genero, "GeneroID", "Nombre_Genero", granModelo.Persona.GeneroID);
-            ViewData["Tipo_IdentidadID"] = new SelectList(_context.Tipo_Identidad, "Tipo_IdentidadID", "Nombre", granModelo.Persona.Tipo_IdentidadID);
+            //ViewData["Tipo_IdentidadID"] = new SelectList(_context.Tipo_Identidad, "Tipo_IdentidadID", "Nombre", granModelo.Persona.Tipo_IdentidadID);
             ViewData["Tipo_PersonaID"] = new SelectList(_context.Tipo_Persona, "Tipo_PersonaID", "Nombre_Tipo", granModelo.Persona.Tipo_PersonaID);
-            ViewData["NacionalidadID"] = new SelectList(_context.Nacionalidad, "NacionalidadID", "Nombre", granModelo.Persona.Nacionalidad);
+            //ViewData["NacionalidadID"] = new SelectList(_context.Nacionalidad, "NacionalidadID", "Nombre", granModelo.Persona.Nacionalidad);
             return View(granModelo);
         }
 
@@ -287,7 +291,7 @@ namespace SistemaAFT.Controllers
         }
 
         //Llamada a procedimiento para insertar persona spAddPersona
-        public string addPersona (string curp, string rfc, string nombrePersona, string aPaterno, string aMAterno, string correo, string nacimiento, int nacionalidad, int genero, int civil, int identidad, string numIdent, int tipoPersona, int etnia, int discapacidad, string suri, string nombreMoral)
+        public string addPersona (string curp, string rfc, string nombrePersona, string aPaterno, string aMAterno, string correo, string nacimiento, int nacionalidad, int genero, int civil, int identidad, string numIdent, int tipoPersona, int etnia, int discapacidad, string suri, string nombreMoral, int actEcon, string fecha_con, string folio, int notario)
         {
             try
             {
@@ -313,6 +317,10 @@ namespace SistemaAFT.Controllers
                 com.Parameters.AddWithValue("@discapacidad", discapacidad);
                 com.Parameters.AddWithValue("@suri", suri);
                 com.Parameters.AddWithValue("@moral", nombreMoral);
+                com.Parameters.AddWithValue("@actEcon", actEcon);
+                com.Parameters.AddWithValue("@fecha_con", fecha_con);
+                com.Parameters.AddWithValue("@folio", folio);
+                com.Parameters.AddWithValue("@notario", notario);
 
                 SqlParameter ID = new SqlParameter("@ID", 0);
                 ID.Direction = ParameterDirection.Output;

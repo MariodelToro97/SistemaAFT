@@ -10,8 +10,19 @@
         </div>
         <div class="form-group" id="divGeneroIDPersona">
             <label asp-for="Persona.GeneroID" class="control-label">Género<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.GeneroID" class="text-danger Persona ErrorInput"></span>
-            <select asp-for="Persona.GeneroID" id="generoPersona" class="form-control" asp-items='ViewBag.GeneroID'>
+            <select asp-for="Persona.GeneroID" id="generoPersona" class="form-control">
                 <option value="" selected>Seleccione opción</option>
+                @foreach (var gen in (IEnumerable<SistemaAFT.Models.Genero>)ViewBag.Genero)
+                {
+                    @if (gen.Nombre_Genero == "MORAL")
+                    {
+                        <option id="optionHidGenero" hidden value="@gen.GeneroID">@gen.Nombre_Genero</option>
+                    }
+                    else
+                    {
+                        <option value="@gen.GeneroID">@gen.Nombre_Genero</option>
+                    }
+                }
             </select>
         </div>
         <div class="form-group" id="divEtniaIDPersona">
@@ -24,9 +35,10 @@
 
         <!--OTRO-->
         <div class="form-group" style="display:none;" id="divActividadEconomica">
-            <label asp-for="Persona.GeneroID" class="control-label">Actividad Económica<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.GeneroID" class="text-danger Persona ErrorInput"></span>
-            <select asp-for="Persona.GeneroID" id="actividadEconomicaPersona" class="form-control">
+            <label asp-for="Persona.actividadEconomica" class="control-label">Actividad Económica<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.actividadEconomica" class="text-danger Persona ErrorInput"></span>
+            <select asp-for="Persona.actividadEconomica" id="actividadEconomicaPersona" class="form-control">
                 <option value="" selected>Seleccione opción</option>
+                <option value="1" >ACTIVIDAD 1</option>
             </select>
         </div>
     </div>
@@ -38,8 +50,19 @@
         </div>
         <div class="form-group" id="divCivilPersona">
             <label asp-for="Persona.Estado_CivilID" class="control-label">Estado civil<span class="text-danger font-weight-bold">*</span>:</label> <span asp-validation-for="Persona.Estado_CivilID" class="text-danger Persona ErrorInput"></span>
-            <select asp-for="Persona.Estado_CivilID" id="civilPersona" class="form-control" asp-items="ViewBag.Estado_CivilID">
+            <select asp-for="Persona.Estado_CivilID" id="civilPersona" class="form-control">
                 <option value="" selected>Seleccione opción</option>
+                @foreach (var estC in (IEnumerable<SistemaAFT.Models.Estado_Civil>)ViewBag.Civil)
+                {
+                    @if (estC.Nombre_Edo_Civil == "MORAL")
+                    {
+                        <option id="optionHidEstadoCivil" hidden value="@estC.Estado_CivilID">@estC.Nombre_Edo_Civil</option>
+                    }
+                    else
+                    {
+                        <option value="@estC.Estado_CivilID">@estC.Nombre_Edo_Civil</option>
+                    }
+                }
             </select>
         </div>
         <div class="form-group" id="divDiscapacidadIDPersona">
@@ -52,32 +75,55 @@
 
         <!--OTRO-->
         <div class="form-group" style="display:none;" id="divFechaConstitucion">
-            <label asp-for="Persona.fechaNacimiento" class="control-label">Fecha de constitución<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.fechaNacimiento" class="text-danger Persona ErrorInput"></span>
-            <input asp-for="Persona.fechaNacimiento" id="fechaConstitucionPersona" type="date" class="form-control" required />
+            <label asp-for="Persona.fecha_Consti" class="control-label">Fecha de constitución<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.fecha_Consti" class="text-danger Persona ErrorInput"></span>
+            <input asp-for="Persona.fecha_Consti" id="fechaConstitucionPersona" type="date" class="form-control" required />
         </div>
         <div class="form-group" style="display:none;" id="divfolioActa">
-            <label asp-for="Persona.correo" class="control-label">Folio de acta constitutiva<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.correo" class="text-danger Persona ErrorInput"></span>
-            <input asp-for="Persona.correo" id="folioActaPersona" type="text" class="form-control" placeholder="Folio de acta" />
+            <label asp-for="Persona.folio_Acta" class="control-label">Folio de acta constitutiva<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.folio_Acta" class="text-danger Persona ErrorInput"></span>
+            <input asp-for="Persona.folio_Acta" id="folioActaPersona" type="text" class="form-control" placeholder="Folio de acta" />
         </div>
     </div>
 
     <div class="col-md-3 mt-2">
         <div class="form-group" id="divNacionalidadPerso">
             <label asp-for="Persona.NacionalidadID" class="control-label">Nacionalidad<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.NacionalidadID" class="text-danger Persona ErrorInput"></span>
-            <select asp-for="Persona.NacionalidadID" id="nacionalidadPers" class="form-control" asp-items="ViewBag.NacionalidadID">
+            <select asp-for="Persona.NacionalidadID" id="nacionalidadPers" class="form-control">
                 <option value="" selected>Seleccione opción</option>
+                @foreach (var nac in (IEnumerable<SistemaAFT.Models.Nacionalidad>)ViewBag.Nacionalidad)
+                {
+                    @if (nac.Nombre == "MORAL")
+                    {
+                        <option id="optionHidNacionalidad" hidden value="@nac.NacionalidadID">@nac.Nombre</option>
+                    }
+                    else
+                    {
+                        <option value="@nac.NacionalidadID">@nac.Nombre</option>
+
+                    }
+                }
             </select>
         </div>
         <div class="form-group" id="divTipoIdenPersona">
             <label asp-for="Persona.Tipo_IdentidadID" class="control-label">Tipo de identificación<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.Tipo_IdentidadID" class="text-danger Persona ErrorInput"></span>
-            <select asp-for="Persona.Tipo_IdentidadID" id="tipoIdenPersona" class="form-control" asp-items="ViewBag.Tipo_IdentidadID">
+            <select asp-for="Persona.Tipo_IdentidadID" id="tipoIdenPersona" class="form-control">
                 <option value="" selected>Seleccione opción</option>
+                @foreach (var iden in (IEnumerable<SistemaAFT.Models.Tipo_Identidad>)ViewBag.Tipo_Iden)
+                {
+                    @if (iden.Nombre == "MORAL")
+                    {
+                        <option id="optionHidTipoIdentidad" hidden value="@iden.Tipo_IdentidadID">@iden.Nombre</option>
+                    }
+                    else
+                    {
+                    <option value="@iden.Tipo_IdentidadID">@iden.Nombre</option>
+                        }
+                    }
             </select>
         </div>
         <!--OTRO-->
         <div class="form-group" style="display:none;" id="divNumeroNotario">
-            <label asp-for="Persona.correo" class="control-label">Número de notartio<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.correo" class="text-danger Persona ErrorInput"></span>
-            <input asp-for="Persona.correo" id="numeroNotarioPersona" type="number" class="form-control" placeholder="12345" />
+            <label asp-for="Persona.num_Notario" class="control-label">Número de notartio<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.num_Notario" class="text-danger Persona ErrorInput"></span>
+            <input asp-for="Persona.num_Notario" id="numeroNotarioPersona" type="number" class="form-control" placeholder="12345" />
         </div>
     </div>
 

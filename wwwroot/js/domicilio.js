@@ -324,7 +324,6 @@ $('#formEditDomicilio').submit(function (e) {
 
         if (document.getElementById('btnModalDomicilio').innerHTML === "Editar Domicilio") {
             var id = $('#domicilioID').val();
-            console.log("este es el id", id);
 
             $.ajax({
                 type: 'POST',
