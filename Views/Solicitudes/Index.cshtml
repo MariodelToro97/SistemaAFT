@@ -14,13 +14,13 @@
                 <h6 class="my-3 mx-3 text-white font-weight-lighter">Configuración de la solicitud</h6>
             </div>
             <div class="container">
-                <form asp-action="Create">
+                <form id="crearSolicitud">
                     <div class="row">
                         <div class="col-md-3 mt-2">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
                                 <label asp-for="YearID" class="control-label">Año<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="YearID" class="text-danger ErrorInput"></span>
-                                <select asp-for="YearID" class="form-control" asp-items="ViewBag.YearID">
+                                <select asp-for="YearID" class="form-control" asp-items="ViewBag.YearID" id="year">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
                             </div>
@@ -30,7 +30,7 @@
                         <div class="col-md-6 mt-2">
                             <div class="form-group">
                                 <label asp-for="ProgramaID" class="control-label">Programa<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="ProgramaID" class="text-danger ErrorInput"></span>
-                                <select asp-for="ProgramaID" class="form-control" asp-items="ViewBag.ProgramaID">
+                                <select asp-for="ProgramaID" class="form-control" id="programa" asp-items="ViewBag.ProgramaID">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
                             </div>
@@ -38,7 +38,7 @@
                         <div class="col-md-6 mt-2">
                             <div class="form-group">
                                 <label asp-for="ComponenteID" class="control-label">Componente<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="ComponenteID" class="text-danger ErrorInput"></span>
-                                <select asp-for="ComponenteID" class="form-control" asp-items="ViewBag.ComponenteID">
+                                <select asp-for="ComponenteID" class="form-control" id="componente" asp-items="ViewBag.ComponenteID">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
                             </div>
@@ -48,7 +48,7 @@
                         <div class="col-md-4 mt-2">
                             <div class="form-group">
                                 <label asp-for="Instancia_EjecutoraID" class="control-label">Instancia Ejecutora<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Instancia_EjecutoraID" class="text-danger ErrorInput"></span>
-                                <select asp-for="Instancia_EjecutoraID" class="form-control" asp-items="ViewBag.Instancia_EjecutoraID">
+                                <select asp-for="Instancia_EjecutoraID" class="form-control" id="instancia" asp-items="ViewBag.Instancia_EjecutoraID">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
                             </div>
@@ -56,22 +56,23 @@
                         <div class="col-md-4 mt-2">
                             <div class="form-group">
                                 <label asp-for="DelegacionID" class="control-label">Delegación<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="DelegacionID" class="text-danger ErrorInput"></span>
-                                <select asp-for="DelegacionID" class="form-control" asp-items="ViewBag.DelegacionID">
+                                <select asp-for="DelegacionID" class="form-control" id="delegacion" asp-items="ViewBag.DelegacionID">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-4 mt-2">
                             <div class="form-group">
-                                <label class="control-label">Estado<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="DelegacionID" class="text-danger ErrorInput"></span>
-                                <select class="form-control" id="estadoSolicitud">
+                                <label asp-for="estado" class="control-label">Estado<span class="text-danger font-weight-bold">*</span>:</label>
+                                <span asp-validation-for="estado" class="text-danger ErrorInput Modal"></span>                                
+                                <select asp-for="estado" class="form-control" id="estadoSolicitud" asp-items="ViewBag.estado">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-primary" id="traer_datos"/>
+                        <input type="submit" value="Create" class="btn btn-primary" />
                         <a asp-action="Index">Back to List</a>
                     </div>
                 </form>

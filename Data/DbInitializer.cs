@@ -16,11 +16,23 @@ namespace SistemaAFT.Data
 				context.Nacionalidad.Any() || context.Tipo_Documento.Any()  || context.Genero.Any() || 
 				context.Estado_Civil.Any() || context.Tipo_Identidad.Any() || context.Municipio.Any() || 
 				context.Tipo_Persona.Any() || context.Etnia.Any() || context.Discapacidad.Any() || 
-				context.Tipo_Ambito.Any() || context.Tipo_Asentamiento.Any() || context.Tipo_Vialidad.Any())
+				context.Tipo_Ambito.Any() || context.Tipo_Asentamiento.Any() || context.Tipo_Vialidad.Any() || context.Tipo_Proyecto.Any())
 			{
 				return;
 			}
 
+			//YEAR
+			var tipo_proyecto = new Tipo_Proyecto[]
+			{
+				new Tipo_Proyecto {Nombre = "Social"},
+				new Tipo_Proyecto {Nombre = "Privado"},
+
+			};
+
+			foreach (Tipo_Proyecto g in tipo_proyecto)
+			{
+				context.Tipo_Proyecto.Add(g);
+			}
 
 			//YEAR
 			var year = new Year[]

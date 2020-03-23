@@ -1,11 +1,12 @@
 ﻿
 $(document).ready(function () {
+    estado();
     $('#btnAgregarDom').click(function () {
         $('#btnModalDomicilio').show();
         document.getElementById('btnModalDomicilio').innerHTML = "Agregar Domicilio";
         document.getElementById('btnCancelarDom').innerHTML = "Cancelar";
 
-        estado();
+        
         
     });
 
@@ -25,6 +26,8 @@ function estado() {
             //console.log(data);
             for (var i = 0; i < data.datos.length; i++) {
                 $("#domicilioEstado").append("<option value=" + data.datos[i].cve_agee + ">" + data.datos[i].nom_agee + "</option>");
+                $("#estadoSolicitud").append("<option value=" + data.datos[i].cve_agee + ">" + data.datos[i].nom_agee + "</option>");
+
             }
         }, error: function (objeto, tipo, causa) {
             console.log(objeto);
