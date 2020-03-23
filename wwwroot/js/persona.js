@@ -119,6 +119,7 @@ $('#crearPersona').submit(function () {
                                 alert('Insertado con el id ' + data);
                                 $('#personaGeneralID').val(data);
                                 habilitarModales();
+                                deshabilitarCampos();
                             }
                         },
                         error: function (r) {
@@ -172,6 +173,7 @@ $('#crearPersona').submit(function () {
                             alert('Insertado con el id ' + data);
                             $('#personaGeneralID').val(data);
                             habilitarModales();
+                            deshabilitarCampos();
                         }
                     },
                     error: function (r) {
@@ -183,6 +185,19 @@ $('#crearPersona').submit(function () {
         }
     }
 });
+
+function deshabilitarCampos() {
+    $('#crearPersona input').attr("disabled", true);
+    $('#crearPersona select').attr("disabled", true);
+    $('#guardarPersonas').attr("disabled", true);
+}
+
+function habilitarCampos() {
+    $('#crearPersona input').attr("disabled", false);
+    $('#crearPersona select').attr("disabled", false);
+    $('#guardarPersonas').attr("disabled", false);
+    $('#acuseSuri').attr("disabled", true);
+}
 
 function habilitarModales() {
     $('#botonAgregarTelefono').attr("disabled", false);
