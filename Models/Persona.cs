@@ -57,6 +57,14 @@ namespace SistemaAFT.Models
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime Created { get; set; } = DateTime.Now;
+        [Required(ErrorMessage = "Campo Requerido")]
+        public int actividadEconomica { get; set; }
+        [Required(ErrorMessage = "Campo Requerido")]
+        public string fecha_Consti { get; set; }
+        [Required(ErrorMessage = "Campo Requerido")]
+        public string folio_Acta { get; set; }
+        [Required(ErrorMessage = "Campo Requerido")]
+        public int num_Notario { get; set; }
 
 
     }

@@ -109,8 +109,23 @@ namespace SistemaAFT.Data
 			//COMPANIA
 			var compania = new Compania[]
 			{
-				new Compania {nombre_compania = "Telcel"},
-				new Compania {nombre_compania = "Movistar"}
+				new Compania {nombre_compania = "TELCEL"},
+				new Compania {nombre_compania = "IUSACELL"},
+				new Compania {nombre_compania = "MOVISTAR"},
+				new Compania {nombre_compania = "NEXTEL"},
+				new Compania {nombre_compania = "UNEFON"},
+				new Compania {nombre_compania = "AT&T"},
+				new Compania {nombre_compania = "ALO SIEMPRE CERCA"},
+				new Compania {nombre_compania = "MAZ TIEMPO"},
+				new Compania {nombre_compania = "QBOCEL"},
+				new Compania {nombre_compania = "VIRGIN MOBILE"},
+				new Compania {nombre_compania = "ALESTRA"},
+				new Compania {nombre_compania = "AXTEL"},
+				new Compania {nombre_compania = "MAXCOM"},
+				new Compania {nombre_compania = "MEGACABLE"},
+				new Compania {nombre_compania = "IZZI"},
+				new Compania {nombre_compania = "TELMEX"},
+				new Compania {nombre_compania = "TELNOR"}
 			};
 
 			foreach (Compania g in compania)
@@ -121,8 +136,8 @@ namespace SistemaAFT.Data
 			//TUIPO_TELEFONO
 			var tipo_telefono = new Tipo_Telefono[]
 			{
-				new Tipo_Telefono {nombre_tipo = "Fijo"},
-				new Tipo_Telefono {nombre_tipo = "Movil"}
+				new Tipo_Telefono {nombre_tipo = "FIJO"},
+				new Tipo_Telefono {nombre_tipo = "MOVIL"}
 			};
 
 			foreach (Tipo_Telefono g in tipo_telefono)
@@ -133,8 +148,9 @@ namespace SistemaAFT.Data
 			//GENEROS
 			var generos = new Genero[]
 			{				
-				new Genero {Nombre_Genero = "Masculino"},
-				new Genero {Nombre_Genero = "Femenino"}
+				new Genero {Nombre_Genero = "MASCULINO"},
+				new Genero {Nombre_Genero = "FEMENINO"},
+				new Genero {Nombre_Genero = "MORAL"},
 			};
 
 			foreach (Genero g in generos )
@@ -145,12 +161,13 @@ namespace SistemaAFT.Data
 			//ESTADO CIVIL
 			var civil = new Estado_Civil[]
 			{				
-				new Estado_Civil {Nombre_Edo_Civil = "Soltero"},
-				new Estado_Civil {Nombre_Edo_Civil = "Casado"},
-				new Estado_Civil {Nombre_Edo_Civil = "Divorciado"},
-				new Estado_Civil {Nombre_Edo_Civil = "Viudo/a"},
-				new Estado_Civil {Nombre_Edo_Civil = "Unión Libre"},
-				new Estado_Civil {Nombre_Edo_Civil = "Concubinato"},
+				new Estado_Civil {Nombre_Edo_Civil = "SOLTERO"},
+				new Estado_Civil {Nombre_Edo_Civil = "CASADO"},
+				new Estado_Civil {Nombre_Edo_Civil = "DIVORCIADO"},
+				new Estado_Civil {Nombre_Edo_Civil = "VIUDO/A"},
+				new Estado_Civil {Nombre_Edo_Civil = "UNION LIBRE"},
+				new Estado_Civil {Nombre_Edo_Civil = "CONCUBINATO"},
+				new Estado_Civil {Nombre_Edo_Civil = "MORAL"},
 			};
 
 			foreach (Estado_Civil g in civil)
@@ -162,25 +179,26 @@ namespace SistemaAFT.Data
 			//TIPO DE IDENTIDAD
 			var tipo_identidad = new Tipo_Identidad[]
 			{				
-				new Tipo_Identidad {Nombre = "Cartilla del servicio militar"},
-				new Tipo_Identidad {Nombre = "Licencia de Manejo"},
-				new Tipo_Identidad {Nombre = "Pasaporte"},
-				new Tipo_Identidad {Nombre = "Credencial para votar con fotografía"},
-				new Tipo_Identidad {Nombre = "Credencial del IMSS o del ISSSTE"},
-				new Tipo_Identidad {Nombre = "Constancia exp. por autoridad legal con fotografía"},
-				new Tipo_Identidad {Nombre = "Cédula profesional"},
-				new Tipo_Identidad {Nombre = "Credencial del Instituto Nacional de la SENECTUD"},
-				new Tipo_Identidad {Nombre = "Acta de nacimiento"},
-				new Tipo_Identidad {Nombre = "Credencial o acta de naturalización exp. por Sec. de Rel. Exteriores"},
-				new Tipo_Identidad {Nombre = "Tarjeta PROCAMPO"},
-				new Tipo_Identidad {Nombre = "Tarjeta SAGARPA/CURP"},
-				new Tipo_Identidad {Nombre = "Libreta de mar o navegación con fotoggrafía exp. por la SCT"},
-				new Tipo_Identidad {Nombre = "Credencial de Pesca"},
+				new Tipo_Identidad {Nombre = "CARTILLA DEL SERVICIO MILITAR"},
+				new Tipo_Identidad {Nombre = "LICENCIA DE MANEJO"},
+				new Tipo_Identidad {Nombre = "PASAPORTE"},
+				new Tipo_Identidad {Nombre = "CREDENCIAL PARA VOTAR CON FOTOGRAFIA"},
+				new Tipo_Identidad {Nombre = "CREDENCIAL DEL IMSS O DEL ISSSTE"},
+				new Tipo_Identidad {Nombre = "CONSTANCIA EXP. POR AUTORIDAD LEGAL CON FOTOGRAFIA"},
+				new Tipo_Identidad {Nombre = "CEDULA PROFESIONAL"},
+				new Tipo_Identidad {Nombre = "CREDENCIAL DEL INSTITUTO NACIONAL DE LA SENECTUD"},
+				new Tipo_Identidad {Nombre = "ACTA DE NACIMIENTO"},
+				new Tipo_Identidad {Nombre = "CREDENCIAL O ACTA DE NATURALIZACION EXP. POR SEC. DE REL. EXTERIORES"},
+				new Tipo_Identidad {Nombre = "TARJETA PROCAMPO"},
+				new Tipo_Identidad {Nombre = "TARJETA SAGARPA/CURP"},
+				new Tipo_Identidad {Nombre = "LIBRETA DE MAR O NAVEGACION CON FOTOGRAFIA EXP. POR LA SCT"},
+				new Tipo_Identidad {Nombre = "CREDENCIAL DE  PESCA"},
 				new Tipo_Identidad {Nombre = "CURP"},
 				new Tipo_Identidad {Nombre = "INE ESTATAL"},
-				new Tipo_Identidad {Nombre = "Instituto Nacional de las personas Adultas y Mayores (INAPAM)"},
-				new Tipo_Identidad {Nombre = "Credencial del Servicio Postal Mexicano"},
-				new Tipo_Identidad {Nombre = "Matricula consular"}
+				new Tipo_Identidad {Nombre = "INSTITUTO NACIONAL DE LAS PERSONAS ADULTAS Y MAYORES (INAPAM)"},
+				new Tipo_Identidad {Nombre = "CREDENCIAL DEL SERVICIO POSTAL MEXICANO"},
+				new Tipo_Identidad {Nombre = "MATRICULA CONSULAR"},
+				new Tipo_Identidad {Nombre = "MORAL"}
 			};
 
 			foreach (Tipo_Identidad g in tipo_identidad)
@@ -227,7 +245,8 @@ namespace SistemaAFT.Data
 			var tipo_etnia = new Etnia[]
 			{
 				new Etnia { Pertenece_Etnia = "Si"},
-				new Etnia { Pertenece_Etnia = "No" }
+				new Etnia { Pertenece_Etnia = "No" },
+				new Etnia { Pertenece_Etnia = "MORAL" },
 			};
 
 			foreach (Etnia g in tipo_etnia)
@@ -239,7 +258,8 @@ namespace SistemaAFT.Data
 			var discapacidad = new Discapacidad[]
 			{
 				new Discapacidad {Tiene_Discapacidad = "Si"},
-				new Discapacidad {Tiene_Discapacidad = "No"}
+				new Discapacidad {Tiene_Discapacidad = "No"},
+				new Discapacidad {Tiene_Discapacidad = "MORAL"},
 			};
 
 			foreach(Discapacidad g in discapacidad)
@@ -358,7 +378,8 @@ namespace SistemaAFT.Data
 			var nacionalidad = new Nacionalidad[]
 			{
 				new Nacionalidad {Nombre = "MEXICANO"},
-				new Nacionalidad {Nombre = "EXTRANJERA"}
+				new Nacionalidad {Nombre = "EXTRANJERA"},
+				new Nacionalidad {Nombre = "MORAL"}
 			};
 
 			foreach (Nacionalidad g in nacionalidad)
