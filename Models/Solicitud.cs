@@ -22,5 +22,8 @@ namespace SistemaAFT.Models
         public Instancia_Ejecutora Instancia_Ejecutora { get; set; }
         public int DelegacionID { get; set; }
         public Delegacion Delegacion { get; set; }
+
+        [Required(ErrorMessage = "Campo Requerido")]
+        public string estado { get; set; }
     }
 }

@@ -22,7 +22,7 @@
                 {
                     @foreach (var dom in (IEnumerable<SistemaAFT.Models.Domicilio>)ViewBag.Libros)
                     {
-                        <tr id="@dom.DomicilioID" class="tablaDomicilio-@dom.DomicilioID">
+                        <tr id="@dom.DomicilioID" class="tablaDomicilio-@dom.DomicilioID tablaDomicilio">
                             <th>@dom.estado</th>
                             <th>@dom.Municipio</th>
                             <th>@dom.localidad</th>

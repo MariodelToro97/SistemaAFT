@@ -28,7 +28,7 @@
                     {
                         @foreach (var tel in (IEnumerable<SistemaAFT.Models.Telefono>)ViewBag.Telefonos)
                         {
-                            <tr id="@tel.TelefonoID" class="tablaTelefono-@tel.TelefonoID">
+                            <tr id="@tel.TelefonoID" class="tablaTelefono-@tel.TelefonoID tablaTelefono">
                                 <th>@tel.numero</th>
                                 <th>@tel.CompaniaID</th>
                                 <th>@tel.Tipo_TelefonoID</th>

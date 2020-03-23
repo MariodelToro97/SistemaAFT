@@ -356,7 +356,7 @@ $('#formEditDomicilio').submit(function (e) {
                     $(elemento).remove();
 
                     nuevoContacto.setAttribute("id", id);
-                    nuevoContacto.setAttribute("class", `tablaDomicilio-${id}`);
+                    nuevoContacto.setAttribute("class", `tablaDomicilio-${id} tablaDomicilio`);
 
                     nuevoContacto.innerHTML = `
                         <td>${estado}</td>
@@ -410,7 +410,7 @@ $('#formEditDomicilio').submit(function (e) {
                     $('#lblNoDomicilio').hide();
 
                     nuevoContacto.setAttribute("id", `${data}`);
-                    nuevoContacto.setAttribute("class", `tablaDomicilio-${data}`);
+                    nuevoContacto.setAttribute("class", `tablaDomicilio-${data} tablaDomicilio`);
                                         
                     nuevoContacto.innerHTML = `
                         <td>${estado}</td>

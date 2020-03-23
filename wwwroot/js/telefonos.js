@@ -43,7 +43,7 @@ $('#formTelefonos').submit(function (e) {
                     $('#lblNoTelefonos').hide();
 
                     nuevoContacto.setAttribute("id", `${data}`);
-                    nuevoContacto.setAttribute("class", `tablaTelefono-${data}`);
+                    nuevoContacto.setAttribute("class", `tablaTelefono-${data} tablaTelefono`);
 
                     nuevoContacto.innerHTML = `
                         <td>${numero}</td>
@@ -88,7 +88,7 @@ $('#formTelefonos').submit(function (e) {
                         $(elemento).remove();
 
                         nuevoContacto.setAttribute("id", `${id}`);
-                        nuevoContacto.setAttribute("class", `tablaTelefono-${id}`);
+                        nuevoContacto.setAttribute("class", `tablaTelefono-${id} tablaTelefono`);
 
                         nuevoContacto.innerHTML = `
                         <td>${numero}</td>

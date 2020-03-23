@@ -12,9 +12,86 @@ namespace SistemaAFT.Data
 		{
 			context.Database.EnsureCreated();
 
-			if (context.Nacionalidad.Any() || context.Tipo_Documento.Any()  || context.Genero.Any() || context.Estado_Civil.Any() || context.Tipo_Identidad.Any() || context.Municipio.Any() || context.Tipo_Persona.Any() || context.Etnia.Any() || context.Discapacidad.Any() || context.Tipo_Ambito.Any() || context.Tipo_Asentamiento.Any() || context.Tipo_Vialidad.Any())
+			if (context.Year.Any() || context.Programa.Any() || context.Componente.Any() || context.Instancia_Ejecutora.Any() || context.Delegacion.Any() ||
+				context.Nacionalidad.Any() || context.Tipo_Documento.Any()  || context.Genero.Any() || 
+				context.Estado_Civil.Any() || context.Tipo_Identidad.Any() || context.Municipio.Any() || 
+				context.Tipo_Persona.Any() || context.Etnia.Any() || context.Discapacidad.Any() || 
+				context.Tipo_Ambito.Any() || context.Tipo_Asentamiento.Any() || context.Tipo_Vialidad.Any())
 			{
 				return;
+			}
+
+
+			//YEAR
+			var year = new Year[]
+			{
+				new Year {year = 2020},
+			};
+
+			foreach (Year g in year)
+			{
+				context.Year.Add(g);
+			}
+
+			//PROGRAMA
+			var programa = new Programa[]
+			{
+				new Programa {nombre = "prestamos para tractor"},
+				new Programa {nombre = "prestamos para terreno"},
+				new Programa {nombre = "prestamos para comida"},
+				new Programa {nombre = "prestamos para carros"},
+				new Programa {nombre = "prestamos para huertas"},
+				new Programa {nombre = "prestamos para casas"},
+
+			};
+
+			foreach (Programa g in programa)
+			{
+				context.Programa.Add(g);
+			}
+
+			//COMPONENTE
+			var componente = new Componente[]
+			{
+				new Componente {nombre = "Componente 1"},
+				new Componente {nombre = "Componente 2"},
+				new Componente {nombre = "Componente 3"},
+				new Componente {nombre = "Componente 4"},
+				new Componente {nombre = "Componente 5"},
+				new Componente {nombre = "Componente 6"},
+			};
+
+			foreach (Componente g in componente)
+			{
+				context.Componente.Add(g);
+			}
+
+			//INSTANCIA EJECUTORA
+			var instancia = new Instancia_Ejecutora[]
+			{
+				new Instancia_Ejecutora {nombre = "Instancia 1"},
+				new Instancia_Ejecutora {nombre = "Instancia 2"},
+				new Instancia_Ejecutora {nombre = "Instancia 3"},
+
+			};
+
+			foreach (Instancia_Ejecutora g in instancia)
+			{
+				context.Instancia_Ejecutora.Add(g);
+			}
+
+			//DELEGACION
+			var delegacion = new Delegacion[]
+			{
+				new Delegacion {nombre = "Delegacion 1"},
+				new Delegacion {nombre = "Delegacion 2"},
+				new Delegacion {nombre = "Delegacion 3"},
+
+			};
+
+			foreach (Delegacion g in delegacion)
+			{
+				context.Delegacion.Add(g);
 			}
 
 			//COMPANIA

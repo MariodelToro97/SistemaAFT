@@ -64,14 +64,14 @@
                         <div class="col-md-4 mt-2">
                             <div class="form-group">
                                 <label class="control-label">Estado<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="DelegacionID" class="text-danger ErrorInput"></span>
-                                <select class="form-control">
+                                <select class="form-control" id="estadoSolicitud">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-primary" />
+                        <input type="submit" value="Create" class="btn btn-primary" id="traer_datos"/>
                         <a asp-action="Index">Back to List</a>
                     </div>
                 </form>

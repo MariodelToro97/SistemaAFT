@@ -49,7 +49,7 @@ $('#formIntegrantes').submit(function (e) {
                     $('#lblNoIntegrantes').hide();
 
                     nuevoContacto.setAttribute("id", `${data}`);
-                    nuevoContacto.setAttribute("class", `tablaIntegrante-${data}`);
+                    nuevoContacto.setAttribute("class", `tablaIntegrante-${data} tablaIntegrante`);
 
                     nuevoContacto.innerHTML = `
                             <td>-</td>
@@ -97,7 +97,7 @@ $('#formIntegrantes').submit(function (e) {
                         $(elemento).remove();
 
                         nuevoContacto.setAttribute("id", `${id}`);
-                        nuevoContacto.setAttribute("class", `tablaIntegrante-${id}`);
+                        nuevoContacto.setAttribute("class", `tablaIntegrante-${id} tablaIntegrante`);
 
                         nuevoContacto.innerHTML = `
                             <td>-</td>
