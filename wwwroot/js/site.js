@@ -171,6 +171,8 @@ function reinicializarTodo() {
     $("#crearPersona select").val("");
     $("#crearPersona span.Persona").hide();
 
+    habilitarCampos();
+
     deshabilitarModales();
     personaFisicaRadio();
 
