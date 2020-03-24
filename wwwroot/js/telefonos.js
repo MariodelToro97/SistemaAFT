@@ -93,10 +93,13 @@ $('#formTelefonos').submit(function (e) {
                         nuevoContacto.setAttribute("id", `${id}`);
                         nuevoContacto.setAttribute("class", `tablaTelefono-${id} tablaTelefono`);
 
+                        var comp = $('#companiaTelefono option[value=' + CompaniaID + ']').text();
+                        var tipo = $('#tipoTelefono option[value=' + Tipo_TelefonoID + ']').text();
+
                         nuevoContacto.innerHTML = `
                         <td>${numero}</td>
-                        <td>${CompaniaID}</td>
-                        <td>${Tipo_TelefonoID}</td>
+                        <td>${comp}</td>
+                        <td>${tipo}</td>
                         <td>
                             <button type="button" onclick="editTelefono(this)" data-toggle="modal" data-target="#modalTelefonos" class="btn btn-success" value=${id} name=${persona} id="editTelefono">Editar</button>
                             <button class="btn btn-primary" onclick="detalleTelefono(this)" data-toggle="modal" data-target="#modalTelefonos" value=${id} name=${persona}>Detalles</button>

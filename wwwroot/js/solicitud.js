@@ -39,9 +39,9 @@ $('#crearSolicitud').submit(function () {
                     alert('No se insertó por qué ya esta dado de alta');
                 } else {
                     alert('Insertado con el id ' + data);
-                    //limpiarPersona();
-                    //$('#personaGeneralID').val(data);
-                    // habilitarModales();
+                    $('#solicitudID').val(data);
+                    //$('#proyectoSolicitudID').val(data);
+                   
                 }
             },
             error: function (r) {
@@ -51,55 +51,63 @@ $('#crearSolicitud').submit(function () {
         return false;
     }
 
-    /*
-
-        if (rfc === 'NULL' || nombreMoral === 'NULL' || genero === '' || nacimiento === '' || civil === '' || nacionalidad === '' || numIdent === '' || identidad === '') {
-            console.log("FALTAN DATOS");
-        } else {
-            var expRFC = new RegExp("^[A-Z]{4}[0-9]{6}[A-Z,0-9]{3}");
-            if (!expRFC.test(rfc)) {
-                alert('El RFC no es válido');
-            } else {
-                $.ajax({
-                    type: 'POST',
-                    url: "/Personas/addPersona",
-                    data: {
-                        curp: curp,
-                        rfc: rfc,
-                        nombrePersona: nombrePersona,
-                        aPaterno: aPaterno,
-                        aMAterno: aMAterno,
-                        correo: correo,
-                        nacimiento: nacimiento,
-                        nacionalidad: nacionalidad,
-                        genero: genero,
-                        civil: civil,
-                        identidad: identidad,
-                        numIdent: numIdent,
-                        tipoPersona: tipoPersona,
-                        etnia: etnia,
-                        discapacidad: discapacidad,
-                        suri: suri,
-                        nombreMoral: nombreMoral
-                    },
-                    success: function (data) {
-                        if (data === '') {
-                            alert('No se insertó por qué ya esta dado de alta');
-                        } else {
-                            alert('Insertado con el id ' + data);
-                            //limpiarPersona();
-                            $('#personaGeneralID').val(data);
-                        }
-                    },
-                    error: function (r) {
-                        console.log(r);
-                    }
-                });
-                //console.log("retorno falso")
-                return false;
-            }
-        }
-        */
 })
+
+
+
+$('#crearProyecto').submit(function () {
+
+    var nombreproyecto = $('#nombreproyecto').val();
+    console.log(nombreproyecto)
+    var tipoproyecto = $('#tipoproyecto').val();
+    console.log(tipoproyecto)
+
+    var objetivo = $('#objetivo').val();
+    console.log(objetivo)
+
+    var fecha = $('#fecha').val();
+    console.log(fecha)
+
+    $('#proyectoSolicitudID').val($('#solicitudID').val());
+
+    var solicitudID = $('#proyectoSolicitudID').val();
+    console.log("id de solicitud", solicitudID)
+
+    //return false;
+
+    if (nombreproyecto === '' || tipoproyecto === '' || objetivo === '' || fecha === '' || solicitudID === '') {
+        alert("Faltan Datos");
+        return false;
+    } else {
+        $.ajax({
+            type: 'POST',
+            url: "/Solicitudes/addProyecto",
+            data: {
+                nombreproyecto: nombreproyecto,
+                tipoproyecto: tipoproyecto,
+                objetivo: objetivo,
+                fecha: fecha,
+                solicitudID: solicitudID,
+            },
+            success: function (data) {
+                if (data === '') {
+                    alert('No se insertó por qué ya esta dado de alta');
+                } else {
+                    alert('Insertado con el id ' + data);
+                    //$('#solicitudID').val(data);
+                    //$('#proyectoSolicitudID').val(data);
+
+                }
+            },
+            error: function (r) {
+                console.log(r);
+            }
+        });
+        return false;
+    }
+    
+
+})
+
    
     

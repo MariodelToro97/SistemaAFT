@@ -1,4 +1,4 @@
-﻿@model SistemaAFT.Models.Solicitud
+﻿@model SistemaAFT.Models.GranModelo
 
 @{
     ViewData["Title"] = "Index";
@@ -19,8 +19,8 @@
                         <div class="col-md-3 mt-2">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
-                                <label asp-for="YearID" class="control-label">Año<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="YearID" class="text-danger ErrorInput"></span>
-                                <select asp-for="YearID" class="form-control" asp-items="ViewBag.YearID" id="year">
+                                <label asp-for="Solicitud.YearID" class="control-label">Año<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Solicitud.YearID" class="text-danger ErrorInput"></span>
+                                <select asp-for="Solicitud.YearID" class="form-control" asp-items="ViewBag.YearID" id="year">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
                             </div>
@@ -29,16 +29,16 @@
                     <div class="row">
                         <div class="col-md-6 mt-2">
                             <div class="form-group">
-                                <label asp-for="ProgramaID" class="control-label">Programa<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="ProgramaID" class="text-danger ErrorInput"></span>
-                                <select asp-for="ProgramaID" class="form-control" id="programa" asp-items="ViewBag.ProgramaID">
+                                <label asp-for="Solicitud.ProgramaID" class="control-label">Programa<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Solicitud.ProgramaID" class="text-danger ErrorInput"></span>
+                                <select asp-for="Solicitud.ProgramaID" class="form-control" id="programa" asp-items="ViewBag.ProgramaID">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6 mt-2">
                             <div class="form-group">
-                                <label asp-for="ComponenteID" class="control-label">Componente<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="ComponenteID" class="text-danger ErrorInput"></span>
-                                <select asp-for="ComponenteID" class="form-control" id="componente" asp-items="ViewBag.ComponenteID">
+                                <label asp-for="Solicitud.ComponenteID" class="control-label">Componente<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Solicitud.ComponenteID" class="text-danger ErrorInput"></span>
+                                <select asp-for="Solicitud.ComponenteID" class="form-control" id="componente" asp-items="ViewBag.ComponenteID">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
                             </div>
@@ -47,25 +47,25 @@
                     <div class="row">
                         <div class="col-md-4 mt-2">
                             <div class="form-group">
-                                <label asp-for="Instancia_EjecutoraID" class="control-label">Instancia Ejecutora<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Instancia_EjecutoraID" class="text-danger ErrorInput"></span>
-                                <select asp-for="Instancia_EjecutoraID" class="form-control" id="instancia" asp-items="ViewBag.Instancia_EjecutoraID">
+                                <label asp-for="Solicitud.Instancia_EjecutoraID" class="control-label">Instancia Ejecutora<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Solicitud.Instancia_EjecutoraID" class="text-danger ErrorInput"></span>
+                                <select asp-for="Solicitud.Instancia_EjecutoraID" class="form-control" id="instancia" asp-items="ViewBag.Instancia_EjecutoraID">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-4 mt-2">
                             <div class="form-group">
-                                <label asp-for="DelegacionID" class="control-label">Delegación<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="DelegacionID" class="text-danger ErrorInput"></span>
-                                <select asp-for="DelegacionID" class="form-control" id="delegacion" asp-items="ViewBag.DelegacionID">
+                                <label asp-for="Solicitud.DelegacionID" class="control-label">Delegación<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Solicitud.DelegacionID" class="text-danger ErrorInput"></span>
+                                <select asp-for="Solicitud.DelegacionID" class="form-control" id="delegacion" asp-items="ViewBag.DelegacionID">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-4 mt-2">
                             <div class="form-group">
-                                <label asp-for="estado" class="control-label">Estado<span class="text-danger font-weight-bold">*</span>:</label>
-                                <span asp-validation-for="estado" class="text-danger ErrorInput Modal"></span>                                
-                                <select asp-for="estado" class="form-control" id="estadoSolicitud" asp-items="ViewBag.estado">
+                                <label asp-for="Solicitud.estado" class="control-label">Estado<span class="text-danger font-weight-bold">*</span>:</label>
+                                <span asp-validation-for="Solicitud.estado" class="text-danger ErrorInput Modal"></span>
+                                <select asp-for="Solicitud.estado" class="form-control" id="estadoSolicitud" asp-items="ViewBag.estado">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
                             </div>
@@ -81,3 +81,73 @@
     </div>
 </div>
 
+
+<form id="crearProyecto">
+    <div class="border border-secondary rounded">
+        <div class="container">
+            <h3 class="text-dark mt-2">Datos del proyecto</h3>
+
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-home" aria-selected="true">Datos del proyecto</a>
+                </div>
+            </nav>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Solicitud.SolicitudID" id="solicitudID" />
+
+
+            <div class="border border-secondary rounded container mb-3 mr-0" id="solicitante_personal">
+                <div class="container">
+                    <div class="border border-secondary rounded mb-3 mt-2">
+                        <div class="form-inline d-flex bg-dark">
+                            <h6 class="my-3 mx-3 text-white font-weight-lighter">Proyecto</h6>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4 mt-2">
+                                    <div class="form-group">
+                                        <label asp-for="Proyecto.nombreProyecto" class="control-label">Nombre del proyecto<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Proyecto.nombreProyecto" class="text-danger ErrorInput"></span>
+                                        <input asp-for="Proyecto.nombreProyecto" type="text" class="form-control" placeholder="NOMBRE DEL PROYECTO" required id="nombreproyecto" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mt-2">
+                                    <div class="form-group">
+                                        <label asp-for="Proyecto.Tipo_ProyectoID" class="control-label">Tipo de Proyecto<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Proyecto.Tipo_ProyectoID" class="text-danger ErrorInput"></span>
+                                        <select asp-for="Proyecto.Tipo_ProyectoID" id="tipoproyecto" class="form-control" asp-items="ViewBag.Tipo_ProyectoID">
+                                            <option value="" selected>Seleccione opción</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mt-1">
+                                    <div class="form-group">
+                                        <label asp-for="Proyecto.fechaRecepcion" class="control-label">Fecha de recepción<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Proyecto.fechaRecepcion" class="text-danger ErrorInput"></span>
+                                        <input asp-for="Proyecto.fechaRecepcion" type="date" class="form-control" placeholder="NOMBRE DEL PROYECTO" required id="fecha" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mt-2">
+                                <label asp-for="Proyecto.objetivo" class="control-label">Objetivo:</label>
+                                <textarea asp-for="Proyecto.objetivo" type="text" class="form-control" id="objetivo"></textarea>
+                            </div>
+                            <div class="col-md-3 mt-2">
+                                <div class="form-group" style="display: none;">
+                                    <input id="proyectoSolicitudID" type="text" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index">Back to List</a>
+            </div>
+            <div class="float-right mt-4" id="botonFormUno">
+                <a class="btn btn-info" asp-action="Index">Regresar</a>
+                <input type="submit" value="Limpiar Pantalla" class="btn btn-success" />
+                <input type="submit" value="Siguiente" class="btn btn-dark text-white" />
+            </div>
+        </div>
+    </div>
+
+</form>

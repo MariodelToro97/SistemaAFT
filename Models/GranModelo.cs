@@ -13,5 +13,10 @@ namespace SistemaAFT.Models
         public Representante Representante { get; set; }
         public documentoRepresentante documentoRepresentante { get; set; }
         public Telefono Telefono { get; set; }
+        public Solicitud Solicitud { get; set; }
+
+        public Proyecto Proyecto { get; set; }
+
+
     }
 }
