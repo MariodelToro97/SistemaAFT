@@ -19,15 +19,23 @@ $('#formTelefonos').submit(function (e) {
     nuevoContacto = document.createElement('tr');
     
     var numero = $('#numeroTelefono').val();
+    console.log(numero);
+
     var CompaniaID = $('#companiaTelefono').val();
+    console.log(CompaniaID);
+
     var Tipo_TelefonoID = $('#tipoTelefono').val();
+    console.log(Tipo_TelefonoID);
+
     var persona = $('#personaGeneralID').val();
+    console.log(persona);
+
 
     if (numero === '' || CompaniaID === '' || Tipo_TelefonoID === '') {
         console.log('FALTAN DATOS');
     } else {
         if (document.getElementById('btnModalTelefono').innerHTML === "Guardar") {
-            
+            numero = $('#numeroTelefono').val();
             $.ajax({
                 type: 'POST',
                 url: "/Peticiones/addTelefono",
@@ -38,17 +46,20 @@ $('#formTelefonos').submit(function (e) {
                     persona: persona
                 },
                 success: function (data) {
-                    alert('Insertado con el id ' + data);
-                    $('#modalTelefonos').modal('hide');
-                    $('#lblNoTelefonos').hide();
+                    if (data === '') {
+                        alert('No se insertó por qué ya esta dado de alta');
+                    } else {
+                        alert('Insertado con el id ' + data);
+                        $('#modalTelefonos').modal('hide');
+                        $('#lblNoTelefonos').hide();
 
-                    nuevoContacto.setAttribute("id", `${data}`);
-                    nuevoContacto.setAttribute("class", `tablaTelefono-${data} tablaTelefono`);
+                        nuevoContacto.setAttribute("id", `${data}`);
+                        nuevoContacto.setAttribute("class", `tablaTelefono-${data} tablaTelefono`);
 
-                    var comp = $('#companiaTelefono option[value=' + CompaniaID + ']').text();
-                    var tipo = $('#tipoTelefono option[value=' + Tipo_TelefonoID + ']').text();
+                        var comp = $('#companiaTelefono option[value=' + CompaniaID + ']').text();
+                        var tipo = $('#tipoTelefono option[value=' + Tipo_TelefonoID + ']').text();
 
-                    nuevoContacto.innerHTML = `
+                        nuevoContacto.innerHTML = `
                         <td>${numero}</td>
                         <td>${comp}</td>
                         <td>${tipo}</td>
@@ -59,7 +70,9 @@ $('#formTelefonos').submit(function (e) {
                         </td>
                     `;
 
-                    listadoContactos.appendChild(nuevoContacto);
+                        listadoContactos.appendChild(nuevoContacto);
+                    }
+                    
                     
                 },
                 error: function (r) {
@@ -84,31 +97,37 @@ $('#formTelefonos').submit(function (e) {
                         persona: persona
                     },
                     success: function (data) {
-                        console.log(data);
-                        $('#modalTelefonos').modal('hide');
+                        console.log("ENTRO A SUCCESS",data)
+                        if (data === '') {
+                            alert("No se puede actualizar porque ya existe");
+                        } else {
+                            console.log("es el data", data);
+                            $('#modalTelefonos').modal('hide');
 
-                        var elemento = document.getElementsByClassName(`tablaTelefono-${id}`);
-                        $(elemento).remove();
+                            var elemento = document.getElementsByClassName(`tablaTelefono-${id}`);
+                            $(elemento).remove();
 
-                        nuevoContacto.setAttribute("id", `${id}`);
-                        nuevoContacto.setAttribute("class", `tablaTelefono-${id} tablaTelefono`);
+                            nuevoContacto.setAttribute("id", `${id}`);
+                            nuevoContacto.setAttribute("class", `tablaTelefono-${id} tablaTelefono`);
 
-                        var comp = $('#companiaTelefono option[value=' + CompaniaID + ']').text();
-                        var tipo = $('#tipoTelefono option[value=' + Tipo_TelefonoID + ']').text();
+                            var comp = $('#companiaTelefono option[value=' + CompaniaID + ']').text();
+                            var tipo = $('#tipoTelefono option[value=' + Tipo_TelefonoID + ']').text();
 
-                        nuevoContacto.innerHTML = `
-                        <td>${numero}</td>
-                        <td>${comp}</td>
-                        <td>${tipo}</td>
-                        <td>
-                            <button type="button" onclick="editTelefono(this)" data-toggle="modal" data-target="#modalTelefonos" class="btn btn-success" value=${id} name=${persona} id="editTelefono">Editar</button>
-                            <button class="btn btn-primary" onclick="detalleTelefono(this)" data-toggle="modal" data-target="#modalTelefonos" value=${id} name=${persona}>Detalles</button>
-                            <button class="btn btn-danger" onclick="deleteTelefono(this)" value=${id}>Borrar</button>
-                        </td>
-                    `;
+                            nuevoContacto.innerHTML = `
+                            <td>${numero}</td>
+                            <td>${comp}</td>
+                            <td>${tipo}</td>
+                            <td>
+                                <button type="button" onclick="editTelefono(this)" data-toggle="modal" data-target="#modalTelefonos" class="btn btn-success" value=${id} name=${persona} id="editTelefono">Editar</button>
+                                <button class="btn btn-primary" onclick="detalleTelefono(this)" data-toggle="modal" data-target="#modalTelefonos" value=${id} name=${persona}>Detalles</button>
+                                <button class="btn btn-danger" onclick="deleteTelefono(this)" value=${id}>Borrar</button>
+                            </td>
+                        `;
 
-                     listadoContactos.appendChild(nuevoContacto);
-
+                            listadoContactos.appendChild(nuevoContacto);
+                        }
+                            
+                        
                     },
                     error: function (r) {
                         console.log(r);

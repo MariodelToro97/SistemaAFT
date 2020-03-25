@@ -49,3 +49,20 @@ AS
 
 	END
 RETURN 0
+
+CREATE PROCEDURE [dbo].[spUpdateTelefono]
+	@id INT,
+	@numero VARCHAR(MAX),
+	@CompaniaID int,
+	@Tipo_TelefonoID int,
+	@persona int
+AS
+	BEGIN
+		IF NOT EXISTS(SELECT * FROM Telefono WHERE numero = @numero)
+			BEGIN
+				UPDATE Telefono
+				SET numero = @numero, CompaniaID = @CompaniaID, Tipo_TelefonoID = @Tipo_TelefonoID, PersonaID = @persona
+				WHERE TelefonoID = @id;
+			END
+	END
+RETURN

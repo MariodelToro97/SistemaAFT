@@ -16,9 +16,37 @@ namespace SistemaAFT.Data
 				context.Nacionalidad.Any() || context.Tipo_Documento.Any()  || context.Genero.Any() || 
 				context.Estado_Civil.Any() || context.Tipo_Identidad.Any() || context.Municipio.Any() || 
 				context.Tipo_Persona.Any() || context.Etnia.Any() || context.Discapacidad.Any() || 
-				context.Tipo_Ambito.Any() || context.Tipo_Asentamiento.Any() || context.Tipo_Vialidad.Any() || context.Tipo_Proyecto.Any())
+				context.Tipo_Ambito.Any() || context.Tipo_Asentamiento.Any() || context.Tipo_Vialidad.Any() || context.Tipo_Proyecto.Any()
+				|| context.Concepto_Apoyo.Any() || context.Subconcepto_Apoyo.Any()
+				)
 			{
 				return;
+			}
+
+			//Concepto_Apoyo
+			var concepto_apoyo = new Concepto_Apoyo[]
+			{
+				new Concepto_Apoyo {nombre = "Concepto 1"},
+				new Concepto_Apoyo {nombre = "Concepto 2"},
+
+			};
+
+			foreach (Concepto_Apoyo g in concepto_apoyo)
+			{
+				context.Concepto_Apoyo.Add(g);
+			}
+
+			//Subconceptopoyo
+			var subconcepto_apoyo = new Subconcepto_Apoyo[]
+			{
+				new Subconcepto_Apoyo {nombre = "SubConcepto 1"},
+				new Subconcepto_Apoyo {nombre = "SubConcepto 2"},
+
+			};
+
+			foreach (Subconcepto_Apoyo g in subconcepto_apoyo)
+			{
+				context.Subconcepto_Apoyo.Add(g);
 			}
 
 			//YEAR
