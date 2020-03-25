@@ -43,7 +43,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="addon-wrapping"></span>
                             </div>
-                            <input asp-for="can_Sol" type="number" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
+                            <input asp-for="can_Sol" type="number" id="can_Sol" onkeyup="calculoApoyo()" min="0" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -52,7 +52,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text text-center" id="addon-wrapping">$</span>
                             </div>
-                            <input asp-for="cos_Uni" type="number" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
+                            <input asp-for="cos_Uni" type="number" id="cos_Uni" onkeyup="calculoApoyo()" min="0" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -61,7 +61,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text text-center" id="addon-wrapping">$</span>
                             </div>
-                            <input asp-for="apo_Pro" type="number" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
+                            <input asp-for="apo_Pro" type="number" min="0" id="apo_Pro" onkeyup="calculoApoyo()" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
                         </div>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text text-center" id="addon-wrapping">$</span>
                             </div>
-                            <input asp-for="apo_Fed" disabled type="number" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
+                            <input asp-for="apo_Fed" disabled type="number" min="0" id="apo_Fed" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -81,7 +81,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text text-center" id="addon-wrapping">$</span>
                             </div>
-                            <input asp-for="apo_Est" type="number" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
+                            <input asp-for="apo_Est" type="number" min="0" id="apo_Est" onkeyup="calculoApoyo()" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -90,7 +90,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text text-center" id="addon-wrapping">$</span>
                             </div>
-                            <input asp-for="mon_Apo" disabled type="number" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
+                            <input asp-for="mon_Apo" disabled type="number" min="0" id="mon_Apo" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
                         </div>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text text-center" id="addon-wrapping">$</span>
                             </div>
-                            <input asp-for="otro_Apo" type="number" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
+                            <input asp-for="otro_Apo" type="number" min="0" id="otro_Apo" onkeyup="calculoApoyo()" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -110,7 +110,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text text-center" id="addon-wrapping">$</span>
                             </div>
-                            <input asp-for="inv_Total" disabled type="number" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
+                            <input asp-for="inv_Total" disabled type="number"  min="0" id="inv_Total" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
                         </div>
                     </div>
                 </div>

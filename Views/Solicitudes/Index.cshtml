@@ -7,7 +7,7 @@
 <hr />
 
 <!--INICIO DE SOLICITANTES-->
-<nav>
+<nav id="navegadorSolicitante">
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-item nav-link active" id="nav-solicitante" data-toggle="tab" href="#solicitante_personal" role="tab" aria-controls="nav-solicitante" aria-selected="true">Solicitante</a>
         <a class="nav-item nav-link" id="nav-Representante" data-toggle="tab" href="#nav-domicilio" role="tab" aria-controls="nav-Representante" aria-selected="false" style="display: none;">Representante</a>
@@ -200,60 +200,63 @@
                 <label class="mt-0"><span id="spanDomRegSol">0</span> registros</label>
             </div>
         </div>
-        <!--FIN DE DOMICILIOS SOLICITUDES-->        
-    </div>
-
-    <div class="float-right mt-4" id="botonFormUno">
-        <a class="btn btn-info" asp-action="Index">Regresar</a>
-        <input type="button" value="Limpiar Pantalla" class="btn btn-success" />
-        <input type="button" value="Siguiente" class="btn btn-dark text-white" />
+        <!--FIN DE DOMICILIOS SOLICITUDES-->
+        <div class="d-flex">
+            <div class="ml-auto mb-3">
+                <button class="btn btn-info" type="button" id="btnRegresarUno">Regresar</button>
+                <button type="button" class="btn btn-success">Limpiar pantalla</button>
+                <input type="button" value="Siguiente" class="btn btn-dark text-white" id="btnSiguienteUno" />
+            </div>
+        </div>
     </div>
 </div>
 <!--FIN DE DATOS SOLICITANTE-->
 <!--INFORMACION PERSONAL SEGUNDA PESTAÑA-->
-<div class="tab-pane fade border border-secondary rounded" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab">
+<div class="tab-pane fade border border-secondary rounded" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab" style="display:none;">
     <div class="container my-3">
         <div class="border border-secondary rounded bg-dark">
             <div class="form-inline d-flex">
                 <h6 class="my-3 mx-3 text-white font-weight-lighter">Información Personal</h6>
             </div>
         </div>
-            <div class="rounded border border-secondary">
-                <div class="container">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-inline mt-2">
-                        <label class="control-label mr-3">Buscar:</label>
-                        <input type="text" class="form-control" placeholder="" />
-                    </div>
-                    <table class="table table-sm table-secondary my-3 rounded">
-                        <thead class="thead-light text-center">
-                            <tr>
-                                <th>°</th>
-                                <th>Nombre</th>
-                                <th>Ap. Paterno</th>
-                                <th>Ap. Materno</th>
-                                <th>CURP</th>
-                                <th>Sexo</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-light" id="tableRepresentantesSolicitudes">
-                        </tbody>
-                    </table>
-                    <label class="mt-0"><span id="spanRepRegSol">0</span> registros</label>
+        <div class="rounded border border-secondary">
+            <div class="container">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-inline mt-2">
+                    <label class="control-label mr-3">Buscar:</label>
+                    <input type="text" class="form-control" placeholder="" />
                 </div>
+                <table class="table table-sm table-secondary my-3 rounded">
+                    <thead class="thead-light text-center">
+                        <tr>
+                            <th>°</th>
+                            <th>Nombre</th>
+                            <th>Ap. Paterno</th>
+                            <th>Ap. Materno</th>
+                            <th>CURP</th>
+                            <th>Sexo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-light" id="tableRepresentantesSolicitudes">
+                    </tbody>
+                </table>
+                <label class="mt-0"><span id="spanRepRegSol">0</span> registros</label>
             </div>
+        </div>
     </div>
-    <div class="float-right mt-4" id="botonFormUno">
-        <a class="btn btn-info" asp-action="Index">Regresar</a>
-        <input type="submit" value="Limpiar Pantalla" class="btn btn-success" />
-        <input type="submit" value="Siguiente" class="btn btn-dark text-white" />
+    <div class="d-flex">
+        <div class="ml-auto mb-3">
+            <button class="btn btn-info" type="button" id="btnRegresarUnos">Regresar</button>
+            <button type="button" class="btn btn-success">Limpiar pantalla</button>
+            <input type="button" value="Siguiente" class="btn btn-dark text-white mr-3" id="btnSiguienteUnos" />
+        </div>
     </div>
 </div>
 <!--FIN DE INFORMACION PERSONAL SEGUNDA PESTAÑA-->
 <!--FIN DE SOLICITANTES-->
 
-<div class="border border-secondary rounded" style="display: none;">
+<div class="border border-secondary rounded" style="display: none;" id="pantallaDos">
     <div class="container">
         <h3 class="text-dark mt-2">Datos de ventanilla</h3>
         <div class="border border-secondary rounded mb-3">
@@ -326,6 +329,13 @@
             </div>
         </div>
     </div>
+    <div class="d-flex">
+        <div class="ml-auto mb-3">
+            <button class="btn btn-info" type="button" id="btnRegresarDos">Regresar</button>
+            <button type="button" class="btn btn-success">Limpiar pantalla</button>
+            <input type="button" value="Siguiente" class="btn btn-dark text-white mr-3" id="btnSiguienteDos" />
+        </div>
+    </div>
 </div>
 
 
@@ -387,17 +397,19 @@
                 <input type="submit" value="Create" class="btn btn-primary" />
                 <a asp-action="Index">Back to List</a>
             </div>
-            <div class="float-right mt-4" id="botonFormUno">
-                <a class="btn btn-info" asp-action="Index">Regresar</a>
-                <input type="submit" value="Limpiar Pantalla" class="btn btn-success" />
-                <input type="submit" value="Siguiente" class="btn btn-dark text-white" />
+            <div class="d-flex">
+                <div class="ml-auto mb-3">
+                    <button class="btn btn-info" type="button" id="btnRegresarTres">Regresar</button>
+                    <button type="button" class="btn btn-success">Limpiar pantalla</button>
+                    <input type="button" value="Siguiente" class="btn btn-dark text-white mr-3" id="btnSiguienteTres" />
+                </div>
             </div>
         </div>
     </div>
 </form>
 
 <!--INICIO DE COTIZACIONES-->
-<div class="border border-secondary rounded" style="display: none;">
+<div class="border border-secondary rounded" style="display: none;" id="pantallaCuatro">
     <div class="container">
         <h3 class="text-dark mt-2">Componentes y conceptos</h3>
 
@@ -445,10 +457,12 @@
             </div>
         </div>
     </div>
-    <div class="float-right mt-4" id="botonFormUno">
-        <a class="btn btn-info" asp-action="Index">Regresar</a>
-        <input type="submit" value="Limpiar Pantalla" class="btn btn-success" />
-        <input type="submit" value="Siguiente" class="btn btn-dark text-white" />
+    <div class="d-flex">
+        <div class="ml-auto mb-3">
+            <button class="btn btn-info" type="button" id="btnRegresarCuatro">Regresar</button>
+            <button type="button" class="btn btn-success">Limpiar pantalla</button>
+            <input type="button" value="Siguiente" class="btn btn-dark text-white mr-3" id="btnSiguienteCuatro" />
+        </div>
     </div>
 </div>
 <!----MODAL DE APOYOS DE COTIZACIONES-->

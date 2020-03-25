@@ -37,7 +37,81 @@
         $('#solicitante_personal').hide();
         $('#nav-domicilio').show();
     });
+
+    $('#btnSiguienteUno, #btnSiguienteUnos').click(function () {
+        $('#solicitante_personal').hide();
+        $('#nav-domicilio').hide();
+        $('#navegadorSolicitante').hide();
+        $('#pantallaDos').show();
+    });
+
+    $('#btnRegresarUno, #btnRegresarUnos').click(function () {
+        $('#solicitante_personal').show();
+        $('#nav-domicilio').show();
+        $('#navegadorSolicitante').show();
+        $('#pantallaDos').hide();
+    });
+
+    $('#btnSiguienteDos').click(function () {
+        $('#pantallaDos').hide();
+        $('#crearProyecto').show();
+    });
+    
+    $('#btnRegresarDos').click(function () {
+        $('#solicitante_personal').show();
+        $('#nav-domicilio').show();
+        $('#navegadorSolicitante').show();
+        $('#pantallaDos').hide();
+    });
+    
+    $('#btnRegresarTres').click(function () {
+        $('#pantallaDos').show();
+        $('#crearProyecto').hide();
+    });
+
+    $('#btnSiguienteTres').click(function () {
+        $('#pantallaCuatro').show();
+        $('#crearProyecto').hide();
+    });
+
+    $('#btnRegresarCuatro').click(function () {
+        $('#pantallaCuatro').hide();
+        $('#crearProyecto').show();
+    });
 });
+
+function calculoApoyo() {
+    var canSol = $('#can_Sol').val();
+    var cosUni = $('#cos_Uni').val();
+    var apoPro = $('#apo_Pro').val();
+    var apoEst = $('#apo_Est').val();
+    var otroApo = $('#otro_Apo').val();
+    var apoFed = $('#apo_Fed').val();
+
+    if (canSol === '')
+        canSol = 0;
+    if (cosUni === '')
+        cosUni = 0;
+    if (apoPro === '')
+        apoPro = 0;
+    if (apoEst === '')
+        apoEst = 0;
+    if (otroApo === '')
+        otroApo = 0;
+    if (apoFed === '')
+        apoFed = 0;
+
+    canSol = parseFloat(canSol);
+    cosUni = parseFloat(cosUni);
+    apoPro = parseFloat(apoPro);
+    apoEst = parseFloat(apoEst);
+    otroApo = parseFloat(otroApo);
+    apoFed = parseFloat(apoFed);
+
+    $('#apo_Est').val((canSol * cosUni)/2 - apoPro);
+    $('#mon_Apo').val(apoFed + apoEst + otroApo);
+    $('#inv_Total').val();
+}
 
 $('#formBusquedaSolicitante').submit(function () {
     var valor = $('#tipoPersonaSolicitante').val();
