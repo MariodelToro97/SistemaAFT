@@ -447,5 +447,29 @@ namespace SistemaAFT.Controllers
                 return e.ToString();
             }
         }
+
+        //Método para obtener los telefonos de una persona
+        [HttpGet]
+        public JsonResult GetTelefonos(int id)
+        {
+            var classes = _context.Telefono.FromSqlRaw("Select * From dbo.Telefono WHERE PersonaID = {0}", id);
+            return Json(classes);
+        }
+
+        //Método para obtener los domicilios de una persona
+        [HttpGet]
+        public JsonResult getDomicilios(int id)
+        {
+            var classes = _context.Domicilio.FromSqlRaw("Select * From dbo.Domicilio WHERE PersonaID = {0}", id);
+            return Json(classes);
+        }
+
+        //Método para obtener los representantes de una persona
+        [HttpGet]
+        public JsonResult getRepre(int id)
+        {
+            var classes = _context.Representante.FromSqlRaw("Select * From dbo.Representante WHERE PersonaID = {0}", id);
+            return Json(classes);
+        }
     }
 }

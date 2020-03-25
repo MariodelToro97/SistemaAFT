@@ -232,8 +232,8 @@ namespace SistemaAFT.Data
 			//Tipo de persona
 			var tipo_persona = new Tipo_Persona[]
 			{
-				new Tipo_Persona { Nombre_Tipo = "Fisica"},
-				new Tipo_Persona { Nombre_Tipo = "Moral" }
+				new Tipo_Persona { Nombre_Tipo = "FISICA"},
+				new Tipo_Persona { Nombre_Tipo = "MORAL" }
 			};
 
 			foreach (Tipo_Persona g in tipo_persona)

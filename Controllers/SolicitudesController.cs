@@ -27,6 +27,13 @@ namespace SistemaAFT.Models
             ViewData["Instancia_EjecutoraID"] = new SelectList(_context.Instancia_Ejecutora, "Instancia_EjecutoraID", "nombre");
             ViewData["DelegacionID"] = new SelectList(_context.Delegacion, "DelegacionID", "nombre");
             ViewData["Tipo_ProyectoID"] = new SelectList(_context.Tipo_Proyecto, "Tipo_ProyectoID", "Nombre");
+            ViewData["Tipo_PersonaID"] = new SelectList(_context.Tipo_Persona, "Tipo_PersonaID", "Nombre_Tipo");
+            ViewData["Etnia"] = new SelectList(_context.Etnia, "EtniaID", "Pertenece_Etnia");
+            ViewData["CompaniaID"] = new SelectList(_context.Set<Compania>(), "CompaniaID", "nombre_compania");
+            ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "nombre_tipo");
+            ViewData["Tipo_DocumentoID"] = new SelectList(_context.Set<Tipo_Documento>(), "Tipo_DocumentoID", "nombre");
+            ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Nombre");
+            ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Nombre");
 
             return View();
         }
@@ -93,8 +100,6 @@ namespace SistemaAFT.Models
 
                 cn.Open();
                 com.ExecuteNonQuery();
-                //int valor = Int32.Parse (com.Parameters["@id"].Value.ToString());
-                //string valor = com.ExecuteScalar().ToString();
                 string valor = com.Parameters["@ID"].Value.ToString();
                 cn.Close();
 
@@ -105,6 +110,14 @@ namespace SistemaAFT.Models
             {
                 return e.ToString();
             }
+        }
+
+        //Método para buscar si existe el usuario con los datos de solicitante MORAL mediante RFC
+        [HttpGet]
+        public JsonResult GetUserMoral(string rfc)
+        {
+            var classes = _context.Persona.FromSqlRaw("Select * From dbo.Persona WHERE Tipo_PersonaID = 2 AND RFC = {0}", rfc);
+            return Json(classes);
         }
     }
 }
