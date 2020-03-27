@@ -190,11 +190,16 @@ namespace SistemaAFT.Controllers
                 com.Parameters.AddWithValue("@Tipo_TelefonoID", Tipo_TelefonoID);
                 com.Parameters.AddWithValue("@persona", persona);
 
+                SqlParameter ID = new SqlParameter("@tel", 0);
+                ID.Direction = ParameterDirection.Output;
+                com.Parameters.Add(ID);
+
                 cn.Open();
                 com.ExecuteNonQuery();
+                string valor = com.Parameters["@tel"].Value.ToString();
                 cn.Close();
 
-                return "SUCCESS UPDATE";
+                return valor;
             }
             catch (Exception e)
             {
