@@ -8,7 +8,6 @@
 AS
 	BEGIN
 		INSERT INTO Proyecto VALUES (@nombreproyecto, @tipoproyecto, @objetivo, @fecha, @solicitudID);
-		SELECT @ID = ProyectoID FROM Proyecto;
-
+		SELECT @ID = ProyectoID FROM Proyecto WHERE nombreProyecto = @nombreproyecto AND Tipo_ProyectoID = @tipoproyecto AND objetivo = @objetivo AND fechaRecepcion = @fecha AND SolicitudID = @solicitudID;
 	END
-RETURN 0
+RETURN 
