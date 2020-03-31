@@ -1,8 +1,8 @@
 ﻿@model GranModelo
 
 <form id="formRepresentantes">
-    <div class="modal fade bd-example-modal-xl" id="modalRepresentantes" tabindex="-1" role="dialog" aria-labelledby="modalRepre" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
+    <div class="modal fade bd-example-modal-xl" style="overflow-y: scroll;" data-backdrop="static" id="modalRepresentantes" tabindex="-1" role="dialog" aria-labelledby="modalRepre" aria-hidden="true">
+        <div class="modal-dialog modal-xl " role="document">
             <div class="modal-content">
 
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -10,7 +10,7 @@
 
                 <div class="modal-header text-center">
                     <h4 class="modal-title w-100 font-weight-bold">Representante</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" id="cerrarModalRepresentantes" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -55,11 +55,13 @@
                     <div class="rounded border border-secondary">
                         <div class="form-inline d-flex bg-dark rounded">
                             <h4 class="my-3 mx-3 text-white font-weight-lighter">Documentos del Representante</h4>
-                            <button type="button" class="btn btn-light btn-rounded mr-3 my-3 ml-auto" id="representanteModal" data-toggle="modal" data-target="#modalDocumentoRepresentantes" disabled>Agregar</button>
+                            <button type="button" class="btn btn-light btn-rounded mr-3 my-3 ml-auto" id="representanteModal" data-toggle="modal" data-target="#modalDocumentoRepresentantes" >Agregar</button>
                         </div>
 
                         <div class="container">
-                            <table class="table table-sm table-secondary my-3" id="tableDocumentosRepresentante">
+                            <label id="lblDocumentosRepresentante" class="text-danger font-weight-bold" style="display: none;">No ha insertado documentos del representante</label>
+                            <label id="lblGuardadoRepresentante" class="text-danger font-weight-bold">Para poder insertar documentos, primero debe guardar el representante</label>
+                            <table class="table table-sm table-secondary my-3">
                                 <thead class="thead-light text-center">
                                     <tr>
                                         <th>Tipo documento</th>
@@ -68,19 +70,18 @@
                                         <th>Editar</th>
                                     </tr>
                                 </thead>
-                                <tbody class="text-center">
-                                   
+                                <tbody class="text-center" id="tableDocumentosRepresentante">
+                                    
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
-                    </div>
-                    <div class="modal-footer d-flex justify-content-center">
-                        <button class="btn btn-danger" id="btnCancelarRepresentante" data-dismiss="modal" aria-label="Close">Cancelar</button>
-                        <button class="btn btn-primary" id="btnModalRepresentante">Gua</button>
-                    </div>
                 </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button class="btn btn-danger" id="btnCancelarRepresentante" data-dismiss="modal" aria-label="Close">Cancelar</button>
+                    <button class="btn btn-primary" id="btnModalRepresentante" disabled >Gua</button>
+                </div>
+            </div>
         </div>
     </div>
 </form>

@@ -16,6 +16,10 @@
 	@discapacidad INT,
 	@suri varchar(max),
 	@moral varchar(max),
+	@actEcon int,
+	@fecha_con varchar(max),
+	@folio varchar(max),
+	@notario int,
 	@ID int OUTPUT
 AS
 	BEGIN
@@ -24,7 +28,7 @@ AS
 		BEGIN
 			IF NOT EXISTS(SELECT * FROM Persona WHERE CURP = @CURP)
 				BEGIN
-					INSERT INTO Persona VALUES (@CURP, @rfc, @nombre, @aPaterno, @aMaterno, @correo, @nacimiento, @nacionalidad, @genero, @civil, @identidad, @identificacion, @persona, @etnia, @discapacidad, @suri, @moral, GETDATE());
+					INSERT INTO Persona VALUES (@CURP, @rfc, @nombre, @aPaterno, @aMaterno, @correo, @nacimiento, @nacionalidad, @genero, @civil, @identidad, @identificacion, @persona, @etnia, @discapacidad, @suri, @moral, GETDATE(), @actEcon, @fecha_con, @folio, @notario);
 					SELECT @ID = PersonaID FROM Persona WHERE CURP = @CURP;
 				END
 		END
@@ -33,7 +37,7 @@ AS
 			BEGIN
 				IF NOT EXISTS(SELECT * FROM Persona WHERE RFC = @rfc)
 				BEGIN
-					INSERT INTO Persona VALUES (@CURP, @rfc, @nombre, @aPaterno, @aMaterno, @correo, @nacimiento, @nacionalidad, @genero, @civil, @identidad, @identificacion, @persona, @etnia, @discapacidad, @suri, @moral, GETDATE());
+					INSERT INTO Persona VALUES (@CURP, @rfc, @nombre, @aPaterno, @aMaterno, @correo, @nacimiento, @nacionalidad, @genero, @civil, @identidad, @identificacion, @persona, @etnia, @discapacidad, @suri, @moral, GETDATE(), @actEcon, @fecha_con, @folio, @notario);
 					SELECT @ID = PersonaID FROM Persona WHERE RFC = @rfc;
 				END
 			END

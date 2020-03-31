@@ -2,9 +2,11 @@
     $('#botonAgregarTelefono').click(function () {
         document.getElementById('btnModalTelefono').innerHTML = "Guardar";
         document.getElementById('btnCancelarTelefono').innerHTML = "Cancelar";
+        
         limpiarTelefonos();
         $('#btnModalTelefono').show();
-        $('#telefonoPersonaID').val($('#personaOcultoID').val());
+        $('#telefonoPersonaID').val($('#personaGeneralID').val());
+        
     });
 
     $('#btnModalTelefono').click(function () {
@@ -12,16 +14,28 @@
     });
 });
 
-$('#formTelefonos').submit(function () {
+$('#formTelefonos').submit(function (e) {
+    listadoContactos = document.querySelector('#tableTelefonos');
+    nuevoContacto = document.createElement('tr');
+    
     var numero = $('#numeroTelefono').val();
+    console.log(numero);
+
     var CompaniaID = $('#companiaTelefono').val();
+    console.log(CompaniaID);
+
     var Tipo_TelefonoID = $('#tipoTelefono').val();
+    console.log(Tipo_TelefonoID);
+
     var persona = $('#personaGeneralID').val();
+    console.log(persona);
+
 
     if (numero === '' || CompaniaID === '' || Tipo_TelefonoID === '') {
         console.log('FALTAN DATOS');
     } else {
         if (document.getElementById('btnModalTelefono').innerHTML === "Guardar") {
+            numero = $('#numeroTelefono').val();
             $.ajax({
                 type: 'POST',
                 url: "/Peticiones/addTelefono",
@@ -32,9 +46,34 @@ $('#formTelefonos').submit(function () {
                     persona: persona
                 },
                 success: function (data) {
-                    console.log(data);
-                    $('#tableTelefonos').load(" #tableTelefonos");
-                    $('#modalTelefonos').modal('hide');
+                    if (data === '') {
+                        alert('No se insertó por qué ya esta dado de alta');
+                    } else {
+                        alert('Insertado con el id ' + data);
+                        $('#modalTelefonos').modal('hide');
+                        $('#lblNoTelefonos').hide();
+
+                        nuevoContacto.setAttribute("id", `${data}`);
+                        nuevoContacto.setAttribute("class", `tablaTelefono-${data} tablaTelefono`);
+
+                        var comp = $('#companiaTelefono option[value=' + CompaniaID + ']').text();
+                        var tipo = $('#tipoTelefono option[value=' + Tipo_TelefonoID + ']').text();
+
+                        nuevoContacto.innerHTML = `
+                        <td>${numero}</td>
+                        <td>${comp}</td>
+                        <td>${tipo}</td>
+                        <td>
+                            <button type="button" onclick="editTelefono(this)" data-toggle="modal" data-target="#modalTelefonos" class="btn btn-success" value=${data} name=${persona} id="editTelefono">Editar</button>
+                            <button type="button" class="btn btn-primary" onclick="detalleTelefono(this)" data-toggle="modal" data-target="#modalTelefonos" value=${data} name=${persona}>Detalles</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteTelefono(this)" value=${data}>Borrar</button>
+                        </td>
+                    `;
+
+                        listadoContactos.appendChild(nuevoContacto);
+                    }
+                    
+                    
                 },
                 error: function (r) {
                     console.log(r);
@@ -58,9 +97,37 @@ $('#formTelefonos').submit(function () {
                         persona: persona
                     },
                     success: function (data) {
-                        console.log(data);
-                        $('#tableTelefonos').load(" #tableTelefonos");
-                        $('#modalTelefonos').modal('hide');
+                        console.log("ENTRO A SUCCESS",data)
+                        if (data === '') {
+                            alert("No se puede actualizar porque ya existe");
+                        } else {
+                            console.log("es el data", data);
+                            $('#modalTelefonos').modal('hide');
+
+                            var elemento = document.getElementsByClassName(`tablaTelefono-${id}`);
+                            $(elemento).remove();
+
+                            nuevoContacto.setAttribute("id", `${id}`);
+                            nuevoContacto.setAttribute("class", `tablaTelefono-${id} tablaTelefono`);
+
+                            var comp = $('#companiaTelefono option[value=' + CompaniaID + ']').text();
+                            var tipo = $('#tipoTelefono option[value=' + Tipo_TelefonoID + ']').text();
+
+                            nuevoContacto.innerHTML = `
+                            <td>${numero}</td>
+                            <td>${comp}</td>
+                            <td>${tipo}</td>
+                            <td>
+                                <button type="button" onclick="editTelefono(this)" data-toggle="modal" data-target="#modalTelefonos" class="btn btn-success" value=${id} name=${persona} id="editTelefono">Editar</button>
+                                <button class="btn btn-primary" onclick="detalleTelefono(this)" data-toggle="modal" data-target="#modalTelefonos" value=${id} name=${persona}>Detalles</button>
+                                <button class="btn btn-danger" onclick="deleteTelefono(this)" value=${id}>Borrar</button>
+                            </td>
+                        `;
+
+                            listadoContactos.appendChild(nuevoContacto);
+                        }
+                            
+                        
                     },
                     error: function (r) {
                         console.log(r);
@@ -81,16 +148,23 @@ function limpiarTelefonos() {
 
 function deleteTelefono(boton) {
     var id = boton.value;
+    var persona = $('#personaGeneralID').val();
 
     $.ajax({
         type: 'POST',
         url: "/Peticiones/deleteTelefono",
         data: {
-            id: id
+            id: id,
+            persona: persona
         },
         success: function (data) {
+            if (data === '0') {
+                $('#lblNoTelefonos').show();
+            } 
             console.log(data);
-            $('#tableTelefonos').load(" #tableTelefonos");
+            var elemento = document.getElementsByClassName(`tablaTelefono-${id}`);
+            $(elemento).remove();
+            //$('#tableTelefonos').load(" #tableTelefonos");
         },
         error: function (r) {
             console.log(r);
@@ -135,13 +209,9 @@ function obtenerTelefono(id) {
             console.log(data);
             $('#TelefonoID').val(data[0]['telefonoID']);
             $('#numeroTelefono').val(data[0]['numero']);
-            var CompaniaID = $('#companiaTelefono').val(data[0]['companiaID']);
-            var Tipo_TelefonoID = $('#tipoTelefono').val(data[0]['tipo_TelefonoID']);
+            $('#companiaTelefono').val(data[0]['companiaID']);
+            $('#tipoTelefono').val(data[0]['tipo_TelefonoID']);
             $('#telefonoPersonaID').val(data[0]['personaID']);
-
-            document.getElementById('companiaTelefono').getElementsByTagName('option')[CompaniaID].selected = 'selected';
-            document.getElementById('tipoTelefono').getElementsByTagName('option')[Tipo_TelefonoID].selected = 'selected';
-
         },
         error: function (r) {
             console.log(r);

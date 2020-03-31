@@ -18,9 +18,16 @@ namespace SistemaAFT.Models
         [Required(ErrorMessage = "Campo Requerido")]
         public int ComponenteID { get; set; }
         public Componente Componente { get; set; }
+        [Required(ErrorMessage = "Campo Requerido")]
         public int Instancia_EjecutoraID { get; set; }
         public Instancia_Ejecutora Instancia_Ejecutora { get; set; }
+        [Required(ErrorMessage = "Campo Requerido")]
         public int DelegacionID { get; set; }
         public Delegacion Delegacion { get; set; }
+
+        [Required(ErrorMessage = "Campo Requerido")]
+        public string estado { get; set; }
+        public int PersonaID { get; set; }
+        public Persona Persona { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 <div class="rounded border border-secondary">
     <div class="container">
-        <table class="table table-sm table-secondary my-3 rounded" id="tableIntegrantes">
+        <table class="table table-sm table-secondary my-3 rounded" >
             <thead class="thead-light text-center">
                 <tr>
                     <th>Tipo persona</th>
@@ -13,17 +13,17 @@
                     <th>Editar</th>
                 </tr>
             </thead>
-            <tbody class="text-center">
+            <tbody id="tableIntegrantes" class="text-center">
                 @if (ViewBag.Integrantes == null)
                 {
-                    <p>No hay Integrantes</p>
+                    <p id="lblNoIntegrantes" class="text-danger font-weight-bold">No hay Integrantes</p>
 
                 }
                 else
                 {
                     @foreach (var integrante in (IEnumerable<SistemaAFT.Models.Integrante>)ViewBag.Integrantes)
                     {
-                        <tr>
+                        <tr id="@integrante.IntegranteID" class="tablaIntegrante-@integrante.IntegranteID tablaIntegrante">
                             <th></th>
                             <th>@integrante.CURP</th>
                             <th></th>

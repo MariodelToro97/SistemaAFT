@@ -261,11 +261,18 @@ namespace SistemaAFT.Controllers
                 com.Parameters.AddWithValue("@referencia", referenciaubicacion);
                 com.Parameters.AddWithValue("@personaID", PersonaID);
 
+                SqlParameter ID = new SqlParameter("@ID", 0);
+                ID.Direction = ParameterDirection.Output;
+                com.Parameters.Add(ID);
+
                 cn.Open();
                 com.ExecuteNonQuery();
+                //int valor = Int32.Parse (com.Parameters["@id"].Value.ToString());
+                //string valor = com.ExecuteScalar().ToString();
+                string valor = com.Parameters["@ID"].Value.ToString();
                 cn.Close();
 
-                return "SUCCESS";
+                return valor;
 
             }
             catch (Exception e)
@@ -275,7 +282,7 @@ namespace SistemaAFT.Controllers
         }
 
         //Llamada a procedimiento para eliminar domicilio
-        public string deleteDomicilio (int domID)
+        public string deleteDomicilio (int domID, int persona)
         {
             try
             {
@@ -284,13 +291,19 @@ namespace SistemaAFT.Controllers
                 SqlCommand com = new SqlCommand("spDeleteAddress", cn);
                 com.CommandType = CommandType.StoredProcedure;
 
-                com.Parameters.AddWithValue("@domID", domID);                
+                com.Parameters.AddWithValue("@domID", domID);
+                com.Parameters.AddWithValue("@persona", persona);
+
+                SqlParameter ID = new SqlParameter("@contador", 0);
+                ID.Direction = ParameterDirection.Output;
+                com.Parameters.Add(ID);
 
                 cn.Open();
                 com.ExecuteNonQuery();
+                string valor = com.Parameters["@contador"].Value.ToString();
                 cn.Close();
 
-                return "SUCCESS";
+                return valor;
 
             }
             catch (Exception e)

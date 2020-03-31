@@ -13,10 +13,10 @@
                     <th>Editar</th>
                 </tr>
             </thead>
-            <tbody class="text-center">
+            <tbody class="text-center" id="tableRepresentante">
                 @if (ViewBag.Representante == null)
                 {
-                    <p>No hay representantes</p>
+                    <p id="lblNoRepresentantes" class="text-danger font-weight-bold">No hay representantes</p>
 
                 }
                 else

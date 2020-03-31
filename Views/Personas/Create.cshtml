@@ -33,8 +33,16 @@
 <!--MODAL TELEFONO-->
 @await Html.PartialAsync("_modalTelefono")
 
-<!--TABLA TELEFONOS-->
-@await Html.PartialAsync("_tablaTelefono")
+<div class="container my-3" id="Tel">
+    <div class="border border-secondary rounded bg-dark d-flex">
+        <h4 class="my-3 mx-3 text-white font-weight-lighter">Telefonos</h4>
+        <!--Modal 2-->
+        <button type="button" class="btn btn-light btn-rounded mr-3 my-3 ml-auto" id="botonAgregarTelefono" data-toggle="modal" onclick="limpiarForm()" data-target="#modalTelefonos">Agregar</button>
+    </div>
+    <!--TABLA TELEFONOS-->
+    @await Html.PartialAsync("_tablaTelefono")
+</div><!--FIN TABLA TELEFONOS-->
+
 
 <div class="tab-pane fade border border-secondary rounded" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab" style="display:none;">
     <!--MODAL DE DOMICILIO-->
@@ -60,7 +68,7 @@
         <div class="rounded">
             <div class="form-inline d-flex bg-dark rounded">
                 <h4 class="my-3 mx-3 text-white font-weight-lighter">Representante</h4>
-                <button type="button" class="btn btn-light btn-rounded mr-3 my-3 ml-auto" id="representanteTop" data-toggle="modal" data-target="#modalRepresentantes" disabled>Agregar</button>
+                <button type="button" class="btn btn-light btn-rounded mr-3 my-3 ml-auto" id="representanteTop" data-toggle="modal" data-target="#modalRepresentantes">Agregar</button>
             </div>
 
             <!-- MODAL REPRESENTANTES -->
@@ -81,7 +89,7 @@
         <div class="rounded">
             <div class="form-inline d-flex bg-dark rounded">
                 <h4 class="my-3 mx-3 text-white font-weight-lighter">Integrantes</h4>
-                <button type="button" class="btn btn-light btn-rounded mr-3 my-3 ml-auto" id="integrantesTop" data-toggle="modal" data-target="#modalIntegrantes" disabled>Agregar</button>
+                <button type="button" class="btn btn-light btn-rounded mr-3 my-3 ml-auto" id="integrantesTop" data-toggle="modal" data-target="#modalIntegrantes">Agregar</button>
             </div>
 
             <!-- Extra large modal -->

@@ -3,9 +3,15 @@
 	@nombre VARCHAR (MAX),
 	@aPaterno VARCHAR (MAX),
 	@aMaterno VARCHAR(MAX),
-	@persona int
+	@persona int,
+	@ID int OUTPUT
 AS
 	BEGIN
-		INSERT INTO Representante VALUES (@curp, @nombre, @aPaterno, @aMaterno, @persona);
+		IF NOT EXISTS(SELECT * FROM Representante WHERE CURP = @CURP)
+			BEGIN
+				INSERT INTO Representante VALUES (@curp, @nombre, @aPaterno, @aMaterno, @persona);
+				SELECT @ID = RepresentanteID FROM Representante WHERE CURP = @CURP;
+			END
+		
 	END
-RETURN 0
+RETURN
