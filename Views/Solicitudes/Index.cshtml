@@ -7,6 +7,363 @@
 <hr />
 
 <div class="border border-secondary rounded">
+<!--INICIO DE SOLICITANTES-->
+<nav id="navegadorSolicitante">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-solicitante" data-toggle="tab" href="#solicitante_personal" role="tab" aria-controls="nav-solicitante" aria-selected="true">Solicitante</a>
+        <a class="nav-item nav-link" id="nav-Representante" data-toggle="tab" href="#nav-domicilio" role="tab" aria-controls="nav-Representante" aria-selected="false" style="display: none;">Representante</a>
+        <a class="nav-item nav-link" id="nav-complementarios" data-toggle="tab" href="#nav-cuenta" role="tab" aria-controls="nav-contact" aria-selected="false" style="display: none;">Datos Complementarios</a>
+        <a class="nav-item nav-link" id="nav-socioeconomicos" data-toggle="tab" href="#nav-obligacion" role="tab" aria-controls="nav-contact" aria-selected="false" style="display: none;">Datos SocioEconomicos</a>
+    </div>
+</nav>
+
+<div class="border border-secondary rounded container my-3 mr-0" id="solicitante_personal">
+    <h3 class="text-dark mt-2">Datos del Solicitante</h3>
+    <div class="border border-secondary rounded bg-dark">
+
+        <div class="form-inline d-flex">
+            <h6 class="my-3 mx-3 text-white font-weight-lighter">Busqueda</h6>
+        </div>
+
+    </div>
+    <form id="formBusquedaSolicitante">
+        <div class="rounded border border-secondary mb-3">
+            <div class="container">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-md-4 mt-2">
+                        <div class="form-group">
+                            <label asp-for="Persona.Tipo_PersonaID" class="control-label">Tipo de Persona<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.Tipo_PersonaID" class="text-danger solicitanteBusqueda ErrorInput"></span>
+                            <select asp-for="Persona.Tipo_PersonaID" id="tipoPersonaSolicitante" class="form-control" asp-items='ViewBag.Tipo_PersonaID'>
+                                <option value="" selected>Seleccione opción</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Persona.CURP" class="control-label">CURP<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.CURP" class="text-danger solicitanteBusqueda ErrorInput"></span>
+                            <input asp-for="Persona.CURP" type="text" onkeyup="mayus(this)" maxlength="18" class="form-control" placeholder="CURP" required id="curpBusquedaSolicitante" disabled />
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mt-2">
+                        <div class="form-group">
+                            <label asp-for="Persona.fechaNacimiento" class="control-label">Folio de Grupo<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.fechaNacimiento" class="text-danger solicitanteBusqueda ErrorInput"></span>
+                            <input asp-for="Persona.fechaNacimiento" type="text" class="form-control" placeholder="FOLIO DE GRUPO" id="folioGrupoSolicitante" required disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Persona.RFC" class="control-label">RFC<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.RFC" class="text-danger solicitanteBusqueda ErrorInput"></span>
+                            <input id="rfcBusquedaSolicitante" asp-for="Persona.RFC" maxlength="13" onkeyup="mayus(this)" required type="text" class="form-control" placeholder="RFC" disabled />
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mt-2">
+                        <div class="form-group">
+                            <label asp-for="Persona.NacionalidadID" class="control-label">Folio del Productor<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.NacionalidadID" class="text-danger solicitanteBusqueda ErrorInput"></span>
+                            <input asp-for="Persona.NacionalidadID" type="text" class="form-control" placeholder="FOLIO DE PRODUCTOR" id="folioProductorSolicitante" disabled />
+                        </div>
+                        <div class="form-group text-center ">
+                            <button class="btn btn-dark mt-4">Buscar</button>
+                            <button type="button" id="btnLimpiarBusquedaSolic" class="btn btn-dark mt-4">Limpiar</button>
+                        </div>
+                        <div style="display: none;">
+                            <input type="text" id="personaIDSOLICITANTES" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div style="display: none;" id="parteBajaSolicitantes">
+        <div class="border border-secondary rounded bg-dark">
+            <div class="form-inline d-flex">
+                <h6 class="my-3 mx-3 text-white font-weight-lighter">Información Personal</h6>
+            </div>
+        </div>
+        <form id="formInformacionPersonalSolicitante">
+            <div class="rounded border border-secondary">
+                <div class="container">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row" id="personaMoral">
+                        <div class="col-md-4 mt-2">
+
+                            <div class="form-group">
+                                <label asp-for="Persona.nombreMoral" class="control-label">Denominación o Razon Social<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.nombreMoral" class="text-danger ErrorInput"></span>
+                                <input asp-for="Persona.nombreMoral" type="text" class="form-control" id="denInfPersSolic" placeholder="Denominación o razón social" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Documento de Acreditación:</label>
+                                <select id="docAcrPersoSolic" class="form-control">
+                                    <option value="" selected></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Persona.EtniaID" class="control-label">Etnia a la que pertence la mayoría de los integrantes de la persona moral:</label>
+                                <select asp-for="Persona.EtniaID" id="etnActPersoSolic" class="form-control" asp-items='ViewBag.Etnia'>
+                                    <option value="" selected></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mt-2">
+                            <div class="form-group punteado">
+                                <label asp-for="Persona.fecha_Consti" class="control-label">Fecha de Constitución<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.fecha_Consti" class="text-danger ErrorInput"></span>
+                                <input asp-for="Persona.fecha_Consti" type="date" id="fechConstInfPersSolic" class="form-control " required />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Especificar:</label>
+                                <input id="especInfPersSolic" type="text" class="form-control" placeholder="Especificar" />
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4 mt-2">
+                            <div class="form-group">
+                                <label asp-for="Persona.actividadEconomica" class="control-label">Actividad Economica<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.actividadEconomica" class="text-danger ErrorInput"></span>
+                                <input asp-for="Persona.actividadEconomica" id="actEcoInfPerSoli" type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--PERSONA FISICA-->
+                    <div class="row" id="personaFisica">
+                        <div class="col-md-3 mt-2">
+                            <div class="form-group" id="divGeneroIDPersona">
+                                <label asp-for="Persona.GeneroID" class="control-label">Género<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.GeneroID" class="text-danger Persona ErrorInput"></span>
+                                <select asp-for="Persona.GeneroID" id="generoPersona" class="form-control">
+                                    <option value="" selected>Seleccione opción</option>
+                                    @foreach (var gen in (IEnumerable<SistemaAFT.Models.Genero>)ViewBag.Genero)
+                                    {
+                                        @if (gen.Nombre_Genero == "MORAL")
+                                        {
+                                            <option id="optionHidGenero" hidden value="@gen.GeneroID">@gen.Nombre_Genero</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@gen.GeneroID">@gen.Nombre_Genero</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group" id="divEtniaIDPersona">
+                                <label asp-for="Persona.EtniaID" class="control-label">Pertenece a una étnia:</label>
+                                <div asp-for="Tipo_PersonaID">
+                                    @Html.RadioButton("Persona.EtniaID", 2, false, new { id = "etniaPosPersona" }) <label class="control-label mx-2">Si</label>
+                                    @Html.RadioButton("Persona.EtniaID", 1, true, new { id = "etniaNegPersona" }) <label class="control-label mx-2">No</label>
+                                </div>
+                            </div>                           
+                        </div>
+
+                        <div class="col-md-3 mt-2">
+                            <div class="form-group" id="divFechaNacimientoPersona">
+                                <label asp-for="Persona.fechaNacimiento" class="control-label">Fecha de nacimiento<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.fechaNacimiento" class="text-danger Persona ErrorInput"></span>
+                                <input asp-for="Persona.fechaNacimiento" id="nacimientoPersona" type="date" class="form-control" required />
+                            </div>
+                            <div class="form-group" id="divCivilPersona">
+                                <label asp-for="Persona.Estado_CivilID" class="control-label">Estado civil<span class="text-danger font-weight-bold">*</span>:</label> <span asp-validation-for="Persona.Estado_CivilID" class="text-danger Persona ErrorInput"></span>
+                                <select asp-for="Persona.Estado_CivilID" id="civilPersona" class="form-control">
+                                    <option value="" selected>Seleccione opción</option>
+                                    @foreach (var estC in (IEnumerable<SistemaAFT.Models.Estado_Civil>)ViewBag.Civil)
+                                    {
+                                        @if (estC.Nombre_Edo_Civil == "MORAL")
+                                        {
+                                            <option id="optionHidEstadoCivil" hidden value="@estC.Estado_CivilID">@estC.Nombre_Edo_Civil</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@estC.Estado_CivilID">@estC.Nombre_Edo_Civil</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group" id="divDiscapacidadIDPersona">
+                                <label asp-for="Persona.DiscapacidadID" class="control-label">Discapacidad:</label>
+                                <div asp-for="Tipo_PersonaID">
+                                    @Html.RadioButton("Persona.DiscapacidadID", 2, false, new { id = "discPosPersona" }) <label class="control-label mx-2">Si</label>
+                                    @Html.RadioButton("Persona.DiscapacidadID", 1, true, new { id = "discNegPersona" }) <label class="control-label mx-2">No</label>
+                                </div>
+                            </div>                           
+                        </div>
+
+                        <div class="col-md-3 mt-2">
+                            <div class="form-group" id="divNacionalidadPerso">
+                                <label asp-for="Persona.NacionalidadID" class="control-label">Nacionalidad<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.NacionalidadID" class="text-danger Persona ErrorInput"></span>
+                                <select asp-for="Persona.NacionalidadID" id="nacionalidadPers" class="form-control">
+                                    <option value="" selected>Seleccione opción</option>
+                                    @foreach (var nac in (IEnumerable<SistemaAFT.Models.Nacionalidad>)ViewBag.Nacionalidad)
+                                    {
+                                        @if (nac.Nombre == "MORAL")
+                                        {
+                                            <option id="optionHidNacionalidad" hidden value="@nac.NacionalidadID">@nac.Nombre</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@nac.NacionalidadID">@nac.Nombre</option>
+
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group" id="divTipoIdenPersona">
+                                <label asp-for="Persona.Tipo_IdentidadID" class="control-label">Tipo de identificación<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.Tipo_IdentidadID" class="text-danger Persona ErrorInput"></span>
+                                <select asp-for="Persona.Tipo_IdentidadID" id="tipoIdenPersona" class="form-control">
+                                    <option value="" selected>Seleccione opción</option>
+                                    @foreach (var iden in (IEnumerable<SistemaAFT.Models.Tipo_Identidad>)ViewBag.Tipo_Iden)
+                                    {
+                                        @if (iden.Nombre == "MORAL")
+                                        {
+                                            <option id="optionHidTipoIdentidad" hidden value="@iden.Tipo_IdentidadID">@iden.Nombre</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@iden.Tipo_IdentidadID">@iden.Nombre</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mt-2">
+                            <div class="form-group" id="divNumIdenPersona">
+                                <label asp-for="Persona.num_identificacion" class="control-label">Núm. Doc de identificación<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.num_identificacion" class="text-danger Persona ErrorInput"></span>
+                                <input asp-for="Persona.num_identificacion" id="numIdenPersona" type="text" class="form-control" placeholder="Número identificación" required disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <!--FIN DE PERSONA FISICA-->
+                    <!--TABLA DE TELEFONOS-->
+                    <table class="table table-sm table-secondary mt-2 rounded">
+                        <thead class="thead-light text-center">
+                            <tr>
+                                <th>Tipo Telefono</th>
+                                <th>Compania</th>
+                                <th>Numero Telefono</th>
+                                <th>Contactar</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-light" id="tableTelefonosSolicitudes">
+                        </tbody>
+                    </table>
+                    <!--FIN TABLA TELEFONOS-->
+                    <label class="mt-0"><span id="spanTelRegSol">0</span> registros</label>
+
+                    <div class="row">
+                        <div class="col-md-4 mt-2">
+                            <div class="form-group">
+                                <label asp-for="Persona.Tipo_PersonaID" class="control-label">¿Desea que se le notifique via mensaje el estatus de su solicitud?<span class="text-danger font-weight-bold">*</span>:</label>
+                                <div asp-for="Persona.Tipo_PersonaID">
+                                    @Html.RadioButton("Persona.Tipo_PersonaID", 1, new { id = "notPosMens" }) <label class="control-label mx-2">Sí</label>
+                                    @Html.RadioButton("Persona.Tipo_PersonaID", 2, true, new { id = "notNegMens" }) <label class="control-label mx-2">No</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mt-2">
+                            <div class="form-group">
+                                <label asp-for="Persona.correo" class="control-label">Correo electrónico:</label><span asp-validation-for="Persona.correo" class="text-danger ErrorInput"></span>
+                                <input asp-for="Persona.correo" type="email" id="corInfGeneSoli" class="form-control" placeholder="correo@electrónico.com" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mt-2">
+                            <div class="form-group">
+                                <label asp-for="Persona.actividadEconomica" class="control-label">Actividad Principal:</label><span asp-validation-for="Persona.actividadEconomica" class="text-danger ErrorInput"></span>
+                                <input asp-for="Persona.actividadEconomica" id="actEcoInfGenSoli" type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form><!--FIN DE TELEFONOS-->
+        <!--INFORMACION DOMICILIOS-->
+        <div class="border border-secondary rounded bg-dark mt-3">
+            <div class="form-inline d-flex">
+                <h6 class="my-3 mx-3 text-white font-weight-lighter">Domicilios</h6>
+            </div>
+        </div>
+        <div class="rounded border border-secondary mb-3">
+            <div class="container">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-inline mt-2">
+                    <label class="control-label mr-3">Buscar:</label>
+                    <input type="text" class="form-control" />
+                </div>
+                <table class="table table-sm table-secondary my-3 rounded">
+                    <thead class="thead-light text-center">
+                        <tr>
+                            <th>Vialidad</th>
+                            <th>Codigo Postal</th>
+                            <th>Estado</th>
+                            <th>Municipio</th>
+                            <th>Localidad</th>
+                            <th>Asentamiento</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-light" id="tablaDomicilioSolicitudes">
+                    </tbody>
+                </table>
+                <label class="mt-0"><span id="spanDomRegSol">0</span> registros</label>
+            </div>
+        </div>
+        <!--FIN DE DOMICILIOS SOLICITUDES-->
+        <div class="d-flex">
+            <div class="ml-auto mb-3">
+                <button class="btn btn-info" type="button" id="btnRegresarUno">Regresar</button>
+                <button type="button" class="btn btn-success" id="limpPantUno">Limpiar pantalla</button>
+                <input type="button" value="Siguiente" class="btn btn-dark text-white" id="btnSiguienteUno" />
+            </div>
+        </div>
+    </div>
+</div>
+<!--FIN DE DATOS SOLICITANTE-->
+<!--INFORMACION PERSONAL SEGUNDA PESTAÑA-->
+<div class="tab-pane fade border border-secondary rounded" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab" style="display:none;">
+    <div class="container my-3">
+        <div class="border border-secondary rounded bg-dark">
+            <div class="form-inline d-flex">
+                <h6 class="my-3 mx-3 text-white font-weight-lighter">Información Personal</h6>
+            </div>
+        </div>
+        <div class="rounded border border-secondary">
+            <div class="container">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-inline mt-2">
+                    <label class="control-label mr-3">Buscar:</label>
+                    <input type="text" class="form-control" placeholder="" />
+                </div>
+                <table class="table table-sm table-secondary my-3 rounded">
+                    <thead class="thead-light text-center">
+                        <tr>
+                            <th>°</th>
+                            <th>Nombre</th>
+                            <th>Ap. Paterno</th>
+                            <th>Ap. Materno</th>
+                            <th>CURP</th>
+                            <th>Sexo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-light" id="tableRepresentantesSolicitudes">
+                    </tbody>
+                </table>
+                <label class="mt-0"><span id="spanRepRegSol">0</span> registros</label>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex">
+        <div class="ml-auto mb-3">
+            <button class="btn btn-info" type="button" id="btnRegresarUnos">Regresar</button>
+            <button type="button" class="btn btn-success" id="limpPantUnos">Limpiar pantalla</button>
+            <input type="button" value="Siguiente" class="btn btn-dark text-white mr-3" id="btnSiguienteUnos" />
+        </div>
+    </div>
+</div>
+<!--FIN DE INFORMACION PERSONAL SEGUNDA PESTAÑA-->
+<!--FIN DE SOLICITANTES-->
+
+<div class="border border-secondary rounded" style="display: none;" id="pantallaDos">
     <div class="container">
         <h3 class="text-dark mt-2">Datos de ventanilla</h3>
         <div class="border border-secondary rounded mb-3">
@@ -19,8 +376,8 @@
                         <div class="col-md-3 mt-2">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
-                                <label asp-for="YearID" class="control-label">Año<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="YearID" class="text-danger ErrorInput"></span>
-                                <select asp-for="YearID" class="form-control" asp-items="ViewBag.YearID">
+                                <label asp-for="Solicitud.YearID" class="control-label">Año<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Solicitud.YearID" class="text-danger ventanilla ErrorInput"></span>
+                                <select asp-for="Solicitud.YearID" class="form-control" asp-items="ViewBag.YearID" id="year">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
                             </div>
@@ -29,16 +386,16 @@
                     <div class="row">
                         <div class="col-md-6 mt-2">
                             <div class="form-group">
-                                <label asp-for="ProgramaID" class="control-label">Programa<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="ProgramaID" class="text-danger ErrorInput"></span>
-                                <select asp-for="ProgramaID" class="form-control" asp-items="ViewBag.ProgramaID">
+                                <label asp-for="Solicitud.ProgramaID" class="control-label">Programa<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Solicitud.ProgramaID" class="text-danger ventanilla ErrorInput"></span>
+                                <select asp-for="Solicitud.ProgramaID" class="form-control" id="programa" asp-items="ViewBag.ProgramaID">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6 mt-2">
                             <div class="form-group">
-                                <label asp-for="ComponenteID" class="control-label">Componente<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="ComponenteID" class="text-danger ErrorInput"></span>
-                                <select asp-for="ComponenteID" class="form-control" asp-items="ViewBag.ComponenteID">
+                                <label asp-for="Solicitud.ComponenteID" class="control-label">Componente<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Solicitud.ComponenteID" class="text-danger ventanilla ErrorInput"></span>
+                                <select asp-for="Solicitud.ComponenteID" class="form-control" id="componente" asp-items="ViewBag.ComponenteID">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
                             </div>
@@ -47,35 +404,169 @@
                     <div class="row">
                         <div class="col-md-4 mt-2">
                             <div class="form-group">
-                                <label asp-for="Instancia_EjecutoraID" class="control-label">Instancia Ejecutora<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Instancia_EjecutoraID" class="text-danger ErrorInput"></span>
-                                <select asp-for="Instancia_EjecutoraID" class="form-control" asp-items="ViewBag.Instancia_EjecutoraID">
+                                <label asp-for="Solicitud.Instancia_EjecutoraID" class="control-label">Instancia Ejecutora<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Solicitud.Instancia_EjecutoraID" class="text-danger ventanilla ErrorInput"></span>
+                                <select asp-for="Solicitud.Instancia_EjecutoraID" class="form-control" id="instancia" asp-items="ViewBag.Instancia_EjecutoraID">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-4 mt-2">
                             <div class="form-group">
-                                <label asp-for="DelegacionID" class="control-label">Delegación<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="DelegacionID" class="text-danger ErrorInput"></span>
-                                <select asp-for="DelegacionID" class="form-control" asp-items="ViewBag.DelegacionID">
+                                <label asp-for="Solicitud.DelegacionID" class="control-label">Delegación<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Solicitud.DelegacionID" class="text-danger ventanilla ErrorInput"></span>
+                                <select asp-for="Solicitud.DelegacionID" class="form-control" id="delegacion" asp-items="ViewBag.DelegacionID">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-4 mt-2">
                             <div class="form-group">
-                                <label class="control-label">Estado<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="DelegacionID" class="text-danger ErrorInput"></span>
-                                <select class="form-control" id="estadoSolicitud">
+                                <label asp-for="Solicitud.estado" class="control-label">Estado<span class="text-danger font-weight-bold">*</span>:</label>
+                                <span asp-validation-for="Solicitud.estado" class="text-danger ventanilla ErrorInput Modal"></span>
+                                <select asp-for="Solicitud.estado" class="form-control" id="estadoSolicitud" asp-items="ViewBag.estado">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-primary" id="traer_datos"/>
-                        <a asp-action="Index">Back to List</a>
+                    <div class="form-group d-flex">
+                        <input type="submit" value="Crear" id="btnCrearSolicitudVentanilla" class="btn btn-primary mx-auto" />
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+    <div class="d-flex">
+        <div class="ml-auto mb-3">
+            <button class="btn btn-info" type="button" id="btnRegresarDos">Regresar</button>
+            <button type="button" class="btn btn-success" id="limpPantallaSolicitudesVentanilla">Limpiar pantalla</button>
+            <input type="button" value="Siguiente" class="btn btn-dark text-white mr-3" id="btnSiguienteDos" />
+        </div>
+    </div>
+</div>
+
+
+<form id="crearProyecto" style="display: none;">
+    <div class="border border-secondary rounded">
+        <div class="container">
+            <h3 class="text-dark mt-2">Datos del proyecto</h3>
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-home" aria-selected="true">Datos del proyecto</a>
+                </div>
+            </nav>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Solicitud.SolicitudID" id="solicitudID" />
+
+            <div class="border border-secondary rounded container mb-3 mr-0" id="solicitante_personal">
+                <div class="container">
+                    <div class="border border-secondary rounded mb-3 mt-2">
+                        <div class="form-inline d-flex bg-dark">
+                            <h6 class="my-3 mx-3 text-white font-weight-lighter">Proyecto</h6>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4 mt-2">
+                                    <div class="form-group">
+                                        <label asp-for="Proyecto.nombreProyecto" class="control-label">Nombre del proyecto<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Proyecto.nombreProyecto" class="text-danger proyecto ErrorInput"></span>
+                                        <input asp-for="Proyecto.nombreProyecto" type="text" class="form-control proyecto" placeholder="Nombre del proyecto" required id="nombreproyecto" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mt-2">
+                                    <div class="form-group">
+                                        <label asp-for="Proyecto.Tipo_ProyectoID" class="control-label">Tipo de Proyecto<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Proyecto.Tipo_ProyectoID" class="text-danger proyecto ErrorInput"></span>
+                                        <select asp-for="Proyecto.Tipo_ProyectoID" id="tipoproyecto" class="form-control proyecto" asp-items="ViewBag.Tipo_ProyectoID">
+                                            <option value="" selected>Seleccione opción</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mt-1">
+                                    <div class="form-group">
+                                        <label asp-for="Proyecto.fechaRecepcion" class="control-label">Fecha de recepción<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Proyecto.fechaRecepcion" class="text-danger proyecto ErrorInput"></span>
+                                        <input class="form-control proyecto" asp-for="Proyecto.fechaRecepcion" type="date" class="form-control" placeholder="NOMBRE DEL PROYECTO" required id="fecha" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mt-2">
+                                <label asp-for="Proyecto.objetivo" class="control-label">Objetivo:</label>
+                                <textarea class="proyecto form-control" asp-for="Proyecto.objetivo" type="text" class="form-control" id="objetivo"></textarea>
+                            </div>
+                            <div class="col-md-3 mt-2">
+                                <div class="form-group" style="display: none;">
+                                    <input id="proyectoSolicitudID" type="text" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group d-flex">
+                    <input type="submit" value="Crear" class="btn btn-primary mx-auto" id="btnCrearProyectoSolicitudes" />
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="ml-auto mb-3">
+                    <button class="btn btn-info" type="button" id="btnRegresarTres">Regresar</button>
+                    <button type="button" class="btn btn-success" id="limpiarPantallaProyectoSolicitudes">Limpiar pantalla</button>
+                    <input type="button" value="Siguiente" class="btn btn-dark text-white mr-3" id="btnSiguienteTres" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!--INICIO DE COTIZACIONES-->
+<div class="border border-secondary rounded" style="display: none;" id="pantallaCuatro">
+    <div class="container">
+        <h3 class="text-dark mt-2">Componentes y conceptos</h3>
+
+        <div class="border border-secondary rounded my-3" id="solicitante_personal">
+            <div class="form-inline d-flex bg-dark rounded">
+                <h6 class="my-3 mx-3 text-white font-weight-lighter">Componentes y conceptos de incentivos solicitados</h6>
+            </div>
+            <div class="container">
+                <div class="form-inline d-flex mt-1">
+                    <label class="my-3 mx-3 control-label">Buscar:</label>
+                    <input class="form-control ml-1" />
+                    <button class="ml-auto btn btn-light" data-toggle="modal" data-target="#modalApoyo" id="agregarApoyoCotizacionSolicitudes"><i class="fas fa-plus mr-1"></i>Agregar</button>
+                </div>
+                <table class="table table-hover table-sm table-bordered">
+                    <thead class="table-secondary">
+                        <tr>
+                            <th class="text-center">Subconcepto de apoyo solicitado</th>
+                            <th>Descripción</th>
+                            <th class="text-right">Monto de apoyo</th>
+                            <th>Aportación productor</th>
+                            <th class="text-right">Inversión total</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaApoyoSolicitantes">
+                        <tr id="trInicialApoyosSolicitantes">
+                            <th class="font-weight-normal">Ningún dato disponible en esta tabla</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr id="trTotalApoyoSolicitante">
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th class="text-right">Total:</th>
+                            <th class="text-right">$ <span id="totalApoyosSolicitudes">0.00</span></th>
+                            <th></th>
+                        </tr>
+                    </tbody>
+                </table>
+                <label class="mt-0"><span id="spanApoyosSolicitantes">0</span> registros</label>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex">
+        <div class="ml-auto mb-3">
+            <button class="btn btn-info" type="button" id="btnRegresarCuatro">Regresar</button>
+            <button type="button" class="btn btn-success" id="limpiarPantApoyosSolicitudes">Limpiar pantalla</button>
+            <input type="button" value="Siguiente" class="btn btn-dark text-white mr-3" id="btnSiguienteCuatro" />
         </div>
     </div>
 </div>
