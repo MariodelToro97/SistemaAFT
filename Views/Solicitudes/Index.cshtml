@@ -1,4 +1,4 @@
-﻿@model SistemaAFT.Models.Solicitud
+﻿@model GranModelo
 
 @{
     ViewData["Title"] = "Index";
@@ -6,7 +6,6 @@
 
 <hr />
 
-<div class="border border-secondary rounded">
 <!--INICIO DE SOLICITANTES-->
 <nav id="navegadorSolicitante">
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -371,7 +370,7 @@
                 <h6 class="my-3 mx-3 text-white font-weight-lighter">Configuración de la solicitud</h6>
             </div>
             <div class="container">
-                <form asp-action="Create">
+                <form id="crearSolicitud">
                     <div class="row">
                         <div class="col-md-3 mt-2">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -488,7 +487,7 @@
                             </div>
                             <div class="form-group mt-2">
                                 <label asp-for="Proyecto.objetivo" class="control-label">Objetivo:</label>
-                                <textarea class="proyecto form-control" asp-for="Proyecto.objetivo" type="text" class="form-control" id="objetivo"></textarea>
+                                <textarea class="proyecto form-control" asp-for="Proyecto.objetivo" type="text" id="objetivo"></textarea>
                             </div>
                             <div class="col-md-3 mt-2">
                                 <div class="form-group" style="display: none;">
@@ -570,4 +569,18 @@
         </div>
     </div>
 </div>
+<!----MODAL DE APOYOS DE COTIZACIONES-->
+@await Html.PartialAsync("_modalApoyo")
+<!--MODAL TELEFONO-->
+@await Html.PartialAsync("_modalTelefono")
+<!--MODAL DE DOMICILIO-->
+@await Html.PartialAsync("_modalDomicilio")
+<!-- MODAL REPRESENTANTES -->
+@await Html.PartialAsync("_modalRepresentantes")
+<!--MODAL DOCUMENTOS DE REPRESENTANTES-->
+@await Html.PartialAsync("_modalDocumentoRepresentante")
+<!--FIN DE COTIZACIONES-->
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

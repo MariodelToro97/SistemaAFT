@@ -1,4 +1,3 @@
-﻿
 $( document ).ready(function() {
     $('#btnLimpiarBusquedaSolic').click(function () {
         limpPrimeraIndex();
@@ -55,6 +54,64 @@ $( document ).ready(function() {
         $('#solicitante_personal input.proyecto').val('');
         $('#solicitante_personal textarea.proyecto').val('');
         $('#solicitante_personal span.proyecto').hide();
+    });
+
+    $('#tipoPersonaSolicitante').change(function () {       
+        var valor = $('#tipoPersonaSolicitante').val();
+        var texto = $('#tipoPersonaSolicitante option[value=' + valor + ']').text();
+        switch (texto) {
+            case 'FISICA':                
+                $('#curpBusquedaSolicitante').attr("disabled", false);
+                $('#rfcBusquedaSolicitante').attr("disabled", true);
+                $('#rfcBusquedaSolicitante').val('');
+                break;
+            case 'MORAL':                
+                $('#rfcBusquedaSolicitante').attr("disabled", false);
+                $('#curpBusquedaSolicitante').attr("disabled", true);
+                $('#curpBusquedaSolicitante').val('');
+                break;
+        }
+    });
+
+    $('#btnLimpiarBusquedaSolic').click(function () {
+        $('#formBusquedaSolicitante input').val('');
+        $('#formBusquedaSolicitante select').val('');
+        $('#curpBusquedaSolicitante').attr("disabled", true);
+        $('#rfcBusquedaSolicitante').attr("disabled", true);
+
+        $('#nav-Representante').hide();
+        $('#nav-complementarios').hide();
+        $('#nav-socioeconomicos').hide();
+        $('#parteBajaSolicitantes').hide();
+    });
+
+    $('#nav-solicitante').click(function () {
+        $('#solicitante_personal').show();
+        $('#nav-domicilio').hide();
+    });
+
+    $('#nav-Representante').click(function () {
+        $('#solicitante_personal').hide();
+        $('#nav-domicilio').show();
+    });
+
+    $('#btnSiguienteUno, #btnSiguienteUnos').click(function () {
+        $('#solicitante_personal').hide();
+        $('#nav-domicilio').hide();
+        $('#navegadorSolicitante').hide();
+        $('#pantallaDos').show();
+    });
+
+    $('#btnRegresarUno, #btnRegresarUnos').click(function () {
+        $('#solicitante_personal').show();
+        $('#nav-domicilio').show();
+        $('#navegadorSolicitante').show();
+        $('#pantallaDos').hide();
+    });
+
+    $('#btnSiguienteDos').click(function () {
+        $('#pantallaDos').hide();
+        $('#crearProyecto').show();
     });
     
     $('#btnRegresarDos').click(function () {
@@ -349,6 +406,7 @@ function borrarApoyosSolicitantes(boton) {
         },
         success: function (data) {
             var elemento = document.getElementsByClassName(`tablaApoyos- ${id}`);
+
             $(elemento).remove();
             document.getElementById('spanApoyosSolicitantes').innerHTML = data;
             if (data === '0') {

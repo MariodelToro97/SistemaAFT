@@ -63,6 +63,7 @@ $('#crearPersona').submit(function () {
     if ($('#personaFisica').is(':checked')) {
         $("#spanRFC").hide();
         curp = $('#curpPersona').val();
+        console.log("es la curp", curp)
         var expCURP = new RegExp ("^[A-Z]{4}[0-9]{6}[H,M][A-Z]{5}[A-Z,0-9][0-9]");
         nombrePersona = $('#nombreGeneral').val();
 
@@ -75,12 +76,18 @@ $('#crearPersona').submit(function () {
 
         if (curp === 'NULL' || nombrePersona === 'NULL' || aPaterno === 'NULL' || genero === 'NULL' || nacimiento === '' || civil === '' || nacionalidad === '' || numIdent === '' || identidad === '') {
             console.log("FALTAN DATOS");
+            console.log("es la curp faltan datos", curp)
+
         } else {
             if (!expCURP.test(curp)) {
                 alert('La CURP no es válida');
+                console.log("es la curp no es valida", curp)
+
             } else {
                 if (!expRFC.test($('#rfcPersona').val()) && $('#rfcPersona').val() !== '') {
                     alert('El RFC no es válido');
+                    console.log("es la curp rfc no valudi", curp)
+
                 } else {
                     var rfc = $('#rfcPersona').val();
                     if (rfc === '') {
@@ -113,6 +120,7 @@ $('#crearPersona').submit(function () {
                             notario: 0
                         },
                         success: function (data) {
+                            console.log("este es el data", data)
                             if (data === '') {
                                 alert('No se insertó por qué ya esta dado de alta');
                             } else {

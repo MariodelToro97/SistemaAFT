@@ -115,7 +115,11 @@ namespace SistemaAFT.Controllers
 
         // GET: Personas/Edit/5
         public async Task<IActionResult> Edit(int? id, GranModelo granModelo)
-        {           
+        {
+            ViewBag.Nacionalidad = _context.Nacionalidad.FromSqlRaw("Select * From dbo.Nacionalidad").ToList();
+            ViewBag.Civil = _context.Estado_Civil.FromSqlRaw("Select * From dbo.Estado_Civil").OrderBy(e => e.Nombre_Edo_Civil).ToList();
+            ViewBag.Genero = _context.Genero.FromSqlRaw("Select * From dbo.Genero ").ToList();
+            ViewBag.Tipo_Iden = _context.Tipo_Identidad.FromSqlRaw("Select * From dbo.Tipo_Identidad").OrderBy(i => i.Nombre).ToList();
             if (id == null)
             {
                 return NotFound();
@@ -195,7 +199,11 @@ namespace SistemaAFT.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, GranModelo granModelo)
         {
-            
+            ViewBag.Nacionalidad = _context.Nacionalidad.FromSqlRaw("Select * From dbo.Nacionalidad").ToList();
+            ViewBag.Civil = _context.Estado_Civil.FromSqlRaw("Select * From dbo.Estado_Civil").OrderBy(e => e.Nombre_Edo_Civil).ToList();
+            ViewBag.Genero = _context.Genero.FromSqlRaw("Select * From dbo.Genero ").ToList();
+            ViewBag.Tipo_Iden = _context.Tipo_Identidad.FromSqlRaw("Select * From dbo.Tipo_Identidad").OrderBy(i => i.Nombre).ToList();
+
             if (id != granModelo.Persona.PersonaID)
             {
                 return NotFound();
