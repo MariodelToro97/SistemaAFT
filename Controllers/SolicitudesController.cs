@@ -84,6 +84,36 @@ namespace SistemaAFT.Models
             }
         }
 
+        //Llamada a procedimiento para actualizar solicitudes
+        public string updateSolicitud(int year, int programa, int componente, int instancia, int delegacion, string estado, int id)
+        {
+            try
+            {
+                SqlConnection cn = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=dbsistemaaft;Trusted_Connection=True;MultipleActiveResultSets=true");
+
+                SqlCommand com = new SqlCommand("spUpdateSolicitudes", cn);
+                com.CommandType = CommandType.StoredProcedure;
+
+                com.Parameters.AddWithValue("@year", year);
+                com.Parameters.AddWithValue("@programa", programa);
+                com.Parameters.AddWithValue("@componente", componente);
+                com.Parameters.AddWithValue("@instancia", instancia);
+                com.Parameters.AddWithValue("@delegacion", delegacion);
+                com.Parameters.AddWithValue("@estado", estado);
+                com.Parameters.AddWithValue("@id", id);
+
+                cn.Open();
+                com.ExecuteNonQuery();
+                cn.Close();
+
+                return "SUCCESS";
+
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
 
         //Llamada a procedimiento para insertar proyectos
         public string addProyecto(string nombreproyecto, int tipoproyecto, string objetivo, string fecha, int solicitudID)
@@ -120,6 +150,36 @@ namespace SistemaAFT.Models
             }
         }
 
+        //Llamada a procedimiento para actualizar el proyecto
+        public string updateProyecto(string nombreproyecto, int tipoproyecto, string objetivo, string fecha, int solicitudID, int id)
+        {
+            try
+            {
+                SqlConnection cn = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=dbsistemaaft;Trusted_Connection=True;MultipleActiveResultSets=true");
+
+                SqlCommand com = new SqlCommand("spUpdateProyecto", cn);
+                com.CommandType = CommandType.StoredProcedure;
+
+                com.Parameters.AddWithValue("@nombreproyecto", nombreproyecto);
+                com.Parameters.AddWithValue("@tipoproyecto", tipoproyecto);
+                com.Parameters.AddWithValue("@objetivo", objetivo);
+                com.Parameters.AddWithValue("@fecha", fecha);
+                com.Parameters.AddWithValue("@solicitudID", solicitudID);
+                com.Parameters.AddWithValue("@id", id);
+
+                cn.Open();
+                com.ExecuteNonQuery();
+                cn.Close();
+
+                return "SUCCESS";
+
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+        
         //Método para buscar si existe el usuario con los datos de solicitante MORAL mediante RFC
         [HttpGet]
         public JsonResult GetUserMoral(string rfc)
@@ -204,6 +264,53 @@ namespace SistemaAFT.Models
                 cn.Close();
 
                 return valor;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        //Método para obtener los datos del Apoyo seleccionado en la tabla
+        [HttpGet]
+        public JsonResult GetApoyos(int id)
+        {
+            var classes = _context.Cotizacion.FromSqlRaw("Select * From dbo.Cotizacion WHERE CotizacionID = {0}", id);
+            return Json(classes);
+        }
+
+        //Llamada a procedimiento para actualizar cotizacion
+        public string updateCotizacion(int conc, int subc, string uniMed, string uniImp, float canSol, float costUni, float apoPro, float apoFed, float apoEst, float montApo, float otroApo, float invTot, string desc, int proyecto, int id)
+        {
+            try
+            {
+                SqlConnection cn = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=dbsistemaaft;Trusted_Connection=True;MultipleActiveResultSets=true");
+
+                SqlCommand com = new SqlCommand("spUpdateCotizacion", cn);
+                com.CommandType = CommandType.StoredProcedure;
+
+                com.Parameters.AddWithValue("@conc", conc);
+                com.Parameters.AddWithValue("@subcon", subc);
+                com.Parameters.AddWithValue("@uniMed", uniMed);
+                com.Parameters.AddWithValue("@uniImp", uniImp);
+                com.Parameters.AddWithValue("@canSol", canSol);
+                com.Parameters.AddWithValue("@costUni", costUni);
+                com.Parameters.AddWithValue("@apoPro", apoPro);
+                com.Parameters.AddWithValue("@apoFed", apoFed);
+                com.Parameters.AddWithValue("@apoEst", apoEst);
+                com.Parameters.AddWithValue("@montApo", montApo);
+                com.Parameters.AddWithValue("@otroApo", otroApo);
+                com.Parameters.AddWithValue("@invTot", invTot);
+                com.Parameters.AddWithValue("@desc", desc);
+                com.Parameters.AddWithValue("@proyecto", proyecto);
+                com.Parameters.AddWithValue("@id", id);
+
+                cn.Open();
+                com.ExecuteNonQuery();                
+                cn.Close();
+
+                return "SUCCESS";
+
             }
             catch (Exception e)
             {
