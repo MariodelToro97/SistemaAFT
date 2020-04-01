@@ -17,6 +17,18 @@ namespace SistemaAFT.Models
 
         public Proyecto Proyecto { get; set; }
 
+        public Year Year { get; set; }
+        
+        public Programa Programa { get; set; }
+
+        public Componente Componente { get; set; }
+        public Instancia_Ejecutora Instancia_Ejecutora { get; set; }
+
+        public Delegacion Delegacion { get; set; }
+
+
+
+
 
     }
 }

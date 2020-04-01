@@ -19,6 +19,15 @@ namespace SistemaAFT.Models
         {
             _context = context;
         }
+
+        public IActionResult Index2(GranModelo granModelo)
+        {
+            var libros = _context.Solicitud.FromSqlRaw("Select * From dbo.Solicitud ").ToList();
+            ViewBag.Libros = libros;
+
+            return View(granModelo);
+        }
+
         public IActionResult Index()
         {
             ViewData["YearID"] = new SelectList(_context.Year, "YearID", "year");
@@ -43,6 +52,41 @@ namespace SistemaAFT.Models
             ViewBag.Tipo_Iden = _context.Tipo_Identidad.FromSqlRaw("Select * From dbo.Tipo_Identidad").OrderBy(i => i.Nombre).ToList();
 
             return View();
+        }
+
+        // GET: Personas/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var solicitud = await _context.Solicitud
+                .Include(p => p.Year)
+                .Include(p => p.Programa)
+                .Include(p => p.Componente)
+                .Include(p => p.Instancia_Ejecutora)
+                .Include(p => p.Delegacion)
+                .Include(p => p.Persona)
+                .FirstOrDefaultAsync(m => m.PersonaID == id);
+            if (solicitud == null)
+            {
+                return NotFound();
+            }
+
+            return View(solicitud);
+        }
+
+        // POST: Personas/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var solicitud = await _context.Solicitud.FindAsync(id);
+            _context.Solicitud.Remove(solicitud);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         //Llamada a procedimiento para insertar solicitudes
