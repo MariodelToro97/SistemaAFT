@@ -26,6 +26,7 @@ namespace SistemaAFT.Models
 
         public Delegacion Delegacion { get; set; }
 
+        public Cotizacion Cotizacion { get; set; }
 
 
 

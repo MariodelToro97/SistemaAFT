@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using SistemaAFT.Data;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SistemaAFT.Models
 {
@@ -22,10 +23,12 @@ namespace SistemaAFT.Models
 
         public IActionResult Index2(GranModelo granModelo)
         {
-            var libros = _context.Solicitud.FromSqlRaw("Select * From dbo.Solicitud ").ToList();
+            var libros = _context.Solicitud.FromSqlRaw("Select * From dbo.Solicitud").ToList();
             ViewBag.Libros = libros;
-
+            
             return View(granModelo);
+
+            
         }
 
         public IActionResult Index()
@@ -87,6 +90,43 @@ namespace SistemaAFT.Models
             _context.Solicitud.Remove(solicitud);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Personas/Details/5
+        public async Task<IActionResult> Details(int? id, GranModelo granModelo)
+        {
+
+            ViewData["YearID"] = new SelectList(_context.Year, "YearID", "year");
+            ViewData["ProgramaID"] = new SelectList(_context.Programa, "ProgramaID", "nombre");
+            ViewData["ComponenteID"] = new SelectList(_context.Componente, "ComponenteID", "nombre");
+            ViewData["Instancia_EjecutoraID"] = new SelectList(_context.Instancia_Ejecutora, "Instancia_EjecutoraID", "nombre");
+            ViewData["DelegacionID"] = new SelectList(_context.Delegacion, "DelegacionID", "nombre");
+            ViewData["Tipo_ProyectoID"] = new SelectList(_context.Tipo_Proyecto, "Tipo_ProyectoID", "Nombre");
+            ViewData["Tipo_PersonaID"] = new SelectList(_context.Tipo_Persona, "Tipo_PersonaID", "Nombre_Tipo");
+            ViewData["Etnia"] = new SelectList(_context.Etnia, "EtniaID", "Pertenece_Etnia");
+            ViewData["CompaniaID"] = new SelectList(_context.Set<Compania>(), "CompaniaID", "nombre_compania");
+            ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "nombre_tipo");
+            ViewData["Tipo_DocumentoID"] = new SelectList(_context.Set<Tipo_Documento>(), "Tipo_DocumentoID", "nombre");
+            ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Nombre");
+            ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Nombre");
+            ViewData["Concepto_ApoyoID"] = new SelectList(_context.Set<Concepto_Apoyo>(), "Concepto_ApoyoID", "nombre");
+            ViewData["Subconcepto_ApoyoID"] = new SelectList(_context.Set<Subconcepto_Apoyo>(), "Subconcepto_ApoyoID", "nombre");
+
+            ViewBag.Proyectos = _context.Proyecto.FromSqlRaw("Select * From dbo.Proyecto WHERE SolicitudID = {0}", id).ToList();
+            
+            return View(granModelo);
+        }
+
+
+
+
+        
+        //Método para buscar si existe el usuario con los datos de solicitante MORAL mediante RFC
+        [HttpGet]
+        public JsonResult GetCotizacion(int id)
+        {
+            var classes = _context.Cotizacion.FromSqlRaw("Select * From dbo.Cotizacion WHERE ProyectoID = {0}", id);
+            return Json(classes);
         }
 
         //Llamada a procedimiento para insertar solicitudes

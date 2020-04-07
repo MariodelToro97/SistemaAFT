@@ -2,7 +2,6 @@ $( document ).ready(function() {
     $('#btnLimpiarBusquedaSolic').click(function () {
         limpPrimeraIndex();
     });
-
     $('#limpPantUno').click(function () {
         limpPrimeraIndex();
         limpiezaDosIndexSol();
@@ -987,3 +986,79 @@ $('#crearProyecto').submit(function () {
     }
     return false;
 });
+
+
+function GetCotizacionPersona(id) {
+    $.ajax({
+        type: 'GET',
+        url: "/Solicitudes/GetCotizacion",
+        data: {
+            id: id
+        },
+        success: function (data) {
+            console.log(data);
+            //$('#trInicialApoyosSolicitantes').remove();
+            //$('#trTotalApoyoSolicitante').remove();
+
+            if (data.length === 0) {
+                console.log("entro");
+                return
+            }
+
+            listadoContactos = document.querySelector('#tablaApoyoSolicitantes');
+            //nuevoContacto = document.createElement('tr');
+            let res1 = document.querySelector('#tablaApoyoSolicitantes');
+            res1.innerHTML = '';
+            let contador = 0
+            let total = 0;
+                for (var res of data) {
+                    console.log(res.cotizacionID)
+                    //nuevoContacto.setAttribute("id", `${res.cotizacionID}`);
+                    //nuevoContacto.setAttribute("class", `tablaApoyos- ${res.cotizacionID} tablaApoyos`);
+                    res1.innerHTML += `
+                                <td class="text-center">${res.subconcepto_ApoyoID}</td>
+                                <td class="text-center">${res.descripcion}</td>
+                                <td class="text-right">$ ${res.mon_Apo}</td>
+                                <td class="text-right">$ ${res.apo_Pro}</td>
+                                <td class="text-right">$ ${res.inv_Total}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" onclick="getApoyosSolicitantes(${res.cotizacionID})" data-toggle="modal" data-target="#modalApoyo" value=${res.cotizacionID}>Detalles</button>
+                                </td>
+                               
+                            `;
+                    contador = contador + 1;
+                    total = total + res.inv_Total;
+
+                    if (contador === data.length) {
+                        nuevoContacto = document.createElement('tr');
+                        nuevoContacto.innerHTML = `
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-right font-weight-bold">Total:</td>
+                                <td class="text-right font-weight-bold">$ <span id="totalApoyosSolicitudes" class ="font-weight-bold">${total}</span></th>
+                                <td></td>
+                            `;
+
+                        listadoContactos.appendChild(nuevoContacto);
+                    }
+
+                }
+
+
+                document.getElementById('spanApoyosSolicitantes').innerHTML = data.length;
+            
+        },
+        error: function (r) {
+            console.log(r);
+        }
+    });
+    return false;
+}
+
+var x = $(".proyectoVersionNuevo").val();
+console.log("id", x);
+
+if (x != undefined) {
+    GetCotizacionPersona(x);
+}
