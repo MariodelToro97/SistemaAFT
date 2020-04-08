@@ -26,19 +26,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Personas" asp-action="Index">Personas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Domicilios" asp-action="Index">Domicilios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Solicitantes" asp-action="Index">Solicitantes</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Solicitudes" asp-action="Index">Solicitudes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Proyectos" asp-action="Index">Proyectos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cotizaciones" asp-action="Index">Cotizaciones</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Solicitudes" asp-action="Index2">Ver Solicitudes</a>
                         </li>
                     </ul>
                 </div>
@@ -61,10 +52,15 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://kit.fontawesome.com/958485153f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+    <script src="~/js/proyecto.js"></script>
+    <script src="~/js/solicitud.js"></script>
     <script src="~/js/integrantes.js"></script>
     <script src="~/js/representantes.js"></script>
     <script src="~/js/telefonos.js"></script>
     <script src="~/js/persona.js"></script>
+
 
     @RenderSection("Scripts", required: false)
 </body>

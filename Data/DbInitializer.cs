@@ -12,16 +12,148 @@ namespace SistemaAFT.Data
 		{
 			context.Database.EnsureCreated();
 
-			if (context.Nacionalidad.Any()  || context.Genero.Any() || context.Estado_Civil.Any() || context.Tipo_Identidad.Any() || context.Municipio.Any() || context.Tipo_Persona.Any() || context.Etnia.Any() || context.Discapacidad.Any() || context.Tipo_Ambito.Any() || context.Tipo_Asentamiento.Any() || context.Tipo_Vialidad.Any())
+			if (context.Year.Any() || context.Programa.Any() || context.Componente.Any() || context.Instancia_Ejecutora.Any() || context.Delegacion.Any() ||
+				context.Nacionalidad.Any() || context.Tipo_Documento.Any()  || context.Genero.Any() || 
+				context.Estado_Civil.Any() || context.Tipo_Identidad.Any() || context.Municipio.Any() || 
+				context.Tipo_Persona.Any() || context.Etnia.Any() || context.Discapacidad.Any() || 
+				context.Tipo_Ambito.Any() || context.Tipo_Asentamiento.Any() || context.Tipo_Vialidad.Any() || context.Tipo_Proyecto.Any()
+				|| context.Concepto_Apoyo.Any() || context.Subconcepto_Apoyo.Any()
+				)
 			{
 				return;
+			}
+
+			//Concepto_Apoyo
+			var concepto_apoyo = new Concepto_Apoyo[]
+			{
+				new Concepto_Apoyo {nombre = "Concepto 1"},
+				new Concepto_Apoyo {nombre = "Concepto 2"},
+
+			};
+
+			foreach (Concepto_Apoyo g in concepto_apoyo)
+			{
+				context.Concepto_Apoyo.Add(g);
+			}
+
+			//Subconceptopoyo
+			var subconcepto_apoyo = new Subconcepto_Apoyo[]
+			{
+				new Subconcepto_Apoyo {nombre = "SubConcepto 1"},
+				new Subconcepto_Apoyo {nombre = "SubConcepto 2"},
+
+			};
+
+			foreach (Subconcepto_Apoyo g in subconcepto_apoyo)
+			{
+				context.Subconcepto_Apoyo.Add(g);
+			}
+
+			//YEAR
+			var tipo_proyecto = new Tipo_Proyecto[]
+			{
+				new Tipo_Proyecto {Nombre = "Social"},
+				new Tipo_Proyecto {Nombre = "Privado"},
+
+			};
+
+			foreach (Tipo_Proyecto g in tipo_proyecto)
+			{
+				context.Tipo_Proyecto.Add(g);
+			}
+
+			//YEAR
+			var year = new Year[]
+			{
+				new Year {year = 2020},
+			};
+
+			foreach (Year g in year)
+			{
+				context.Year.Add(g);
+			}
+
+			//PROGRAMA
+			var programa = new Programa[]
+			{
+				new Programa {nombre = "prestamos para tractor"},
+				new Programa {nombre = "prestamos para terreno"},
+				new Programa {nombre = "prestamos para comida"},
+				new Programa {nombre = "prestamos para carros"},
+				new Programa {nombre = "prestamos para huertas"},
+				new Programa {nombre = "prestamos para casas"},
+
+			};
+
+			foreach (Programa g in programa)
+			{
+				context.Programa.Add(g);
+			}
+
+			//COMPONENTE
+			var componente = new Componente[]
+			{
+				new Componente {nombre = "Componente 1"},
+				new Componente {nombre = "Componente 2"},
+				new Componente {nombre = "Componente 3"},
+				new Componente {nombre = "Componente 4"},
+				new Componente {nombre = "Componente 5"},
+				new Componente {nombre = "Componente 6"},
+			};
+
+			foreach (Componente g in componente)
+			{
+				context.Componente.Add(g);
+			}
+
+			//INSTANCIA EJECUTORA
+			var instancia = new Instancia_Ejecutora[]
+			{
+				new Instancia_Ejecutora {nombre = "Instancia 1"},
+				new Instancia_Ejecutora {nombre = "Instancia 2"},
+				new Instancia_Ejecutora {nombre = "Instancia 3"},
+
+			};
+
+			foreach (Instancia_Ejecutora g in instancia)
+			{
+				context.Instancia_Ejecutora.Add(g);
+			}
+
+			//DELEGACION
+			var delegacion = new Delegacion[]
+			{
+				new Delegacion {nombre = "Delegacion 1"},
+				new Delegacion {nombre = "Delegacion 2"},
+				new Delegacion {nombre = "Delegacion 3"},
+
+			};
+
+			foreach (Delegacion g in delegacion)
+			{
+				context.Delegacion.Add(g);
 			}
 
 			//COMPANIA
 			var compania = new Compania[]
 			{
-				new Compania {nombre_compania = "Telcel"},
-				new Compania {nombre_compania = "Movistar"}
+				new Compania {nombre_compania = "TELCEL"},
+				new Compania {nombre_compania = "IUSACELL"},
+				new Compania {nombre_compania = "MOVISTAR"},
+				new Compania {nombre_compania = "NEXTEL"},
+				new Compania {nombre_compania = "UNEFON"},
+				new Compania {nombre_compania = "AT&T"},
+				new Compania {nombre_compania = "ALO SIEMPRE CERCA"},
+				new Compania {nombre_compania = "MAZ TIEMPO"},
+				new Compania {nombre_compania = "QBOCEL"},
+				new Compania {nombre_compania = "VIRGIN MOBILE"},
+				new Compania {nombre_compania = "ALESTRA"},
+				new Compania {nombre_compania = "AXTEL"},
+				new Compania {nombre_compania = "MAXCOM"},
+				new Compania {nombre_compania = "MEGACABLE"},
+				new Compania {nombre_compania = "IZZI"},
+				new Compania {nombre_compania = "TELMEX"},
+				new Compania {nombre_compania = "TELNOR"}
 			};
 
 			foreach (Compania g in compania)
@@ -32,8 +164,8 @@ namespace SistemaAFT.Data
 			//TUIPO_TELEFONO
 			var tipo_telefono = new Tipo_Telefono[]
 			{
-				new Tipo_Telefono {nombre_tipo = "Fijo"},
-				new Tipo_Telefono {nombre_tipo = "Movil"}
+				new Tipo_Telefono {nombre_tipo = "FIJO"},
+				new Tipo_Telefono {nombre_tipo = "MOVIL"}
 			};
 
 			foreach (Tipo_Telefono g in tipo_telefono)
@@ -44,8 +176,9 @@ namespace SistemaAFT.Data
 			//GENEROS
 			var generos = new Genero[]
 			{				
-				new Genero {Nombre_Genero = "Masculino"},
-				new Genero {Nombre_Genero = "Femenino"}
+				new Genero {Nombre_Genero = "MASCULINO"},
+				new Genero {Nombre_Genero = "FEMENINO"},
+				new Genero {Nombre_Genero = "MORAL"},
 			};
 
 			foreach (Genero g in generos )
@@ -56,12 +189,13 @@ namespace SistemaAFT.Data
 			//ESTADO CIVIL
 			var civil = new Estado_Civil[]
 			{				
-				new Estado_Civil {Nombre_Edo_Civil = "Soltero"},
-				new Estado_Civil {Nombre_Edo_Civil = "Casado"},
-				new Estado_Civil {Nombre_Edo_Civil = "Divorciado"},
-				new Estado_Civil {Nombre_Edo_Civil = "Viudo/a"},
-				new Estado_Civil {Nombre_Edo_Civil = "Unión Libre"},
-				new Estado_Civil {Nombre_Edo_Civil = "Concubinato"},
+				new Estado_Civil {Nombre_Edo_Civil = "SOLTERO"},
+				new Estado_Civil {Nombre_Edo_Civil = "CASADO"},
+				new Estado_Civil {Nombre_Edo_Civil = "DIVORCIADO"},
+				new Estado_Civil {Nombre_Edo_Civil = "VIUDO/A"},
+				new Estado_Civil {Nombre_Edo_Civil = "UNION LIBRE"},
+				new Estado_Civil {Nombre_Edo_Civil = "CONCUBINATO"},
+				new Estado_Civil {Nombre_Edo_Civil = "MORAL"},
 			};
 
 			foreach (Estado_Civil g in civil)
@@ -73,25 +207,26 @@ namespace SistemaAFT.Data
 			//TIPO DE IDENTIDAD
 			var tipo_identidad = new Tipo_Identidad[]
 			{				
-				new Tipo_Identidad {Nombre = "Cartilla del servicio militar"},
-				new Tipo_Identidad {Nombre = "Licencia de Manejo"},
-				new Tipo_Identidad {Nombre = "Pasaporte"},
-				new Tipo_Identidad {Nombre = "Credencial para votar con fotografía"},
-				new Tipo_Identidad {Nombre = "Credencial del IMSS o del ISSSTE"},
-				new Tipo_Identidad {Nombre = "Constancia exp. por autoridad legal con fotografía"},
-				new Tipo_Identidad {Nombre = "Cédula profesional"},
-				new Tipo_Identidad {Nombre = "Credencial del Instituto Nacional de la SENECTUD"},
-				new Tipo_Identidad {Nombre = "Acta de nacimiento"},
-				new Tipo_Identidad {Nombre = "Credencial o acta de naturalización exp. por Sec. de Rel. Exteriores"},
-				new Tipo_Identidad {Nombre = "Tarjeta PROCAMPO"},
-				new Tipo_Identidad {Nombre = "Tarjeta SAGARPA/CURP"},
-				new Tipo_Identidad {Nombre = "Libreta de mar o navegación con fotoggrafía exp. por la SCT"},
-				new Tipo_Identidad {Nombre = "Credencial de Pesca"},
+				new Tipo_Identidad {Nombre = "CARTILLA DEL SERVICIO MILITAR"},
+				new Tipo_Identidad {Nombre = "LICENCIA DE MANEJO"},
+				new Tipo_Identidad {Nombre = "PASAPORTE"},
+				new Tipo_Identidad {Nombre = "CREDENCIAL PARA VOTAR CON FOTOGRAFIA"},
+				new Tipo_Identidad {Nombre = "CREDENCIAL DEL IMSS O DEL ISSSTE"},
+				new Tipo_Identidad {Nombre = "CONSTANCIA EXP. POR AUTORIDAD LEGAL CON FOTOGRAFIA"},
+				new Tipo_Identidad {Nombre = "CEDULA PROFESIONAL"},
+				new Tipo_Identidad {Nombre = "CREDENCIAL DEL INSTITUTO NACIONAL DE LA SENECTUD"},
+				new Tipo_Identidad {Nombre = "ACTA DE NACIMIENTO"},
+				new Tipo_Identidad {Nombre = "CREDENCIAL O ACTA DE NATURALIZACION EXP. POR SEC. DE REL. EXTERIORES"},
+				new Tipo_Identidad {Nombre = "TARJETA PROCAMPO"},
+				new Tipo_Identidad {Nombre = "TARJETA SAGARPA/CURP"},
+				new Tipo_Identidad {Nombre = "LIBRETA DE MAR O NAVEGACION CON FOTOGRAFIA EXP. POR LA SCT"},
+				new Tipo_Identidad {Nombre = "CREDENCIAL DE  PESCA"},
 				new Tipo_Identidad {Nombre = "CURP"},
 				new Tipo_Identidad {Nombre = "INE ESTATAL"},
-				new Tipo_Identidad {Nombre = "Instituto Nacional de las personas Adultas y Mayores (INAPAM)"},
-				new Tipo_Identidad {Nombre = "Credencial del Servicio Postal Mexicano"},
-				new Tipo_Identidad {Nombre = "Matricula consular"}
+				new Tipo_Identidad {Nombre = "INSTITUTO NACIONAL DE LAS PERSONAS ADULTAS Y MAYORES (INAPAM)"},
+				new Tipo_Identidad {Nombre = "CREDENCIAL DEL SERVICIO POSTAL MEXICANO"},
+				new Tipo_Identidad {Nombre = "MATRICULA CONSULAR"},
+				new Tipo_Identidad {Nombre = "MORAL"}
 			};
 
 			foreach (Tipo_Identidad g in tipo_identidad)
@@ -125,8 +260,8 @@ namespace SistemaAFT.Data
 			//Tipo de persona
 			var tipo_persona = new Tipo_Persona[]
 			{
-				new Tipo_Persona { Nombre_Tipo = "Fisica"},
-				new Tipo_Persona { Nombre_Tipo = "Moral" }
+				new Tipo_Persona { Nombre_Tipo = "FISICA"},
+				new Tipo_Persona { Nombre_Tipo = "MORAL" }
 			};
 
 			foreach (Tipo_Persona g in tipo_persona)
@@ -138,7 +273,8 @@ namespace SistemaAFT.Data
 			var tipo_etnia = new Etnia[]
 			{
 				new Etnia { Pertenece_Etnia = "Si"},
-				new Etnia { Pertenece_Etnia = "No" }
+				new Etnia { Pertenece_Etnia = "No" },
+				new Etnia { Pertenece_Etnia = "MORAL" },
 			};
 
 			foreach (Etnia g in tipo_etnia)
@@ -150,7 +286,8 @@ namespace SistemaAFT.Data
 			var discapacidad = new Discapacidad[]
 			{
 				new Discapacidad {Tiene_Discapacidad = "Si"},
-				new Discapacidad {Tiene_Discapacidad = "No"}
+				new Discapacidad {Tiene_Discapacidad = "No"},
+				new Discapacidad {Tiene_Discapacidad = "MORAL"},
 			};
 
 			foreach(Discapacidad g in discapacidad)
@@ -269,12 +406,30 @@ namespace SistemaAFT.Data
 			var nacionalidad = new Nacionalidad[]
 			{
 				new Nacionalidad {Nombre = "MEXICANO"},
-				new Nacionalidad {Nombre = "EXTRANJERA"}
+				new Nacionalidad {Nombre = "EXTRANJERA"},
+				new Nacionalidad {Nombre = "MORAL"}
 			};
 
 			foreach (Nacionalidad g in nacionalidad)
 			{
 				context.Nacionalidad.Add(g);
+			}
+
+			//Tipo de documento
+			var tipoDocumento = new Tipo_Documento[]
+			{
+				new Tipo_Documento {nombre = "ACTA CONSTITUTIVA"},
+				new Tipo_Documento {nombre = "ANEXO MODIFICATORIO DE ACTA CONSTITUTIVA"},
+				new Tipo_Documento {nombre = "OTRO"},
+				new Tipo_Documento {nombre = "PODER NOTARIAL"},
+				new Tipo_Documento {nombre = "CARTA PODER SIMPLE"},
+				new Tipo_Documento {nombre = "CARTA PODER ANTE NOTARIO"},
+				new Tipo_Documento {nombre = "ACTA DE ASAMBLEA"}
+			};
+
+			foreach (Tipo_Documento g in tipoDocumento)
+			{
+				context.Tipo_Documento.Add(g);
 			}
 
 			context.SaveChanges();

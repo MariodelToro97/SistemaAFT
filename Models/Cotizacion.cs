@@ -32,5 +32,7 @@ namespace SistemaAFT.Models
         public float inv_Total { get; set; }
         [Required(ErrorMessage = "Campo Requerido")]
         public string Descripcion { get; set; }
+        public int ProyectoID { get; set; }
+        public Proyecto Proyecto { get; set; }
     }
 }

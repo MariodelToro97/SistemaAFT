@@ -15,15 +15,18 @@ namespace SistemaAFT.Models
         
 		public int PersonaID { get; set; }
         [RegularExpression("^[A-Z]{4}[0-9]{6}[H,M][A-Z]{5}[A-Z,0-9][0-9]", ErrorMessage = "La CURP no es Válida")]
-        //[Required(ErrorMessage = "Campo requerido")]
+        [Required(ErrorMessage = "Campo requerido")]
         public string CURP { get; set; }
-        //[Required(ErrorMessage = "Campo requerido")]
+        [Required(ErrorMessage = "Campo requerido")]
         [RegularExpression("^[A-Z]{4}[0-9]{6}[A-Z,0-9]{3}", ErrorMessage = "El RFC no es válido")]
         public string RFC { get; set; }
-        //[Required(ErrorMessage = "Campo Requerido")]
+        [Required(ErrorMessage = "Campo Requerido")]
+        [RegularExpression("^[A-ZÑÁÉÍÓÚ]+[.]*([ ]*[A-ZÑÁÉÍÓÚ]*)*", ErrorMessage = "Formato no válido")]
         public string nombre { get; set; }
-        //[Required(ErrorMessage = "Campo Requerido")]
+        [Required(ErrorMessage = "Campo Requerido")]
+        [RegularExpression("^[A-ZÑÁÉÍÓÚ]+([ ]*[A-ZÑÁÉÍÓÚ]*)*", ErrorMessage = "Formato no válido")]
         public string apellido_paterno { get; set; }
+        [RegularExpression("^[A-ZÑÁÉÍÓÚ]+([ ]*[A-ZÑÁÉÍÓÚ]*)*", ErrorMessage = "Formato no válido")]
         public string apellido_materno { get; set; }
         public string correo { get; set; }
         [Required(ErrorMessage = "Campo Requerido")]
@@ -50,13 +53,21 @@ namespace SistemaAFT.Models
         public Discapacidad Discapacidad { get; set; }
         [Required(ErrorMessage = "ACUSE SURI")]
         public string ACUSESURI { get; set; } = "ACUSE SURI";
-
-        //[Required(ErrorMessage ="Campo Requerido")]
+        [Required(ErrorMessage ="Campo Requerido")]
+        [RegularExpression("^[A-ZÑÁÉÍÓÚ]+([.]*[ ]*[A-ZÑÁÉÍÓÚ]*)*", ErrorMessage = "Formato no válido")]
         public string nombreMoral { get; set; }
         public ICollection<Domicilio> Domicilios { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime Created { get; set; } = DateTime.Now;
+        [Required(ErrorMessage = "Campo Requerido")]
+        public int actividadEconomica { get; set; }
+        [Required(ErrorMessage = "Campo Requerido")]
+        public string fecha_Consti { get; set; }
+        [Required(ErrorMessage = "Campo Requerido")]
+        public string folio_Acta { get; set; }
+        [Required(ErrorMessage = "Campo Requerido")]
+        public int num_Notario { get; set; }
 
 
     }

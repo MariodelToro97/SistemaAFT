@@ -1,0 +1,76 @@
+﻿@model GranModelo
+
+@{
+    ViewData["Title"] = "Index2";
+}
+
+<h1>Index2</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Año
+            </th>
+            <th>
+                Programa
+            </th>
+            <th>
+                Componente
+            </th>
+            <th>
+                Instancia Ejecutora
+            </th>
+            <th>
+                Delegación
+            </th>
+            <th>
+                Estado
+            </th>
+            <th>
+                Persona
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in (IEnumerable<SistemaAFT.Models.Solicitud>)ViewBag.Libros)
+        {
+            <tr>
+                <td>
+                    @item.YearID
+                </td>
+                <td>
+                    @item.ProgramaID
+                </td>
+                <td>
+                    @item.ComponenteID
+                </td>
+                <td>
+                    @item.Instancia_EjecutoraID
+                </td>
+                <td>
+                    @item.DelegacionID
+                </td>
+                <td>
+                </td>
+                <td>
+                    @item.PersonaID
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.SolicitudID">Ver Información</a> |
+                    <a asp-action="Delete" asp-route-id="@item.SolicitudID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div>
+    
+</div>
+

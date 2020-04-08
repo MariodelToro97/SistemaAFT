@@ -43,5 +43,6 @@ namespace SistemaAFT.Data
 		public DbSet<SistemaAFT.Models.Concepto_Apoyo> Concepto_Apoyo { get; set; }
 		public DbSet<SistemaAFT.Models.Subconcepto_Apoyo> Subconcepto_Apoyo { get; set; }
 		public DbSet<SistemaAFT.Models.Cotizacion> Cotizacion { get; set; }
+		public DbSet<SistemaAFT.Models.Tipo_Documento> Tipo_Documento { get; set; }
 	}
 }

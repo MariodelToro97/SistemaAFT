@@ -33,8 +33,15 @@
 <!--MODAL TELEFONO-->
 @await Html.PartialAsync("_modalTelefono")
 
-<!--TABLA TELEFONOS-->
-@await Html.PartialAsync("_tablaTelefono")
+<div class="container my-3" id="Tel">
+    <div class="border border-secondary rounded bg-dark d-flex">
+        <h4 class="my-3 mx-3 text-white font-weight-lighter">Telefonos</h4>
+        <!--Modal 2-->
+        <button type="button" class="btn btn-light btn-rounded mr-3 my-3 ml-auto" id="botonAgregarTelefono" data-toggle="modal" onclick="limpiarForm()" data-target="#modalTelefonos">Agregar</button>
+    </div>
+    <!--TABLA TELEFONOS-->
+    @await Html.PartialAsync("_tablaTelefono")
+</div><!--FIN TABLA TELEFONOS-->
 
 <div class="tab-pane fade border border-secondary rounded" id="nav-domicilio" role="tabpanel" aria-labelledby="nav-profile-tab" style="display:none;">
     <!--MODAL DE DOMICILIO-->

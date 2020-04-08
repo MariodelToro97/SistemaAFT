@@ -5,6 +5,7 @@
     <UserSecretsId>aspnet-SistemaAFT-F5F62387-4966-4A37-ABF3-88ED286884C4</UserSecretsId>
   </PropertyGroup>
 
+
   <ItemGroup>
     <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
     <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />

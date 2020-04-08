@@ -16,15 +16,15 @@
             <tbody id="tableDomicilio" class="text-center ">
                 @if (ViewBag.Libros == null)
                 {
-                    <p>No hay domicilios</p>
+                    <p id="lblNoDomicilio" class="text-danger font-weight-bold">No hay domicilios</p>
                 }
                 else
                 {
                     @foreach (var dom in (IEnumerable<SistemaAFT.Models.Domicilio>)ViewBag.Libros)
                     {
-                        <tr id="@dom.DomicilioID">
+                        <tr id="@dom.DomicilioID" class="tablaDomicilio-@dom.DomicilioID tablaDomicilio">
                             <th>@dom.estado</th>
-                            <th>@dom.MunicipioID</th>
+                            <th>@dom.Municipio</th>
                             <th>@dom.localidad</th>
                             <th>@dom.Tipo_AsentamientoID</th>
                             <th>@dom.referenciaubicacion</th>
@@ -42,3 +42,4 @@
         </table>
     </div>
 </div>
+
