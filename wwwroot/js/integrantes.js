@@ -182,7 +182,7 @@ function deleteIntegrante(boton) {
             });
             return false;
         }
-    }
+    });
 }
 
 function editIntegrante(boton) {

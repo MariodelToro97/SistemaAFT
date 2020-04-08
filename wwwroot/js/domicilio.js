@@ -278,7 +278,7 @@ function borrarDom(boton) {
             });
             return false;
         }
-    }
+    });
 }
 
 $('#formEditDomicilio').submit(function (e) {

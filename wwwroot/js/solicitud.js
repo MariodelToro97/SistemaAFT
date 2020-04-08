@@ -487,7 +487,7 @@ function borrarApoyosSolicitantes(boton) {
             });
             return false;
         }
-    }
+    });
 }
 
 function calculoApoyo() {
@@ -1112,10 +1112,7 @@ function GetCotizacionPersona(id) {
                     }
 
                 }
-
-
-                document.getElementById('spanApoyosSolicitantes').innerHTML = data.length;
-            
+                document.getElementById('spanApoyosSolicitantes').innerHTML = data.length;            
         },
         error: function (r) {
             console.log(r);

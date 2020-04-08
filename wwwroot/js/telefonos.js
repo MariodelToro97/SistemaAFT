@@ -192,21 +192,21 @@ function deleteTelefono(boton) {
                     if (data === '0') {
                         $('#lblNoTelefonos').show();
                     }
-                        Swal.fire(
-                            'Borrado exitoso',
-                            'El campo ha sido eliminado',
-                            'success'
-                        )
-                        var elemento = document.getElementsByClassName(`tablaTelefono-${id}`);
-                        $(elemento).remove();
-                    },
-                    error: function (r) {
-                        console.log(r);
-                    }
-                });
+                    Swal.fire(
+                        'Borrado exitoso',
+                        'El campo ha sido eliminado',
+                        'success'
+                    )
+                    var elemento = document.getElementsByClassName(`tablaTelefono-${id}`);
+                    $(elemento).remove();
+                },
+                error: function (r) {
+                    console.log(r);
+                }
+            });
             return false;
         }
-    })    
+    });  
 }
 
 function editTelefono(boton) {

@@ -90,7 +90,7 @@ function borrarInt(boton) {
                         'success'
                     )
                     var elemento = document.getElementById(id);
-                    $(elemento).remove(".tablaRepresentante");                    
+                    $(elemento).remove(".tablaRepresentante");
                 },
                 error: function (r) {
                     console.log(r);
@@ -98,7 +98,7 @@ function borrarInt(boton) {
             });
             return false;
         }
-    }
+    });
 }
 
 $('#formRepresentantes').submit(function () {
@@ -413,7 +413,7 @@ function deleteDocumentoRepresentante(boton) {
             });
             return false;
         }
-    }
+    });
 }
 
 function editarInt(boton) {
