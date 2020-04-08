@@ -490,6 +490,8 @@ function borrarApoyosSolicitantes(boton) {
     });
 }
 
+//Agregue este comentario
+
 function calculoApoyo() {
     var canSol = $('#can_Sol').val();
     var cosUni = $('#cos_Uni').val();
