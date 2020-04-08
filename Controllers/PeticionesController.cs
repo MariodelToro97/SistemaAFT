@@ -131,7 +131,7 @@ namespace SistemaAFT.Controllers
         
         //Llamada a procedimiento de insertar Telefonos en la base de datos spAddTelefono
         [HttpPost]
-        public string addTelefono(string numero, int CompaniaID, int Tipo_TelefonoID, int persona)
+        public string addTelefono(string numero, int CompaniaID, int Tipo_TelefonoID, int persona, Boolean notificacion)
         {
             try
             {
@@ -144,6 +144,7 @@ namespace SistemaAFT.Controllers
                 com.Parameters.AddWithValue("@CompaniaID", CompaniaID);
                 com.Parameters.AddWithValue("@Tipo_TelefonoID", Tipo_TelefonoID);
                 com.Parameters.AddWithValue("@persona", persona);
+                com.Parameters.AddWithValue("@notificacion", notificacion);
 
                 SqlParameter ID = new SqlParameter("@ID", 0);
                 ID.Direction = ParameterDirection.Output;
@@ -175,7 +176,7 @@ namespace SistemaAFT.Controllers
 
         //Llamada a procedimiento de actualizar Telefonos en la base de datos spUpdateIntegrante
         [HttpPost]
-        public string updateTelefono(int id, string numero, int CompaniaID, int Tipo_TelefonoID, int persona)
+        public string updateTelefono(int id, string numero, int CompaniaID, int Tipo_TelefonoID, int persona, Boolean notificacion)
         {
             try
             {
@@ -189,6 +190,7 @@ namespace SistemaAFT.Controllers
                 com.Parameters.AddWithValue("@CompaniaID", CompaniaID);
                 com.Parameters.AddWithValue("@Tipo_TelefonoID", Tipo_TelefonoID);
                 com.Parameters.AddWithValue("@persona", persona);
+                com.Parameters.AddWithValue("@notificacion", notificacion);
 
                 SqlParameter ID = new SqlParameter("@tel", 0);
                 ID.Direction = ParameterDirection.Output;

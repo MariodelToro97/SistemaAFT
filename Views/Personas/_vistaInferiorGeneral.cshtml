@@ -2,12 +2,55 @@
 
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <input type="hidden" asp-for="Persona.PersonaID" id="personaGeneralID" />
-<div class="row">
-    <div class="col-md-3 mt-2">
+<div class="row mt-2">
+    <div class="col-md-3">
         <div class="form-group">
             <label asp-for="Persona.correo" class="control-label">Correo electrónico:</label><span asp-validation-for="Persona.correo" class="text-danger Persona ErrorInput"></span>
             <input asp-for="Persona.correo" id="correoPersona" type="email" class="form-control" placeholder="correo@electrónico.com" />
         </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group" id="divFechaNacimientoPersona">
+            <label asp-for="Persona.fechaNacimiento" class="control-label">Fecha de nacimiento<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.fechaNacimiento" class="text-danger Persona ErrorInput"></span>
+            <input asp-for="Persona.fechaNacimiento" id="nacimientoPersona" type="date" class="form-control" required />
+        </div>
+        <!--OTRO-->
+        <div class="form-group" style="display:none;" id="divFechaConstitucion">
+            <label asp-for="Persona.fecha_Consti" class="control-label">Fecha de constitución<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.fecha_Consti" class="text-danger Persona ErrorInput"></span>
+            <input asp-for="Persona.fecha_Consti" id="fechaConstitucionPersona" type="date" class="form-control" required />
+        </div>
+    </div>
+    <div class="col-md-2" id="divDiscapacidadIDPersona">
+        <div class="form-group text-center">
+            <label asp-for="Persona.DiscapacidadID" class="control-label">Discapacidad:</label>
+            <div asp-for="Tipo_PersonaID">
+                @Html.RadioButton("Persona.DiscapacidadID", 2, false, new { id = "discPosPersona" }) <label class="control-label mx-2">Si</label>
+                @Html.RadioButton("Persona.DiscapacidadID", 1, true, new { id = "discNegPersona" }) <label class="control-label mx-2">No</label>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3" id="divEtniaIDPersona">
+        <div class="form-group text-center">
+            <label asp-for="Persona.EtniaID" class="control-label">Pertenece a una étnia:</label>
+            <div asp-for="Tipo_PersonaID">
+                @Html.RadioButton("Persona.EtniaID", 2, false, new { id = "etniaPosPersona" }) <label class="control-label mx-2">Si</label>
+                @Html.RadioButton("Persona.EtniaID", 1, true, new { id = "etniaNegPersona" }) <label class="control-label mx-2">No</label>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <!--OTRO-->
+        <div class="form-group" style="display:none;" id="divActividadEconomica">
+            <label asp-for="Persona.actividadEconomica" class="control-label">Actividad Económica<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.actividadEconomica" class="text-danger Persona ErrorInput"></span>
+            <select asp-for="Persona.actividadEconomica" id="actividadEconomicaPersona" class="form-control">
+                <option value="" selected>Seleccione opción</option>
+                <option value="1">ACTIVIDAD 1</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-md-4">
         <div class="form-group" id="divGeneroIDPersona">
             <label asp-for="Persona.GeneroID" class="control-label">Género<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.GeneroID" class="text-danger Persona ErrorInput"></span>
             <select asp-for="Persona.GeneroID" id="generoPersona" class="form-control">
@@ -25,29 +68,12 @@
                 }
             </select>
         </div>
-        <div class="form-group" id="divEtniaIDPersona">
-            <label asp-for="Persona.EtniaID" class="control-label">Pertenece a una étnia:</label>
-            <div asp-for="Tipo_PersonaID">
-                @Html.RadioButton("Persona.EtniaID", 2, false, new { id = "etniaPosPersona" }) <label class="control-label mx-2">Si</label>
-                @Html.RadioButton("Persona.EtniaID", 1, true, new { id = "etniaNegPersona" }) <label class="control-label mx-2">No</label>
-            </div>
-        </div>
-
-        <!--OTRO-->
-        <div class="form-group" style="display:none;" id="divActividadEconomica">
-            <label asp-for="Persona.actividadEconomica" class="control-label">Actividad Económica<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.actividadEconomica" class="text-danger Persona ErrorInput"></span>
-            <select asp-for="Persona.actividadEconomica" id="actividadEconomicaPersona" class="form-control">
-                <option value="" selected>Seleccione opción</option>
-                <option value="1" >ACTIVIDAD 1</option>
-            </select>
+        <div class="form-group" style="display:none;" id="divfolioActa">
+            <label asp-for="Persona.folio_Acta" class="control-label">Folio de acta constitutiva<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.folio_Acta" class="text-danger Persona ErrorInput"></span>
+            <input asp-for="Persona.folio_Acta" id="folioActaPersona" type="text" class="form-control" placeholder="Folio de acta" />
         </div>
     </div>
-
-    <div class="col-md-3 mt-2">
-        <div class="form-group" id="divFechaNacimientoPersona">
-            <label asp-for="Persona.fechaNacimiento" class="control-label">Fecha de nacimiento<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.fechaNacimiento" class="text-danger Persona ErrorInput"></span>
-            <input asp-for="Persona.fechaNacimiento" id="nacimientoPersona" type="date" class="form-control" required />
-        </div>
+    <div class="col-md-4">
         <div class="form-group" id="divCivilPersona">
             <label asp-for="Persona.Estado_CivilID" class="control-label">Estado civil<span class="text-danger font-weight-bold">*</span>:</label> <span asp-validation-for="Persona.Estado_CivilID" class="text-danger Persona ErrorInput"></span>
             <select asp-for="Persona.Estado_CivilID" id="civilPersona" class="form-control">
@@ -65,26 +91,13 @@
                 }
             </select>
         </div>
-        <div class="form-group" id="divDiscapacidadIDPersona">
-            <label asp-for="Persona.DiscapacidadID" class="control-label">Discapacidad:</label>
-            <div asp-for="Tipo_PersonaID">
-                @Html.RadioButton("Persona.DiscapacidadID", 2, false, new { id = "discPosPersona" }) <label class="control-label mx-2">Si</label>
-                @Html.RadioButton("Persona.DiscapacidadID", 1, true, new { id = "discNegPersona" }) <label class="control-label mx-2">No</label>
-            </div>
-        </div>
-
         <!--OTRO-->
-        <div class="form-group" style="display:none;" id="divFechaConstitucion">
-            <label asp-for="Persona.fecha_Consti" class="control-label">Fecha de constitución<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.fecha_Consti" class="text-danger Persona ErrorInput"></span>
-            <input asp-for="Persona.fecha_Consti" id="fechaConstitucionPersona" type="date" class="form-control" required />
-        </div>
-        <div class="form-group" style="display:none;" id="divfolioActa">
-            <label asp-for="Persona.folio_Acta" class="control-label">Folio de acta constitutiva<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.folio_Acta" class="text-danger Persona ErrorInput"></span>
-            <input asp-for="Persona.folio_Acta" id="folioActaPersona" type="text" class="form-control" placeholder="Folio de acta" />
+        <div class="form-group" style="display:none;" id="divNumeroNotario">
+            <label asp-for="Persona.num_Notario" class="control-label">Número de notario<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.num_Notario" class="text-danger Persona ErrorInput"></span>
+            <input asp-for="Persona.num_Notario" id="numeroNotarioPersona" type="number" class="form-control" placeholder="12345" />
         </div>
     </div>
-
-    <div class="col-md-3 mt-2">
+    <div class="col-md-4">
         <div class="form-group" id="divNacionalidadPerso">
             <label asp-for="Persona.NacionalidadID" class="control-label">Nacionalidad<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.NacionalidadID" class="text-danger Persona ErrorInput"></span>
             <select asp-for="Persona.NacionalidadID" id="nacionalidadPers" class="form-control">
@@ -103,6 +116,10 @@
                 }
             </select>
         </div>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-md-8">
         <div class="form-group" id="divTipoIdenPersona">
             <label asp-for="Persona.Tipo_IdentidadID" class="control-label">Tipo de identificación<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.Tipo_IdentidadID" class="text-danger Persona ErrorInput"></span>
             <select asp-for="Persona.Tipo_IdentidadID" id="tipoIdenPersona" class="form-control">
@@ -115,23 +132,45 @@
                     }
                     else
                     {
-                    <option value="@iden.Tipo_IdentidadID">@iden.Nombre</option>
-                        }
+                        <option value="@iden.Tipo_IdentidadID">@iden.Nombre</option>
                     }
+                }
             </select>
         </div>
-        <!--OTRO-->
-        <div class="form-group" style="display:none;" id="divNumeroNotario">
-            <label asp-for="Persona.num_Notario" class="control-label">Número de notario<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.num_Notario" class="text-danger Persona ErrorInput"></span>
-            <input asp-for="Persona.num_Notario" id="numeroNotarioPersona" type="number" class="form-control" placeholder="12345" />
-        </div>
     </div>
-
-    <div class="col-md-3 mt-2">
+    <div class="col-md-4">
         <div class="form-group" id="divNumIdenPersona">
             <label asp-for="Persona.num_identificacion" class="control-label">Núm. Doc de identificación<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.num_identificacion" class="text-danger Persona ErrorInput"></span>
             <input asp-for="Persona.num_identificacion" id="numIdenPersona" type="text" class="form-control" placeholder="Número identificación" required disabled />
         </div>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-md-3 mt-2">
+
+
+
+
+       
+    </div>
+
+    <div class="col-md-3 mt-2">
+        
+
+
+
+        
+    </div>
+
+    <div class="col-md-3 mt-2">
+
+       
+       
+    </div>
+
+    <div class="col-md-3 mt-2">
+        
     </div>
 </div>
 

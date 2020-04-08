@@ -19,6 +19,7 @@ namespace SistemaAFT.Models
         public Tipo_Telefono Tipo_Telefono { get; set; }
         public int PersonaID { get; set; }
         public Persona Persona { get; set; }
-
+        [Required(ErrorMessage = "Campo Requerido")]
+        public Boolean notificacion { get; set; }
     }
 }
