@@ -128,15 +128,26 @@ $('#crearPersona').submit(function () {
                                     folio: 'NULL',
                                     notario: 0
                                 },
-                                success: function (data) {
-                                    console.log("este es el data", data)
-                                    if (data === '') {
-                                        alert('No se insertó por qué ya esta dado de alta');
-                                    } else {
-                                        alert('Insertado con el id ' + data);
+                                success: function (data) {                                    
+                                    if (data === '') {                                        
+                                        Swal.fire({
+                                            position: 'top-end',
+                                            icon: 'error',
+                                            title: 'Ya está dado de alta',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        })
+                                    } else {                                        
                                         $('#personaGeneralID').val(data);
                                         habilitarModales();
                                         deshabilitarCampos();
+                                        Swal.fire({
+                                            position: 'top-end',
+                                            icon: 'success',
+                                            title: 'Guardado exitoso',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        })
                                     }
                                 },
                                 error: function (r) {
@@ -192,12 +203,24 @@ $('#crearPersona').submit(function () {
                         },
                         success: function (data) {
                             if (data === '') {
-                                alert('No se insertó por qué ya esta dado de alta');
-                            } else {
-                                alert('Insertado con el id ' + data);
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'error',
+                                    title: 'Ya está dado de alta',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            } else {                                
                                 $('#personaGeneralID').val(data);
                                 habilitarModales();
                                 deshabilitarCampos();
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Guardado exitoso',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
                             }
                         },
                         error: function (r) {

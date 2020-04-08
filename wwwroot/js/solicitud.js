@@ -251,9 +251,21 @@ $('#apoyoSolicitantes').submit(function () {
                     },
                     success: function (data) {
                         if (data === '') {
-                            alert('Ha ocurrido un error en la inserción de los datos');
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'error',
+                                title: 'Ha ocurrido un error en el guardado',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
                         } else {
-                            alert('Insertado con el id ' + data);
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Guardado exitoso',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
                             $('#modalApoyo').modal('hide');
                             $('#trInicialApoyosSolicitantes').remove();
                             var totalApoyos = document.getElementById('totalApoyosSolicitudes').innerHTML;
@@ -329,9 +341,22 @@ $('#apoyoSolicitantes').submit(function () {
                         },
                         success: function (data) {
                             if (data !== 'SUCCESS') {
-                                alert('Ha ocurrido un error inesperado');
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'error',
+                                    title: 'Ha ocurrido un error inesperado',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
                             } else {
                                 if (data === 'SUCCESS') {
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Guardado exitoso',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
                                     $('#modalApoyo').modal('hide');
                                     $('#trInicialApoyosSolicitantes').remove();
                                     var totalApoyos = document.getElementById('totalApoyosSolicitudes').innerHTML;
@@ -394,28 +419,39 @@ $('#apoyoSolicitantes').submit(function () {
 });
 
 function borrarApoyosSolicitantes(boton) {
-    var id = boton.value;
-    var inv = parseFloat(boton.name);
+    Swal.fire({
+        title: '¿Desea eliminar el campo permanentemente?',
+        text: "Su decisión no podrá ser revertida",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Sí, bórralo'
+    }).then((result) => {
+        if (result.value) {
+            var id = boton.value;
+            var inv = parseFloat(boton.name);
 
-    $.ajax({
-        type: 'POST',
-        url: "/Solicitudes/deleteCotizacion",
-        data: {
-            id: id
-        },
-        success: function (data) {
-            var elemento = document.getElementsByClassName(`tablaApoyos- ${id}`);
+            $.ajax({
+                type: 'POST',
+                url: "/Solicitudes/deleteCotizacion",
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    var elemento = document.getElementsByClassName(`tablaApoyos- ${id}`);
 
-            $(elemento).remove();
-            document.getElementById('spanApoyosSolicitantes').innerHTML = data;
-            if (data === '0') {
-                $('#trTotalApoyoSolicitante').remove();
+                    $(elemento).remove();
+                    document.getElementById('spanApoyosSolicitantes').innerHTML = data;
+                    if (data === '0') {
+                        $('#trTotalApoyoSolicitante').remove();
 
-                listadoContactos = document.querySelector('#tablaApoyoSolicitantes');
-                nuevoContacto = document.createElement('tr');
+                        listadoContactos = document.querySelector('#tablaApoyoSolicitantes');
+                        nuevoContacto = document.createElement('tr');
 
-                nuevoContacto.setAttribute("id", `trInicialApoyosSolicitantes`)
-                nuevoContacto.innerHTML = `
+                        nuevoContacto.setAttribute("id", `trInicialApoyosSolicitantes`)
+                        nuevoContacto.innerHTML = `
                                 <td class="font-weight-normal">Ningún dato disponible en esta tabla</td>
                                 <td></td>
                                 <td></td>
@@ -424,12 +460,12 @@ function borrarApoyosSolicitantes(boton) {
                                 <td></td>
                             `;
 
-                listadoContactos.appendChild(nuevoContacto);
+                        listadoContactos.appendChild(nuevoContacto);
 
-                nuevoContacto = document.createElement('tr');
+                        nuevoContacto = document.createElement('tr');
 
-                nuevoContacto.setAttribute("id", `trTotalApoyoSolicitante`)
-                nuevoContacto.innerHTML = `
+                        nuevoContacto.setAttribute("id", `trTotalApoyoSolicitante`)
+                        nuevoContacto.innerHTML = `
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -438,18 +474,20 @@ function borrarApoyosSolicitantes(boton) {
                                 <td></td>
                             `;
 
-                listadoContactos.appendChild(nuevoContacto); 
-            } else {
-                var totalApoyos = document.getElementById('totalApoyosSolicitudes').innerHTML;
-                totalApoyos = parseFloat(totalApoyos);
-                document.getElementById('totalApoyosSolicitudes').innerHTML = totalApoyos - inv;
-            }
-        },
-        error: function (r) {
-            console.log(r);
+                        listadoContactos.appendChild(nuevoContacto);
+                    } else {
+                        var totalApoyos = document.getElementById('totalApoyosSolicitudes').innerHTML;
+                        totalApoyos = parseFloat(totalApoyos);
+                        document.getElementById('totalApoyosSolicitudes').innerHTML = totalApoyos - inv;
+                    }
+                },
+                error: function (r) {
+                    console.log(r);
+                }
+            });
+            return false;
         }
-    });
-    return false;
+    }
 }
 
 function calculoApoyo() {
@@ -881,7 +919,13 @@ $('#crearSolicitud').submit(function () {
                     if (data === '') {
                         alert('No se insertó por qué ya esta dado de alta');
                     } else {
-                        alert('Insertado con el id ' + data);
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Guardado exitoso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                         $('#solicitudID').val(data);
                         $('#btnCrearSolicitudVentanilla').val('Editar');
                         $('#btnSiguienteDos').attr('disabled', false);
@@ -908,7 +952,13 @@ $('#crearSolicitud').submit(function () {
                         id: id
                     },
                     success: function (data) {
-                        console.log('SUCCESS');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Editado exitoso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                     },
                     error: function (r) {
                         console.log(r);
@@ -946,9 +996,21 @@ $('#crearProyecto').submit(function () {
                 },
                 success: function (data) {
                     if (data === '') {
-                        alert('No se insertó por qué ya esta dado de alta');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: 'Ha ocurrido un error inesperado',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                     } else {
-                        alert('Insertado con el id ' + data);
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Guardado exitoso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                         $('#proyectoSolicitudID').val(data);
                         $('#btnCrearProyectoSolicitudes').val('Editar');
                         $('#btnSiguienteTres').attr('disabled', false);
@@ -974,7 +1036,13 @@ $('#crearProyecto').submit(function () {
                         id: id
                     },
                     success: function (data) {
-                        console.log(data);
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Actualizado exitoso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                     },
                     error: function (r) {
                         console.log(r);

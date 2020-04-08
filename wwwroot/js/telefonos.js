@@ -45,9 +45,21 @@ $('#formTelefonos').submit(function (e) {
                 },
                 success: function (data) {
                     if (data === '') {
-                        alert('No se insertó por qué ya esta dado de alta');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: 'Ya está dado de alta',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                     } else {
-                        alert('Insertado con el id ' + data);
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Guardado exitoso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                         $('#modalTelefonos').modal('hide');
                         $('#lblNoTelefonos').hide();
 
@@ -95,9 +107,21 @@ $('#formTelefonos').submit(function (e) {
                     },
                     success: function (data) {                        
                         if (data === '') {
-                            alert("No se puede actualizar porque ya existe");
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'error',
+                                title: 'Ya está dado de alta',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
                         } else {
-                            console.log("es el data", data);
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Actualizado exitoso',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
                             $('#modalTelefonos').modal('hide');
 
                             var elemento = document.getElementsByClassName(`tablaTelefono-${id}`);
@@ -143,29 +167,46 @@ function limpiarTelefonos() {
 }
 
 function deleteTelefono(boton) {
-    var id = boton.value;
-    var persona = $('#personaGeneralID').val();
+    Swal.fire({
+        title: '¿Desea eliminar el campo permanentemente?',
+        text: "Su decisión no podrá ser revertida",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Sí, bórralo'
+    }).then((result) => {
+        if (result.value) {
+            var id = boton.value;
+            var persona = $('#personaGeneralID').val();
 
-    $.ajax({
-        type: 'POST',
-        url: "/Peticiones/deleteTelefono",
-        data: {
-            id: id,
-            persona: persona
-        },
-        success: function (data) {
-            if (data === '0') {
-                $('#lblNoTelefonos').show();
-            } 
-            console.log(data);
-            var elemento = document.getElementsByClassName(`tablaTelefono-${id}`);
-            $(elemento).remove();
-        },
-        error: function (r) {
-            console.log(r);
+            $.ajax({
+                type: 'POST',
+                url: "/Peticiones/deleteTelefono",
+                data: {
+                    id: id,
+                    persona: persona
+                },
+                success: function (data) {
+                    if (data === '0') {
+                        $('#lblNoTelefonos').show();
+                    }
+                        Swal.fire(
+                            'Borrado exitoso',
+                            'El campo ha sido eliminado',
+                            'success'
+                        )
+                        var elemento = document.getElementsByClassName(`tablaTelefono-${id}`);
+                        $(elemento).remove();
+                    },
+                    error: function (r) {
+                        console.log(r);
+                    }
+                });
+            return false;
         }
-    });
-    return false;
+    })    
 }
 
 function editTelefono(boton) {

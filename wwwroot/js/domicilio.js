@@ -238,35 +238,47 @@ function watchMunicipios(est) {
 }
 
 function borrarDom(boton) {
-    var id = boton.value;
-    var persona = $('#personaGeneralID').val();
+    Swal.fire({
+        title: '¿Desea eliminar el campo permanentemente?',
+        text: "Su decisión no podrá ser revertida",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Sí, bórralo'
+    }).then((result) => {
+        if (result.value) {
+            var id = boton.value;
+            var persona = $('#personaGeneralID').val();
 
-    $.ajax({
-        type: 'POST',
-        url: "/Domicilios/deleteDomicilio",
-        data: {
-            domID: id,
-            persona: persona
-        },
-        success: function (data) {
-            
-            console.log(data);
-            var elemento = document.getElementsByClassName(`tablaDomicilio-${id}`);
-            console.log("este es el elemento", elemento);
+            $.ajax({
+                type: 'POST',
+                url: "/Domicilios/deleteDomicilio",
+                data: {
+                    domID: id,
+                    persona: persona
+                },
+                success: function (data) {
+                    Swal.fire(
+                        'Borrado exitoso',
+                        'El campo ha sido eliminado',
+                        'success'
+                    )
+                    var elemento = document.getElementsByClassName(`tablaDomicilio-${id}`);
+                    $(elemento).remove();
 
-            $(elemento).remove();
-
-            if (data === '0') {
-                $('#lblNoDomicilio').show();
-            } 
-            
-            //$('#tableDomicilio').load(" #tableDomicilio");
-        },
-        error: function (r) {
-            console.log(r);
+                    if (data === '0') {
+                        $('#lblNoDomicilio').show();
+                    }
+                },
+                error: function (r) {
+                    console.log(r);
+                }
+            });
+            return false;
         }
-    });
-    return false;
+    }
 }
 
 $('#formEditDomicilio').submit(function (e) {
@@ -340,8 +352,7 @@ $('#formEditDomicilio').submit(function (e) {
                     DomicilioID: domicilioID,
                     PersonaID: persona
                 },
-                success: function (data) {  
-                    console.log("este es el id", id);
+                success: function (data) {                      
                     $('#modalRegisterForm').modal('hide');
 
                     var elemento = document.getElementsByClassName(`tablaDomicilio-${id}`);
@@ -364,7 +375,13 @@ $('#formEditDomicilio').submit(function (e) {
                     `;
 
                     listadoContactos.appendChild(nuevoContacto);
-                    
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Actualizado exitoso',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 },
                 error: function (r) {
                     console.log(r);
@@ -373,7 +390,6 @@ $('#formEditDomicilio').submit(function (e) {
             return false;
 
         } else {
-           // e.preventDefault();
             $.ajax({
                 type: 'POST',
                 url: "/Domicilios/addDomicilio",
@@ -396,9 +412,14 @@ $('#formEditDomicilio').submit(function (e) {
                     PersonaID: persona
                 },
                 success: function (data) {
-                    alert('Insertado con el id ' + data);
-                    $('#modalRegisterForm').modal('hide');
-                    //$('#tableDomicilio').load(" #tableDomicilio");
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Guardado exitoso',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    $('#modalRegisterForm').modal('hide');                    
                     $('#lblNoDomicilio').hide();
 
                     nuevoContacto.setAttribute("id", `${data}`);
