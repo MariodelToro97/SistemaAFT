@@ -1,0 +1,279 @@
+﻿@model GranModelo
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+<form id="crearProyecto1">
+    <div class="border border-secondary rounded">
+        <div class="container">
+            <h3 class="text-dark mt-2">Datos del proyecto</h3>
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-general" role="tab" aria-controls="nav-home" aria-selected="true">Datos del proyecto</a>
+                </div>
+            </nav>
+
+            @foreach (var tel in (IEnumerable<SistemaAFT.Models.Proyecto>)ViewBag.Proyectos)
+            {
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" class="proyectoVersionNuevo" id="@tel.ProyectoID" value="@tel.ProyectoID" />
+                <div class="border border-secondary rounded container mb-3 mr-0" id="solicitante_personal">
+                    <div class="container">
+                        <div class="border border-secondary rounded mb-3 mt-2">
+                            <div class="form-inline d-flex bg-dark">
+                                <h6 class="my-3 mx-3 text-white font-weight-lighter">Proyecto</h6>
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-4 mt-2">
+                                        <div class="form-group">
+                                            <label asp-for="@tel.nombreProyecto" class="control-label">Nombre del proyecto<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="@tel.nombreProyecto" class="text-danger proyecto ErrorInput"></span>
+                                            <input asp-for="@tel.nombreProyecto" type="text" class="form-control proyecto" placeholder="Nombre del proyecto" required id="nombreproyecto" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-2">
+                                        <div class="form-group">
+                                            <label asp-for="@tel.Tipo_ProyectoID" class="control-label">Tipo de Proyecto<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="@tel.Tipo_ProyectoID" class="text-danger proyecto ErrorInput"></span>
+                                            <select asp-for="@tel.Tipo_ProyectoID" id="tipoproyecto" class="form-control proyecto" asp-items="ViewBag.Tipo_ProyectoID">
+                                                <option value="" selected>Seleccione opción</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-1">
+                                        <div class="form-group">
+                                            <label asp-for="@tel.fechaRecepcion" class="control-label">Fecha de recepción<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="@tel.fechaRecepcion" class="text-danger proyecto ErrorInput"></span>
+                                            <input class="form-control proyecto" asp-for="@tel.fechaRecepcion" type="date" class="form-control" placeholder="NOMBRE DEL PROYECTO" required id="fecha" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label asp-for="@tel.objetivo" class="control-label">Objetivo:</label>
+                                    <textarea class="proyecto form-control" asp-for="@tel.objetivo" type="text" id="objetivo"></textarea>
+                                </div>
+                                <div class="col-md-3 mt-2">
+                                    <div class="form-group" style="display: none;">
+                                        <input id="@tel.SolicitudID" type="text" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="form-group d-flex">
+                        <input type="submit" value="Crear" class="btn btn-primary mx-auto" id="btnCrearProyectoSolicitudes" />
+                    </div>-->
+                </div>
+                <!--<div class="d-flex">
+                   <div class="ml-auto mb-3">
+                       <button class="btn btn-info" type="button" id="btnRegresarTres">Regresar</button>
+                       <button type="button" class="btn btn-success" id="limpiarPantallaProyectoSolicitudes">Limpiar pantalla</button>
+                       <input type="button" value="Siguiente" class="btn btn-dark text-white mr-3" id="btnSiguienteTres" />
+                   </div>
+                </div>-->
+
+
+                <!--INICIO DE COTIZACIONES-->
+
+                <div class="border border-secondary rounded" style="" id="pantallaCuatro">
+                    <div class="container">
+                        <h3 class="text-dark mt-2">Componentes y conceptos</h3>
+
+                        <div class="border border-secondary rounded my-3" id="solicitante_personal">
+                            <div class="form-inline d-flex bg-dark rounded">
+                                <h6 class="my-3 mx-3 text-white font-weight-lighter">Componentes y conceptos de incentivos solicitados</h6>
+                            </div>
+                            <div class="container">
+                                <div class="form-inline d-flex mt-1">
+                                    <label class="my-3 mx-3 control-label">Buscar:</label>
+                                    <input class="form-control ml-1" />
+                                    <!--<button class="ml-auto btn btn-light" data-toggle="modal" data-target="#modalApoyo" id="agregarApoyoCotizacionSolicitudes"><i class="fas fa-plus mr-1"></i>Agregar</button>-->
+                                </div>
+                                <table class="table table-hover table-sm table-bordered">
+                                    <thead class="table-secondary">
+                                        <tr>
+                                            <th class="text-center">Subconcepto de apoyo solicitado</th>
+                                            <th>Descripción</th>
+                                            <th class="text-right">Monto de apoyo</th>
+                                            <th>Aportación productor</th>
+                                            <th class="text-right">Inversión total</th>
+                                            <th>Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tablaApoyoSolicitantes">
+                                        <tr id="trInicialApoyosSolicitantes">
+                                            <th class="font-weight-normal">Ningún dato disponible en esta tabla</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        <tr id="trTotalApoyoSolicitante">
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th class="text-right">Total:</th>
+                                            <th class="text-right">$ <span id="totalApoyosSolicitudes">0.00</span></th>
+                                            <th></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <label class="mt-0"><span id="spanApoyosSolicitantes">0</span> registros</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="d-flex">
+                            <div class="ml-auto mb-3">
+                                <button class="btn btn-info" type="button" id="btnRegresarCuatro">Regresar</button>
+                                <button type="button" class="btn btn-success" id="limpiarPantApoyosSolicitudes">Limpiar pantalla</button>
+                                <input type="button" value="Siguiente" class="btn btn-dark text-white mr-3" id="btnSiguienteCuatro" />
+                            </div>
+                        </div>-->
+                </div>
+
+
+            }
+
+
+
+        </div>
+    </div>
+</form>
+
+
+<!----MODAL DE APOYOS DE COTIZACIONES-->
+<form id="apoyoSolicitantes">
+    <div class="modal bd-example-modal-lg" tabindex="-1" role="dialog" id="modalApoyo">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-dark d-flex">
+                    <h5 class="modal-title text-white mx-auto">Apoyo solicitado</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="text-white" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label asp-for="Cotizacion.Concepto_ApoyoID" class="control-label">Concepto de apoyo solicitado<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Cotizacion.Concepto_ApoyoID" class="text-danger ErrorInput"></span>
+                        <select asp-for="Cotizacion.Concepto_ApoyoID" id="concApoSolic" class="form-control" asp-items="ViewBag.Concepto_ApoyoID">
+                            <option value="" selected>Seleccione opción</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cotizacion.Subconcepto_ApoyoID" class="control-label">Subconcepto de apoyo solicitado<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Cotizacion.Subconcepto_ApoyoID" class="text-danger ErrorInput"></span>
+                        <select asp-for="Cotizacion.Subconcepto_ApoyoID" id="subconcApoSoli" class="form-control" asp-items="ViewBag.Subconcepto_ApoyoID">
+                            <option value="" selected>Seleccione opción</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <div class="form-group input-group-sm">
+                                <label asp-for="Cotizacion.Unidad_Medida" class="control-label">Unidad de medida:</label>
+                                <input asp-for="Cotizacion.Unidad_Medida" id="uniMed" class="form-control" disabled placeholder="UNIDAD DE MEDIDA" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group input-group-sm">
+                                <label asp-for="Cotizacion.Unidad_Impacto" class="control-label">Unidad de impacto:</label>
+                                <input asp-for="Cotizacion.Unidad_Impacto" id="uniImp" class="form-control" disabled placeholder="UNIDAD DE IMPACTO" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label asp-for="Cotizacion.can_Sol" class="control-label">Cantidad solicitada<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Cotizacion.can_Sol" class="text-danger ErrorInput"></span>
+                            <div class="input-group flex-nowrap input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="addon-wrapping"></span>
+                                </div>
+                                <input asp-for="Cotizacion.can_Sol" type="number" id="can_Sol" onkeyup="calculoApoyo()" min="0" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="Cotizacion.cos_Uni" class="control-label">Costo unitario<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Cotizacion.cos_Uni" class="text-danger ErrorInput"></span>
+                            <div class="input-group flex-nowrap input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-center" id="addon-wrapping">$</span>
+                                </div>
+                                <input asp-for="Cotizacion.cos_Uni" type="number" id="cos_Uni" onkeyup="calculoApoyo()" min="0" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="Cotizacion.apo_Pro" class="control-label">Aportación productor<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Cotizacion.apo_Pro" class="text-danger ErrorInput"></span>
+                            <div class="input-group flex-nowrap input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-center" id="addon-wrapping">$</span>
+                                </div>
+                                <input asp-for="Cotizacion.apo_Pro" type="number" min="0" id="apo_Pro" onkeyup="apoProd()" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label asp-for="Cotizacion.apo_Fed" class="control-label">Apoyo federal:</label>
+                            <div class="input-group flex-nowrap input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-center" id="addon-wrapping">$</span>
+                                </div>
+                                <input asp-for="Cotizacion.apo_Fed" disabled type="number" min="0" id="apo_Fed" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="Cotizacion.apo_Est" class="control-label">Apoyo estatal:</label>
+                            <div class="input-group flex-nowrap input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-center" id="addon-wrapping">$</span>
+                                </div>
+                                <input asp-for="Cotizacion.apo_Est" type="number" min="0" id="apo_Est" onkeyup="calculoApoyo()" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="Cotizacion.mon_Apo" class="control-label">Monto de apoyo<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Cotizacion.mon_Apo" class="text-danger ErrorInput"></span>
+                            <div class="input-group flex-nowrap input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-center" id="addon-wrapping">$</span>
+                                </div>
+                                <input asp-for="Cotizacion.mon_Apo" disabled type="number" min="0" id="mon_Apo" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label asp-for="Cotizacion.otro_Apo" class="control-label">Otro apoyo gubernamental:</label>
+                            <div class="input-group flex-nowrap input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-center" id="addon-wrapping">$</span>
+                                </div>
+                                <input asp-for="Cotizacion.otro_Apo" type="number" min="0" id="otro_Apo" onkeyup="calculoApoyo()" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="Cotizacion.inv_Total" class="control-label">Inversión total<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Cotizacion.inv_Total" class="text-danger ErrorInput"></span>
+                            <div class="input-group flex-nowrap input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-center" id="addon-wrapping">$</span>
+                                </div>
+                                <input asp-for="Cotizacion.inv_Total" disabled type="number" min="0" id="inv_Total" class="form-control text-right" placeholder="0.00" aria-label="0.00" aria-describedby="addon-wrapping">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cotizacion.Descripcion" class="control-label">Descripción<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Cotizacion.Descripcion" class="text-danger ErrorInput"></span>
+                        <textarea asp-for="Cotizacion.Descripcion" id="descSolicitanteApoyo" class="form-control"></textarea>
+                    </div>
+                    <input hidden id="idCotizacionSolicitudes" />
+                    <input hidden id="invTotalAnteriorApoyoSolicitudes" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-primary" id="btnGuardarApoyoSolicitantes">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

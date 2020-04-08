@@ -21,9 +21,12 @@ namespace SistemaAFT.Models
         [RegularExpression("^[A-Z]{4}[0-9]{6}[A-Z,0-9]{3}", ErrorMessage = "El RFC no es válido")]
         public string RFC { get; set; }
         [Required(ErrorMessage = "Campo Requerido")]
+        [RegularExpression("^[A-ZÑÁÉÍÓÚ]+[.]*([ ]*[A-ZÑÁÉÍÓÚ]*)*", ErrorMessage = "Formato no válido")]
         public string nombre { get; set; }
         [Required(ErrorMessage = "Campo Requerido")]
+        [RegularExpression("^[A-ZÑÁÉÍÓÚ]+([ ]*[A-ZÑÁÉÍÓÚ]*)*", ErrorMessage = "Formato no válido")]
         public string apellido_paterno { get; set; }
+        [RegularExpression("^[A-ZÑÁÉÍÓÚ]+([ ]*[A-ZÑÁÉÍÓÚ]*)*", ErrorMessage = "Formato no válido")]
         public string apellido_materno { get; set; }
         public string correo { get; set; }
         [Required(ErrorMessage = "Campo Requerido")]
@@ -50,8 +53,8 @@ namespace SistemaAFT.Models
         public Discapacidad Discapacidad { get; set; }
         [Required(ErrorMessage = "ACUSE SURI")]
         public string ACUSESURI { get; set; } = "ACUSE SURI";
-
         [Required(ErrorMessage ="Campo Requerido")]
+        [RegularExpression("^[A-ZÑÁÉÍÓÚ]+([.]*[ ]*[A-ZÑÁÉÍÓÚ]*)*", ErrorMessage = "Formato no válido")]
         public string nombreMoral { get; set; }
         public ICollection<Domicilio> Domicilios { get; set; }
 

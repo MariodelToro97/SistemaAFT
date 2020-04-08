@@ -39,27 +39,27 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="Persona.nombre" class="control-label">Nombre<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.nombre" class="text-danger Persona ErrorInput"></span>
-                            <input id="nombreGeneral" asp-for="Persona.nombre" type="text" class="form-control" placeholder="Nombre" required />
+                            <input id="nombreGeneral" asp-for="Persona.nombre" onkeyup="mayus(this)" type="text" class="form-control" placeholder="Nombre" required />
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="Persona.apellido_paterno" class="control-label">Apellido Paterno<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.apellido_paterno" class="text-danger Persona ErrorInput"></span>
-                            <input id="apellidoPaterno" asp-for="Persona.apellido_paterno" type="text" class="form-control" placeholder="Apellido Paterno" required />
+                            <input id="apellidoPaterno" asp-for="Persona.apellido_paterno" onkeyup="mayus(this)" type="text" class="form-control" placeholder="Apellido Paterno" required />
                         </div>
 
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="Persona.apellido_materno" class="control-label">Apellido Materno:</label><span asp-validation-for="Persona.apellido_materno" class="text-danger"></span>
-                            <input id="apellidoMaterno" asp-for="Persona.apellido_materno" type="text" class="form-control" placeholder="Apellido Materno" />
+                            <label asp-for="Persona.apellido_materno" class="control-label">Apellido Materno:</label><span asp-validation-for="Persona.apellido_materno" class="text-danger Persona ErrorInput"></span>
+                            <input id="apellidoMaterno" asp-for="Persona.apellido_materno" onkeyup="mayus(this)" type="text" class="form-control" placeholder="Apellido Materno" />
                         </div>
                     </div>
                 </div>
                 <div class="form-group" id="nombreMoral" style="display: none;">
                     <label asp-for="Persona.nombreMoral" class="control-label">Nombre<span class="text-danger font-weight-bold">*</span>:</label><span asp-validation-for="Persona.nombreMoral" class="text-danger Persona ErrorInput"></span>
-                    <input asp-for="Persona.nombreMoral" type="text" class="form-control" id="nombreMoralPersonas" placeholder="Nombre/s" required />
+                    <input asp-for="Persona.nombreMoral" onkeyup="mayus(this)" type="text" class="form-control" id="nombreMoralPersonas" placeholder="Nombre/s" required />
                 </div>
             </div>
             <div class="col-md-3" id="curpHistoricas">

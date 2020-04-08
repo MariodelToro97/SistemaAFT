@@ -1,4 +1,60 @@
-﻿$(document).ready(function () {
+$( document ).ready(function() {
+    $('#btnLimpiarBusquedaSolic').click(function () {
+        limpPrimeraIndex();
+    });
+    $('#limpPantUno').click(function () {
+        limpPrimeraIndex();
+        limpiezaDosIndexSol();
+    });
+
+    $('#limpPantUnos').click(function () {
+        limpPrimeraIndex();
+        limpiezaDosIndexSol();
+        $('#nav-domicilio').hide();
+        $('#solicitante_personal').show();
+    });
+
+    $('#btnSiguienteUno, #btnSiguienteUnos').click(function () {
+        $('#solicitante_personal').hide();
+        $('#nav-domicilio').hide();
+        $('#navegadorSolicitante').hide();
+        $('#pantallaDos').show();
+        
+        if ($('#solicitudID').val() === '')
+            $('#btnSiguienteDos').attr('disabled', true);
+        else
+            $('#btnSiguienteDos').attr('disabled', false);
+    });
+
+    $('#limpPantallaSolicitudesVentanilla').click(function () {
+        $('#pantallaDos select').val('');
+        $('#pantallaDos span.ventanilla').hide();
+    });
+
+    $('#btnRegresarUno, #btnRegresarUnos').click(function () {
+        $('#solicitante_personal').show();
+        $('#nav-domicilio').show();
+        $('#navegadorSolicitante').show();
+        $('#pantallaDos').hide();
+    });
+
+    $('#btnSiguienteDos').click(function () {
+        $('#pantallaDos').hide();
+        $('#crearProyecto').show();
+
+        if ($('#proyectoSolicitudID').val() === '')
+            $('#btnSiguienteTres').attr('disabled', true);
+        else
+            $('#btnSiguienteTres').attr('disabled', false);
+    });
+
+    $('#limpiarPantallaProyectoSolicitudes').click(function () {
+        $('#solicitante_personal select.proyecto').val('');
+        $('#solicitante_personal input.proyecto').val('');
+        $('#solicitante_personal textarea.proyecto').val('');
+        $('#solicitante_personal span.proyecto').hide();
+    });
+
     $('#tipoPersonaSolicitante').change(function () {       
         var valor = $('#tipoPersonaSolicitante').val();
         var texto = $('#tipoPersonaSolicitante option[value=' + valor + ']').text();
@@ -62,11 +118,17 @@
         $('#nav-domicilio').show();
         $('#navegadorSolicitante').show();
         $('#pantallaDos').hide();
+        $('#solicitante_personal').show();
+        $('#nav-domicilio').hide();
     });
     
     $('#btnRegresarTres').click(function () {
         $('#pantallaDos').show();
         $('#crearProyecto').hide();
+    });
+
+    $('#limpiarPantApoyosSolicitudes').click(function () {
+        alert('HOLA ZAMANO, ME ABRISTE? JEJEJEJEJEJEJEJEJE CREO QUE YA ACABÉ AQUÍ, NO SÉ QUE DEBE PASAR CUANDO LE PIQUES AQUÍ, SI BORRAR TODO DE LA BASE DE DATOS O NO DEBERÍA EXISTIR ESTE BOTÓN, EN FIN LO DEJÉ PARA CUANDO SEPAMOS QUE VA AQUI SOLAMENTE LO COLOCAMOS')
     });
 
     $('#btnSiguienteTres').click(function () {
@@ -78,7 +140,37 @@
         $('#pantallaCuatro').hide();
         $('#crearProyecto').show();
     });
+
+    $('#agregarApoyoCotizacionSolicitudes').click(function () {
+        limpiarModalApoyosSolicitudes();
+        document.getElementById('btnGuardarApoyoSolicitantes').innerHTML = "Guardar";
+        $('#btnGuardarApoyoSolicitantes').show();
+        $('#apoyoSolicitantes span').show();
+    });
 });
+
+function limpPrimeraIndex() {
+    $('#formBusquedaSolicitante input').val('');
+    $('#formBusquedaSolicitante select').val('');
+    $('#curpBusquedaSolicitante').attr("disabled", true);
+    $('#rfcBusquedaSolicitante').attr("disabled", true);
+
+    $('#nav-Representante').hide();
+    $('#nav-complementarios').hide();
+    $('#nav-socioeconomicos').hide();
+    $('#parteBajaSolicitantes').hide();
+}
+
+function limpiezaDosIndexSol() {
+    var elemento = document.getElementsByClassName(`table-light border border-secondary text-center filaRepresentante tablaRepresentante`);
+    $(elemento).remove();
+
+    var otro = document.getElementsByClassName(`table-light border border-secondary text-center tablaTelefono`);
+    $(otro).remove();
+
+    var dos = document.getElementsByClassName(`table-light border border-secondary text-center tablaObtencionDomicilios`);
+    $(dos).remove();
+}
 
 function apoProd(){
     calculoApoyo();
@@ -97,8 +189,6 @@ function apoProd(){
 }
 
 $('#apoyoSolicitantes').submit(function () {
-    var concApo = $('#concApoSolic').val();
-    var subconcApo = $('#subconcApoSoli').val();
     var uniMed = $('#uniMed').val();
     var uniImp = $('#uniImp').val();
 
@@ -161,16 +251,28 @@ $('#apoyoSolicitantes').submit(function () {
                     },
                     success: function (data) {
                         if (data === '') {
-                            alert('Ha ocurrido un error en la inserción de los datos');
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'error',
+                                title: 'Ha ocurrido un error en el guardado',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
                         } else {
-                            alert('Insertado con el id ' + data);
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Guardado exitoso',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
                             $('#modalApoyo').modal('hide');
                             $('#trInicialApoyosSolicitantes').remove();
                             var totalApoyos = document.getElementById('totalApoyosSolicitudes').innerHTML;
                             $('#trTotalApoyoSolicitante').remove();
 
                             nuevoContacto.setAttribute("id", `${data}`);
-                            nuevoContacto.setAttribute("class", `tablaApoyos-${data} tablaApoyos`);
+                            nuevoContacto.setAttribute("class", `tablaApoyos- ${data} tablaApoyos`);
 
                             var subConcepto = $('#subconcApoSoli option[value=' + $('#subconcApoSoli').val() + ']').text();
 
@@ -181,8 +283,8 @@ $('#apoyoSolicitantes').submit(function () {
                                 <td class="text-right">$ ${apoPro}</td>
                                 <td class="text-right">$ ${invTot}</td>
                                 <td>
-                                    <button type="button" onclick="" data-toggle="modal" data-target="#modalApoyo" class="btn btn-success" value=${data}">Editar</button>
-                                    <button type="button" class="btn btn-primary" onclick="" data-toggle="modal" data-target="#modalApoyo" value=${data}>Detalles</button>
+                                    <button type="button" onclick="editarApoyoSolicitante(${data})" data-toggle="modal" data-target="#modalApoyo" class="btn btn-success" value=${data}">Editar</button>
+                                    <button type="button" class="btn btn-primary" onclick="getApoyosSolicitantes(${data})" data-toggle="modal" data-target="#modalApoyo" value=${data}>Detalles</button>
                                     <button type="button" class="btn btn-danger" onclick="borrarApoyosSolicitantes(this)" value=${data} name=${invTot}>Borrar</button>
                                 </td>
                             `;
@@ -200,9 +302,9 @@ $('#apoyoSolicitantes').submit(function () {
                                 <td></td>
                             `;
 
-                            listadoContactos.appendChild(nuevoContacto); 
+                            listadoContactos.appendChild(nuevoContacto);
 
-                            var registros = document.getElementById('spanApoyosSolicitantes').innerHTML;                            
+                            var registros = document.getElementById('spanApoyosSolicitantes').innerHTML;
                             registros = parseInt(registros);
                             totalApoyos = parseFloat(totalApoyos);
                             document.getElementById('spanApoyosSolicitantes').innerHTML = registros + 1;
@@ -215,6 +317,101 @@ $('#apoyoSolicitantes').submit(function () {
                     }
                 });
                 return false;
+            } else {
+                if (document.getElementById('btnGuardarApoyoSolicitantes').innerHTML === "Editar") {                    
+                    $.ajax({
+                        type: 'POST',
+                        url: "/Solicitudes/updateCotizacion",
+                        data: {
+                            conc: $('#concApoSolic').val(),
+                            subc: $('#subconcApoSoli').val(),
+                            uniMed: uniMed,
+                            uniImp: uniImp,
+                            canSol: canSol,
+                            costUni: cosUni,
+                            apoPro: apoPro,
+                            apoFed: apoFed,
+                            apoEst: apoEst,
+                            montApo: monApo,
+                            otroApo: otroApo,
+                            invTot: invTot,
+                            desc: desc,
+                            proyecto: proyecto,
+                            id: $('#idCotizacionSolicitudes').val()
+                        },
+                        success: function (data) {
+                            if (data !== 'SUCCESS') {
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'error',
+                                    title: 'Ha ocurrido un error inesperado',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            } else {
+                                if (data === 'SUCCESS') {
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Guardado exitoso',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                    $('#modalApoyo').modal('hide');
+                                    $('#trInicialApoyosSolicitantes').remove();
+                                    var totalApoyos = document.getElementById('totalApoyosSolicitudes').innerHTML;
+                                    var id = $('#idCotizacionSolicitudes').val();
+                                    $('#trTotalApoyoSolicitante').remove();
+
+                                    var elemento = document.getElementsByClassName(`tablaApoyos- ${id}`);
+                                    $(elemento).remove();
+
+                                    nuevoContacto.setAttribute("id", $('#idCotizacionSolicitudes').val());
+                                    nuevoContacto.setAttribute("class", 'tablaApoyos- ' + $('#idCotizacionSolicitudes').val() + ' tablaApoyos');
+                                    
+                                    var subConcepto = $('#subconcApoSoli option[value=' + $('#subconcApoSoli').val() + ']').text();
+
+                                    nuevoContacto.innerHTML = `
+                                    <td class="text-center">${subConcepto}</td>
+                                    <td class="text-center">${desc}</td>
+                                    <td class="text-right">$ ${monApo}</td>
+                                    <td class="text-right">$ ${apoPro}</td>
+                                    <td class="text-right">$ ${invTot}</td>
+                                    <td>
+                                        <button type="button" onclick="editarApoyoSolicitante(${id})" data-toggle="modal" data-target="#modalApoyo" class="btn btn-success" value=${id}">Editar</button>
+                                        <button type="button" class="btn btn-primary" onclick="getApoyosSolicitantes(${id})" data-toggle="modal" data-target="#modalApoyo" value=${id}>Detalles</button>
+                                        <button type="button" class="btn btn-danger" onclick="borrarApoyosSolicitantes(this)" value=${id} name=${invTot}>Borrar</button>
+                                    </td>
+                                    `;
+
+                                    listadoContactos.appendChild(nuevoContacto);
+                                    nuevoContacto = document.createElement('tr');
+
+                                    nuevoContacto.setAttribute("id", `trTotalApoyoSolicitante`)
+                                    nuevoContacto.innerHTML = `
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-right font-weight-bold">Total:</td>
+                                    <td class="text-right font-weight-bold">$ <span id="totalApoyosSolicitudes" class ="font-weight-bold">0.00</span></th>
+                                    <td></td>
+                                    `;
+
+                                    listadoContactos.appendChild(nuevoContacto);
+
+                                    var invAnt = parseFloat($('#invTotalAnteriorApoyoSolicitudes').val());
+                                    totalApoyos = parseFloat(totalApoyos);
+                                    var nueva = invAnt - invTot;
+                                    document.getElementById('totalApoyosSolicitudes').innerHTML = totalApoyos - nueva;
+                                }
+                            }
+                        },
+                        error: function (r) {
+                            console.log(r);
+                        }
+                    });
+                    return false;
+                }
             }
         }
     }
@@ -222,27 +419,39 @@ $('#apoyoSolicitantes').submit(function () {
 });
 
 function borrarApoyosSolicitantes(boton) {
-    var id = boton.value;
-    var inv = boton.name;
+    Swal.fire({
+        title: '¿Desea eliminar el campo permanentemente?',
+        text: "Su decisión no podrá ser revertida",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Sí, bórralo'
+    }).then((result) => {
+        if (result.value) {
+            var id = boton.value;
+            var inv = parseFloat(boton.name);
 
-    $.ajax({
-        type: 'POST',
-        url: "/Solicitudes/deleteCotizacion",
-        data: {
-            id: id
-        },
-        success: function (data) {
-            var elemento = document.getElementsByClassName(`tablaApoyos-${id}`);
-            $(elemento).remove();
-            document.getElementById('spanApoyosSolicitantes').innerHTML = data;
-            if (data === '0') {
-                $('#trTotalApoyoSolicitante').remove();
+            $.ajax({
+                type: 'POST',
+                url: "/Solicitudes/deleteCotizacion",
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    var elemento = document.getElementsByClassName(`tablaApoyos- ${id}`);
 
-                listadoContactos = document.querySelector('#tablaApoyoSolicitantes');
-                nuevoContacto = document.createElement('tr');
+                    $(elemento).remove();
+                    document.getElementById('spanApoyosSolicitantes').innerHTML = data;
+                    if (data === '0') {
+                        $('#trTotalApoyoSolicitante').remove();
 
-                nuevoContacto.setAttribute("id", `trInicialApoyosSolicitantes`)
-                nuevoContacto.innerHTML = `
+                        listadoContactos = document.querySelector('#tablaApoyoSolicitantes');
+                        nuevoContacto = document.createElement('tr');
+
+                        nuevoContacto.setAttribute("id", `trInicialApoyosSolicitantes`)
+                        nuevoContacto.innerHTML = `
                                 <td class="font-weight-normal">Ningún dato disponible en esta tabla</td>
                                 <td></td>
                                 <td></td>
@@ -251,12 +460,12 @@ function borrarApoyosSolicitantes(boton) {
                                 <td></td>
                             `;
 
-                listadoContactos.appendChild(nuevoContacto);
+                        listadoContactos.appendChild(nuevoContacto);
 
-                nuevoContacto = document.createElement('tr');
+                        nuevoContacto = document.createElement('tr');
 
-                nuevoContacto.setAttribute("id", `trTotalApoyoSolicitante`)
-                nuevoContacto.innerHTML = `
+                        nuevoContacto.setAttribute("id", `trTotalApoyoSolicitante`)
+                        nuevoContacto.innerHTML = `
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -265,18 +474,20 @@ function borrarApoyosSolicitantes(boton) {
                                 <td></td>
                             `;
 
-                listadoContactos.appendChild(nuevoContacto); 
-            } else {
-                var totalApoyos = document.getElementById('totalApoyosSolicitudes').innerHTML;
-                totalApoyos = parseFloat(totalApoyos);
-                document.getElementById('totalApoyosSolicitudes').innerHTML = totalApoyos - inv;
-            }
-        },
-        error: function (r) {
-            console.log(r);
+                        listadoContactos.appendChild(nuevoContacto);
+                    } else {
+                        var totalApoyos = document.getElementById('totalApoyosSolicitudes').innerHTML;
+                        totalApoyos = parseFloat(totalApoyos);
+                        document.getElementById('totalApoyosSolicitudes').innerHTML = totalApoyos - inv;
+                    }
+                },
+                error: function (r) {
+                    console.log(r);
+                }
+            });
+            return false;
         }
-    });
-    return false;
+    }
 }
 
 function calculoApoyo() {
@@ -320,6 +531,62 @@ function calculoApoyo() {
         monApo = 0;
     monApo = parseFloat(monApo);
     $('#inv_Total').val(apoFed + monApo);  
+}
+
+function editarApoyoSolicitante(id) {
+    getApoyosSolicitantes(id);
+    $('#btnGuardarApoyoSolicitantes').show();
+    document.getElementById('btnGuardarApoyoSolicitantes').innerHTML = "Editar";
+    $('#apoyoSolicitantes span').show();
+}
+
+function limpiarModalApoyosSolicitudes() {
+    $('#apoyoSolicitantes select').val("");
+    $('#apoyoSolicitantes textarea').val("");
+    $('#apoyoSolicitantes input').val("");
+    $('#apoyoSolicitantes span').hide();
+}
+
+function getApoyosSolicitantes(id) {
+    $('#btnGuardarApoyoSolicitantes').hide();
+    limpiarModalApoyosSolicitudes();
+    $.ajax({
+        type: 'GET',
+        url: "/Solicitudes/GetApoyos",
+        data: {
+            id: id
+        },
+        success: function (data) {
+            $('#idCotizacionSolicitudes').val(data[0]['cotizacionID']);
+            $('#concApoSolic').val(data[0]['concepto_ApoyoID']);
+            $('#subconcApoSoli').val(data[0]['subconcepto_ApoyoID']);
+
+            if (data[0]['unidad_Medida'] === "NULL")
+                $('#uniMed').val('');
+            else
+                $('#uniMed').val(data[0]['unidad_Medida']);
+
+            if (data[0]['unidad_Impacto'] === "NULL")
+                $('#uniImp').val('');
+            else
+                $('#uniImp').val(data[0]['cotizacionID']);
+
+            $('#can_Sol').val(data[0]['can_Sol']);
+            $('#cos_Uni').val(data[0]['cos_Uni']);
+            $('#apo_Pro').val(data[0]['apo_Pro']);
+            $('#apo_Fed').val(data[0]['apo_Fed']);
+            $('#apo_Est').val(data[0]['apo_Est']);
+            $('#mon_Apo').val(data[0]['mon_Apo']);
+            $('#otro_Apo').val(data[0]['otro_Apo']);
+            $('#inv_Total').val(data[0]['inv_Total']);
+            $('#invTotalAnteriorApoyoSolicitudes').val(data[0]['inv_Total']);
+            $('#descSolicitanteApoyo').val(data[0]['descripcion']);
+        },
+        error: function (r) {
+            console.log(r);
+        }
+    });
+    return false;
 }
 
 $('#formBusquedaSolicitante').submit(function () {
@@ -510,7 +777,7 @@ function obtencionDomiciliosAJAX(persona) {
                     listadoContactos.appendChild(nuevoContacto);
                 }
             } else {
-                nuevoContacto.setAttribute("class", 'table-light border border-secondary text-center');
+                nuevoContacto.setAttribute("class", 'table-light border border-secondary text-center tablaObtencionDomicilios');
                 nuevoContacto.innerHTML = `
                         <td>No hay Domicilios</td>`;
                 listadoContactos.appendChild(nuevoContacto);
@@ -623,6 +890,7 @@ function obtencionAJAX() {
 }
 
 $('#crearSolicitud').submit(function () {
+    $('#pantallaDos span.ventanilla').show();
     var year = $('#year').val();
     var programa = $('#programa').val();
     var componente = $('#componente').val();
@@ -634,31 +902,71 @@ $('#crearSolicitud').submit(function () {
     if (year === '' || programa === '' || componente === '' || instancia === '' || delegacion === '' || estado === '') {
         alert("Faltan Datos");
     } else {
-        $.ajax({
-            type: 'POST',
-            url: "/Solicitudes/addSolicitud",
-            data: {
-                year: year,
-                programa: programa,
-                componente: componente,
-                instancia: instancia,
-                delegacion: delegacion,
-                estado: estado,
-                persona: persona
-            },
-            success: function (data) {
-                if (data === '') {
-                    alert('No se insertó por qué ya esta dado de alta');
-                } else {
-                    alert('Insertado con el id ' + data);
-                    $('#solicitudID').val(data);
+        if ($('#btnCrearSolicitudVentanilla').val() === 'Crear') {
+            $.ajax({
+                type: 'POST',
+                url: "/Solicitudes/addSolicitud",
+                data: {
+                    year: year,
+                    programa: programa,
+                    componente: componente,
+                    instancia: instancia,
+                    delegacion: delegacion,
+                    estado: estado,
+                    persona: persona
+                },
+                success: function (data) {
+                    if (data === '') {
+                        alert('No se insertó por qué ya esta dado de alta');
+                    } else {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Guardado exitoso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        $('#solicitudID').val(data);
+                        $('#btnCrearSolicitudVentanilla').val('Editar');
+                        $('#btnSiguienteDos').attr('disabled', false);
+                    }
+                },
+                error: function (r) {
+                    console.log(r);
                 }
-            },
-            error: function (r) {
-                console.log(r);
+            });
+            return false;
+        } else {
+            if ($('#btnCrearSolicitudVentanilla').val() === 'Editar') {
+                var id = $('#solicitudID').val();
+                $.ajax({
+                    type: 'POST',
+                    url: "/Solicitudes/updateSolicitud",
+                    data: {
+                        year: year,
+                        programa: programa,
+                        componente: componente,
+                        instancia: instancia,
+                        delegacion: delegacion,
+                        estado: estado,
+                        id: id
+                    },
+                    success: function (data) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Editado exitoso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    },
+                    error: function (r) {
+                        console.log(r);
+                    }
+                });
+                return false;
             }
-        });
-        return false;
+        }
     }
     return false;
 });
@@ -669,36 +977,156 @@ $('#crearProyecto').submit(function () {
     var objetivo = $('#objetivo').val();
     var fecha = $('#fecha').val();
     var solicitudID = $('#solicitudID').val();
+    if (objetivo === '')
+        objetivo = "NULL"
 
-    if (nombreproyecto === '' || tipoproyecto === '' || objetivo === '' || fecha === '' || solicitudID === '') {
+    if (nombreproyecto === '' || tipoproyecto === '' || fecha === '' || solicitudID === '') {
         alert("Faltan Datos");
     } else {
-        $.ajax({
-            type: 'POST',
-            url: "/Solicitudes/addProyecto",
-            data: {
-                nombreproyecto: nombreproyecto,
-                tipoproyecto: tipoproyecto,
-                objetivo: objetivo,
-                fecha: fecha,
-                solicitudID: solicitudID
-            },
-            success: function (data) {
-                if (data === '') {
-                    alert('No se insertó por qué ya esta dado de alta');
-                } else {
-                    alert('Insertado con el id ' + data);
-                    $('#proyectoSolicitudID').val(data);
+        if ($('#btnCrearProyectoSolicitudes').val() === 'Crear') {
+            $.ajax({
+                type: 'POST',
+                url: "/Solicitudes/addProyecto",
+                data: {
+                    nombreproyecto: nombreproyecto,
+                    tipoproyecto: tipoproyecto,
+                    objetivo: objetivo,
+                    fecha: fecha,
+                    solicitudID: solicitudID
+                },
+                success: function (data) {
+                    if (data === '') {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: 'Ha ocurrido un error inesperado',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    } else {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Guardado exitoso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        $('#proyectoSolicitudID').val(data);
+                        $('#btnCrearProyectoSolicitudes').val('Editar');
+                        $('#btnSiguienteTres').attr('disabled', false);
+                    }
+                },
+                error: function (r) {
+                    console.log(r);
                 }
-            },
-            error: function (r) {
-                console.log(r);
+            });
+            return false;
+        } else {
+            if ($('#btnCrearProyectoSolicitudes').val() === 'Editar') {
+                var id = $('#proyectoSolicitudID').val();
+                $.ajax({
+                    type: 'POST',
+                    url: "/Solicitudes/updateProyecto",
+                    data: {
+                        nombreproyecto: nombreproyecto,
+                        tipoproyecto: tipoproyecto,
+                        objetivo: objetivo,
+                        fecha: fecha,
+                        solicitudID: solicitudID,
+                        id: id
+                    },
+                    success: function (data) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Actualizado exitoso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    },
+                    error: function (r) {
+                        console.log(r);
+                    }
+                });
+                return false;
             }
-        });
-        return false;
+        }
     }
     return false;
 });
 
-   
-    
+
+function GetCotizacionPersona(id) {
+    $.ajax({
+        type: 'GET',
+        url: "/Solicitudes/GetCotizacion",
+        data: {
+            id: id
+        },
+        success: function (data) {
+            console.log(data);
+            //$('#trInicialApoyosSolicitantes').remove();
+            //$('#trTotalApoyoSolicitante').remove();
+
+            if (data.length === 0) {
+                console.log("entro");
+                return
+            }
+
+            listadoContactos = document.querySelector('#tablaApoyoSolicitantes');
+            //nuevoContacto = document.createElement('tr');
+            let res1 = document.querySelector('#tablaApoyoSolicitantes');
+            res1.innerHTML = '';
+            let contador = 0
+            let total = 0;
+                for (var res of data) {
+                    console.log(res.cotizacionID)
+                    //nuevoContacto.setAttribute("id", `${res.cotizacionID}`);
+                    //nuevoContacto.setAttribute("class", `tablaApoyos- ${res.cotizacionID} tablaApoyos`);
+                    res1.innerHTML += `
+                                <td class="text-center">${res.subconcepto_ApoyoID}</td>
+                                <td class="text-center">${res.descripcion}</td>
+                                <td class="text-right">$ ${res.mon_Apo}</td>
+                                <td class="text-right">$ ${res.apo_Pro}</td>
+                                <td class="text-right">$ ${res.inv_Total}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" onclick="getApoyosSolicitantes(${res.cotizacionID})" data-toggle="modal" data-target="#modalApoyo" value=${res.cotizacionID}>Detalles</button>
+                                </td>
+                               
+                            `;
+                    contador = contador + 1;
+                    total = total + res.inv_Total;
+
+                    if (contador === data.length) {
+                        nuevoContacto = document.createElement('tr');
+                        nuevoContacto.innerHTML = `
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-right font-weight-bold">Total:</td>
+                                <td class="text-right font-weight-bold">$ <span id="totalApoyosSolicitudes" class ="font-weight-bold">${total}</span></th>
+                                <td></td>
+                            `;
+
+                        listadoContactos.appendChild(nuevoContacto);
+                    }
+
+                }
+
+
+                document.getElementById('spanApoyosSolicitantes').innerHTML = data.length;
+            
+        },
+        error: function (r) {
+            console.log(r);
+        }
+    });
+    return false;
+}
+
+var x = $(".proyectoVersionNuevo").val();
+console.log("id", x);
+
+if (x != undefined) {
+    GetCotizacionPersona(x);
+}

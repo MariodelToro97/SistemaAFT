@@ -43,7 +43,13 @@ $('#formIntegrantes').submit(function (e) {
                     persona: persona
                 },
                 success: function (data) {
-                    alert('Insertado con el id ' + data);
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Guardado exitoso',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
 
                    $('#modalIntegrantes').modal('hide');
                     $('#lblNoIntegrantes').hide();
@@ -89,8 +95,13 @@ $('#formIntegrantes').submit(function (e) {
                         persona: persona
                     },
                     success: function (data) {
-                        console.log(data);
-                        //$('#tableIntegrantes').load(" #tableIntegrantes");
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Actualizado exitoso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                         $('#modalIntegrantes').modal('hide');
 
                         var elemento = document.getElementsByClassName(`tablaIntegrante-${id}`);
@@ -132,30 +143,46 @@ function limpiarIntegrantes() {
 }
 
 function deleteIntegrante(boton) {
-    var id = boton.value;
-    var persona = $('#personaGeneralID').val();
+    Swal.fire({
+        title: '¿Desea eliminar el campo permanentemente?',
+        text: "Su decisión no podrá ser revertida",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Sí, bórralo'
+    }).then((result) => {
+        if (result.value) {
+            var id = boton.value;
+            var persona = $('#personaGeneralID').val();
 
-    $.ajax({
-        type: 'POST',
-        url: "/Peticiones/deleteIntegrante",
-        data: {
-            id: id,
-            persona: persona
-        },
-        success: function (data) {
-            if (data === '0') {
-                $('#lblNoIntegrantes').show();
-            } 
-            console.log(data);
-            //$('#tableIntegrantes').load(" #tableIntegrantes");
-            var elemento = document.getElementsByClassName(`tablaIntegrante-${id}`);
-            $(elemento).remove();
-        },
-        error: function (r) {
-            console.log(r);
+            $.ajax({
+                type: 'POST',
+                url: "/Peticiones/deleteIntegrante",
+                data: {
+                    id: id,
+                    persona: persona
+                },
+                success: function (data) {
+                    if (data === '0') {
+                        $('#lblNoIntegrantes').show();
+                    }
+                    Swal.fire(
+                        'Borrado exitoso',
+                        'El campo ha sido eliminado',
+                        'success'
+                    )
+                    var elemento = document.getElementsByClassName(`tablaIntegrante-${id}`);
+                    $(elemento).remove();
+                },
+                error: function (r) {
+                    console.log(r);
+                }
+            });
+            return false;
         }
-    });
-    return false;
+    }
 }
 
 function editIntegrante(boton) {

@@ -310,7 +310,7 @@
         <div class="d-flex">
             <div class="ml-auto mb-3">
                 <button class="btn btn-info" type="button" id="btnRegresarUno">Regresar</button>
-                <button type="button" class="btn btn-success">Limpiar pantalla</button>
+                <button type="button" class="btn btn-success" id="limpPantUno">Limpiar pantalla</button>
                 <input type="button" value="Siguiente" class="btn btn-dark text-white" id="btnSiguienteUno" />
             </div>
         </div>
@@ -354,7 +354,7 @@
     <div class="d-flex">
         <div class="ml-auto mb-3">
             <button class="btn btn-info" type="button" id="btnRegresarUnos">Regresar</button>
-            <button type="button" class="btn btn-success">Limpiar pantalla</button>
+            <button type="button" class="btn btn-success" id="limpPantUnos">Limpiar pantalla</button>
             <input type="button" value="Siguiente" class="btn btn-dark text-white mr-3" id="btnSiguienteUnos" />
         </div>
     </div>
@@ -375,7 +375,7 @@
                         <div class="col-md-3 mt-2">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
-                                <label asp-for="Solicitud.YearID" class="control-label">Año<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Solicitud.YearID" class="text-danger ErrorInput"></span>
+                                <label asp-for="Solicitud.YearID" class="control-label">Año<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Solicitud.YearID" class="text-danger ventanilla ErrorInput"></span>
                                 <select asp-for="Solicitud.YearID" class="form-control" asp-items="ViewBag.YearID" id="year">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
@@ -385,7 +385,7 @@
                     <div class="row">
                         <div class="col-md-6 mt-2">
                             <div class="form-group">
-                                <label asp-for="Solicitud.ProgramaID" class="control-label">Programa<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Solicitud.ProgramaID" class="text-danger ErrorInput"></span>
+                                <label asp-for="Solicitud.ProgramaID" class="control-label">Programa<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Solicitud.ProgramaID" class="text-danger ventanilla ErrorInput"></span>
                                 <select asp-for="Solicitud.ProgramaID" class="form-control" id="programa" asp-items="ViewBag.ProgramaID">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
@@ -393,7 +393,7 @@
                         </div>
                         <div class="col-md-6 mt-2">
                             <div class="form-group">
-                                <label asp-for="Solicitud.ComponenteID" class="control-label">Componente<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Solicitud.ComponenteID" class="text-danger ErrorInput"></span>
+                                <label asp-for="Solicitud.ComponenteID" class="control-label">Componente<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Solicitud.ComponenteID" class="text-danger ventanilla ErrorInput"></span>
                                 <select asp-for="Solicitud.ComponenteID" class="form-control" id="componente" asp-items="ViewBag.ComponenteID">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
@@ -403,7 +403,7 @@
                     <div class="row">
                         <div class="col-md-4 mt-2">
                             <div class="form-group">
-                                <label asp-for="Solicitud.Instancia_EjecutoraID" class="control-label">Instancia Ejecutora<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Solicitud.Instancia_EjecutoraID" class="text-danger ErrorInput"></span>
+                                <label asp-for="Solicitud.Instancia_EjecutoraID" class="control-label">Instancia Ejecutora<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Solicitud.Instancia_EjecutoraID" class="text-danger ventanilla ErrorInput"></span>
                                 <select asp-for="Solicitud.Instancia_EjecutoraID" class="form-control" id="instancia" asp-items="ViewBag.Instancia_EjecutoraID">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
@@ -411,7 +411,7 @@
                         </div>
                         <div class="col-md-4 mt-2">
                             <div class="form-group">
-                                <label asp-for="Solicitud.DelegacionID" class="control-label">Delegación<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Solicitud.DelegacionID" class="text-danger ErrorInput"></span>
+                                <label asp-for="Solicitud.DelegacionID" class="control-label">Delegación<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Solicitud.DelegacionID" class="text-danger ventanilla ErrorInput"></span>
                                 <select asp-for="Solicitud.DelegacionID" class="form-control" id="delegacion" asp-items="ViewBag.DelegacionID">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
@@ -420,7 +420,7 @@
                         <div class="col-md-4 mt-2">
                             <div class="form-group">
                                 <label asp-for="Solicitud.estado" class="control-label">Estado<span class="text-danger font-weight-bold">*</span>:</label>
-                                <span asp-validation-for="Solicitud.estado" class="text-danger ErrorInput Modal"></span>
+                                <span asp-validation-for="Solicitud.estado" class="text-danger ventanilla ErrorInput Modal"></span>
                                 <select asp-for="Solicitud.estado" class="form-control" id="estadoSolicitud" asp-items="ViewBag.estado">
                                     <option value="" selected>Seleccione opción</option>
                                 </select>
@@ -428,7 +428,7 @@
                         </div>
                     </div>
                     <div class="form-group d-flex">
-                        <input type="submit" value="Crear" class="btn btn-primary mx-auto" />
+                        <input type="submit" value="Crear" id="btnCrearSolicitudVentanilla" class="btn btn-primary mx-auto" />
                     </div>
                 </form>
             </div>
@@ -437,7 +437,7 @@
     <div class="d-flex">
         <div class="ml-auto mb-3">
             <button class="btn btn-info" type="button" id="btnRegresarDos">Regresar</button>
-            <button type="button" class="btn btn-success">Limpiar pantalla</button>
+            <button type="button" class="btn btn-success" id="limpPantallaSolicitudesVentanilla">Limpiar pantalla</button>
             <input type="button" value="Siguiente" class="btn btn-dark text-white mr-3" id="btnSiguienteDos" />
         </div>
     </div>
@@ -466,28 +466,28 @@
                             <div class="row">
                                 <div class="col-md-4 mt-2">
                                     <div class="form-group">
-                                        <label asp-for="Proyecto.nombreProyecto" class="control-label">Nombre del proyecto<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Proyecto.nombreProyecto" class="text-danger ErrorInput"></span>
-                                        <input asp-for="Proyecto.nombreProyecto" type="text" class="form-control" placeholder="Nombre del proyecto" required id="nombreproyecto" />
+                                        <label asp-for="Proyecto.nombreProyecto" class="control-label">Nombre del proyecto<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Proyecto.nombreProyecto" class="text-danger proyecto ErrorInput"></span>
+                                        <input asp-for="Proyecto.nombreProyecto" type="text" class="form-control proyecto" placeholder="Nombre del proyecto" required id="nombreproyecto" />
                                     </div>
                                 </div>
                                 <div class="col-md-4 mt-2">
                                     <div class="form-group">
-                                        <label asp-for="Proyecto.Tipo_ProyectoID" class="control-label">Tipo de Proyecto<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Proyecto.Tipo_ProyectoID" class="text-danger ErrorInput"></span>
-                                        <select asp-for="Proyecto.Tipo_ProyectoID" id="tipoproyecto" class="form-control" asp-items="ViewBag.Tipo_ProyectoID">
+                                        <label asp-for="Proyecto.Tipo_ProyectoID" class="control-label">Tipo de Proyecto<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Proyecto.Tipo_ProyectoID" class="text-danger proyecto ErrorInput"></span>
+                                        <select asp-for="Proyecto.Tipo_ProyectoID" id="tipoproyecto" class="form-control proyecto" asp-items="ViewBag.Tipo_ProyectoID">
                                             <option value="" selected>Seleccione opción</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-4 mt-1">
                                     <div class="form-group">
-                                        <label asp-for="Proyecto.fechaRecepcion" class="control-label">Fecha de recepción<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Proyecto.fechaRecepcion" class="text-danger ErrorInput"></span>
-                                        <input asp-for="Proyecto.fechaRecepcion" type="date" class="form-control" placeholder="NOMBRE DEL PROYECTO" required id="fecha" />
+                                        <label asp-for="Proyecto.fechaRecepcion" class="control-label">Fecha de recepción<span class="text-danger font-weight-bold">*</span>:</label><span id="spanCURP" asp-validation-for="Proyecto.fechaRecepcion" class="text-danger proyecto ErrorInput"></span>
+                                        <input class="form-control proyecto" asp-for="Proyecto.fechaRecepcion" type="date" class="form-control" placeholder="NOMBRE DEL PROYECTO" required id="fecha" />
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group mt-2">
                                 <label asp-for="Proyecto.objetivo" class="control-label">Objetivo:</label>
-                                <textarea asp-for="Proyecto.objetivo" type="text" class="form-control" id="objetivo"></textarea>
+                                <textarea class="proyecto form-control" asp-for="Proyecto.objetivo" type="text" id="objetivo"></textarea>
                             </div>
                             <div class="col-md-3 mt-2">
                                 <div class="form-group" style="display: none;">
@@ -497,14 +497,14 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group d-flex">
-                <input type="submit" value="Crear" class="btn btn-primary mx-auto" />
+                <div class="form-group d-flex">
+                    <input type="submit" value="Crear" class="btn btn-primary mx-auto" id="btnCrearProyectoSolicitudes" />
+                </div>
             </div>
             <div class="d-flex">
                 <div class="ml-auto mb-3">
                     <button class="btn btn-info" type="button" id="btnRegresarTres">Regresar</button>
-                    <button type="button" class="btn btn-success">Limpiar pantalla</button>
+                    <button type="button" class="btn btn-success" id="limpiarPantallaProyectoSolicitudes">Limpiar pantalla</button>
                     <input type="button" value="Siguiente" class="btn btn-dark text-white mr-3" id="btnSiguienteTres" />
                 </div>
             </div>
@@ -525,7 +525,7 @@
                 <div class="form-inline d-flex mt-1">
                     <label class="my-3 mx-3 control-label">Buscar:</label>
                     <input class="form-control ml-1" />
-                    <button class="ml-auto btn btn-light" data-toggle="modal" data-target="#modalApoyo"><i class="fas fa-plus mr-1"></i>Agregar</button>
+                    <button class="ml-auto btn btn-light" data-toggle="modal" data-target="#modalApoyo" id="agregarApoyoCotizacionSolicitudes"><i class="fas fa-plus mr-1"></i>Agregar</button>
                 </div>
                 <table class="table table-hover table-sm table-bordered">
                     <thead class="table-secondary">
@@ -564,7 +564,7 @@
     <div class="d-flex">
         <div class="ml-auto mb-3">
             <button class="btn btn-info" type="button" id="btnRegresarCuatro">Regresar</button>
-            <button type="button" class="btn btn-success">Limpiar pantalla</button>
+            <button type="button" class="btn btn-success" id="limpiarPantApoyosSolicitudes">Limpiar pantalla</button>
             <input type="button" value="Siguiente" class="btn btn-dark text-white mr-3" id="btnSiguienteCuatro" />
         </div>
     </div>

@@ -74,9 +74,8 @@ $('#crearPersona').submit(function () {
             aMAterno = 'NULL';
         }     
 
-        if (curp === 'NULL' || nombrePersona === 'NULL' || aPaterno === 'NULL' || genero === 'NULL' || nacimiento === '' || civil === '' || nacionalidad === '' || numIdent === '' || identidad === '') {
+        if (curp === '' || nombrePersona === '' || aPaterno === '' || genero === '' || nacimiento === '' || civil === '' || nacionalidad === '' || numIdent === '' || identidad === '') {
             console.log("FALTAN DATOS");
-            console.log("es la curp faltan datos", curp)
 
         } else {
             if (!expCURP.test(curp)) {
@@ -89,52 +88,75 @@ $('#crearPersona').submit(function () {
                     console.log("es la curp rfc no valudi", curp)
 
                 } else {
-                    var rfc = $('#rfcPersona').val();
-                    if (rfc === '') {
-                        rfc = 'NULL';
-                    }
-                    $.ajax({
-                        type: 'POST',
-                        url: "/Personas/addPersona",
-                        data: {
-                            curp: curp,
-                            rfc: rfc,
-                            nombrePersona: nombrePersona,
-                            aPaterno: aPaterno,
-                            aMAterno: aMAterno,
-                            correo: correo,
-                            nacimiento: nacimiento,
-                            nacionalidad: nacionalidad,
-                            genero: genero,
-                            civil: civil,
-                            identidad: identidad,
-                            numIdent: numIdent,
-                            tipoPersona: 1,
-                            etnia: etnia,
-                            discapacidad: discapacidad,
-                            suri: suri,
-                            nombreMoral: 'NULL',
-                            actEcon: 0,
-                            fecha_con: 'NULL',
-                            folio: 'NULL',
-                            notario: 0
-                        },
-                        success: function (data) {
-                            console.log("este es el data", data)
-                            if (data === '') {
-                                alert('No se insertó por qué ya esta dado de alta');
-                            } else {
-                                alert('Insertado con el id ' + data);
-                                $('#personaGeneralID').val(data);
-                                habilitarModales();
-                                deshabilitarCampos();
+                    var expNombre = new RegExp("^[A-ZÑÁÉÍÓÚ]+[.]*([ ]*[A-ZÑÁÉÍÓÚ]*)*");                    
+                    if (!expNombre.test(nombrePersona)) {
+                        alert('El formato del nombre no es válido');
+
+                    } else {
+                        var expApellido = new RegExp("^[A-ZÑÁÉÍÓÚ]+([ ]*[A-ZÑÁÉÍÓÚ]*)*");
+                        if (!expApellido.test(aPaterno) || aMAterno !== 'NULL' && !expApellido.test(aMAterno)) {
+                            alert('El formato del apellido no es válido');
+
+                        } else {
+                            var rfc = $('#rfcPersona').val();
+                            if (rfc === '') {
+                                rfc = 'NULL';
                             }
-                        },
-                        error: function (r) {
-                            console.log(r);
+                            $.ajax({
+                                type: 'POST',
+                                url: "/Personas/addPersona",
+                                data: {
+                                    curp: curp,
+                                    rfc: rfc,
+                                    nombrePersona: nombrePersona,
+                                    aPaterno: aPaterno,
+                                    aMAterno: aMAterno,
+                                    correo: correo,
+                                    nacimiento: nacimiento,
+                                    nacionalidad: nacionalidad,
+                                    genero: genero,
+                                    civil: civil,
+                                    identidad: identidad,
+                                    numIdent: numIdent,
+                                    tipoPersona: 1,
+                                    etnia: etnia,
+                                    discapacidad: discapacidad,
+                                    suri: suri,
+                                    nombreMoral: 'NULL',
+                                    actEcon: 0,
+                                    fecha_con: 'NULL',
+                                    folio: 'NULL',
+                                    notario: 0
+                                },
+                                success: function (data) {                                    
+                                    if (data === '') {                                        
+                                        Swal.fire({
+                                            position: 'top-end',
+                                            icon: 'error',
+                                            title: 'Ya está dado de alta',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        })
+                                    } else {                                        
+                                        $('#personaGeneralID').val(data);
+                                        habilitarModales();
+                                        deshabilitarCampos();
+                                        Swal.fire({
+                                            position: 'top-end',
+                                            icon: 'success',
+                                            title: 'Guardado exitoso',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        })
+                                    }
+                                },
+                                error: function (r) {
+                                    console.log(r);
+                                }
+                            });
+                            return false;
                         }
-                    });
-                    return false;
+                    }
                 }
             }
         }        
@@ -148,47 +170,65 @@ $('#crearPersona').submit(function () {
             if (!expRFC.test($('#rfcPersona').val())) {
                 alert('El RFC no es válido');
             } else {
-                $.ajax({
-                    type: 'POST',
-                    url: "/Personas/addPersona",
-                    data: {
-                        curp: 'NULL',
-                        rfc: $('#rfcPersona').val(),
-                        nombrePersona: 'NULL',
-                        aPaterno: 'NULL',
-                        aMAterno: 'NULL',
-                        correo: correo,
-                        nacimiento: 'NULL',
-                        nacionalidad: $('#optionHidNacionalidad').val(),
-                        genero: $('#optionHidGenero').val(),
-                        civil: $('#optionHidEstadoCivil').val(),
-                        identidad: $('#optionHidTipoIdentidad').val(),
-                        numIdent: 'NULL',
-                        tipoPersona: 2,
-                        etnia: 1,
-                        discapacidad: 1,
-                        suri: suri,
-                        nombreMoral: $('#nombreMoralPersonas').val(),
-                        actEcon: $('#actividadEconomicaPersona').val(), 
-                        fecha_con: $('#fechaConstitucionPersona').val(),
-                        folio: $('#folioActaPersona').val(),
-                        notario: $('#numeroNotarioPersona').val()
-                    },
-                    success: function (data) {
-                        if (data === '') {
-                            alert('No se insertó por qué ya esta dado de alta');
-                        } else {
-                            alert('Insertado con el id ' + data);
-                            $('#personaGeneralID').val(data);
-                            habilitarModales();
-                            deshabilitarCampos();
+                var expMoral = new RegExp("^[A-ZÑÁÉÍÓÚ]+([.]*[ ]*[A-ZÑÁÉÍÓÚ]*)*");
+                if (!expMoral.test($('#nombreMoralPersonas').val())) {
+                    alert('El formato del nombre no es válido');
+
+                } else {
+                    $.ajax({
+                        type: 'POST',
+                        url: "/Personas/addPersona",
+                        data: {
+                            curp: 'NULL',
+                            rfc: $('#rfcPersona').val(),
+                            nombrePersona: 'NULL',
+                            aPaterno: 'NULL',
+                            aMAterno: 'NULL',
+                            correo: correo,
+                            nacimiento: 'NULL',
+                            nacionalidad: $('#optionHidNacionalidad').val(),
+                            genero: $('#optionHidGenero').val(),
+                            civil: $('#optionHidEstadoCivil').val(),
+                            identidad: $('#optionHidTipoIdentidad').val(),
+                            numIdent: 'NULL',
+                            tipoPersona: 2,
+                            etnia: 1,
+                            discapacidad: 1,
+                            suri: suri,
+                            nombreMoral: $('#nombreMoralPersonas').val(),
+                            actEcon: $('#actividadEconomicaPersona').val(),
+                            fecha_con: $('#fechaConstitucionPersona').val(),
+                            folio: $('#folioActaPersona').val(),
+                            notario: $('#numeroNotarioPersona').val()
+                        },
+                        success: function (data) {
+                            if (data === '') {
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'error',
+                                    title: 'Ya está dado de alta',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            } else {                                
+                                $('#personaGeneralID').val(data);
+                                habilitarModales();
+                                deshabilitarCampos();
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Guardado exitoso',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            }
+                        },
+                        error: function (r) {
+                            console.log(r);
                         }
-                    },
-                    error: function (r) {
-                        console.log(r);
-                    }
-                });
-                return false;
+                    });
+                    return false;
+                }
             }
         }
     }
@@ -205,6 +245,7 @@ function habilitarCampos() {
     $('#crearPersona select').attr("disabled", false);
     $('#guardarPersonas').attr("disabled", false);
     $('#acuseSuri').attr("disabled", true);
+    $('#numIdenPersona').attr("disabled", true);
 }
 
 function habilitarModales() {

@@ -59,30 +59,46 @@ function detailInt(boton) {
 }
 
 function borrarInt(boton) {
-    var id = boton.value;
-    var persona = $('#personaGeneralID').val();
+    Swal.fire({
+        title: '¿Desea eliminar el campo permanentemente?',
+        text: "Su decisión no podrá ser revertida",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Sí, bórralo'
+    }).then((result) => {
+        if (result.value) {
+            var id = boton.value;
+            var persona = $('#personaGeneralID').val();
 
-    $.ajax({
-        type: 'POST',
-        url: "/Peticiones/deleteRepresentante",
-        data: {
-            id: id,
-            persona: persona
-        },
-        success: function (data) {
-            if (data === '0') {
-                $('#lblNoRepresentantes').show();
-            } 
-            console.log(data);
-            var elemento = document.getElementById(id);
-            $(elemento).remove(".tablaRepresentante");
-            //$('#tableRepresentante').load(" #tableRepresentante");
-        },
-        error: function (r) {
-            console.log(r);
+            $.ajax({
+                type: 'POST',
+                url: "/Peticiones/deleteRepresentante",
+                data: {
+                    id: id,
+                    persona: persona
+                },
+                success: function (data) {
+                    if (data === '0') {
+                        $('#lblNoRepresentantes').show();
+                    }
+                    Swal.fire(
+                        'Borrado exitoso',
+                        'El campo ha sido eliminado',
+                        'success'
+                    )
+                    var elemento = document.getElementById(id);
+                    $(elemento).remove(".tablaRepresentante");                    
+                },
+                error: function (r) {
+                    console.log(r);
+                }
+            });
+            return false;
         }
-    });
-    return false;
+    }
 }
 
 $('#formRepresentantes').submit(function () {
@@ -114,8 +130,21 @@ $('#formRepresentantes').submit(function () {
                 },
                 success: function (data) {
                     if (data === '') {
-                        alert('No se insertó por qué ya esta dado de alta');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: 'Ya está dado de alta',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                     } else {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Guardado exitoso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                         $('#representanteID').val(data);
                         $('#representanteModal').attr("disabled", false);
                         $('#btnModalRepresentante').attr("disabled", true);
@@ -164,7 +193,13 @@ $('#formRepresentantes').submit(function () {
                         persona: persona
                     },
                     success: function (data) {
-                        //$('#tableRepresentante').load(" #tableRepresentante");
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Actualizado exitoso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                         $('#modalRepresentantes').modal('hide');
 
                         var fila = document.getElementById(id);
@@ -220,6 +255,13 @@ $('#formDocumentoRepresentantes').submit(function () {
                     repre: repre
                 },
                 success: function (data) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Guardado exitoso',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     nuevoDoc.setAttribute("id", data);
                     nuevoDoc.setAttribute("class", "filaDocumentoRepresentante tablaDocumentosRepresentantes");
                     nuevoDoc.innerHTML = '<td>' + nombreDoc + '</td><td>' + folio + '</td><td>' + fecha + '</td>' +
@@ -253,6 +295,13 @@ $('#formDocumentoRepresentantes').submit(function () {
                     fecha: fecha
                 },
                 success: function (data) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Actualizado exitoso',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     var fila = document.getElementById(id);
                     $(fila).remove(".tablaDocumentosRepresentantes");
                     
@@ -323,30 +372,48 @@ function getDocumentoRepresentantes(id) {
 }
 
 function deleteDocumentoRepresentante(boton) {
-    var id = boton.value;
-    var repre = boton.name;
+    Swal.fire({
+        title: '¿Desea eliminar el campo permanentemente?',
+        text: "Su decisión no podrá ser revertida",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Sí, bórralo'
+    }).then((result) => {
+        if (result.value) {
+            var id = boton.value;
+            var repre = boton.name;
 
-    $.ajax({
-        type: 'POST',
-        url: "/Peticiones/deleteDocumentoRepresentante",
-        data: {
-            id: id,
-            repre: repre
-        },
-        success: function (data) {
-            if (data === '0') {
-                $('#lblDocumentosRepresentante').show();
-                $('#btnCancelarRepresentante').attr("disabled", true);
-                $('#cerrarModalRepresentantes').attr("disabled", true);
-            }
-            var fila = document.getElementById(id);
-            $(fila).remove(".tablaDocumentosRepresentantes");
-        },
-        error: function (r) {
-            console.log(r);
+            $.ajax({
+                type: 'POST',
+                url: "/Peticiones/deleteDocumentoRepresentante",
+                data: {
+                    id: id,
+                    repre: repre
+                },
+                success: function (data) {
+                    if (data === '0') {
+                        $('#lblDocumentosRepresentante').show();
+                        $('#btnCancelarRepresentante').attr("disabled", true);
+                        $('#cerrarModalRepresentantes').attr("disabled", true);
+                    }
+                    var fila = document.getElementById(id);
+                    $(fila).remove(".tablaDocumentosRepresentantes");
+                    Swal.fire(
+                        'Borrado exitoso',
+                        'El campo ha sido eliminado',
+                        'success'
+                    )
+                },
+                error: function (r) {
+                    console.log(r);
+                }
+            });
+            return false;
         }
-    });
-    return false;
+    }
 }
 
 function editarInt(boton) {
