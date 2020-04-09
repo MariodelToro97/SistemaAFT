@@ -5,7 +5,7 @@
         <form id="formTelefonos">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h4 class="modal-title w-100 font-weight-bold">Telefonos</h4>
+                    <h4 class="modal-title w-100 font-weight-bold">Teléfonos</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col-md-3 mt-2">
                             <div class="form-group">
-                                <label asp-for="Telefono.numero" class="control-label">Numero<span class="text-danger font-weight-bold">*</span>:</label>
+                                <label asp-for="Telefono.numero" class="control-label">Número<span class="text-danger font-weight-bold">*</span>:</label>
                                 <span asp-validation-for="Telefono.numero" class="text-danger Telefonos ErrorInput Modal"></span>
                                 <input asp-for="Telefono.numero" placeholder="Numero Télefono" id="numeroTelefono" class="form-control" required />
                             </div>
@@ -26,17 +26,21 @@
 
                         <div class="col-md-3 mt-2">
                             <div class="form-group">
-                                <label asp-for="Telefono.CompaniaID" class="control-label">Compania<span class="text-danger font-weight-bold">*</span>:</label>
+                                <label asp-for="Telefono.CompaniaID" class="control-label">Compañía<span class="text-danger font-weight-bold">*</span>:</label>
                                 <span asp-validation-for="Telefono.CompaniaID" class="text-danger Telefonos ErrorInput Modal"></span>
-                                <select asp-for="Telefono.CompaniaID" id="companiaTelefono" class="form-control" asp-items="ViewBag.CompaniaID" required>
+                                <select asp-for="Telefono.CompaniaID" id="companiaTelefono" class="form-control" required>
                                     <option value="">Seleccione opción</option>
+                                    @foreach (var compania in (IEnumerable<SistemaAFT.Models.Compania>)ViewBag.CompaniaID)
+                                    {
+                                        <option value="@compania.CompaniaID">@compania.nombre_compania</option>
+                                    }
                                 </select>
                             </div>
                         </div>
 
                         <div class="col-md-3 mt-2">
                             <div class="form-group">
-                                <label asp-for="Telefono.Tipo_TelefonoID" class="control-label">Tipo Telefono<span class="text-danger font-weight-bold">*</span>:</label>
+                                <label asp-for="Telefono.Tipo_TelefonoID" class="control-label">Tipo Teléfono<span class="text-danger font-weight-bold">*</span>:</label>
                                 <span asp-validation-for="Telefono.Tipo_TelefonoID" class="text-danger ErrorInput Telefonos Modal"></span>
                                 <select asp-for="Telefono.Tipo_TelefonoID" id="tipoTelefono" class="form-control" asp-items="ViewBag.Tipo_TelefonoID" required>
                                     <option value="">Seleccione opción</option>

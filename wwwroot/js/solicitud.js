@@ -1,4 +1,5 @@
-$( document ).ready(function() {
+$(document).ready(function () {
+    console.clear();
     $('#btnLimpiarBusquedaSolic').click(function () {
         limpPrimeraIndex();
     });
@@ -487,8 +488,10 @@ function borrarApoyosSolicitantes(boton) {
             });
             return false;
         }
-    }
+    });
 }
+
+//Agregue este comentario
 
 function calculoApoyo() {
     var canSol = $('#can_Sol').val();
@@ -1112,10 +1115,7 @@ function GetCotizacionPersona(id) {
                     }
 
                 }
-
-
-                document.getElementById('spanApoyosSolicitantes').innerHTML = data.length;
-            
+                document.getElementById('spanApoyosSolicitantes').innerHTML = data.length;            
         },
         error: function (r) {
             console.log(r);
@@ -1125,7 +1125,7 @@ function GetCotizacionPersona(id) {
 }
 
 var x = $(".proyectoVersionNuevo").val();
-console.log("id", x);
+//console.log("id", x);
 
 if (x != undefined) {
     GetCotizacionPersona(x);

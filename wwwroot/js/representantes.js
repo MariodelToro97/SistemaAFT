@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    console.clear();
     $('#representanteTop').click(function () {
         $('#btnModalRepresentante').show();
         document.getElementById('btnModalRepresentante').innerHTML = "Guardar";
@@ -90,7 +91,7 @@ function borrarInt(boton) {
                         'success'
                     )
                     var elemento = document.getElementById(id);
-                    $(elemento).remove(".tablaRepresentante");                    
+                    $(elemento).remove(".tablaRepresentante");
                 },
                 error: function (r) {
                     console.log(r);
@@ -98,7 +99,7 @@ function borrarInt(boton) {
             });
             return false;
         }
-    }
+    });
 }
 
 $('#formRepresentantes').submit(function () {
@@ -413,7 +414,7 @@ function deleteDocumentoRepresentante(boton) {
             });
             return false;
         }
-    }
+    });
 }
 
 function editarInt(boton) {

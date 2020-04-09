@@ -31,6 +31,7 @@ namespace SistemaAFT.Models
         public string localidad { get; set; }
         public string referenciaposterior { get; set; }
         [Required(ErrorMessage = "Campo Requerido")]
+        [RegularExpression("^[0-9]{5}", ErrorMessage = "Formato inválido")]
         public string codigopostal { get; set; }
         [Required(ErrorMessage = "Campo Requerido")]
         public int Tipo_AsentamientoID { get; set; }

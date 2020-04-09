@@ -1,8 +1,5 @@
 ﻿using System;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -62,7 +59,11 @@ namespace SistemaAFT.Controllers
             ViewBag.Nacionalidad = _context.Nacionalidad.FromSqlRaw("Select * From dbo.Nacionalidad").ToList();
             ViewBag.Civil = _context.Estado_Civil.FromSqlRaw("Select * From dbo.Estado_Civil").OrderBy(e => e.Nombre_Edo_Civil).ToList();
             ViewBag.Genero = _context.Genero.FromSqlRaw("Select * From dbo.Genero ").ToList();
-            ViewBag.Tipo_Iden = _context.Tipo_Identidad.FromSqlRaw("Select * From dbo.Tipo_Identidad").OrderBy(i => i.Nombre).ToList();
+            ViewBag.Tipo_Iden = _context.Tipo_Identidad.FromSqlRaw("Select * From dbo.Tipo_Identidad").OrderBy(i => i.Nombre).ToList();            
+            ViewBag.Tipo_VialidadID = _context.Tipo_Vialidad.FromSqlRaw("Select * From dbo.Tipo_Vialidad").OrderBy(i => i.Nombre).ToList();
+            ViewBag.Tipo_AsentamientoID = _context.Tipo_Asentamiento.FromSqlRaw("Select * From dbo.Tipo_Asentamiento").OrderBy(i => i.Nombre).ToList();
+            ViewBag.Tipo_AmbitoID = _context.Tipo_Ambito.FromSqlRaw("Select * From dbo.Tipo_Ambito").OrderBy(i => i.Nombre).ToList();
+            ViewBag.CompaniaID = _context.Compania.FromSqlRaw("Select * From dbo.Compania").OrderBy(i => i.nombre_compania).ToList();
 
             ViewData["DiscapacidadID"] = new SelectList(_context.Discapacidad, "DiscapacidadID", "DiscapacidadID");
             //ViewData["Estado_CivilID"] = new SelectList(_context.Estado_Civil, "Estado_CivilID", "Nombre_Edo_Civil");
@@ -72,11 +73,10 @@ namespace SistemaAFT.Controllers
             ViewData["Tipo_PersonaID"] = new SelectList(_context.Tipo_Persona, "Tipo_PersonaID", "Nombre_Tipo");
             //ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "Nombre");
             ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "PersonaID");
-            ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Nombre");
-            ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Nombre");
-            ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Nombre");
+            //ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Nombre");
+            //ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Nombre");
+            //ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Nombre");
             //ViewData["NacionalidadID"] = new SelectList(_context.Set<Nacionalidad>(), "NacionalidadID", "Nombre");
-            ViewData["CompaniaID"] = new SelectList(_context.Set<Compania>(), "CompaniaID", "nombre_compania");
             ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "nombre_tipo");
             ViewData["Tipo_DocumentoID"] = new SelectList(_context.Set<Tipo_Documento>(), "Tipo_DocumentoID", "nombre");
             return View();
@@ -181,14 +181,19 @@ namespace SistemaAFT.Controllers
             ViewData["Tipo_PersonaID"] = new SelectList(_context.Tipo_Persona, "Tipo_PersonaID", "Nombre_Tipo", granModelo.Persona.Tipo_PersonaID);
             ViewData["PersonaID"] = new SelectList(_context.Persona, "PersonaID", "CURP", granModelo.Persona.PersonaID);
 
-            ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Nombre", granModelo.Domicilio.Tipo_AmbitoID);
+            //ViewData["Tipo_AmbitoID"] = new SelectList(_context.Set<Tipo_Ambito>(), "Tipo_AmbitoID", "Nombre", granModelo.Domicilio.Tipo_AmbitoID);
             //ViewData["MunicipioID"] = new SelectList(_context.Municipio, "MunicipioID", "Nombre", granModelo.Domicilio.MunicipioID);            
-            ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Nombre", granModelo.Domicilio.Tipo_AsentamientoID);
-            ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Nombre", granModelo.Domicilio.Tipo_VialidadID);
+            //ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Nombre", granModelo.Domicilio.Tipo_AsentamientoID);
+            //ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Nombre", granModelo.Domicilio.Tipo_VialidadID);
             ViewData["NacionalidadID"] = new SelectList(_context.Set<Nacionalidad>(), "NacionalidadID", "Nombre");
-            ViewData["CompaniaID"] = new SelectList(_context.Set<Compania>(), "CompaniaID", "nombre_compania", granModelo.Telefono.CompaniaID);
+            //ViewData["CompaniaID"] = new SelectList(_context.Set<Compania>(), "CompaniaID", "nombre_compania", granModelo.Telefono.CompaniaID);
             ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "nombre_tipo", granModelo.Telefono.Tipo_TelefonoID);
             ViewData["Tipo_DocumentoID"] = new SelectList(_context.Set<Tipo_Documento>(), "Tipo_DocumentoID", "nombre");
+
+            ViewBag.Tipo_VialidadID = _context.Tipo_Vialidad.FromSqlRaw("Select * From dbo.Tipo_Vialidad").OrderBy(i => i.Nombre).ToList();
+            ViewBag.Tipo_AsentamientoID = _context.Tipo_Asentamiento.FromSqlRaw("Select * From dbo.Tipo_Asentamiento").OrderBy(i => i.Nombre).ToList();
+            ViewBag.Tipo_AmbitoID = _context.Tipo_Ambito.FromSqlRaw("Select * From dbo.Tipo_Ambito").OrderBy(i => i.Nombre).ToList();
+            ViewBag.CompaniaID = _context.Compania.FromSqlRaw("Select * From dbo.Compania").OrderBy(i => i.nombre_compania).ToList();
 
             return View(granModelo);
         }
