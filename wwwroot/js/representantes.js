@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    console.clear();
     $('#representanteTop').click(function () {
         $('#btnModalRepresentante').show();
         document.getElementById('btnModalRepresentante').innerHTML = "Guardar";

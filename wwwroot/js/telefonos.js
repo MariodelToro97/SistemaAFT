@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    console.clear();
     $('#botonAgregarTelefono').click(function () {
         document.getElementById('btnModalTelefono').innerHTML = "Guardar";
         document.getElementById('btnCancelarTelefono').innerHTML = "Cancelar";

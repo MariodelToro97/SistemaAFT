@@ -40,12 +40,9 @@ namespace SistemaAFT.Models
             ViewData["DelegacionID"] = new SelectList(_context.Delegacion, "DelegacionID", "nombre");
             ViewData["Tipo_ProyectoID"] = new SelectList(_context.Tipo_Proyecto, "Tipo_ProyectoID", "Nombre");
             ViewData["Tipo_PersonaID"] = new SelectList(_context.Tipo_Persona, "Tipo_PersonaID", "Nombre_Tipo");
-            ViewData["Etnia"] = new SelectList(_context.Etnia, "EtniaID", "Pertenece_Etnia");
-            ViewData["CompaniaID"] = new SelectList(_context.Set<Compania>(), "CompaniaID", "nombre_compania");
+            ViewData["Etnia"] = new SelectList(_context.Etnia, "EtniaID", "Pertenece_Etnia");            
             ViewData["Tipo_TelefonoID"] = new SelectList(_context.Set<Tipo_Telefono>(), "Tipo_TelefonoID", "nombre_tipo");
             ViewData["Tipo_DocumentoID"] = new SelectList(_context.Set<Tipo_Documento>(), "Tipo_DocumentoID", "nombre");
-            ViewData["Tipo_AsentamientoID"] = new SelectList(_context.Set<Tipo_Asentamiento>(), "Tipo_AsentamientoID", "Nombre");
-            ViewData["Tipo_VialidadID"] = new SelectList(_context.Set<Tipo_Vialidad>(), "Tipo_VialidadID", "Nombre");
             ViewData["Concepto_ApoyoID"] = new SelectList(_context.Set<Concepto_Apoyo>(), "Concepto_ApoyoID", "nombre");
             ViewData["Subconcepto_ApoyoID"] = new SelectList(_context.Set<Subconcepto_Apoyo>(), "Subconcepto_ApoyoID", "nombre");
 
@@ -53,6 +50,10 @@ namespace SistemaAFT.Models
             ViewBag.Civil = _context.Estado_Civil.FromSqlRaw("Select * From dbo.Estado_Civil").OrderBy(e => e.Nombre_Edo_Civil).ToList();
             ViewBag.Genero = _context.Genero.FromSqlRaw("Select * From dbo.Genero ").ToList();
             ViewBag.Tipo_Iden = _context.Tipo_Identidad.FromSqlRaw("Select * From dbo.Tipo_Identidad").OrderBy(i => i.Nombre).ToList();
+            ViewBag.CompaniaID = _context.Compania.FromSqlRaw("Select * From dbo.Compania").OrderBy(i => i.nombre_compania).ToList();
+            ViewBag.Tipo_VialidadID = _context.Tipo_Vialidad.FromSqlRaw("Select * From dbo.Tipo_Vialidad").OrderBy(i => i.Nombre).ToList();
+            ViewBag.Tipo_AsentamientoID = _context.Tipo_Asentamiento.FromSqlRaw("Select * From dbo.Tipo_Asentamiento").OrderBy(i => i.Nombre).ToList();
+            ViewBag.Tipo_AmbitoID = _context.Tipo_Ambito.FromSqlRaw("Select * From dbo.Tipo_Ambito").OrderBy(i => i.Nombre).ToList();
 
             return View();
         }

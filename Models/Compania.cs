@@ -9,7 +9,6 @@ namespace SistemaAFT.Models
     {
         public int CompaniaID { get; set; }
         public string nombre_compania { get; set; }
-
         public ICollection<Telefono> Telefonos { get; set; }
     }
 }

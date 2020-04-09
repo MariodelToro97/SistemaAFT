@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
+    console.clear();
     $('#guardarPersonas').click(function () {
-        $("span.Persona").show();
-        /* ASIGNA VALOR A CAMPO SURI */
+        $("span.Persona").show();        
         $('#acuseSuri').val('ACUSE SURI');
     });
 

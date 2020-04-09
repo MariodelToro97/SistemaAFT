@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    console.clear();
     $('#integrantesTop').click(function () {
         document.getElementById('btnModalIntegrante').innerHTML = "Guardar";
         document.getElementById('btnCancelarIntegrante').innerHTML = "Cancelar";

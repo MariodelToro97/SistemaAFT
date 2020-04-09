@@ -1,4 +1,5 @@
-$( document ).ready(function() {
+$(document).ready(function () {
+    console.clear();
     $('#btnLimpiarBusquedaSolic').click(function () {
         limpPrimeraIndex();
     });
@@ -1124,7 +1125,7 @@ function GetCotizacionPersona(id) {
 }
 
 var x = $(".proyectoVersionNuevo").val();
-console.log("id", x);
+//console.log("id", x);
 
 if (x != undefined) {
     GetCotizacionPersona(x);
