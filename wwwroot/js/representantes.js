@@ -113,7 +113,14 @@ $('#formRepresentantes').submit(function () {
     var nuevoDoc = document.createElement('tr');
 
     if (curp === '' || nombre === '' || aPaterno === '') {
-        console.log('FALTAN DATOS');
+        Swal.fire({
+            position: 'top-end',
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Faltan datos',
+            showConfirmButton: false,
+            timer: 1500
+        });
     } else {
         if (aMaterno === '') {
             aMaterno = 'NULL';
@@ -242,8 +249,15 @@ $('#formDocumentoRepresentantes').submit(function () {
 
     $("span.documentosRepresentantes").show();
 
-    if (tipo === '' || folio === '' || fecha === '') {
-        console.log("FALTAN DATOS");
+    if (tipo === '' || folio === '' || fecha === '') {        
+        Swal.fire({
+            position: 'top-end',
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Faltan datos',
+            showConfirmButton: false,
+            timer: 1500
+        });
     } else {
         if (document.getElementById('btnModalDocumentoRepresentante').innerHTML === "Guardar") {
             $.ajax({

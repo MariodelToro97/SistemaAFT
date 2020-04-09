@@ -31,7 +31,14 @@ $('#formTelefonos').submit(function (e) {
     }
 
     if (numero === '' || CompaniaID === '' || Tipo_TelefonoID === '') {
-        console.log('FALTAN DATOS');
+        Swal.fire({
+            position: 'top-end',
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Faltan datos',
+            showConfirmButton: false,
+            timer: 1500
+        });
     } else {
         if (document.getElementById('btnModalTelefono').innerHTML === "Guardar") {
             $.ajax({
@@ -243,7 +250,6 @@ function obtenerTelefono(id) {
             id: id
         },
         success: function (data) {
-            console.log(data);
             $('#TelefonoID').val(data[0]['telefonoID']);
             $('#numeroTelefono').val(data[0]['numero']);
             $('#companiaTelefono').val(data[0]['companiaID']);

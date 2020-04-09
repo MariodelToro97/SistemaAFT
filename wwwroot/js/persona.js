@@ -63,7 +63,6 @@ $('#crearPersona').submit(function () {
     if ($('#personaFisica').is(':checked')) {
         $("#spanRFC").hide();
         curp = $('#curpPersona').val();
-        console.log("es la curp", curp)
         var expCURP = new RegExp ("^[A-Z]{4}[0-9]{6}[H,M][A-Z]{5}[A-Z,0-9][0-9]");
         nombrePersona = $('#nombreGeneral').val();
 
@@ -75,28 +74,60 @@ $('#crearPersona').submit(function () {
         }     
 
         if (curp === '' || nombrePersona === '' || aPaterno === '' || genero === '' || nacimiento === '' || civil === '' || nacionalidad === '' || numIdent === '' || identidad === '') {
-            console.log("FALTAN DATOS");
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Faltan datos',
+                showConfirmButton: false,
+                timer: 1500
+            });
 
         } else {
             if (!expCURP.test(curp)) {
-                alert('La CURP no es válida');
-                console.log("es la curp no es valida", curp)
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: 'La CURP no es válida',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
 
             } else {
                 if (!expRFC.test($('#rfcPersona').val()) && $('#rfcPersona').val() !== '') {
-                    alert('El RFC no es válido');
-                    console.log("es la curp rfc no valudi", curp)
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'warning',
+                        title: 'Oops...',
+                        text: 'El RFC no es válido',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
 
                 } else {
                     var expNombre = new RegExp("^[A-ZÑÁÉÍÓÚ]+[.]*([ ]*[A-ZÑÁÉÍÓÚ]*)*");                    
                     if (!expNombre.test(nombrePersona)) {
-                        alert('El formato del nombre no es válido');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'warning',
+                            title: 'Oops...',
+                            text: 'El formato del nombre no es válido',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
 
                     } else {
                         var expApellido = new RegExp("^[A-ZÑÁÉÍÓÚ]+([ ]*[A-ZÑÁÉÍÓÚ]*)*");
-                        if (!expApellido.test(aPaterno) || aMAterno !== 'NULL' && !expApellido.test(aMAterno)) {
-                            alert('El formato del apellido no es válido');
-
+                        if (!expApellido.test(aPaterno) || aMAterno !== 'NULL' && !expApellido.test(aMAterno)) {                            
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'warning',
+                                title: 'Oops...',
+                                text: 'El formato del apellido no es válido',
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
                         } else {
                             var rfc = $('#rfcPersona').val();
                             if (rfc === '') {
@@ -165,15 +196,35 @@ $('#crearPersona').submit(function () {
         $("#spanRFC").show();
 
         if ($('#rfcPersona').val() === 'NULL' || $('#nombreMoralPersonas').val() === '' || $('#actividadEconomicaPersona').val() === '' || $('#fechaConstitucionPersona').val() === '' || $('#folioActaPersona').val() === '' || $('#numeroNotarioPersona').val() === '') {
-            console.log("FALTAN DATOS");
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Faltan datos',
+                showConfirmButton: false,
+                timer: 1500
+            });
         } else {            
             if (!expRFC.test($('#rfcPersona').val())) {
-                alert('El RFC no es válido');
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: 'El RFC no es válido',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             } else {
                 var expMoral = new RegExp("^[A-ZÑÁÉÍÓÚ]+([.]*[ ]*[A-ZÑÁÉÍÓÚ]*)*");
-                if (!expMoral.test($('#nombreMoralPersonas').val())) {
-                    alert('El formato del nombre no es válido');
-
+                if (!expMoral.test($('#nombreMoralPersonas').val())) {                    
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'warning',
+                        title: 'Oops...',
+                        text: 'El formato del nombre no es válido',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
                 } else {
                     $.ajax({
                         type: 'POST',

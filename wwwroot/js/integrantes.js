@@ -17,7 +17,6 @@
 
 $('#formIntegrantes').submit(function (e) {
     listadoContactos = document.querySelector('#tableIntegrantes');
-    //console.log("listado", listadoContactos)
     nuevoContacto = document.createElement('tr');
 
     var curp = $('#integranteCurp').val();
@@ -27,7 +26,14 @@ $('#formIntegrantes').submit(function (e) {
     var persona = $('#personaGeneralID').val();
 
     if (curp === '' || nombre === '' || aPaterno === '') {
-        console.log('FALTAN DATOS');
+        Swal.fire({
+            position: 'top-end',
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Faltan datos',
+            showConfirmButton: false,
+            timer: 1500
+        });
     } else {
         if (aMaterno === '') {
             aMaterno = 'NULL';

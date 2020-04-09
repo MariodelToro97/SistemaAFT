@@ -221,11 +221,25 @@ $('#apoyoSolicitantes').submit(function () {
         otroApo = parseFloat(otroApo);
     }
 
-    if ($('#concApoSolic').val() === '' || $('#subconcApoSoli').val() === '' || $('#can_Sol').val() === '' || $('#cos_Uni').val() === '' || $('#apo_Pro').val() === '' || $('#mon_Apo').val() === '' || $('#inv_Total').val() === '' || $('#descSolicitanteApoyo').val() === '') {
-        console.log("FALTAN DATOS");
+    if ($('#concApoSolic').val() === '' || $('#subconcApoSoli').val() === '' || $('#can_Sol').val() === '' || $('#cos_Uni').val() === '' || $('#apo_Pro').val() === '' || $('#mon_Apo').val() === '' || $('#inv_Total').val() === '' || $('#descSolicitanteApoyo').val() === '') {        
+        Swal.fire({
+            position: 'top-end',
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Faltan Datos',
+            showConfirmButton: false,
+            timer: 1500
+        });
     } else {
         if (apoPro > (canSol * cosUni)) {
-            alert('La aportación del productor no puede ser mayor al costo solicitado');
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'La aportación del productor no puede ser mayor al costo solicitado',
+                showConfirmButton: false,
+                timer: 3000
+            });            
         } else {
             listadoContactos = document.querySelector('#tablaApoyoSolicitantes');
             nuevoContacto = document.createElement('tr');
@@ -594,8 +608,15 @@ function getApoyosSolicitantes(id) {
 
 $('#formBusquedaSolicitante').submit(function () {
     var valor = $('#tipoPersonaSolicitante').val();
-    if (valor === '') {
-        console.log('CAMPOS VACIOS');
+    if (valor === '') {        
+        Swal.fire({
+            position: 'top-end',
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Faltan Datos',
+            showConfirmButton: false,
+            timer: 1500
+        });
     } else {
         var texto = $('#tipoPersonaSolicitante option[value=' + valor + ']').text();
 
@@ -604,11 +625,25 @@ $('#formBusquedaSolicitante').submit(function () {
             $('#personaMoral').hide();
 
             if ($('#curpBusquedaSolicitante').val() === '') {
-                console.log("CAMPOS VACIOS");
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: 'Faltan Datos',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             } else {
                 var expCURP = new RegExp("^[A-Z]{4}[0-9]{6}[H,M][A-Z]{5}[A-Z,0-9][0-9]");
-                if (!expCURP.test($('#curpBusquedaSolicitante').val())) {
-                    alert("LA CURP NO ES VÁLIDA");
+                if (!expCURP.test($('#curpBusquedaSolicitante').val())) {                    
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'warning',
+                        title: 'Oops...',
+                        text: 'La CURP no es válida',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 } else {
                     //AJAX PARA LLENAR ESPACIOS DE INFORMACION PERSONA
                     obtencionFisicaAJAX();
@@ -619,12 +654,26 @@ $('#formBusquedaSolicitante').submit(function () {
                 $('#personaFisica').hide();
                 $('#personaMoral').show();
 
-                if ($('#rfcBusquedaSolicitante').val() === '') {
-                    console.log("CAMPOS VACIOS");
+                if ($('#rfcBusquedaSolicitante').val() === '') {                    
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'warning',
+                        title: 'Oops...',
+                        text: 'Faltan Datos',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 } else {
                     var expRFC = new RegExp("^[A-Z]{4}[0-9]{6}[A-Z,0-9]{3}");
                     if (!expRFC.test($('#rfcBusquedaSolicitante').val())) {
-                        alert("EL RFC NO ES VÁLIDO");
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'warning',
+                            title: 'Oops...',
+                            text: 'El RFC no es válido',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
                     } else {
                         //AJAX PARA LLENAR ESPACIOS DE INFORMACION PERSONA
                         obtencionAJAX();
@@ -645,7 +694,14 @@ function obtencionFisicaAJAX() {
         },
         success: function (data) {
             if (Object.keys(data).length === 0) {
-                alert('La persona no está dada de alta');
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: 'La persona no está dada de alta',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
             } else {
                 $('#parteBajaSolicitantes').show();
 
@@ -859,8 +915,15 @@ function obtencionAJAX() {
             rfc: $('#rfcBusquedaSolicitante').val()
         },
         success: function (data) {
-            if (Object.keys(data).length === 0) {
-                alert('La persona no está dada de alta');
+            if (Object.keys(data).length === 0) {                
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: 'La persona no está dada de alta',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
             } else {
                 $('#nav-Representante').show();
                 $('#nav-complementarios').show();
@@ -902,8 +965,15 @@ $('#crearSolicitud').submit(function () {
     var estado = $('#estadoSolicitud').val();
     var persona = $('#personaIDSOLICITANTES').val();
 
-    if (year === '' || programa === '' || componente === '' || instancia === '' || delegacion === '' || estado === '') {
-        alert("Faltan Datos");
+    if (year === '' || programa === '' || componente === '' || instancia === '' || delegacion === '' || estado === '') {        
+        Swal.fire({
+            position: 'top-end',
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Faltan datos',
+            showConfirmButton: false,
+            timer: 1500
+        });
     } else {
         if ($('#btnCrearSolicitudVentanilla').val() === 'Crear') {
             $.ajax({
@@ -920,7 +990,14 @@ $('#crearSolicitud').submit(function () {
                 },
                 success: function (data) {
                     if (data === '') {
-                        alert('No se insertó por qué ya esta dado de alta');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'warning',
+                            title: 'Oops...',
+                            text: 'La persona ya está dada de alta',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
                     } else {
                         Swal.fire({
                             position: 'top-end',
@@ -983,8 +1060,15 @@ $('#crearProyecto').submit(function () {
     if (objetivo === '')
         objetivo = "NULL"
 
-    if (nombreproyecto === '' || tipoproyecto === '' || fecha === '' || solicitudID === '') {
-        alert("Faltan Datos");
+    if (nombreproyecto === '' || tipoproyecto === '' || fecha === '' || solicitudID === '') {        
+        Swal.fire({
+            position: 'top-end',
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Faltan datos',
+            showConfirmButton: false,
+            timer: 1500
+        });
     } else {
         if ($('#btnCrearProyectoSolicitudes').val() === 'Crear') {
             $.ajax({
@@ -1067,12 +1151,10 @@ function GetCotizacionPersona(id) {
             id: id
         },
         success: function (data) {
-            console.log(data);
             //$('#trInicialApoyosSolicitantes').remove();
             //$('#trTotalApoyoSolicitante').remove();
 
             if (data.length === 0) {
-                console.log("entro");
                 return
             }
 
@@ -1083,7 +1165,6 @@ function GetCotizacionPersona(id) {
             let contador = 0
             let total = 0;
                 for (var res of data) {
-                    console.log(res.cotizacionID)
                     //nuevoContacto.setAttribute("id", `${res.cotizacionID}`);
                     //nuevoContacto.setAttribute("class", `tablaApoyos- ${res.cotizacionID} tablaApoyos`);
                     res1.innerHTML += `

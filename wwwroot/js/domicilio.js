@@ -28,7 +28,14 @@ function obtenerCP() {
     var domCP = $('#domicilioCodigoPostal').val();
     var expCP = new RegExp("^[0-9]{5}");
     if (!expCP.test(domCP)) {
-        alert('El Código Postal no es válido');
+        Swal.fire({
+            position: 'top-end',
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'El Código Postal no es válido',
+            showConfirmButton: false,
+            timer: 1500
+        });
 
     } else {
         $("#domicilioMunicipioID").attr('disabled', false);
@@ -132,7 +139,6 @@ function mostrarMunicipios(option) {
         async: false,
         dataType: "json",
         success: function (data) {
-            //console.log(data);
             for (var i = 0; i < data.datos.length; i++) {
                 $("#domicilioMunicipioID").append("<option class ='municipioDomicilios' value=" + data.datos[i].cve_agem + " name=" + data.datos[i].cve_agee + ">" + data.datos[i].nom_agem + "</option>");
             }
@@ -286,7 +292,6 @@ function watchMunicipios(est) {
         async: false,
         dataType: "json",
         success: function (data) {
-            //console.log(data);
             for (var i = 0; i < data.datos.length; i++) {
                 $("#domicilioMunicipioID").append("<option class ='municipioDomicilios' value=" + data.datos[i].cve_agem + " name=" + data.datos[i].cve_agee + ">" + data.datos[i].nom_agem + "</option>");
             }
@@ -362,11 +367,25 @@ $('#formEditDomicilio').submit(function (e) {
     var refUb = $('#domicilioReferenciaUbicacion').val();
 
     if (dom === '' || via === '' || nomVia === '' || domCP === '' || domNE === '' || domEs === '' || domNA === '' || domMun === '' || loc === '' || tAse === '' || refUb === '') {
-        console.log("FALTAN DATOS");
+        Swal.fire({
+            position: 'top-end',
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Faltan datos',
+            showConfirmButton: false,
+            timer: 1500
+        });
     } else {
         var expCP = new RegExp("^[0-9]{5}");
         if (!expCP.test(domCP)) {
-            alert('El Código Postal no es válido');
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'El Código Postal no es válido',
+                showConfirmButton: false,
+                timer: 1500
+            });
 
         } else {
             var noExterior = $('#domicilioNoExterior').val();
