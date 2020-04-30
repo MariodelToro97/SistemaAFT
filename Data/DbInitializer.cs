@@ -138,22 +138,23 @@ namespace SistemaAFT.Data
 			var compania = new Compania[]
 			{
 				new Compania {nombre_compania = "TELCEL"},
-				new Compania {nombre_compania = "IUSACELL"},
+				//new Compania {nombre_compania = "IUSACELL"},
 				new Compania {nombre_compania = "MOVISTAR"},
-				new Compania {nombre_compania = "NEXTEL"},
+				//new Compania {nombre_compania = "NEXTEL"},
 				new Compania {nombre_compania = "UNEFON"},
 				new Compania {nombre_compania = "AT&T"},
-				new Compania {nombre_compania = "ALO SIEMPRE CERCA"},
-				new Compania {nombre_compania = "MAZ TIEMPO"},
-				new Compania {nombre_compania = "QBOCEL"},
+				//new Compania {nombre_compania = "ALO SIEMPRE CERCA"},
+				//new Compania {nombre_compania = "MAZ TIEMPO"},
+				//new Compania {nombre_compania = "QBOCEL"},
 				new Compania {nombre_compania = "VIRGIN MOBILE"},
-				new Compania {nombre_compania = "ALESTRA"},
+				//new Compania {nombre_compania = "ALESTRA"},
 				new Compania {nombre_compania = "AXTEL"},
-				new Compania {nombre_compania = "MAXCOM"},
+				//new Compania {nombre_compania = "MAXCOM"},
 				new Compania {nombre_compania = "MEGACABLE"},
 				new Compania {nombre_compania = "IZZI"},
 				new Compania {nombre_compania = "TELMEX"},
-				new Compania {nombre_compania = "TELNOR"}
+				//new Compania {nombre_compania = "TELNOR"},
+				new Compania {nombre_compania = "OTRO"}
 			};
 
 			foreach (Compania g in compania)
@@ -179,6 +180,7 @@ namespace SistemaAFT.Data
 				new Genero {Nombre_Genero = "MASCULINO"},
 				new Genero {Nombre_Genero = "FEMENINO"},
 				new Genero {Nombre_Genero = "MORAL"},
+				new Genero {Nombre_Genero = "OTRO"},
 			};
 
 			foreach (Genero g in generos )

@@ -19,17 +19,20 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <li class="nav-item dropdown">
+                            <a class="btn nav-link text-dark dropdown-toggle" role="button" id="dropdownPersonas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Personas</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownPersonas">
+                                <a class="dropdown-item" asp-controller="Personas" asp-action="Create">Captura</a>
+                                <a class="dropdown-item" asp-controller="Personas" asp-action="Index">Consulta de personas</a>                                
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Personas" asp-action="Index">Personas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Solicitudes" asp-action="Index">Solicitudes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Solicitudes" asp-action="Index2">Ver Solicitudes</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" role="button" id="dropdownSolicitudes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solicitudes</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownSolicitudes">
+                                <a class="dropdown-item" asp-controller="" asp-action="">Captura</a>
+                                <a class="dropdown-item" asp-controller="Solicitudes" asp-action="Index2">Consulta de solicitudes</a>
+                                <a class="dropdown-item" asp-controller="Solicitudes" asp-action="Index">Captura directa</a>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -44,7 +47,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - SistemaAFT - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020 - SistemaAFT - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

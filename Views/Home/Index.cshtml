@@ -1,12 +1,36 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Principal";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-
-    <a class="btn btn-primary" asp-controller="Personas" asp-action="Index">REGISTRO</a>
-    <a class="btn btn-secondary" asp-controller="" asp-action="">SOLICITUDES</a>
-
-</div>
+    <div class="text-center">
+        <h1 class="display-4">Panel de Control</h1>
+        <hr />
+        <div class="row d-flex">
+            <div class="col-md-5">
+                <div class="border border-secondary rounded-top bg-dark">
+                    <div class="form-inline d-flex">
+                        <h5 class="my-3 mx-auto text-white"><img src="~/icon/user-regular.svg" alt="Imagen personas" class="imagePanel mr-4" /> Personas</h5>
+                    </div>
+                </div>
+                <div class="rounded-bottom border border-secondary p-3">
+                    <a asp-controller="Personas" asp-action="Create">Captura</a>
+                    <hr />
+                    <a asp-controller="Personas" asp-action="Index">Consulta de personas</a>
+                </div>
+            </div>
+            <div class="col-md-5 ml-auto">
+                <div class="rounded-top bg-dark">
+                    <div class="form-inline d-flex">
+                        <h5 class="my-3 mx-auto text-white"><img src="~/icon/file-alt-regular.svg" alt="Imagen solicitudes" class="imagePanel mr-4" /> Solicitudes</h5>
+                    </div>
+                </div>
+                <div class="rounded-bottom border border-secondary p-3">
+                    <a asp-controller="" asp-action="">Captura</a>
+                    <hr />
+                    <a asp-controller="Solicitudes" asp-action="Index2">Consulta de solicitudes</a>
+                    <hr />
+                    <a asp-controller="Solicitudes" asp-action="Index">Captura directa</a>
+                </div>
+            </div>
+        </div>
+    </div>

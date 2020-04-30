@@ -1,17 +1,17 @@
 ﻿@model IEnumerable<SistemaAFT.Models.Persona>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Personas";
 }
 
 <h1>Lista de personas</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear nueva persona</a>
 </p>
 <table class="table">
     <thead>
-        <tr>
+        <tr class="text-center">
             <th>
                 @Html.DisplayNameFor(model => model.CURP)
             </th>
@@ -33,7 +33,7 @@
             <th>
                 Fecha de Nacimiento
             </th>
-            <th>
+            <!--<th>
                 Nacionalidad
             </th>
             <th>
@@ -42,7 +42,7 @@
             <th>
                 Estado Civil
             </th>
-            <th>
+            <!--<th>
                 Tipo de Identidad
             </th>
             <th>
@@ -59,67 +59,101 @@
             </th>
             <th>
                 Creado
-            </th>
+            </th>-->
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
+        @foreach (var item in Model) {
+            <tr class="text-center">
+                <td>
+                    @if (!item.CURP.StartsWith("NULL") && !item.CURP.EndsWith("NULL"))
+                    {
+                        @Html.DisplayFor(modelItem => item.CURP)
+                    }
+                </td>
+                <td>
+                    @if (!item.RFC.StartsWith("NULL") && !item.RFC.EndsWith("NULL"))
+                    {
+                        @Html.DisplayFor(modelItem => item.RFC)
+                    }
+                </td>
+                <td>
+                    @if (!item.nombre.StartsWith("NULL") && !item.nombre.EndsWith("NULL"))
+                    {
+                        @Html.DisplayFor(modelItem => item.nombre)
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.nombreMoral)
+                    }
+                </td>
+                <td>
+                    @if (!item.apellido_paterno.StartsWith("NULL") && !item.apellido_paterno.EndsWith("NULL"))
+                    {
+                        @Html.DisplayFor(modelItem => item.apellido_paterno)
+                    }                
+                </td>
+                <td>
+                    @if (!item.apellido_materno.StartsWith("NULL") && !item.apellido_materno.EndsWith("NULL"))
+                    {
+                        @Html.DisplayFor(modelItem => item.apellido_materno)
+                    }                
+                </td>
+                <td>
+                    @if (!item.correo.StartsWith("NULL") && !item.correo.EndsWith("NULL"))
+                    {
+                        @Html.DisplayFor(modelItem => item.correo)
+                    }                
+                </td>
+                <td>
+                    @if (!item.fechaNacimiento.StartsWith("NULL") && !item.fechaNacimiento.EndsWith("NULL"))
+                    {
+                        @Html.DisplayFor(modelItem => item.fechaNacimiento)
+                    }else
+                    {
+                        @Html.DisplayFor(modelItem => item.fecha_Consti)
+                    }                
+                </td>
+                <!--<td>
+                    @Html.DisplayFor(modelItem => item.Nacionalidad.Nombre)
+                </td>
+                <td>
+                    @if (!item.Genero.Nombre_Genero.StartsWith("MORAL") && !item.Genero.Nombre_Genero.EndsWith("MORAL"))
+                    {
+                        @Html.DisplayFor(modelItem => item.Genero.Nombre_Genero)
+                    }            
+                </td>
+                <td>
+                    @if (!item.Estado_Civil.Nombre_Edo_Civil.StartsWith("MORAL") && !item.Estado_Civil.Nombre_Edo_Civil.EndsWith("MORAL"))
+                    {
+                        @Html.DisplayFor(modelItem => item.Estado_Civil.Nombre_Edo_Civil)
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tipo_Identidad.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.num_identificacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tipo_Persona.Nombre_Tipo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Etnia.Pertenece_Etnia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Discapacidad.Tiene_Discapacidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Created)
+                </td>-->
             <td>
-                @Html.DisplayFor(modelItem => item.CURP)
+                <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.PersonaID">Editar</a>
+                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.PersonaID">Detalles</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.PersonaID">Eliminar</a>
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RFC)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.apellido_paterno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.apellido_materno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.correo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fechaNacimiento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nacionalidad.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genero.Nombre_Genero)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado_Civil.Nombre_Edo_Civil)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tipo_Identidad.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.num_identificacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tipo_Persona.Nombre_Tipo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Etnia.Pertenece_Etnia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Discapacidad.Tiene_Discapacidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Created)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PersonaID">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.PersonaID">Detalles</a> |
-                <a asp-action="Delete" asp-route-id="@item.PersonaID">Eliminar</a>
-            </td>
-        </tr>
-}
+            </tr>
+         }
     </tbody>
 </table>

@@ -1,13 +1,13 @@
 ﻿@model GranModelo
 
 @{
-    ViewData["Title"] = "Index2";
+    ViewData["Title"] = "Lista Solicitudes";
 }
 
-<h1>Index2</h1>
+<h1>Listado de Solicitudes</h1>
 
 <p>
-    <a asp-action="Index" asp-controller="Solicitudes">Create New</a>
+    <a asp-action="Index" asp-controller="Solicitudes">Crear nueva solicitud</a>
 </p>
 <table class="table">
     <thead>
@@ -62,7 +62,7 @@
                 </td>
                 <td>
                     <a asp-action="Details" asp-route-id="@item.SolicitudID">Ver Información</a> |
-                    <a asp-action="Delete" asp-route-id="@item.SolicitudID">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.SolicitudID">Borrar</a>
                 </td>
             </tr>
         }
